@@ -23,6 +23,10 @@ from astrometry.util.plotutils import *
 from astrometry.plot.plotstuff import *
 from astrometry.util.util import anwcs_new_sip
 
+
+fig_dir = '/Users/shanydanieli/projects/merian/skipper/figures/skycoverage/'
+
+
 def get_datadir():
     return join(dirname(dirname(dirname(abspath(__file__)))),'data')
 
@@ -70,7 +74,7 @@ def decam():
     for maxit in [0, 6, 30, 31, 37, 61, 62, 68, 90, 91, 92, 119]:
         #mx = { 1: 2, 2: 4, 3: 6 }[t.passnum]
         plot = Plotstuff(outformat='pdf', ra=ra, dec=dec, width=W*pixsc,
-                         size=(W,H), outfn='tile-%02i.pdf' % maxit)
+                         size=(W,H), outfn=fig_dir+'tile-%02i.pdf' % maxit)
         plot.color = 'white'
         plot.alpha = 1.
         plot.plot('fill')
@@ -121,14 +125,13 @@ def decam():
             # plt.colorbar()
             # plt.savefig('tile-%02i.png' % it) 
     
-            plt.imsave('tile-%02i.png' % it, cov, origin='lower', vmin=0, vmax=mx, cmap=antigray)
+            plt.imsave(fig_dir+'tile-%02i.png' % it, cov, origin='lower', vmin=0, vmax=mx, cmap=antigray)
             #plt.imsave('tile-%02i.pdf' % it, cov, origin='lower', vmin=0, vmax=mx, cmap=antigray, format='pdf')
     
         if it in [30, 61, 90, 119]:
             from collections import Counter
             if it == 30:
                 print(cov.tolist())
-            quit()
 
             print('Coverage counts:', Counter(cov.ravel()).most_common())
             bins = -0.5 + np.arange(8)
@@ -159,7 +162,7 @@ def decam():
             plt.ylabel('Fraction of sky')
             #plt.title('DECaLS tiling, %i pass%s' % (t.passnum, t.passnum > 1 and 'es' or ''))
             #plt.savefig('hist-%02i.png' % it)
-            plt.savefig('hist-%02i.pdf' % it)
+            plt.savefig(fig_dir+'hist-%02i.pdf' % it)
 
 
 
