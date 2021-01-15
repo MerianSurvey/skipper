@@ -6,22 +6,34 @@ __author__ = "Shany Danieli"
 
 
 # from __future__ import print_function
-import matplotlib
-matplotlib.use('Agg')
-matplotlib.rc('text', usetex=True)
-matplotlib.rc('font', family='serif')
+import sys
+
+if 'matplotlib' not in sys.modules:
+    import matplotlib
+    matplotlib.use('Agg')
+    matplotlib.rc('text', usetex=True)
+    matplotlib.rc('font', family='serif')
 from os.path import join,dirname,abspath
 import pylab as plt
 import numpy as np
 import fitsio
+from astropy.coordinates import SkyCoord
 
-from astrometry.util.fits import *
-from astrometry.util.util import wcs_pv2sip_hdr, Tan
-from astrometry.util.resample import *
-from astrometry.libkd.spherematch import match_radec
-from astrometry.util.plotutils import *
-from astrometry.plot.plotstuff import *
-from astrometry.util.util import anwcs_new_sip
+try:
+    import astrometry
+except ModuleNotFoundError:
+    from astrometry.util.fits import *
+    from astrometry.util.util import wcs_pv2sip_hdr, Tan
+    from astrometry.util.resample import *
+    from astrometry.libkd.spherematch import match_radec
+    from astrometry.util.plotutils import *
+    from astrometry.plot.plotstuff import *
+    from astrometry.util.util import anwcs_new_sip
+
+from shapely import geometry
+from shapely.ops import unary_union
+from shapely.geometry import Point
+from descartes.patch import PolygonPatch
 
 
 fig_dir = '/Users/shanydanieli/projects/merian/skipper/figures/skycoverage/'
@@ -165,6 +177,110 @@ def decam():
             plt.savefig(fig_dir+'hist-%02i.pdf' % it)
 
 
+class FocusedRandomDither ( object ):
+    '''
+    Create a focused random dither pattern around a central
+    point. Similar dither pattern to HSC UDeep, but using evenly 
+    spaced grid in azimuth instead of fixed 5 pointings.
+    '''
+    def __init__ ( self, center,
+                   offset_radius=0.08,
+                   random_max=0.125,
+                   start_at_center=True,
+                   ndither=40,
+                   fov_radius = (3.18/np.pi)**0.5 ):
+        '''
+        center: [array-like] (RA, Dec) in degrees or SkyCoord object
+        '''
+        if type(center) == SkyCoord:
+            self.center = (center.ra.deg, center.dec.deg )
+        else:
+            assert len(center)==2, "Expected coordinates of length 2: (RA,Dec)."
+            self.center = center
+
+        
+        self.offset_radius = offset_radius
+        self.random_max = random_max
+        self.start_at_center = start_at_center
+        self.ndither = ndither
+        assert self.ndither > 1, "Cannot have <1 exposure!"
+        self.fov_radius = fov_radius
+
+    def _make_grid ( self, ngridstep=150, extent=None ):
+        if extent is None:
+            extent = self.random_max * 20
+            
+        gra_a = np.linspace(self.center[0] - extent,
+                            self.center[0]  + extent, ngridstep)
+        gdec_a = np.linspace(self.center[1] - extent,
+                             self.center[1] + extent, ngridstep)
+
+        step = np.diff(gra_a)[0]
+
+        pl_l = []
+        for cra in gra_a:
+            for cdec in gdec_a:
+                pl_l.append ( Point ( cra, cdec ).buffer ( step ) )
+
+        grid = np.zeros([self.ndither,ngridstep,ngridstep])  
+        self.grid = grid
+        self.gridpoints = pl_l
+        self.grid_ra = gra_a
+        self.grid_dec = gdec_a   
+
+    def get_dcenter ( self, theta ):
+        '''
+        Find dither center for a given angle. Randomly draw offsets
+        in RA and Dec from a uniform distribution [-random_max, random_max]
+        '''
+        dely = self.offset_radius * np.sin ( theta )
+        delx = self.offset_radius * np.cos ( theta )
+
+        pull = lambda: np.random.uniform ( -self.random_max,
+                                              self.random_max )
+        cra = self.center[0] + delx + pull ()
+        cdec = self.center[1] + dely + pull ()
+        return cra, cdec
+                
+    def compute_coverage ( self, target_area ):
+        grid = self.grid.copy ()
+
+        theta_a = np.linspace(0, np.pi*2, self.ndither+1)[:-1]
+        centers = np.zeros ( [self.ndither, 2] )
+        area_a = np.zeros(self.ndither)
+        poly_l = []
+        ii=0
+        pl_l = self.gridpoints
+
+        for ii,ita in enumerate(theta_a):
+            if start_at_center and ii==0:
+                centers[ii,0] = self.center[0]
+                centers[ii,1] = self.center[1]
+            else:
+                cra, cdec = self.get_dcenter ( ita )
+                centers[ii,0] = cra
+                centers[ii,1] = cdec
+
+            dfov = Point ( centers[ii,0], centers[ii,1] )
+            dfov = dfov.buffer ( self.fov_radius )
+            
+            iarea = target_area.intersection ( dfov )
+            area_a[ii] = iarea.area
+            poly_l.append(dfov)
+
+            aa = [ dfov.contains ( pl_l[ix] ) for ix in range(len(pl_l)) ]
+            grid[ii, np.asarray(aa).reshape(grid.shape[1:])] = 1
+
+        #self.grid = grid
+        #self.poly_l = poly_l
+        #self.area_a = area_a
+        #self.centers = centers
+        return grid, poly_l, area_a, centers
+
+    def evaluate_coverage ( self ):
+        total_area_covered = unary_union ( self.poly_l ).area
+        cy = (self.grid[in_cosmos] > cnexp).sum(axis=1)/in_cosmos.sum()
+        
 
 if __name__ == "__main__":
 
