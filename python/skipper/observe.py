@@ -45,7 +45,7 @@ class ObsCatalog ():
 
         return catalog
         
-    def to_json (self, catalog, fp='../data/obsscript.json'):
+    def to_json (self, catalog, fp='../json/obsscript.json'):
         '''
         Format to JSON with small tweaks to enhance readability
         '''
