@@ -104,7 +104,8 @@ if __name__ == "__main__":
     # decals = create_decals_fields()
     decals = create_shifted_decals_fields()
     datadir = join(dirname(dirname(dirname(abspath(__file__)))),'data')
-    outfile = datadir+'/decam-tiles-decals-merian.fits.gz'
+    # outfile = datadir+'/decam-tiles-decals-merian.fits.gz'
+    outfile = datadir+'/shifted-tiles-decals-merian.fits.gz'
     fitsio.write(outfile,decals,clobber=True)
 
 
