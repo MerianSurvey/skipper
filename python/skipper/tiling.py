@@ -31,6 +31,7 @@ except ModuleNotFoundError:
     from astrometry.util.util import anwcs_new_sip
 
 from shapely import geometry
+from shapely import affinity
 from shapely.ops import unary_union
 from shapely.geometry import Point
 from descartes.patch import PolygonPatch
@@ -188,7 +189,8 @@ class FocusedRandomDither ( object ):
                    random_max=0.125,
                    start_at_center=True,
                    ndither=40,
-                   fov_radius = (3.18/np.pi)**0.5 ):
+                   fov_radius = (3.18/np.pi)**0.5,
+                   ):
         '''
         center: [array-like] (RA, Dec) in degrees or SkyCoord object
         '''
@@ -246,7 +248,7 @@ class FocusedRandomDither ( object ):
         dfov = Point ( cra, cdec ).buffer ( self.fov_radius )
 
 
-    def decam_fp ( self, cra, cdec ):
+    def decam_fp ( self, cra, cdec, rotation=0. ):
         from skymap.instrument.decam import DECamFocalPlane
         
         decam = DECamFocalPlane ()
@@ -256,6 +258,7 @@ class FocusedRandomDither ( object ):
             #corners[:,0] += cra # \\ treating as Cartesian b.c.
             #corners[:,1] += cdec # \\ SMALL AREA!!
             ccd = geometry.Polygon ( decam_arr[xi] )
+            ccd = affinity.rotate ( ccd, rotation, 'center' )
             ccd_l.append(ccd)
 
         ccd_mpoly = unary_union ( ccd_l )
@@ -270,7 +273,11 @@ class FocusedRandomDither ( object ):
         #grid = self.grid.copy ()
 
         theta_a = np.linspace(0, np.pi*2, self.ndither+1)[:-1]
-        centers = np.zeros ( [self.ndither, 2] )
+        if rotate:
+            centers = np.zeros ( [self.ndither, 3] )
+        else:
+            centers = np.zeros ( [self.ndither, 2] )
+            
         area_a = np.zeros(self.ndither)
         poly_l = []
         ii=0
@@ -285,7 +292,11 @@ class FocusedRandomDither ( object ):
                 centers[ii,0] = cra
                 centers[ii,1] = cdec
 
-            dfov = footprint ( centers[ii,0], centers[ii,1] )
+            if rotate:
+                centers[ii,2] = np.random.uniform(0,359)
+                dfov = footprint ( *centers[ii] )
+            else:
+                dfov = footprint ( centers[ii,0], centers[ii,1] )
             
             iarea = target_area.intersection ( dfov )
             area_a[ii] = iarea.area
