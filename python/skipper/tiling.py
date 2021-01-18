@@ -203,10 +203,10 @@ class FocusedRandomDither ( object ):
         self.random_max = random_max
         self.start_at_center = start_at_center
         self.ndither = ndither
-        assert self.ndither > 1, "Cannot have <1 exposure!"
+        assert self.ndither >= 1, "Cannot have <1 exposure!"
         self.fov_radius = fov_radius
 
-    def _make_grid ( self, ngridstep=150, extent=None ):
+    def _make_grid ( self, ngridstep=300, extent=None ):
         if extent is None:
             extent = self.random_max * 20
             
@@ -241,9 +241,33 @@ class FocusedRandomDither ( object ):
         cra = self.center[0] + delx + pull ()
         cdec = self.center[1] + dely + pull ()
         return cra, cdec
-                
-    def compute_coverage ( self, target_area ):
-        grid = self.grid.copy ()
+
+    def circular_fov ( self, cra, cdec ):
+        dfov = Point ( cra, cdec ).buffer ( self.fov_radius )
+
+
+    def decam_fp ( self, cra, cdec ):
+        from skymap.instrument.decam import DECamFocalPlane
+        
+        decam = DECamFocalPlane ()
+        decam_arr = decam.rotate ( cra, cdec )
+        ccd_l = []
+        for xi in range(decam_arr.shape[0]):
+            #corners[:,0] += cra # \\ treating as Cartesian b.c.
+            #corners[:,1] += cdec # \\ SMALL AREA!!
+            ccd = geometry.Polygon ( decam_arr[xi] )
+            ccd_l.append(ccd)
+
+        ccd_mpoly = unary_union ( ccd_l )
+        return ccd_mpoly
+        
+        
+    def compute_coverage ( self, target_area, footprint=None,
+                           rotate=False ):
+        if footprint is None:
+            footprint = self.circular_fov
+            
+        #grid = self.grid.copy ()
 
         theta_a = np.linspace(0, np.pi*2, self.ndither+1)[:-1]
         centers = np.zeros ( [self.ndither, 2] )
@@ -253,7 +277,7 @@ class FocusedRandomDither ( object ):
         pl_l = self.gridpoints
 
         for ii,ita in enumerate(theta_a):
-            if start_at_center and ii==0:
+            if self.start_at_center and ii==0:
                 centers[ii,0] = self.center[0]
                 centers[ii,1] = self.center[1]
             else:
@@ -261,21 +285,20 @@ class FocusedRandomDither ( object ):
                 centers[ii,0] = cra
                 centers[ii,1] = cdec
 
-            dfov = Point ( centers[ii,0], centers[ii,1] )
-            dfov = dfov.buffer ( self.fov_radius )
+            dfov = footprint ( centers[ii,0], centers[ii,1] )
             
             iarea = target_area.intersection ( dfov )
             area_a[ii] = iarea.area
             poly_l.append(dfov)
 
-            aa = [ dfov.contains ( pl_l[ix] ) for ix in range(len(pl_l)) ]
-            grid[ii, np.asarray(aa).reshape(grid.shape[1:])] = 1
+            #aa = [ dfov.contains ( pl_l[ix] ) for ix in range(len(pl_l)) ]
+            #grid[ii, np.asarray(aa).reshape(grid.shape[1:])] = 1
 
         #self.grid = grid
         #self.poly_l = poly_l
         #self.area_a = area_a
         #self.centers = centers
-        return grid, poly_l, area_a, centers
+        return poly_l, area_a, centers
 
     def evaluate_coverage ( self ):
         total_area_covered = unary_union ( self.poly_l ).area
