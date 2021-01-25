@@ -258,10 +258,11 @@ class FocusedRandomDither ( object ):
             #corners[:,0] += cra # \\ treating as Cartesian b.c.
             #corners[:,1] += cdec # \\ SMALL AREA!!
             ccd = geometry.Polygon ( decam_arr[xi] )
-            ccd = affinity.rotate ( ccd, rotation, 'center' )
+            #ccd = affinity.rotate ( ccd, rotation, 'center' )
             ccd_l.append(ccd)
 
         ccd_mpoly = unary_union ( ccd_l )
+        ccd_mpoly = affinity.rotate(ccd_mpoly, rotation, 'center' )
         return ccd_mpoly
         
         

@@ -6,9 +6,13 @@ __author__ = "Erin Kado-Fong"
 
 import numpy as np
 import pandas as pd
+import pytz
+from astropy import coordinates
+from astropy import units as u
+from astropy.time import Time
 from astropy.io import fits
 
-class ObsCatalog ():
+class ObsCatalog (object):
     def __init__ (self,
                   comment='',
                   proposer='Leauthaud',
@@ -56,3 +60,23 @@ class ObsCatalog ():
             json_str = json_str.replace(key, repkey)
 
         open(fp, 'w').write(json_str)
+
+class ObservingSite ( object ):
+    def __init__ ( self, site='CTIO', timezone=None):
+        if site=='CTIO':
+            self.site = coordinates.EarthLocation ( lat='-30d10m10.78s',
+                                                    lon='-70d48m23.49s',
+                                                    height=2241.*u.m )
+            timezone='America/Santiago'
+
+            
+        else:
+            self.site = site
+
+
+            
+
+    def get_utcoffset ( self, zone_name):
+        from pytz import timezone
+        
+        
