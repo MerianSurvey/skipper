@@ -92,9 +92,9 @@ class ObservingSite ( object ):
         '''
         # // because of daylight savings time,
         # // we need to calculate the UTC offset *after* we know the
-        # // observation date. So here I'll set up that machinery.
-        # // (We're actually observing during the daylight savings time
-        # // switch in 2021A, so we need to make sure this is robust)
+        # // observation date.
+        # // WARNING ) pytz-2018 has an outdated handling of Chilean
+        # // daylight savings time. Make sure your pytz version is up-to-date (2020).
         return date.astimezone ( self.timezone ).utcoffset().total_seconds()/3600.
 
     def define_obsframe ( self, obs_datetime, nstep=0.5, lim=6. ):
@@ -117,28 +117,3 @@ class ObservingSite ( object ):
         '''
         alt = target_coord.transform_to ( obsframe )
         return alt
-
-    def myownformatter ( self, dtobj ):
-        '''
-        There's a bug in matplotlib 2.0.0 that forcibly converts all datetime
-        objects to UTC when plotting, so we need to get around that with this hack
-        '''
-        return f'{dtobj.hour:02d}:00'
-    
-    def plot_altitude ( self, alt ):
-        fig, ax = plt.subplots(1,1,figsize=(8,6))
-
-        ax.plot ( alt.obstime.datetime, alt.alt, lw=3 )
-        ax.set_xlabel ("UTC")
-
-        twiny = ax.twiny ()
-        twiny.set_xlim ( ax.get_xlim() )
-        twiny.set_xticks ( ax.get_xticks() )
-        twiny.set_xticklabels ([ myownformatter(mdates.num2date(ct).astimezone(ctio.timezone))
-                                for ct in ax.get_xticks()] )
-        twiny.set_xlabel('local time')
-
-        xformatter = mdates.DateFormatter('%H:%M')
-        plt.gcf().axes[0].xaxis.set_major_formatter(xformatter)
-        #plt.gcf().axes[1].xaxis.set_major_formatter(xformatter)
-        plt.grid ()
