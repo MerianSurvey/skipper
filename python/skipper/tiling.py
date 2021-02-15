@@ -246,7 +246,7 @@ class FocusedRandomDither ( object ):
 
     def circular_fov ( self, cra, cdec ):
         dfov = Point ( cra, cdec ).buffer ( self.fov_radius )
-
+        return dfov
 
     def decam_fp ( self, cra, cdec, rotation=0. ):
         from skymap.instrument.decam import DECamFocalPlane
@@ -264,7 +264,18 @@ class FocusedRandomDither ( object ):
         ccd_mpoly = unary_union ( ccd_l )
         ccd_mpoly = affinity.rotate(ccd_mpoly, rotation, 'center' )
         return ccd_mpoly
-        
+    def get_centers (self):
+        theta_a = np.linspace(0, np.pi*2, self.ndither+1)[:-1]
+        centers = np.zeros ( [self.ndither, 2] )
+        for ii,ita in enumerate(theta_a):
+            if self.start_at_center and ii==0:
+                centers[ii,0] = self.center[0]
+                centers[ii,1] = self.center[1]
+            else:
+                cra, cdec = self.get_dcenter ( ita )
+                centers[ii,0] = cra
+                centers[ii,1] = cdec
+        return centers
         
     def compute_coverage ( self, target_area, footprint=None,
                            rotate=False ):

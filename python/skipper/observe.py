@@ -4,6 +4,7 @@ Base functions to generate observing JSONs
 """
 __author__ = "Erin Kado-Fong"
 
+import os
 import datetime
 import numpy as np
 import pandas as pd
@@ -48,12 +49,19 @@ class ObsCatalog (object):
         catalog['expType'] = expType_l
         catalog['expTime'] = expTime_l
 
+        self.catalog = catalog
         return catalog
         
-    def to_json (self, catalog, fp='../json/obsscript.json'):
+    def to_json (self, catalog=None, fp='../json/obsscript.json'):
         '''
         Format to JSON with small tweaks to enhance readability
         '''
+        if catalog is None:
+            catalog = self.catalog
+
+        catalog['seqnum'] = np.arange(1,catalog.shape[0]+1)
+        catalog['seqtot'] = catalog.shape[0]
+            
         fx = {',':',\n', '[':'[\n', ']':'\n]', '{':'{\n', '}':'\n}' }
         json_str = catalog.to_json(orient='records')
 
@@ -61,6 +69,56 @@ class ObsCatalog (object):
             json_str = json_str.replace(key, repkey)
 
         open(fp, 'w').write(json_str)
+
+    def observing_time ( self ):
+        return self.catalog.expTime.sum() / 3600.
+
+    def as_skycoord ( self, catalog=None):
+        if catalog is None:
+            catalog = self.catalog
+        coords = coordinates.SkyCoord ( catalog['RA'],
+                                        catalog['dec'], unit='deg')
+        return coords
+
+    def plan_night ( self, obstime, obssite, catalog=None, maxairmass=1.3,
+                     is_queued=None):
+        if catalog is None:
+            catalog = self.catalog
+        dstr = obstime.strftime('%Y%m%d')
+        dpath = f'../json/{dstr}'
+        if not os.path.exists(dpath):
+            os.mkdir(dpath)
+            
+        obsframe = obssite.define_obsframe ( obstime)
+
+        alt_l = [ obssite.get_altitude(cc, obsframe) for cc in self.as_skycoord(catalog)]
+        if is_queued is None:
+            is_queued = pd.DataFrame (index=catalog.index,
+                                      columns=['is_queued'])
+            is_queued['is_queued'] = False
+        
+        for ix in range(len(alt_l[0])):
+            htime = alt_l[0][ix].obstime.datetime
+            
+            cmass = pd.DataFrame(index=catalog.index)
+
+            cmass['airmass'] = [ ai.secz[ix] for ai in alt_l]
+            cmass['is_possible'] = True
+            cmass.loc[cmass.airmass>maxairmass, 'is_possible'] = False
+            cmass.loc[cmass.airmass<0,'is_possible'] = False
+            cmass.loc[is_queued.is_queued, 'is_possible'] = False
+            pidx = cmass.loc[cmass.is_possible].sort_values('airmass').index
+            g2q = catalog.reindex(pidx)['expTime'].cumsum () <= 3600.
+
+            hfile = catalog.reindex(pidx).loc[g2q]
+            hstr = htime.strftime('%Y%m%d_%H')
+            if hfile.shape[0]>0:
+                self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
+
+            is_queued.loc[g2q.loc[g2q].index, 'is_queued'] = True
+
+        return catalog, is_queued
+    
 
 class ObservingSite ( object ):
     '''
@@ -97,18 +155,18 @@ class ObservingSite ( object ):
         # // daylight savings time. Make sure your pytz version is up-to-date (2020).
         return date.astimezone ( self.timezone ).utcoffset().total_seconds()/3600.
 
-    def define_obsframe ( self, obs_datetime, nstep=0.5, lim=6. ):
+    def define_obsframe ( self, obs_datetime, nstep=1., lim=6. ):
         '''
         For an individual night of an observing run, generate the
         observing frame. The observing frame specifies observatory location
         + time for +/- lim hours about the fiducial obs_datetime in steps of nstep
         hours.
         '''
-        utcoffset = self.get_utcoffset ( obs_datetime )
+        #utcoffset = self.get_utcoffset ( obs_datetime )
         frame = np.arange ( -lim, lim+nstep/2., nstep) * u.hour
         timeframe = Time ( obs_datetime ) + frame
         obsframe = coordinates.AltAz ( obstime = timeframe, location=self.site)
-        return obsframe, utcoffset
+        return obsframe#, utcoffset
 
     def get_altitude ( self, target_coord, obsframe ):
         '''
