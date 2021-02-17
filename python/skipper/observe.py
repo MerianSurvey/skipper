@@ -82,6 +82,25 @@ class ObsCatalog (object):
 
     def plan_night ( self, obstime, obssite, catalog=None, maxairmass=1.3,
                      is_queued=None):
+        '''
+        Using obstime and obssite (CTIO), generate a plan from the night
+        via airmass optimization.
+
+        TODO: cut time at beginning at end based on ephem
+        
+        args:
+        =====
+        obstime (datetime.Datetime): date and central time for observing.
+          We will plan the night for +/-6 hours around this central time by 
+          default.
+        obssite (observe.ObservingSite): Observatory object where we'll
+          observer.
+        catalog (observe.ObsCatalog): Catalog from which to generate
+          observing plan. If None, use self.
+        maxairmass (float): maximum airmass at which we will observe
+        is_queued (pandas.DataFrame): list of pointings that have
+          already been observed
+        '''
         if catalog is None:
             catalog = self.catalog
         dstr = obstime.strftime('%Y%m%d')
