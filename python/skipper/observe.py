@@ -118,24 +118,31 @@ class ObsCatalog (object):
         dpath = f'../json/{dstr}'
         if not os.path.exists(dpath):
             os.mkdir(dpath)
-            
+
+        # \\ Define Observing Frame from obstime
         obsframe = obssite.define_obsframe ( obstime)
 
+        # \\ Get altitudes for the night
         alt_l = [ obssite.get_altitude(cc, obsframe) for cc in self.as_skycoord(catalog)]
+
+        # \\ If we've not already got a queue, make one
         if is_queued is None:
             is_queued = pd.DataFrame (index=catalog.index,
                                       columns=['is_queued'])
             is_queued['is_queued'] = False
-            
+
+        # \\ If we've got object priorities, set those
         if object_priority is not None:
             is_queued['has_priority'] = np.inf
             for key,val in object_priority.items():
                 is_that_object = catalog['object']==key
                 is_queued.loc[is_that_object, 'has_priority'] = val
+        else:
+            is_queued['has_priority'] = np.inf
 
-        for ix in range(len(alt_l[0])):
-            htime = alt_l[0][ix].obstime.datetime
-            
+        # \\ START planning the night
+        for ix in range(len(alt_l[0])): # \\ for each hour,
+            htime = alt_l[0][ix].obstime.datetime            
             cmass = pd.DataFrame(index=catalog.index)
 
             cmass['airmass'] = [ ai.secz[ix] for ai in alt_l]
@@ -143,15 +150,30 @@ class ObsCatalog (object):
             cmass.loc[cmass.airmass>maxairmass, 'is_possible'] = False
             cmass.loc[cmass.airmass<0,'is_possible'] = False
             cmass.loc[is_queued.is_queued, 'is_possible'] = False
-            pidx = cmass.loc[cmass.is_possible].sort_values('airmass').index
-            g2q = catalog.reindex(pidx)['expTime'].cumsum () <= 3600.
+            cmass['going_to_queue'] = False
+            total_queued_time = 0.
+            for cprior in is_queued.has_priority.unique():                
+                # \\ go through each object priority level
+                avail_queue_time = 3600. - total_queued_time                
+                is_this_priority = is_queued.reindex(cmass.index)['has_priority'] == cprior                
+                targets = cmass.is_possible & is_this_priority
+                pidx = cmass.loc[targets].sort_values('airmass').index
+                going_to_queue = catalog.reindex(pidx)['expTime'].cumsum() <= avail_queue_time
 
-            hfile = catalog.reindex(pidx).loc[g2q]
+                # \\ update remaining available queue time
+                total_queued_time += catalog.reindex(pidx).loc[going_to_queue, 'expTime'].sum()
+                print(f'{total_queued_time}s filled by priority={cprior} objects')
+                cmass.loc[going_to_queue.loc[going_to_queue].index, 'going_to_queue'] = True
+
+            #pidx = cmass.loc[cmass.is_possible].sort_values('airmass').index
+            #g2q = catalog.reindex(pidx)['expTime'].cumsum () <= 3600.
+
+            hfile = catalog.loc[cmass.going_to_queue] #catalog.reindex(pidx).loc[g2q]
             hstr = htime.strftime('%Y%m%d_%H')
             if hfile.shape[0]>0:
                 self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
 
-            is_queued.loc[g2q.loc[g2q].index, 'is_queued'] = True
+            is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
 
         return catalog, is_queued
     
