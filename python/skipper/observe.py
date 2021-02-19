@@ -153,9 +153,21 @@ class ObsCatalog (object):
             cmass.loc[is_queued.is_queued, 'is_possible'] = False
             cmass['going_to_queue'] = False
             total_queued_time = 0.
+            if ix == 0:
+                total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)).to(u.second).value
+
+            elif ix==(len(alt_l[0])-1):
+                total_available_time = (obsframe.obstime[ix]+1.*u.hr - Time(obs_end)).to(u.second).value
+
+            else:
+                total_available_time = 3600.
+            assert total_available_time <= 3600.1, f'{obs_end}, {total_available_time:.0f}s'
+            if total_available_time < catalog.expTime.mean():
+                print(f'({total_available_time:.0f}s) Not enough time for an exposure. Skipping...')
+                continue
             for cprior in np.sort(is_queued.has_priority.unique()):                
                 # \\ go through each object priority level
-                avail_queue_time = 3600. - total_queued_time                
+                avail_queue_time = total_available_time - total_queued_time                
                 is_this_priority = is_queued.reindex(cmass.index)['has_priority'] == cprior                
                 targets = cmass.is_possible & is_this_priority
                 pidx = cmass.loc[targets].sort_values('airmass').index
@@ -254,9 +266,10 @@ class ObservingSite ( object ):
         else:
             utc_end = utc_start + lim*u.hour
 
+        print(utc_end)
         #frame = np.arange ( -lim, lim+nstep/2., nstep) * u.hour
         frame = np.arange(0, (utc_end-utc_start).to_value(u.hour)+1,1)*u.hour
-        timeframe = utc_start + frame
+        timeframe = np.arange(utc_start, utc_end+.5*u.hour, 1.*u.hour) #utc_start + frame
         obsframe = coordinates.AltAz ( obstime = timeframe, location=self.site)
         return obsframe
 
