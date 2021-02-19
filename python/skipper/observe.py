@@ -51,6 +51,17 @@ class ObsCatalog (object):
 
         self.catalog = catalog
         return catalog
+
+    def write_jsonlog ( self, fp, logname='../json/json.log', user=None ):
+        if user is None:
+            try:
+                user=os.environ['USER']
+            except KeyError:
+                raise ValueError ('No user was specified and cannot be read!')
+        
+        dtime = datetime.datetime.now().strftime('%Y/%m/%d %I:%M %p')
+        with open(logname,'a') as ff:
+            print(f'{fp} written on {dtime} by {user}', file=ff)
         
     def to_json (self, catalog=None, fp='../json/obsscript.json'):
         '''
@@ -69,6 +80,7 @@ class ObsCatalog (object):
             json_str = json_str.replace(key, repkey)
 
         open(fp, 'w').write(json_str)
+        self.write_jsonlog ( fp )
 
     def observing_time ( self ):
         return self.catalog.expTime.sum() / 3600.
