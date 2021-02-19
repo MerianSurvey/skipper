@@ -81,7 +81,8 @@ class ObsCatalog (object):
         return coords
 
     def plan_night ( self, obstime, obssite, catalog=None, maxairmass=1.3,
-                     is_queued=None):
+                     obsstart=None, obsend=None,
+                     is_queued=None, object_priority=None):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -92,14 +93,24 @@ class ObsCatalog (object):
         =====
         obstime (datetime.Datetime): date and central time for observing.
           We will plan the night for +/-6 hours around this central time by 
-          default.
+          default; if obsstart and obsend are supplied, we will plan
+          between obsstart and obsend.
         obssite (observe.ObservingSite): Observatory object where we'll
           observer.
         catalog (observe.ObsCatalog): Catalog from which to generate
           observing plan. If None, use self.
         maxairmass (float): maximum airmass at which we will observe
+        !!NOTIMPLEMENTED) obsstart (datetime.Datetime): date and time for observing to start.
+        !!NOTIMPLEMENTED) obsend (datetime.Datetime): date and time for observing to end. 
         is_queued (pandas.DataFrame): list of pointings that have
           already been observed
+        !!NOTIMPLEMENTED) object_priority (dict-like): if given, a list of objects in the
+          observing catalog that will take priority over the rest of the
+          catalog. Other pointings will only be queued if the priority
+          objects are all already queued OR above the maximum airmass
+          needed for observation.
+          object priority should be given as {OBJECT_NAME:OBJECT_PRIORITY},
+          where 0 is highest priority.
         '''
         if catalog is None:
             catalog = self.catalog
@@ -115,7 +126,13 @@ class ObsCatalog (object):
             is_queued = pd.DataFrame (index=catalog.index,
                                       columns=['is_queued'])
             is_queued['is_queued'] = False
-        
+            
+        if object_priority is not None:
+            is_queued['has_priority'] = np.inf
+            for key,val in object_priority.items():
+                is_that_object = catalog['object']==key
+                is_queued.loc[is_that_object, 'has_priority'] = val
+
         for ix in range(len(alt_l[0])):
             htime = alt_l[0][ix].obstime.datetime
             
