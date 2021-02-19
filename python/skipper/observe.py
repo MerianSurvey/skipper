@@ -59,8 +59,8 @@ class ObsCatalog (object):
         if catalog is None:
             catalog = self.catalog
 
-        catalog['seqnum'] = np.arange(1,catalog.shape[0]+1)
-        catalog['seqtot'] = catalog.shape[0]
+        catalog.loc[:,'seqnum'] = np.arange(1,catalog.shape[0]+1)
+        catalog.loc[:,'seqtot'] = catalog.shape[0]
             
         fx = {',':',\n', '[':'[\n', ']':'\n]', '{':'{\n', '}':'\n}' }
         json_str = catalog.to_json(orient='records')
@@ -104,7 +104,7 @@ class ObsCatalog (object):
         !!NOTIMPLEMENTED) obsend (datetime.Datetime): date and time for observing to end. 
         is_queued (pandas.DataFrame): list of pointings that have
           already been observed
-        !!NOTIMPLEMENTED) object_priority (dict-like): if given, a list of objects in the
+        object_priority (dict-like): if given, a list of objects in the
           observing catalog that will take priority over the rest of the
           catalog. Other pointings will only be queued if the priority
           objects are all already queued OR above the maximum airmass
