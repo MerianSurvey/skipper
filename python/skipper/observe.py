@@ -80,8 +80,8 @@ class ObsCatalog (object):
                                         catalog['dec'], unit='deg')
         return coords
 
-    def plan_night ( self, obstime, obssite, catalog=None, maxairmass=1.3,
-                     obsstart=None, obsend=None,
+    def plan_night ( self, obs_start, obssite, catalog=None, maxairmass=1.3,
+                     obs_end=None, 
                      is_queued=None, object_priority=None):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
@@ -91,17 +91,15 @@ class ObsCatalog (object):
         
         args:
         =====
-        obstime (datetime.Datetime): date and central time for observing.
-          We will plan the night for +/-6 hours around this central time by 
-          default; if obsstart and obsend are supplied, we will plan
-          between obsstart and obsend.
+        obs_start (datetime.Datetime): date and time for observing to start. Can be in either
+          local time or UTC, as long as time zone is specified.
         obssite (observe.ObservingSite): Observatory object where we'll
           observer.
         catalog (observe.ObsCatalog): Catalog from which to generate
           observing plan. If None, use self.
         maxairmass (float): maximum airmass at which we will observe
-        !!NOTIMPLEMENTED) obsstart (datetime.Datetime): date and time for observing to start.
-        !!NOTIMPLEMENTED) obsend (datetime.Datetime): date and time for observing to end. 
+        obs_end (datetime.Datetime): date and time for observing to end. If no obs_end is
+          specified, a plan will be generated for 6 hours.
         is_queued (pandas.DataFrame): list of pointings that have
           already been observed
         object_priority (dict-like): if given, a list of objects in the
@@ -114,13 +112,13 @@ class ObsCatalog (object):
         '''
         if catalog is None:
             catalog = self.catalog
-        dstr = obstime.strftime('%Y%m%d')
+        dstr = obs_start.strftime('%Y%m%d')
         dpath = f'../json/{dstr}'
         if not os.path.exists(dpath):
             os.mkdir(dpath)
 
         # \\ Define Observing Frame from obstime
-        obsframe = obssite.define_obsframe ( obstime)
+        obsframe = obssite.define_obsframe ( obs_start=obs_start, obs_end=obs_end)
 
         # \\ Get altitudes for the night
         alt_l = [ obssite.get_altitude(cc, obsframe) for cc in self.as_skycoord(catalog)]
@@ -204,7 +202,29 @@ class ObservingSite ( object ):
                 self.timezone = pytz.timezone(timezone)
             else:
                 self.timezone = timezone
-            
+
+    def get_sunriseset ( self, year, month, day, alt=-10. ):
+        '''
+        DECam observing begins and ends at Sun altitude=-10 deg.
+        '''
+        utc_midnight = pytz.utc.localize ( datetime.datetime ( year, month, day, 0, 0 ) )
+        utc_offset = int(self.get_utcoffset (utc_midnight))
+
+        utc_start = pytz.utc.localize ( datetime.datetime ( year, month, day, 12-utc_offset, 0))
+        utc_end = pytz.utc.localize ( datetime.datetime ( year, month, day+1, 12-utc_offset,0) )
+
+        grid = np.arange(Time(utc_start), Time(utc_end),0.1*u.hour)
+        sun_alt = []
+        for ts in grid:
+            sun_coord = coordinates.get_sun ( ts )
+            obsframe = coordinates.AltAz ( obstime=ts, location=self.site )
+            sun_alt.append( sun_coord.transform_to(obsframe).alt )
+
+        sun_alt = np.asarray( [ sa.value for sa in sun_alt ] )
+        observable = sun_alt <= alt
+        obs_can_start, obs_must_end = grid[observable][[0,-1]]
+        lcl = lambda x: pytz.utc.localize(x.to_datetime())
+        return lcl(obs_can_start), lcl(obs_must_end)
 
     def get_utcoffset ( self, date ):
         '''
@@ -218,7 +238,8 @@ class ObservingSite ( object ):
         # // daylight savings time. Make sure your pytz version is up-to-date (2020).
         return date.astimezone ( self.timezone ).utcoffset().total_seconds()/3600.
 
-    def define_obsframe ( self, obs_datetime, nstep=1., lim=6. ):
+    def define_obsframe ( self, obs_start=None, nstep=1., lim=6.,
+                          obs_end=None ):
         '''
         For an individual night of an observing run, generate the
         observing frame. The observing frame specifies observatory location
@@ -226,10 +247,18 @@ class ObservingSite ( object ):
         hours.
         '''
         #utcoffset = self.get_utcoffset ( obs_datetime )
-        frame = np.arange ( -lim, lim+nstep/2., nstep) * u.hour
-        timeframe = Time ( obs_datetime ) + frame
+
+        utc_start = Time(obs_start) - obs_start.astimezone(pytz.utc).minute*u.minute - obs_start.astimezone(pytz.utc).second*u.second
+        if obs_end is not None:
+            utc_end = Time(obs_end) - obs_end.astimezone(pytz.utc).minute*u.minute -obs_end.astimezone(pytz.utc).second*u.second
+        else:
+            utc_end = utc_start + lim*u.hour
+
+        #frame = np.arange ( -lim, lim+nstep/2., nstep) * u.hour
+        frame = np.arange(0, (utc_end-utc_start).to_value(u.hour)+1,1)*u.hour
+        timeframe = utc_start + frame
         obsframe = coordinates.AltAz ( obstime = timeframe, location=self.site)
-        return obsframe#, utcoffset
+        return obsframe
 
     def get_altitude ( self, target_coord, obsframe ):
         '''
