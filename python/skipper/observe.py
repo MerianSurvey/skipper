@@ -130,19 +130,22 @@ class ObsCatalog (object):
             is_queued = pd.DataFrame (index=catalog.index,
                                       columns=['is_queued'])
             is_queued['is_queued'] = False
+            is_queued['qstamp'] = ''
 
         # \\ If we've got object priorities, set those
-        if object_priority is not None:
+        if object_priority is not None: # \\ allow overwrite if priorities change
             is_queued['has_priority'] = np.inf
             for key,val in object_priority.items():
                 is_that_object = catalog['object']==key
                 is_queued.loc[is_that_object, 'has_priority'] = val
-        else:
+        elif 'has_priority' not in is_queued.columns: # \\ don't overwrite if already there
             is_queued['has_priority'] = np.inf
-
+            
         # \\ START planning the night
         for ix in range(len(alt_l[0])): # \\ for each hour,
             htime = alt_l[0][ix].obstime.datetime            
+            hstr = htime.strftime('%Y%m%d_%H')
+            print(f'==> {hstr}')
             cmass = pd.DataFrame(index=catalog.index)
 
             cmass['airmass'] = [ ai.secz[ix] for ai in alt_l]
@@ -152,7 +155,7 @@ class ObsCatalog (object):
             cmass.loc[is_queued.is_queued, 'is_possible'] = False
             cmass['going_to_queue'] = False
             total_queued_time = 0.
-            for cprior in is_queued.has_priority.unique():                
+            for cprior in np.sort(is_queued.has_priority.unique()):                
                 # \\ go through each object priority level
                 avail_queue_time = 3600. - total_queued_time                
                 is_this_priority = is_queued.reindex(cmass.index)['has_priority'] == cprior                
@@ -161,21 +164,23 @@ class ObsCatalog (object):
                 going_to_queue = catalog.reindex(pidx)['expTime'].cumsum() <= avail_queue_time
 
                 # \\ update remaining available queue time
-                total_queued_time += catalog.reindex(pidx).loc[going_to_queue, 'expTime'].sum()
-                print(f'{total_queued_time}s filled by priority={cprior} objects')
+                new_qtime = catalog.reindex(pidx).loc[going_to_queue, 'expTime'].sum()
+                total_queued_time += new_qtime
+                print(f'{new_qtime}s filled by priority={cprior} objects')
                 cmass.loc[going_to_queue.loc[going_to_queue].index, 'going_to_queue'] = True
 
             #pidx = cmass.loc[cmass.is_possible].sort_values('airmass').index
             #g2q = catalog.reindex(pidx)['expTime'].cumsum () <= 3600.
 
             hfile = catalog.loc[cmass.going_to_queue] #catalog.reindex(pidx).loc[g2q]
-            hstr = htime.strftime('%Y%m%d_%H')
+
             if hfile.shape[0]>0:
                 self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
+            is_queued.loc[cmass.index[cmass.going_to_queue], 'qstamp'] = hstr
 
-        return catalog, is_queued
+        return is_queued
     
 
 class ObservingSite ( object ):
