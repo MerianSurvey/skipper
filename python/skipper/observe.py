@@ -19,17 +19,22 @@ class ObsCatalog (object):
                   comment='',
                   proposer='Leauthaud',
                   program='Merian',
-                  propid='2020B-XXXX' ):
+                  propid='2020B-XXXX',
+                  seqid='TEST',
+                  count=1,
+                  wait=False):
         self.comment = comment
         self.proposer = proposer
         self.program = program
         self.propid = propid
-
-        self.columns = np.asarray( ['comment','filter','seqtot','seqnum','expType',
+        self.wait = wait
+        self.count = count
+        self.seqid = seqid
+        self.columns = np.asarray( ['comment','filter','seqtot','seqnum','seqid','expType',
                         'object','proposer','program','RA','propid','dec',
-                        'expTime'] )
-        self._singular = [True,False,True,False,False,False,
-                           True,True,False,True,False,False]
+                        'expTime', 'count'] )
+        self._singular = [True,False,True,False,True,False,False,
+                           True,True,False,True,False,False,True]
 
 
     def build_catalog ( self, ra_l, dec_l, object_l, filter_l, expType_l, expTime_l):
@@ -164,6 +169,7 @@ class ObsCatalog (object):
             cmass.loc[cmass.airmass<0,'is_possible'] = False
             cmass.loc[is_queued.is_queued, 'is_possible'] = False
             cmass['going_to_queue'] = False
+
             total_queued_time = 0.
             if ix == 0:
                 total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)).to(u.second).value
@@ -191,6 +197,10 @@ class ObsCatalog (object):
                 print(f'{new_qtime}s filled by priority={cprior} objects')
                 cmass.loc[going_to_queue.loc[going_to_queue].index, 'going_to_queue'] = True
 
+                amass = cmass.reindex(pidx).loc[going_to_queue, 'airmass']
+                cmass.loc[going_to_queue.loc[going_to_queue].index, 'airmass'] = amass
+
+
             #pidx = cmass.loc[cmass.is_possible].sort_values('airmass').index
             #g2q = catalog.reindex(pidx)['expTime'].cumsum () <= 3600.
 
@@ -201,6 +211,7 @@ class ObsCatalog (object):
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
             is_queued.loc[cmass.index[cmass.going_to_queue], 'qstamp'] = hstr
+            is_queued.loc[cmass.index[cmass.going_to_queue], 'airmass'] = cmass.loc[cmass.going_to_queue, 'airmass']
 
         return is_queued
     
