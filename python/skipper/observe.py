@@ -6,6 +6,7 @@ __author__ = "Erin Kado-Fong"
 
 import os
 import datetime
+import warnings
 import numpy as np
 import pandas as pd
 import pytz
@@ -160,7 +161,7 @@ class ObsCatalog (object):
         for ix in range(len(alt_l[0])): # \\ for each hour,
             htime = alt_l[0][ix].obstime.datetime            
             hstr = htime.strftime('%Y%m%d_%H')
-            print(f'==> {hstr}')
+
             cmass = pd.DataFrame(index=catalog.index)
 
             cmass['airmass'] = [ ai.secz[ix] for ai in alt_l]
@@ -172,17 +173,17 @@ class ObsCatalog (object):
 
             total_queued_time = 0.
             if ix == 0:
-                total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)).to(u.second).value
+                total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)-0.5*u.hour).to(u.second).value
 
             elif ix==(len(alt_l[0])-1):
-                total_available_time = (obsframe.obstime[ix]+1.*u.hr - Time(obs_end)).to(u.second).value
-
+                total_available_time = (obsframe.obstime[ix]+1.*u.hr - Time(obs_end)-0.5*u.hour).to(u.second).value
             else:
                 total_available_time = 3600.
             assert total_available_time <= 3600.1, f'{obs_end}, {total_available_time:.0f}s'
             if total_available_time < catalog.expTime.mean():
                 print(f'({total_available_time:.0f}s) Not enough time for an exposure. Skipping...')
                 continue
+            print(f'==> {hstr}, {total_available_time}s available')
             for cprior in np.sort(is_queued.has_priority.unique()):                
                 # \\ go through each object priority level
                 avail_queue_time = total_available_time - total_queued_time                
@@ -200,12 +201,16 @@ class ObsCatalog (object):
                 amass = cmass.reindex(pidx).loc[going_to_queue, 'airmass']
                 cmass.loc[going_to_queue.loc[going_to_queue].index, 'airmass'] = amass
 
-
+            avail_queue_time = total_available_time - total_queued_time 
             #pidx = cmass.loc[cmass.is_possible].sort_values('airmass').index
             #g2q = catalog.reindex(pidx)['expTime'].cumsum () <= 3600.
 
             hfile = catalog.loc[cmass.going_to_queue] #catalog.reindex(pidx).loc[g2q]
-
+            if hfile.shape[0]==0:
+                print('Nothing to queue!!')
+            elif avail_queue_time > catalog['expTime'].mean():
+                print(f'Cannot fill queue!! {avail_queue_time}, {catalog["expTime"].mean()}')
+                warnings.warn('Queue unfilled at {hstr}')
             if hfile.shape[0]>0:
                 self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
 
@@ -292,7 +297,8 @@ class ObservingSite ( object ):
         print(utc_end)
         #frame = np.arange ( -lim, lim+nstep/2., nstep) * u.hour
         frame = np.arange(0, (utc_end-utc_start).to_value(u.hour)+1,1)*u.hour
-        timeframe = np.arange(utc_start, utc_end+.5*u.hour, 1.*u.hour) #utc_start + frame
+        timeframe = np.arange(utc_start+0.5*u.hour, utc_end+1*u.hour, 1.*u.hour) #utc_start + frame
+        #timeframe += 0.5*u.hour # calculate airmass in middle of hour
         obsframe = coordinates.AltAz ( obstime = timeframe, location=self.site)
         return obsframe
 
