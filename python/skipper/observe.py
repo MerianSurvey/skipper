@@ -130,6 +130,7 @@ class ObsCatalog (object):
         '''
         if catalog is None:
             catalog = self.catalog
+        catalog_objects = catalog.apply(lambda x: x['object'].split('_')[0], axis=1)
         dstr = obs_start.strftime('%Y%m%d')
         dpath = f'../json/{dstr}'
         if not os.path.exists(dpath):
@@ -152,7 +153,7 @@ class ObsCatalog (object):
         if object_priority is not None: # \\ allow overwrite if priorities change
             is_queued['has_priority'] = np.inf
             for key,val in object_priority.items():
-                is_that_object = catalog['object']==key
+                is_that_object = catalog_objects==key
                 is_queued.loc[is_that_object, 'has_priority'] = val
         elif 'has_priority' not in is_queued.columns: # \\ don't overwrite if already there
             is_queued['has_priority'] = np.inf
