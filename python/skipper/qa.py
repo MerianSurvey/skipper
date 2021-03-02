@@ -21,7 +21,7 @@ import pytz
 def tmp():
     print('Hello, world')
 
-def validate_json(file, obs_start, maxairmax=1.3):
+def validate_json(file, obs_start, maxairmass=1.3):
     '''
     Validation for JSON observing scripts
     Verifies:
@@ -34,7 +34,7 @@ def validate_json(file, obs_start, maxairmax=1.3):
         - obs_start (datetime.Datetime): date and time for observing to start. Can be in either
             local time or UTC, as long as time zone is specified.
         - obssite (observe.ObsCatalog): Observatory object where we'll be observing
-        - maxairmaxx (float): maximum airmass at which we will observe
+        - maxairmassx (float): maximum airmass at which we will observe
         ===========
     '''
 
@@ -49,7 +49,7 @@ def validate_json(file, obs_start, maxairmax=1.3):
         valid_vis = -1
 
     if valid_json:
-        if __checkVis__(file, obs_start, obssite, maxairmax) == False:
+        if __checkVis__(file, obs_start, obssite, maxairmass) == False:
             valid_vis=False
 
 def __checkJSON__(f):
@@ -118,7 +118,7 @@ def __validJSONVal__(val, forKey):
 
 # Checks is airmass is within acceptable range
 # using input start time and site
-def __checkVis__(file, obs_start, obssite, maxairmax):
+def __checkVis__(file, obs_start, obssite, maxairmass):
     '''
     Checks airmass against upper limit
     '''
@@ -149,7 +149,7 @@ def __checkVis__(file, obs_start, obssite, maxairmax):
         print(wt)
 
         # check airmass against our threshold
-        if wt > maxairmax or wt<0:
+        if wt > maxairmass or wt<0:
             print(f'Warning: Airmass of {wt:.2f} in exposure ' + str(i+1) + ' of file ' + file)
             ok=False
 
