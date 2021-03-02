@@ -14,6 +14,7 @@ from astropy import coordinates
 from astropy import units as u
 from astropy.time import Time
 from astropy.io import fits
+from . import utils
 
 class ObsCatalog (object):
     def __init__ (self,
@@ -37,23 +38,52 @@ class ObsCatalog (object):
         self._singular = [True,False,True,False,True,False,False,
                            True,True,False,True,False,False,True]
 
+    def objnamer_coordinates ( self, cat_row ):
+        '''
+        Define an object name in the SDSS convention using its coordinates 
+        '''
+        coord = coordinates.SkyCoord(cat_row['RA'],cat_row['dec'],unit=u.deg)
+        coorstr = coord.to_string('hmsdms',sep='').split()
+        ra_truncated = utils.truncate(coorstr[0],2)
+        dec_truncated = utils.truncate(coorstr[1],2)
+        filter_name = cat_row['filter']
+        field_name = cat_row['object']
+        return f'{field_name}_J{ra_truncated}{dec_truncated}_{filter_name}'
 
-    def build_catalog ( self, ra_l, dec_l, object_l, filter_l, expType_l, expTime_l):
+        
+    def build_object_names (self, catalog):
+        obj_df = pd.Series(index=catalog.index)
+
+        for ix in range(catalog.shape[0]):
+            row = catalog.iloc[ix]
+            obj_name = self.objnamer_coordinates (row )
+            obj_df.loc[catalog.index[ix]] = obj_name
+        return obj_df
+
+    def build_catalog ( self, ra_l, dec_l, object_l, filter_l, expType_l, expTime_l, build_object_names=True):
         '''
         Generate pandas DataFrame that has our observing info
+
+        If build_object_names is True, then we will build the object names
+        according to self.get_object_name ()
         '''
         self.seqtot = len(ra_l)
         catalog = pd.DataFrame ( index=np.arange(self.seqtot), columns=self.columns )
         for col in self.columns[self._singular]:
             catalog[col] = getattr(self, col)
-
+            
         catalog['RA'] = ra_l
         catalog['dec'] = dec_l
         catalog['seqnum'] = catalog.index + 1
-        catalog['object'] = object_l
         catalog['filter'] = filter_l
         catalog['expType'] = expType_l
         catalog['expTime'] = expTime_l
+
+
+        # \\ add OBJECT names
+        catalog['object'] = object_l
+        if build_object_names:
+            catalog['object'] = self.build_object_names(catalog)
 
         self.catalog = catalog
         return catalog
