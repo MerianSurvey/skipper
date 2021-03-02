@@ -89,7 +89,9 @@ def __checkJSON__(f):
 # return boolean
 def __validJSONVal__(val, forKey):
     '''
-    Checks if JSON value is acceptable for a given key
+    Checks if JSON value is acceptable for a given key:
+        - makes sure there's no spaces
+        - makes sure numerical values are numerical
     '''
     if ' ' in val:
         return False
@@ -117,6 +119,10 @@ def __validJSONVal__(val, forKey):
 # Checks is airmass is within acceptable range
 # using input start time and site
 def __checkVis__(file, obs_start, obssite, maxairmax):
+    '''
+    Checks airmass against upper limit
+    '''
+
     # load into json object
     content = ''
     with open(file, 'r') as content_file:
