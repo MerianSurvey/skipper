@@ -21,7 +21,7 @@ import pytz
 def tmp():
     print('Hello, world')
 
-def validate_json(file, obs_start, maxairmass=1.3):
+def validate_json(file, obs_start, obssite, maxairmass=1.3):
     '''
     Validation for JSON observing scripts
     Verifies:
@@ -93,8 +93,10 @@ def __validJSONVal__(val, forKey):
         - makes sure there's no spaces
         - makes sure numerical values are numerical
     '''
-    if ' ' in val:
-        return False
+    if hasattr( val, '__len__'):
+        if ' ' in val:
+            return False
+        
     if forKey == 'expTime' or forKey == 'RA' or forKey == 'dec': #must be float
         try:
             float(val)
