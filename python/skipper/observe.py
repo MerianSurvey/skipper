@@ -118,7 +118,7 @@ class ObsCatalog (object):
                 throw['expTime'] = 60.
                 throw['object'] = throw['object'] + '_1minexp'
                 throw['comment'] = 'OneMinuteFocusExposure'
-                throw.name = throw.name + 0.5
+                throw.name = throw.name - 0.5
                 catalog.loc[throw.name] = throw
             catalog = catalog.sort_index().reset_index(drop=True)
 
