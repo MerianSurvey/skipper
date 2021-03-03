@@ -84,11 +84,12 @@ def create_decals_fields():
     dither = decals_rotate
     return create_fields(base, offsets, dither)
 
-def create_shifted_decals_fields():
+def create_shifted_decals_fields(dec_offset=1.0):
     """ Replicate first 3 DECaLS tilings from
     decam-tiles_obstatus.fits and add a 4th tiling.
     """
-    dec_offset = 1.0
+
+    print(dec_offset)
 
     offsets = [(0.,0+dec_offset),(-0.2917, 0.0833+dec_offset),
                (-0.5861, 0.1333+dec_offset),
@@ -101,11 +102,12 @@ def create_shifted_decals_fields():
 
 if __name__ == "__main__":
 
-    # decals = create_decals_fields()
-    decals = create_shifted_decals_fields()
     datadir = join(dirname(dirname(dirname(abspath(__file__)))),'data')
+    # decals = create_decals_fields()
+    decals = create_shifted_decals_fields(dec_offset=0.5)
     # outfile = datadir+'/decam-tiles-decals-merian.fits.gz'
-    outfile = datadir+'/shifted-tiles-decals-merian.fits.gz'
+    # outfile = datadir+'/shifted-tiles-decals-merian.fits.gz'
+    outfile = datadir+'/shifted-tiles-decals-merian_0.5.fits.gz'
     fitsio.write(outfile,decals,clobber=True)
 
 
