@@ -21,6 +21,7 @@ import pytz
 def tmp():
     print('Hello, world')
 
+
 def validate_json(file, obs_start, obssite, maxairmass=1.3):
     '''
     Validation for JSON observing scripts
@@ -33,8 +34,8 @@ def validate_json(file, obs_start, obssite, maxairmass=1.3):
         - file (string): path to json file to validate
         - obs_start (datetime.Datetime): date and time for observing to start. Can be in either
             local time or UTC, as long as time zone is specified.
-        - obssite (observe.ObsCatalog): Observatory object where we'll be observing
-        - maxairmassx (float): maximum airmass at which we will observe
+        - obssite (observe.ObsCatalog): Observatory object where we'll be observing, if None defaults to Cerro Tololo
+        - maxairmass (float): maximum airmass at which we will observe
         ===========
     '''
 
@@ -51,6 +52,10 @@ def validate_json(file, obs_start, obssite, maxairmass=1.3):
     if valid_json:
         if __checkVis__(file, obs_start, obssite, maxairmass) == False:
             valid_vis=False
+
+    if valid_json and valid_vis:
+        print('QA COMPLETE: All tests passed')
+
 
 def __checkJSON__(f):
     '''
@@ -93,10 +98,9 @@ def __validJSONVal__(val, forKey):
         - makes sure there's no spaces
         - makes sure numerical values are numerical
     '''
-    if hasattr( val, '__len__'):
-        if ' ' in val:
-            return False
-        
+    if hasattr(val, '__len__') and ' ' in val:
+        return False
+
     if forKey == 'expTime' or forKey == 'RA' or forKey == 'dec': #must be float
         try:
             float(val)
@@ -132,7 +136,11 @@ def __checkVis__(file, obs_start, obssite, maxairmass):
     j = json.loads(content)
 
     #site = obssite #EarthLocation.of_site('Cerro Tololo')
-    site = EarthLocation( lat='-30d10m10.78s', lon='-70d48m23.49s', height=2241.*u.m )
+    site=None
+    if obssite == None:
+        site = EarthLocation( lat='-30d10m10.78s', lon='-70d48m23.49s', height=2241.*u.m )
+    else:
+        site = obssite
     timezone= pytz.timezone ( 'America/Santiago' )
     utc_start = Time(obs_start) - obs_start.astimezone(pytz.utc).minute*u.minute - obs_start.astimezone(pytz.utc).second*u.second
 
@@ -148,7 +156,7 @@ def __checkVis__(file, obs_start, obssite, maxairmass):
         utc_start += 10*u.minute
         obsframe = astropy.coordinates.AltAz( obstime = utc_start, location=site)
         wt = (ra_dec.transform_to(obsframe)).secz
-        print(wt)
+        #print(wt)
 
         # check airmass against our threshold
         if wt > maxairmass or wt<0:
