@@ -99,12 +99,29 @@ class ObsCatalog (object):
         with open(logname,'a') as ff:
             print(f'{fp} written on {dtime} by {user}', file=ff)
         
-    def to_json (self, catalog=None, fp='../json/obsscript.json'):
+    def to_json (self, catalog=None, fp='../json/obsscript.json',
+                 insert_onemin_exposures=True, verbose=True):
         '''
         Format to JSON with small tweaks to enhance readability
+
+        insert_onemin_exposures:
+          Adds a 1 minute exposure in between each science exposure (ODIN)
         '''
         if catalog is None:
             catalog = self.catalog
+        if insert_onemin_exposures:
+            if verbose:
+                print('[to_json] Inserting 60s focus exposures')
+            catalog = catalog.reset_index(drop=True)
+            for name, row in catalog.iterrows():
+                throw = row.copy()
+                throw['expTime'] = 60.
+                throw['object'] = throw['object'] + '_1minexp'
+                throw['comment'] = 'OneMinuteFocusExposure'
+                throw.name = throw.name + 0.5
+                catalog.loc[throw.name] = throw
+            catalog = catalog.sort_index().reset_index(drop=True)
+
 
         catalog.loc[:,'seqnum'] = np.arange(1,catalog.shape[0]+1)
         catalog.loc[:,'seqtot'] = catalog.shape[0]
@@ -161,7 +178,7 @@ class ObsCatalog (object):
         if catalog is None:
             catalog = self.catalog
         catalog_objects = catalog.apply(lambda x: x['object'].split('_')[0], axis=1)
-        dstr = obs_start.strftime('%Y%m%d')
+        dstr = obs_start.astimezone(obssite.timezone).strftime('%Y%m%d')
         dpath = f'../json/{dstr}'
         if not os.path.exists(dpath):
             os.mkdir(dpath)
@@ -239,6 +256,7 @@ class ObsCatalog (object):
             hfile = catalog.loc[cmass.going_to_queue] #catalog.reindex(pidx).loc[g2q]
             if hfile.shape[0]==0:
                 print('Nothing to queue!!')
+                warnings.warn ('Queue empty at {hstr}')
             elif avail_queue_time > catalog['expTime'].mean():
                 print(f'Cannot fill queue!! {avail_queue_time}, {catalog["expTime"].mean()}')
                 warnings.warn('Queue unfilled at {hstr}')
