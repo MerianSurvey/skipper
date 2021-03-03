@@ -1,0 +1,3 @@
+JSON directory files, generated from observe.plan_night().
+
+Directory names are the start of the observing night in CTIO local time, but hourly files are named by UTC. In most cases this should not make a difference, but this is to separate cases where observing begins post-UTC midnight on night N and pre-UTC midnight on night N+1
