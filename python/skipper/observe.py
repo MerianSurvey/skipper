@@ -6,6 +6,7 @@ __author__ = "Erin Kado-Fong"
 
 import os
 import datetime
+import warnings
 import numpy as np
 import pandas as pd
 import pytz
@@ -13,6 +14,7 @@ from astropy import coordinates
 from astropy import units as u
 from astropy.time import Time
 from astropy.io import fits
+from . import utils
 
 class ObsCatalog (object):
     def __init__ (self,
@@ -36,23 +38,52 @@ class ObsCatalog (object):
         self._singular = [True,False,True,False,True,False,False,
                            True,True,False,True,False,False,True]
 
+    def objnamer_coordinates ( self, cat_row ):
+        '''
+        Define an object name in the SDSS convention using its coordinates 
+        '''
+        coord = coordinates.SkyCoord(cat_row['RA'],cat_row['dec'],unit=u.deg)
+        coorstr = coord.to_string('hmsdms',sep='').split()
+        ra_truncated = utils.truncate(coorstr[0],2)
+        dec_truncated = utils.truncate(coorstr[1],2)
+        filter_name = cat_row['filter']
+        field_name = cat_row['object']
+        return f'{field_name}_J{ra_truncated}{dec_truncated}_{filter_name}'
 
-    def build_catalog ( self, ra_l, dec_l, object_l, filter_l, expType_l, expTime_l):
+        
+    def build_object_names (self, catalog):
+        obj_df = pd.Series(index=catalog.index)
+
+        for ix in range(catalog.shape[0]):
+            row = catalog.iloc[ix]
+            obj_name = self.objnamer_coordinates (row )
+            obj_df.loc[catalog.index[ix]] = obj_name
+        return obj_df
+
+    def build_catalog ( self, ra_l, dec_l, object_l, filter_l, expType_l, expTime_l, build_object_names=True):
         '''
         Generate pandas DataFrame that has our observing info
+
+        If build_object_names is True, then we will build the object names
+        according to self.get_object_name ()
         '''
         self.seqtot = len(ra_l)
         catalog = pd.DataFrame ( index=np.arange(self.seqtot), columns=self.columns )
         for col in self.columns[self._singular]:
             catalog[col] = getattr(self, col)
-
+            
         catalog['RA'] = ra_l
         catalog['dec'] = dec_l
         catalog['seqnum'] = catalog.index + 1
-        catalog['object'] = object_l
         catalog['filter'] = filter_l
         catalog['expType'] = expType_l
         catalog['expTime'] = expTime_l
+
+
+        # \\ add OBJECT names
+        catalog['object'] = object_l
+        if build_object_names:
+            catalog['object'] = self.build_object_names(catalog)
 
         self.catalog = catalog
         return catalog
@@ -68,12 +99,29 @@ class ObsCatalog (object):
         with open(logname,'a') as ff:
             print(f'{fp} written on {dtime} by {user}', file=ff)
         
-    def to_json (self, catalog=None, fp='../json/obsscript.json'):
+    def to_json (self, catalog=None, fp='../json/obsscript.json',
+                 insert_onemin_exposures=True, verbose=True):
         '''
         Format to JSON with small tweaks to enhance readability
+
+        insert_onemin_exposures:
+          Adds a 1 minute exposure in between each science exposure (ODIN)
         '''
         if catalog is None:
             catalog = self.catalog
+        if insert_onemin_exposures:
+            if verbose:
+                print('[to_json] Inserting 60s focus exposures')
+            catalog = catalog.reset_index(drop=True)
+            for name, row in catalog.iterrows():
+                throw = row.copy()
+                throw['expTime'] = 60.
+                throw['object'] = throw['object'] + '_1minexp'
+                throw['comment'] = 'OneMinuteFocusExposure'
+                throw.name = throw.name - 0.5
+                catalog.loc[throw.name] = throw
+            catalog = catalog.sort_index().reset_index(drop=True)
+
 
         catalog.loc[:,'seqnum'] = np.arange(1,catalog.shape[0]+1)
         catalog.loc[:,'seqtot'] = catalog.shape[0]
@@ -129,7 +177,8 @@ class ObsCatalog (object):
         '''
         if catalog is None:
             catalog = self.catalog
-        dstr = obs_start.strftime('%Y%m%d')
+        catalog_objects = catalog.apply(lambda x: x['object'].split('_')[0], axis=1)
+        dstr = obs_start.astimezone(obssite.timezone).strftime('%Y%m%d')
         dpath = f'../json/{dstr}'
         if not os.path.exists(dpath):
             os.mkdir(dpath)
@@ -151,7 +200,7 @@ class ObsCatalog (object):
         if object_priority is not None: # \\ allow overwrite if priorities change
             is_queued['has_priority'] = np.inf
             for key,val in object_priority.items():
-                is_that_object = catalog['object']==key
+                is_that_object = catalog_objects==key
                 is_queued.loc[is_that_object, 'has_priority'] = val
         elif 'has_priority' not in is_queued.columns: # \\ don't overwrite if already there
             is_queued['has_priority'] = np.inf
@@ -160,7 +209,7 @@ class ObsCatalog (object):
         for ix in range(len(alt_l[0])): # \\ for each hour,
             htime = alt_l[0][ix].obstime.datetime            
             hstr = htime.strftime('%Y%m%d_%H')
-            print(f'==> {hstr}')
+
             cmass = pd.DataFrame(index=catalog.index)
 
             cmass['airmass'] = [ ai.secz[ix] for ai in alt_l]
@@ -172,17 +221,17 @@ class ObsCatalog (object):
 
             total_queued_time = 0.
             if ix == 0:
-                total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)).to(u.second).value
+                total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)-0.5*u.hour).to(u.second).value
 
             elif ix==(len(alt_l[0])-1):
-                total_available_time = (obsframe.obstime[ix]+1.*u.hr - Time(obs_end)).to(u.second).value
-
+                total_available_time = (obsframe.obstime[ix]+1.*u.hr - Time(obs_end)-0.5*u.hour).to(u.second).value
             else:
                 total_available_time = 3600.
             assert total_available_time <= 3600.1, f'{obs_end}, {total_available_time:.0f}s'
             if total_available_time < catalog.expTime.mean():
                 print(f'({total_available_time:.0f}s) Not enough time for an exposure. Skipping...')
                 continue
+            print(f'==> {hstr}, {total_available_time}s available')
             for cprior in np.sort(is_queued.has_priority.unique()):                
                 # \\ go through each object priority level
                 avail_queue_time = total_available_time - total_queued_time                
@@ -200,12 +249,17 @@ class ObsCatalog (object):
                 amass = cmass.reindex(pidx).loc[going_to_queue, 'airmass']
                 cmass.loc[going_to_queue.loc[going_to_queue].index, 'airmass'] = amass
 
-
+            avail_queue_time = total_available_time - total_queued_time 
             #pidx = cmass.loc[cmass.is_possible].sort_values('airmass').index
             #g2q = catalog.reindex(pidx)['expTime'].cumsum () <= 3600.
 
             hfile = catalog.loc[cmass.going_to_queue] #catalog.reindex(pidx).loc[g2q]
-
+            if hfile.shape[0]==0:
+                print('Nothing to queue!!')
+                warnings.warn ('Queue empty at {hstr}')
+            elif avail_queue_time > catalog['expTime'].mean():
+                print(f'Cannot fill queue!! {avail_queue_time}, {catalog["expTime"].mean()}')
+                warnings.warn('Queue unfilled at {hstr}')
             if hfile.shape[0]>0:
                 self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
 
@@ -292,7 +346,8 @@ class ObservingSite ( object ):
         print(utc_end)
         #frame = np.arange ( -lim, lim+nstep/2., nstep) * u.hour
         frame = np.arange(0, (utc_end-utc_start).to_value(u.hour)+1,1)*u.hour
-        timeframe = np.arange(utc_start, utc_end+.5*u.hour, 1.*u.hour) #utc_start + frame
+        timeframe = np.arange(utc_start+0.5*u.hour, utc_end+1*u.hour, 1.*u.hour) #utc_start + frame
+        #timeframe += 0.5*u.hour # calculate airmass in middle of hour
         obsframe = coordinates.AltAz ( obstime = timeframe, location=self.site)
         return obsframe
 
