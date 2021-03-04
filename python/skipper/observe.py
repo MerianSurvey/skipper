@@ -24,7 +24,7 @@ class ObsCatalog (object):
                   propid='2020B-XXXX',
                   seqid='TEST',
                   count=1,
-                  wait=False):
+                  wait="False"):
         self.comment = comment
         self.proposer = proposer
         self.program = program
@@ -34,9 +34,9 @@ class ObsCatalog (object):
         self.seqid = seqid
         self.columns = np.asarray( ['comment','filter','seqtot','seqnum','seqid','expType',
                         'object','proposer','program','RA','propid','dec',
-                        'expTime', 'count'] )
+                        'expTime', 'count', 'wait'] )
         self._singular = [True,False,True,False,True,False,False,
-                           True,True,False,True,False,False,True]
+                           True,True,False,True,False,False,True,True]
 
     def objnamer_coordinates ( self, cat_row ):
         '''

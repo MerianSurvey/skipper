@@ -13,7 +13,8 @@
 "propid":"2020B-0288",
 "dec":2.2533324336,
 "expTime":60.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"--",
@@ -29,7 +30,8 @@
 "propid":"2020B-0288",
 "dec":2.2533324336,
 "expTime":600.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"OneMinuteFocusExposure",
@@ -45,7 +47,8 @@
 "propid":"2020B-0288",
 "dec":2.2668412376,
 "expTime":60.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"--",
@@ -61,7 +64,8 @@
 "propid":"2020B-0288",
 "dec":2.2668412376,
 "expTime":600.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"OneMinuteFocusExposure",
@@ -77,7 +81,8 @@
 "propid":"2020B-0288",
 "dec":2.2559144043,
 "expTime":60.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"--",
@@ -93,7 +98,8 @@
 "propid":"2020B-0288",
 "dec":2.2559144043,
 "expTime":600.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"OneMinuteFocusExposure",
@@ -109,7 +115,8 @@
 "propid":"2020B-0288",
 "dec":2.2480671857,
 "expTime":60.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"--",
@@ -125,7 +132,8 @@
 "propid":"2020B-0288",
 "dec":2.2480671857,
 "expTime":600.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"OneMinuteFocusExposure",
@@ -141,7 +149,8 @@
 "propid":"2020B-0288",
 "dec":2.2911756444,
 "expTime":60.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"--",
@@ -157,7 +166,8 @@
 "propid":"2020B-0288",
 "dec":2.2911756444,
 "expTime":600.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"OneMinuteFocusExposure",
@@ -173,7 +183,8 @@
 "propid":"2020B-0288",
 "dec":2.22542121,
 "expTime":60.0,
-"count":1
+"count":1,
+"wait":"False"
 },
 {
 "comment":"--",
@@ -189,6 +200,7 @@
 "propid":"2020B-0288",
 "dec":2.22542121,
 "expTime":600.0,
-"count":1
+"count":1,
+"wait":"False"
 }
 ]
