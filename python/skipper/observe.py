@@ -133,6 +133,7 @@ class ObsCatalog (object):
             json_str = json_str.replace(key, repkey)
 
         open(fp, 'w').write(json_str)
+        
         self.write_jsonlog ( fp )
 
     def observing_time ( self ):
@@ -255,11 +256,11 @@ class ObsCatalog (object):
 
             hfile = catalog.loc[cmass.going_to_queue] #catalog.reindex(pidx).loc[g2q]
             if hfile.shape[0]==0:
-                print('Nothing to queue!!')
-                warnings.warn ('Queue empty at {hstr}')
+                print('!!! Nothing to queue !!!')
+                warnings.warn (f'Queue empty at {hstr}')
             elif avail_queue_time > catalog['expTime'].mean():
-                print(f'Cannot fill queue!! {avail_queue_time}, {catalog["expTime"].mean()}')
-                warnings.warn('Queue unfilled at {hstr}')
+                print(f'!!! Cannot fill queue !!! {avail_queue_time}, {catalog["expTime"].mean()}')
+                warnings.warn(f'Queue unfilled at {hstr}')
             if hfile.shape[0]>0:
                 self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
 
