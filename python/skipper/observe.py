@@ -148,7 +148,8 @@ class ObsCatalog (object):
 
     def plan_night ( self, obs_start, obssite, catalog=None, maxairmass=1.3,
                      obs_end=None, 
-                     is_queued=None, object_priority=None):
+                     is_queued=None, object_priority=None,
+                     save=True):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -262,7 +263,8 @@ class ObsCatalog (object):
                 print(f'!!! Cannot fill queue !!! {avail_queue_time}, {catalog["expTime"].mean()}')
                 warnings.warn(f'Queue unfilled at {hstr}')
             if hfile.shape[0]>0:
-                self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
+                if save:
+                    self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
             is_queued.loc[cmass.index[cmass.going_to_queue], 'qstamp'] = hstr

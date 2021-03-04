@@ -35,17 +35,46 @@ def build_gama ():
     ocat = observe.ObsCatalog(comment='--', proposer='LeathaudGreene',
                               propid='2020B-0288', seqid='S2021A')
     catalog = pd.read_csv("../pointings/gama.csv", index_col=0)
-    catalog['object'] = ocat.build_object_names (catalog)
     catalog['filter'] = 'N708'
+    catalog['object'] = ocat.build_object_names (catalog)
     return catalog, ocat
 
+def plan_tomorrow ( mastercat, day, month=3,
+                    year=2021, observed_objects=None ):
+    cosmos,ocat = build_cosmos ()
+    gama,_ = build_gama ()
+    
+    mastercat = pd.concat([gama,cosmos])
+    mastercat.index = mastercat['object']
+    assert not mastercat.object.duplicated().any()
+
+    # \\ Define the observatory site -- default is CTIO
+    ctio = observe.ObservingSite ()
+    priorities = {'COSMOS':0, 'GAMA':1, 'earlyGAMA':2}
+
+    # \\ We need to deprioritize early targets in order to preserve
+    # \\ them for the end of the run
+    obs_start, twibeg = ctio.get_sunriseset ( 2021, 3, 17 )
+    obs_end = obs_start + 0.5*(twibeg-obs_start)
+
+    obsframe = ctio.define_obsframe ( obs_start=obs_start, obs_end=obs_end )
+    alt_l = [ ctio.get_altitude(cc, obsframe) for \
+                  cc in ocat.as_skycoord(mastercat)] 
+
+    airmass = np.array([ai.secz[0] for ai in alt_l])
+    mask =(airmass>0)&(airmass<1.41)&(mastercat['object']!='COSMOS')
+    print (f'Deprioritizing N={mask.sum()} targets')
+    mastercat.loc[mask, 'object'] = mastercat.loc[mask,'object'].apply(lambda x: 'early' + x )
+
+
+    
 
 def predict_s2021a ():
     cosmos,ocat = build_cosmos ()
     gama,_ = build_gama ()
     
     mastercat = pd.concat([gama,cosmos])
-    mastercat.index = np.arange(mastercat.index.size)
+    mastercat.index = mastercat['object']
     assert not mastercat.object.duplicated().any()
 
     # \\ Define the observatory site -- default is CTIO
