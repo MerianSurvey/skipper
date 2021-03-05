@@ -159,11 +159,11 @@ class ObsCatalog (object):
                 print('[to_json] Inserting CheckSky 60s exposures')
             catalog = catalog.reset_index(drop=True)
             checksky = catalog.iloc[0].copy ()
-            throw['expTime'] = 60.
-            throw['object'] = throw['object'] + '_checksky'
-            throw['comment'] = 'CheckSkyExposure'
+            checksky['expTime'] = 60.
+            checksky['object'] = checksky['object'] + '_checksky'
+            checksky['comment'] = 'CheckSkyExposure'
             for ix in np.arange(-3,0,1):
-                catalog.loc[ix] = throw
+                catalog.loc[ix] = checksky
             catalog = catalog.sort_index().reset_index(drop=True)
 
         catalog.loc[:,'seqnum'] = np.arange(1,catalog.shape[0]+1)
