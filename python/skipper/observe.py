@@ -101,7 +101,8 @@ class ObsCatalog (object):
         
     def to_json (self, catalog=None, fp='../json/obsscript.json',
                  insert_onemin_exposures=True,
-                 slew_scale=10.*u.deg,
+                 insert_random_ome=True,
+                 slew_scale=8.*u.deg,
                  insert_checksky_exposures=False,
                  verbose=True):
         '''
@@ -110,6 +111,8 @@ class ObsCatalog (object):
         insert_onemin_exposures:
           Adds a 1 minute exposure in between each science exposure (ODIN)
 
+        insert_random_ome:
+          Adds random 1 minute exposures in between science exposure of slew size < slew_scale
         insert_checksky_exposures:
           Adds 3 1 minute exposures at the start of the script to check sky brightness
         '''
@@ -130,6 +133,15 @@ class ObsCatalog (object):
                         insert_throw=True
                         if verbose:
                             print(f'[to_json] Big slew from {throw["object"]} to {prev_row["object"]}')
+                    elif insert_random_ome:
+                        pull = np.random.uniform(0.,5)
+                        print(pull)
+                        if pull > 3.:
+                            insert_throw=True
+                            if verbose:
+                                print(f'[to_json] Adding random OME before {throw["object"]}')
+                        else:
+                            insert_throw=False
                     else:
                         insert_throw=False
                 else:
