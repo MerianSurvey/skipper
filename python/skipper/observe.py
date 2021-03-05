@@ -24,7 +24,7 @@ class ObsCatalog (object):
                   propid='2020B-XXXX',
                   seqid='TEST',
                   count=1,
-                  wait=False):
+                  wait="False"):
         self.comment = comment
         self.proposer = proposer
         self.program = program
@@ -34,9 +34,9 @@ class ObsCatalog (object):
         self.seqid = seqid
         self.columns = np.asarray( ['comment','filter','seqtot','seqnum','seqid','expType',
                         'object','proposer','program','RA','propid','dec',
-                        'expTime', 'count'] )
+                        'expTime', 'count', 'wait'] )
         self._singular = [True,False,True,False,True,False,False,
-                           True,True,False,True,False,False,True]
+                           True,True,False,True,False,False,True,True]
 
     def objnamer_coordinates ( self, cat_row ):
         '''
@@ -133,6 +133,7 @@ class ObsCatalog (object):
             json_str = json_str.replace(key, repkey)
 
         open(fp, 'w').write(json_str)
+        
         self.write_jsonlog ( fp )
 
     def observing_time ( self ):
@@ -147,7 +148,8 @@ class ObsCatalog (object):
 
     def plan_night ( self, obs_start, obssite, catalog=None, maxairmass=1.3,
                      obs_end=None, 
-                     is_queued=None, object_priority=None):
+                     is_queued=None, object_priority=None,
+                     save=True):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -255,13 +257,14 @@ class ObsCatalog (object):
 
             hfile = catalog.loc[cmass.going_to_queue] #catalog.reindex(pidx).loc[g2q]
             if hfile.shape[0]==0:
-                print('Nothing to queue!!')
-                warnings.warn ('Queue empty at {hstr}')
+                print('!!! Nothing to queue !!!')
+                warnings.warn (f'Queue empty at {hstr}')
             elif avail_queue_time > catalog['expTime'].mean():
-                print(f'Cannot fill queue!! {avail_queue_time}, {catalog["expTime"].mean()}')
-                warnings.warn('Queue unfilled at {hstr}')
+                print(f'!!! Cannot fill queue !!! {avail_queue_time}, {catalog["expTime"].mean()}')
+                warnings.warn(f'Queue unfilled at {hstr}')
             if hfile.shape[0]>0:
-                self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
+                if save:
+                    self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
             is_queued.loc[cmass.index[cmass.going_to_queue], 'qstamp'] = hstr
