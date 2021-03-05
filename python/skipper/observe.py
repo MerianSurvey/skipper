@@ -101,6 +101,7 @@ class ObsCatalog (object):
         
     def to_json (self, catalog=None, fp='../json/obsscript.json',
                  insert_onemin_exposures=True,
+                 slew_scale=10.*u.deg,
                  insert_checksky_exposures=False,
                  verbose=True):
         '''
@@ -120,11 +121,26 @@ class ObsCatalog (object):
             catalog = catalog.reset_index(drop=True)
             for name, row in catalog.iterrows():
                 throw = row.copy()
-                throw['expTime'] = 60.
-                throw['object'] = throw['object'] + '_1minexp'
-                throw['comment'] = 'OneMinuteFocusExposure'
-                throw.name = throw.name - 0.5
-                catalog.loc[throw.name] = throw
+                if name > 0:
+                    prev_row = catalog.loc[name-1]
+                    coord_next = coordinates.SkyCoord(throw['RA'], throw['dec'], unit=u.deg)
+                    coord_prev = coordinates.SkyCoord(prev_row['RA'], prev_row['dec'], unit=u.deg)
+                    slew_size = coord_next.separation(coord_prev)
+                    if slew_size > slew_scale:
+                        insert_throw=True
+                        if verbose:
+                            print(f'[to_json] Big slew from {throw["object"]} to {prev_row["object"]}')
+                    else:
+                        insert_throw=False
+                else:
+                    insert_throw=True
+
+                if insert_throw:
+                    throw['expTime'] = 60.
+                    throw['object'] = throw['object'] + '_1minexp'
+                    throw['comment'] = 'OneMinuteFocusExposure'
+                    throw.name = throw.name - 0.5
+                    catalog.loc[throw.name] = throw
             catalog = catalog.sort_index().reset_index(drop=True)
         if insert_checksky_exposures:
             if verbose:
