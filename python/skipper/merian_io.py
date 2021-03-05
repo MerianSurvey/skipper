@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-IO related functions.
+IO related functions
 """
 __author__ = "Shany Danieli"
 
