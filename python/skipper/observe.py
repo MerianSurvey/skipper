@@ -100,12 +100,17 @@ class ObsCatalog (object):
             print(f'{fp} written on {dtime} by {user}', file=ff)
         
     def to_json (self, catalog=None, fp='../json/obsscript.json',
-                 insert_onemin_exposures=True, verbose=True):
+                 insert_onemin_exposures=True,
+                 insert_checksky_exposures=False,
+                 verbose=True):
         '''
         Format to JSON with small tweaks to enhance readability
 
         insert_onemin_exposures:
           Adds a 1 minute exposure in between each science exposure (ODIN)
+
+        insert_checksky_exposures:
+          Adds 3 1 minute exposures at the start of the script to check sky brightness
         '''
         if catalog is None:
             catalog = self.catalog
@@ -121,7 +126,17 @@ class ObsCatalog (object):
                 throw.name = throw.name - 0.5
                 catalog.loc[throw.name] = throw
             catalog = catalog.sort_index().reset_index(drop=True)
-
+        if insert_checksky_exposures:
+            if verbose:
+                print('[to_json] Inserting CheckSky 60s exposures')
+            catalog = catalog.reset_index(drop=True)
+            checksky = catalog.iloc[0].copy ()
+            throw['expTime'] = 60.
+            throw['object'] = throw['object'] + '_checksky'
+            throw['comment'] = 'CheckSkyExposure'
+            for ix in np.arange(-3,0,1):
+                catalog.loc[ix] = throw
+            catalog = catalog.sort_index().reset_index(drop=True)
 
         catalog.loc[:,'seqnum'] = np.arange(1,catalog.shape[0]+1)
         catalog.loc[:,'seqtot'] = catalog.shape[0]
@@ -149,7 +164,8 @@ class ObsCatalog (object):
     def plan_night ( self, obs_start, obssite, catalog=None, maxairmass=1.3,
                      obs_end=None, 
                      is_queued=None, object_priority=None,
-                     save=True):
+                     save=True,
+                     checksky_at_start=True):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -176,13 +192,16 @@ class ObsCatalog (object):
           needed for observation.
           object priority should be given as {OBJECT_NAME:OBJECT_PRIORITY},
           where 0 is highest priority.
+        save (bool, default=True): if True, save output files as JSON observing scripts
+        checksky_at_start (bool, default=True): if True, add 3 60s exposures to the start
+          of the first script in order to check sky brightness
         '''
         if catalog is None:
             catalog = self.catalog
         catalog_objects = catalog.apply(lambda x: x['object'].split('_')[0], axis=1)
         dstr = obs_start.astimezone(obssite.timezone).strftime('%Y%m%d')
         dpath = f'../json/{dstr}'
-        if not os.path.exists(dpath):
+        if not os.path.exists(dpath) and save:
             os.mkdir(dpath)
 
         # \\ Define Observing Frame from obstime
@@ -208,6 +227,10 @@ class ObsCatalog (object):
             is_queued['has_priority'] = np.inf
             
         # \\ START planning the night
+        if checksky_at_start: # \\ the first hour might not have any exposures so add this flag
+            has_checkedsky = False
+        else:
+            has_checkedsky = True
         for ix in range(len(alt_l[0])): # \\ for each hour,
             htime = alt_l[0][ix].obstime.datetime            
             hstr = htime.strftime('%Y%m%d_%H')
@@ -264,7 +287,9 @@ class ObsCatalog (object):
                 warnings.warn(f'Queue unfilled at {hstr}')
             if hfile.shape[0]>0:
                 if save:
-                    self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json')
+                    self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json',
+                                 insert_checksky_exposures=not has_checkedsky)
+                    has_checkedsky=True
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
             is_queued.loc[cmass.index[cmass.going_to_queue], 'qstamp'] = hstr

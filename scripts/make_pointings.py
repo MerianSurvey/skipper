@@ -34,7 +34,7 @@ def build_gama ():
     '''
     ocat = observe.ObsCatalog(comment='--', proposer='LeathaudGreene',
                               propid='2020B-0288', seqid='S2021A')
-    catalog = pd.read_csv("../pointings/gama.csv", index_col=0)
+    catalog = pd.read_csv("../json/gama.csv", index_col=0)
     catalog['filter'] = 'N708'
     catalog['object'] = ocat.build_object_names (catalog)
     return catalog, ocat
