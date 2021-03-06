@@ -110,7 +110,7 @@ class ObsCatalog (object):
         
     def to_json (self, catalog=None, fp='../json/obsscript.json',
                  insert_onemin_exposures=True,
-                 insert_random_ome=True,
+                 insert_random_ome=False,
                  slew_scale=8.*u.deg,
                  insert_checksky_exposures=False,
                  verbose=True):
@@ -200,7 +200,8 @@ class ObsCatalog (object):
 
     def plan_night ( self, obs_start, obssite, catalog=None, maxairmass=1.3,
                      obs_end=None, 
-                     is_queued=None, object_priority=None,
+                     is_queued=None,
+                     object_priority=None,
                      save=True,
                      checksky_at_start=True):
         '''
