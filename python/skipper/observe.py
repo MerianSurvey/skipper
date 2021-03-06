@@ -125,6 +125,7 @@ class ObsCatalog (object):
         insert_checksky_exposures:
           Adds 3 1 minute exposures at the start of the script to check sky brightness
         '''
+        nonsci_count = 0
         if catalog is None:
             catalog = self.catalog
         if insert_onemin_exposures:
@@ -158,10 +159,11 @@ class ObsCatalog (object):
 
                 if insert_throw:
                     throw['expTime'] = 60.
-                    throw['object'] = throw['object'] + '_1minexp'
+                    throw['object'] =  f'1minexp_{nonsci_count:03d}'
                     throw['comment'] = 'OneMinuteFocusExposure'
                     throw.name = throw.name - 0.5
                     catalog.loc[throw.name] = throw
+                    nonsci_count += 1
             catalog = catalog.sort_index().reset_index(drop=True)
         if insert_checksky_exposures:
             if verbose:
@@ -169,9 +171,10 @@ class ObsCatalog (object):
             catalog = catalog.reset_index(drop=True)
             checksky = catalog.iloc[0].copy ()
             checksky['expTime'] = 60.
-            checksky['object'] = checksky['object'] + '_checksky'
             checksky['comment'] = 'CheckSkyExposure'
             for ix in np.arange(-3,0,1):
+                checksky['object'] = f'checksky_{nonsci_count:03d}'
+                nonsci_count += 1
                 catalog.loc[ix] = checksky
             catalog = catalog.sort_index().reset_index(drop=True)
 
@@ -198,7 +201,10 @@ class ObsCatalog (object):
                                         catalog['dec'], unit='deg')
         return coords
 
-    def plan_night ( self, obs_start, obssite, catalog=None, maxairmass=1.3,
+    def plan_night ( self, obs_start,
+                     obssite,
+                     catalog=None,
+                     maxairmass=1.3,
                      obs_end=None, 
                      is_queued=None,
                      object_priority=None,
@@ -237,7 +243,14 @@ class ObsCatalog (object):
         if catalog is None:
             catalog = self.catalog
         catalog_objects = catalog.apply(lambda x: x['object'].split('_')[0], axis=1)
-        dstr = obs_start.astimezone(obssite.timezone).strftime('%Y%m%d')
+
+        # \\ if time < 12, we've started past midnight.
+        start_hour = obs_start.astimezone(obssite.timezone).hour
+        if start_hour > 12:
+            dstr = obs_start.astimezone(obssite.timezone).strftime('%Y%m%d')
+        else:
+            tstart = obs_start.astimezone(obssite.timezone) - datetime.timedelta(days=1.)
+            dstr = tstart.strftime('%Y%m%d')
         dpath = f'../json/{dstr}'
         if not os.path.exists(dpath) and save:
             os.mkdir(dpath)
