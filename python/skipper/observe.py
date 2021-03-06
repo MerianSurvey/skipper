@@ -14,6 +14,7 @@ from astropy import coordinates
 from astropy import units as u
 from astropy.time import Time
 from astropy.io import fits
+import healpy as hp
 from . import utils
 
 class ObsCatalog (object):
@@ -50,17 +51,25 @@ class ObsCatalog (object):
         field_name = cat_row['object']
         return f'{field_name}_J{ra_truncated}{dec_truncated}_{filter_name}'
 
+    def objnamer_healpix ( self, cat_row ):
+        pixel_index = hp.ang2pix(80000, cat_row['RA'],
+                                   cat_row['dec'], lonlat=True)
+        filter_name = cat_row['filter']
+        field_name = cat_row['object']
+        return f'{field_name}_HP{pixel_index}_{filter_name}'
         
-    def build_object_names (self, catalog):
+    def build_object_names (self, catalog, naming_scheme='coord'):
         obj_df = pd.Series(index=catalog.index)
 
+        namer_d = {'healpix':self.objnamer_healpix,
+                   'coord':self.objnamer_coordinates}
         for ix in range(catalog.shape[0]):
-            row = catalog.iloc[ix]
-            obj_name = self.objnamer_coordinates (row )
+            row = catalog.iloc[ix]            
+            obj_name = namer_d[naming_scheme] (row )
             obj_df.loc[catalog.index[ix]] = obj_name
         return obj_df
 
-    def build_catalog ( self, ra_l, dec_l, object_l, filter_l, expType_l, expTime_l, build_object_names=True):
+    def build_catalog ( self, ra_l, dec_l, object_l, filter_l, expType_l, expTime_l, build_object_names=True, **kwargs):
         '''
         Generate pandas DataFrame that has our observing info
 
@@ -83,7 +92,7 @@ class ObsCatalog (object):
         # \\ add OBJECT names
         catalog['object'] = object_l
         if build_object_names:
-            catalog['object'] = self.build_object_names(catalog)
+            catalog['object'] = self.build_object_names(catalog, **kwargs)
 
         self.catalog = catalog
         return catalog
@@ -277,7 +286,10 @@ class ObsCatalog (object):
                 total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)-0.5*u.hour).to(u.second).value
 
             elif ix==(len(alt_l[0])-1):
-                total_available_time = (obsframe.obstime[ix]+1.*u.hr - Time(obs_end)-0.5*u.hour).to(u.second).value
+                print(obsframe.obstime[ix]+1.*u.hr)
+                print(Time(obs_end))
+                total_available_time = (Time(obs_end) - obsframe.obstime[ix]+1.*u.hr - 0.5*u.hour).to(u.second).value
+                #total_available_time = (obsframe.obstime[ix]+1.*u.hr - Time(obs_end)-0.5*u.hour).to(u.second).value
             else:
                 total_available_time = 3600.
             assert total_available_time <= 3600.1, f'{obs_end}, {total_available_time:.0f}s'
@@ -348,9 +360,9 @@ class ObservingSite ( object ):
             else:
                 self.timezone = timezone
 
-    def get_sunriseset ( self, year, month, day, alt=-10. ):
+    def get_sunriseset ( self, year, month, day, alt=-14. ):
         '''
-        DECam observing begins and ends at Sun altitude=-10 deg.
+        DECam observing begins and ends at Sun altitude=-14 deg.
         '''
         utc_midnight = pytz.utc.localize ( datetime.datetime ( year, month, day, 0, 0 ) )
         utc_offset = int(self.get_utcoffset (utc_midnight))

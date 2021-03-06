@@ -12,7 +12,7 @@ def build_cosmos ():
     '''
     center = coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s")
     size =  (1.4, 1.4)
-
+    np.random.seed(1003)
     edges = [ (center.ra.deg-size[0]/2., center.dec.deg-size[0]/2.),
               (center.ra.deg+size[0]/2., center.dec.deg-size[0]/2.),
               (center.ra.deg+size[0]/2., center.dec.deg+size[0]/2.),
