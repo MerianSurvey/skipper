@@ -113,6 +113,7 @@ class ObsCatalog (object):
                  insert_random_ome=False,
                  slew_scale=8.*u.deg,
                  insert_checksky_exposures=False,
+                 previous_position=None,
                  verbose=True):
         '''
         Format to JSON with small tweaks to enhance readability
@@ -134,8 +135,12 @@ class ObsCatalog (object):
             catalog = catalog.reset_index(drop=True)
             for name, row in catalog.iterrows():
                 throw = row.copy()
-                if name > 0:
+                if name == 0:
+                    prev_row = previous_position
+                else:
                     prev_row = catalog.loc[name-1]
+
+                if prev_row is not None:
                     coord_next = coordinates.SkyCoord(throw['RA'], throw['dec'], unit=u.deg)
                     coord_prev = coordinates.SkyCoord(prev_row['RA'], prev_row['dec'], unit=u.deg)
                     slew_size = coord_next.separation(coord_prev)
@@ -150,8 +155,6 @@ class ObsCatalog (object):
                             insert_throw=True
                             if verbose:
                                 print(f'[to_json] Adding random OME before {throw["object"]}')
-                        else:
-                            insert_throw=False
                     else:
                         insert_throw=False
                 else:
@@ -283,6 +286,8 @@ class ObsCatalog (object):
             has_checkedsky = False
         else:
             has_checkedsky = True
+
+        previous_position = None # \\ initialize as null; no starting focus exp
         for ix in range(len(alt_l[0])): # \\ for each hour,
             htime = alt_l[0][ix].obstime.datetime            
             hstr = htime.strftime('%Y%m%d_%H')
@@ -333,7 +338,10 @@ class ObsCatalog (object):
             #pidx = cmass.loc[cmass.is_possible].sort_values('airmass').index
             #g2q = catalog.reindex(pidx)['expTime'].cumsum () <= 3600.
 
-            hfile = catalog.loc[cmass.going_to_queue] #catalog.reindex(pidx).loc[g2q]
+            hfile = catalog.loc[cmass.going_to_queue]
+            pindex = is_queued.reindex(hfile.index).sort_values('has_priority').index
+            hfile = hfile.reindex(pindex) # \\ sort by priority so that we finish
+            # \\ high priority targets before slewing
             if hfile.shape[0]==0:
                 print('!!! Nothing to queue !!!')
                 warnings.warn (f'Queue empty at {hstr}')
@@ -344,9 +352,11 @@ class ObsCatalog (object):
                 if save:
                     fname = f'../json/{dstr}/{hstr}.json'
                     self.to_json(hfile, fp=fname,
-                                 insert_checksky_exposures=not has_checkedsky)
+                                 insert_checksky_exposures=not has_checkedsky,
+                                 previous_position=previous_position)
                     has_checkedsky=True
                     qa.validate_json(fname, htime, None)
+                previous_position = hfile.iloc[-1]
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
             is_queued.loc[cmass.index[cmass.going_to_queue], 'qstamp'] = hstr
