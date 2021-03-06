@@ -15,7 +15,7 @@ from astropy import units as u
 from astropy.time import Time
 from astropy.io import fits
 import healpy as hp
-from . import utils
+from . import utils, qa
 
 class ObsCatalog (object):
     def __init__ (self,
@@ -142,7 +142,7 @@ class ObsCatalog (object):
                     if slew_size > slew_scale:
                         insert_throw=True
                         if verbose:
-                            print(f'[to_json] Big slew from {throw["object"]} to {prev_row["object"]}')
+                            print(f'[to_json] Big slew from {prev_row["object"]} to {throw["object"]}')
                     elif insert_random_ome:
                         pull = np.random.uniform(0.,5)
                         print(pull)
@@ -190,6 +190,7 @@ class ObsCatalog (object):
         open(fp, 'w').write(json_str)
         
         self.write_jsonlog ( fp )
+
 
     def observing_time ( self ):
         return self.catalog.expTime.sum() / 3600.
@@ -341,9 +342,11 @@ class ObsCatalog (object):
                 warnings.warn(f'Queue unfilled at {hstr}')
             if hfile.shape[0]>0:
                 if save:
-                    self.to_json(hfile, fp=f'../json/{dstr}/{hstr}.json',
+                    fname = f'../json/{dstr}/{hstr}.json'
+                    self.to_json(hfile, fp=fname,
                                  insert_checksky_exposures=not has_checkedsky)
                     has_checkedsky=True
+                    qa.validate_json(fname, htime, None)
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
             is_queued.loc[cmass.index[cmass.going_to_queue], 'qstamp'] = hstr

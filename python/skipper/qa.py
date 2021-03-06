@@ -22,7 +22,7 @@ def tmp():
     print('Hello, world')
 
 
-def validate_json(file, obs_start, obssite, maxairmass=1.3):
+def validate_json(file, obs_start, obssite, maxairmass=1.5, logname='../json/json.log'):
     '''
     Validation for JSON observing scripts
     Verifies:
@@ -55,6 +55,18 @@ def validate_json(file, obs_start, obssite, maxairmass=1.3):
 
     if valid_json and valid_vis:
         print('QA COMPLETE: All tests passed')
+        
+        try:
+            user=os.environ['USER']
+        except KeyError:
+            raise ValueError ('No user was specified and cannot be read!')
+
+        dtime = datetime.now().strftime('%Y/%m/%d %I:%M %p')
+
+        with open(logname,'a') as ff:
+            print(f'{file} VALIDATED at {dtime} by {user}', file=ff)
+            
+            
 
 
 def __checkJSON__(f):
