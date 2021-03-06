@@ -7,7 +7,6 @@
 "seqnum":1,
 "seqid":"S2021A",
 "expType":"object",
-"object.1":"COSMOS_J100026.58+021448.51_N708",
 "proposer":"LeathaudGreene",
 "program":"Merian",
 "RA":150.1107594917,
@@ -15,7 +14,7 @@
 "dec":2.2468106554,
 "expTime":600.0,
 "count":1,
-"wait":false
+"wait":"False"
 },
 {
 "object":"COSMOS_J100042.77+021227.08_N708",
@@ -25,7 +24,6 @@
 "seqnum":2,
 "seqid":"S2021A",
 "expType":"object",
-"object.1":"COSMOS_J100042.77+021227.08_N708",
 "proposer":"LeathaudGreene",
 "program":"Merian",
 "RA":150.1782356655,
@@ -33,7 +31,7 @@
 "dec":2.2075245925,
 "expTime":600.0,
 "count":1,
-"wait":false
+"wait":"False"
 },
 {
 "object":"COSMOS_J100040.83+021453.04_N708",
@@ -43,7 +41,6 @@
 "seqnum":3,
 "seqid":"S2021A",
 "expType":"object",
-"object.1":"COSMOS_J100040.83+021453.04_N708",
 "proposer":"LeathaudGreene",
 "program":"Merian",
 "RA":150.1701644777,
@@ -51,7 +48,7 @@
 "dec":2.2480671857,
 "expTime":600.0,
 "count":1,
-"wait":false
+"wait":"False"
 },
 {
 "object":"COSMOS_J100035.23+021317.07_N708",
@@ -61,7 +58,6 @@
 "seqnum":4,
 "seqid":"S2021A",
 "expType":"object",
-"object.1":"COSMOS_J100035.23+021317.07_N708",
 "proposer":"LeathaudGreene",
 "program":"Merian",
 "RA":150.1468327606,
@@ -69,7 +65,7 @@
 "dec":2.2214085711,
 "expTime":600.0,
 "count":1,
-"wait":false
+"wait":"False"
 },
 {
 "object":"COSMOS_J100040.12+021303.97_N708",
@@ -79,7 +75,6 @@
 "seqnum":5,
 "seqid":"S2021A",
 "expType":"object",
-"object.1":"COSMOS_J100040.12+021303.97_N708",
 "proposer":"LeathaudGreene",
 "program":"Merian",
 "RA":150.1671896033,
@@ -87,7 +82,7 @@
 "dec":2.2177694631,
 "expTime":600.0,
 "count":1,
-"wait":false
+"wait":"False"
 },
 {
 "object":"COSMOS_J100039.87+021331.51_N708",
@@ -97,7 +92,6 @@
 "seqnum":6,
 "seqid":"S2021A",
 "expType":"object",
-"object.1":"COSMOS_J100039.87+021331.51_N708",
 "proposer":"LeathaudGreene",
 "program":"Merian",
 "RA":150.1661630394,
@@ -105,6 +99,6 @@
 "dec":2.22542121,
 "expTime":600.0,
 "count":1,
-"wait":false
+"wait":"False"
 }
 ]
