@@ -308,8 +308,9 @@ class ObsCatalog (object):
             elif ix==(len(alt_l[0])-1):
                 print(obsframe.obstime[ix]+1.*u.hr)
                 print(Time(obs_end))
-                total_available_time = (Time(obs_end) - obsframe.obstime[ix]+1.*u.hr - 0.5*u.hour).to(u.second).value + 600. * u.second
-                # \\ Add an extra exposure at the end just in case. We definitely don't want
+                total_available_time = (Time(obs_end) - obsframe.obstime[ix]+1.*u.hr - 0.5*u.hour).to(u.second).value + 1200. * u.second
+                # \\ Add two extra exposures at the end just in case.
+                # \\ We definitely don't want
                 # \\ to run out of queued objects!
 
             else:
