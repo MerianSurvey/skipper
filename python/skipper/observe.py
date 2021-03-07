@@ -305,6 +305,11 @@ class ObsCatalog (object):
             if ix == 0:
                 total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)-0.5*u.hour).to(u.second).value
 
+                if total_available_time % 600. > 300:
+                    # \\ if we've got time for at least half an exposure, put one int
+                    print(f'\n[plan_night] padding the first hour script with an exposure even though we only have {total_available_time % 600.:.1f}s left')
+                    total_available_time += 600. - total_available_time% 600.
+                    
             elif ix==(len(alt_l[0])-1):
                 print(obsframe.obstime[ix]+1.*u.hr)
                 print(Time(obs_end))
@@ -401,7 +406,8 @@ class ObservingSite ( object ):
         utc_start = pytz.utc.localize ( datetime.datetime ( year, month, day, 12-utc_offset, 0))
         utc_end = pytz.utc.localize ( datetime.datetime ( year, month, day+1, 12-utc_offset,0) )
 
-        grid = np.arange(Time(utc_start), Time(utc_end),1.*u.min)
+        grid = np.arange(Time(utc_start), Time(utc_end),10.*u.min)
+        fgrid = np.arange(Time(utc_start), Time(utc_end), 1.*u.min)
         sun_alt = []
         for ts in grid:
             sun_coord = coordinates.get_sun ( ts )
@@ -409,8 +415,15 @@ class ObservingSite ( object ):
             sun_alt.append( sun_coord.transform_to(obsframe).alt )
 
         sun_alt = np.asarray( [ sa.value for sa in sun_alt ] )
-        observable = sun_alt <= alt
-        obs_can_start, obs_must_end = grid[observable][[0,-1]]
+        
+        fgrid_unix = np.asarray([ gg.unix for gg in fgrid ])
+        grid_unix = np.asarray([ gg.unix for gg in grid ])
+        
+        sun_falt = np.interp(fgrid_unix, grid_unix, sun_alt)
+        
+        observable = sun_falt <= alt
+        obs_can_start, obs_must_end = fgrid[observable][[0,-1]]
+        
         lcl = lambda x: pytz.utc.localize(x.to_datetime())
         return lcl(obs_can_start), lcl(obs_must_end)
 
