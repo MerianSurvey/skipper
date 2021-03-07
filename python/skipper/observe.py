@@ -397,7 +397,7 @@ class ObservingSite ( object ):
         utc_start = pytz.utc.localize ( datetime.datetime ( year, month, day, 12-utc_offset, 0))
         utc_end = pytz.utc.localize ( datetime.datetime ( year, month, day+1, 12-utc_offset,0) )
 
-        grid = np.arange(Time(utc_start), Time(utc_end),0.1*u.hour)
+        grid = np.arange(Time(utc_start), Time(utc_end),1.*u.min)
         sun_alt = []
         for ts in grid:
             sun_coord = coordinates.get_sun ( ts )
