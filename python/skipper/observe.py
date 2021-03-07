@@ -305,6 +305,11 @@ class ObsCatalog (object):
             if ix == 0:
                 total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)-0.5*u.hour).to(u.second).value
 
+                if total_available_time % 600. > 300:
+                    # \\ if we've got time for at least half an exposure, put one int
+                    print(f'\n[plan_night] padding the first hour script with an exposure even though we only have {total_available_time % 600.:.1f}s left')
+                    total_available_time += 600. - total_available_time% 600.
+                    
             elif ix==(len(alt_l[0])-1):
                 print(obsframe.obstime[ix]+1.*u.hr)
                 print(Time(obs_end))

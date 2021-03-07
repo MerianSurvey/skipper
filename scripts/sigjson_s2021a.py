@@ -16,6 +16,7 @@ def load_mastercat ( fname = '../pointings/S2021A.csv' ):
     mastercat = pd.read_csv ( fname )
     mastercat = mastercat.set_index('object.1')
     mastercat['wait'] = "False"
+    mastercat['proposer'] = 'Leauthaud'
     return mastercat
 
 def load_telemetry ( fname ):
