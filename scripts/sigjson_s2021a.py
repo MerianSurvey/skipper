@@ -64,7 +64,7 @@ def plan_tomorrow ( day, tele_fname, **kwargs ):
 
     is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
                                      is_queued=is_queued.copy(),
-                                     maxairmass=1.5, object_priority=priorities, save=False,**kwargs )
+                                     maxairmass=1.5, object_priority=priorities,**kwargs )
     return is_queued_tmrw
 
 
