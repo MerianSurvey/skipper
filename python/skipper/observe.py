@@ -308,15 +308,17 @@ class ObsCatalog (object):
             elif ix==(len(alt_l[0])-1):
                 print(obsframe.obstime[ix]+1.*u.hr)
                 print(Time(obs_end))
-                total_available_time = (Time(obs_end) - obsframe.obstime[ix]+1.*u.hr - 0.5*u.hour).to(u.second).value
-                #total_available_time = (obsframe.obstime[ix]+1.*u.hr - Time(obs_end)-0.5*u.hour).to(u.second).value
+                total_available_time = (Time(obs_end) - obsframe.obstime[ix]+1.*u.hr - 0.5*u.hour).to(u.second).value + 600. * u.second
+                # \\ Add an extra exposure at the end just in case. We definitely don't want
+                # \\ to run out of queued objects!
+
             else:
                 total_available_time = 3600.
             assert total_available_time <= 3600.1, f'{obs_end}, {total_available_time:.0f}s'
             if total_available_time < catalog.expTime.mean():
                 print(f'({total_available_time:.0f}s) Not enough time for an exposure. Skipping...')
                 continue
-            print(f'==> {hstr}, {total_available_time}s available')
+            print(f'\n==> {hstr}, {total_available_time}s available')
             for cprior in np.sort(is_queued.has_priority.unique()):                
                 # \\ go through each object priority level
                 avail_queue_time = total_available_time - total_queued_time                
