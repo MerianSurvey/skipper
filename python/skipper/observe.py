@@ -95,7 +95,7 @@ class ObsCatalog (object):
             catalog['object'] = self.build_object_names(catalog, **kwargs)
 
         self.catalog = catalog
-        return catalog
+        return catalog.set_index('object', drop=False)
 
     def write_jsonlog ( self, fp, logname='../json/json.log', user=None ):
         if user is None:
@@ -213,7 +213,9 @@ class ObsCatalog (object):
                      is_queued=None,
                      object_priority=None,
                      save=True,
-                     checksky_at_start=True):
+                     checksky_at_start=True,
+                     pad_first_hour=False,
+                     prefix=''):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -305,7 +307,7 @@ class ObsCatalog (object):
             if ix == 0:
                 total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)-0.5*u.hour).to(u.second).value
 
-                if total_available_time % 600. > 300:
+                if pad_first_hour and  total_available_time % 600. > 300:
                     # \\ if we've got time for at least half an exposure, put one int
                     print(f'\n[plan_night] padding the first hour script with an exposure even though we only have {total_available_time % 600.:.1f}s left')
                     total_available_time += 600. - total_available_time% 600.
@@ -359,7 +361,7 @@ class ObsCatalog (object):
                 warnings.warn(f'Queue unfilled at {hstr}')
             if hfile.shape[0]>0:
                 if save:
-                    fname = f'../json/{dstr}/{hstr}.json'
+                    fname = f'../json/{dstr}/{prefix}{hstr}.json'
                     self.to_json(hfile, fp=fname,
                                  insert_checksky_exposures=not has_checkedsky,
                                  previous_position=previous_position)
