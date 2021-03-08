@@ -6,22 +6,26 @@ from skipper import observe,tiling,visualize
 
 fmt = '%Y/%m/%d %I:%M %p'
 
-def build_cosmos ():
+def build_cosmos (seed=267667, start_at_center=True):
     '''
     Build COSMOS dithering pattern from FocusedRandomDither
+
+    seed (int, default=267667): numpy random seed. Default is COSMOS=267667
+      see also EXTRA=39872
     '''
     center = coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s")
     size =  (1.4, 1.4)
-    np.random.seed(1003)
+    np.random.seed(seed)
     edges = [ (center.ra.deg-size[0]/2., center.dec.deg-size[0]/2.),
               (center.ra.deg+size[0]/2., center.dec.deg-size[0]/2.),
               (center.ra.deg+size[0]/2., center.dec.deg+size[0]/2.),
               (center.ra.deg-size[0]/2., center.dec.deg+size[0]/2.) ]    
 
     frd = tiling.FocusedRandomDither (center, random_max=0.1,
-                                      offset_radius=0.01, ndither=40)
+                                      offset_radius=0.01, ndither=40,
+                                      start_at_center=start_at_center)
     centers = frd.get_centers ()
-    ocat = observe.ObsCatalog(comment='--', proposer='LeathaudGreene', 
+    ocat = observe.ObsCatalog(comment='--', proposer='Leauthaud', 
                           propid='2020B-0288', seqid='S2021A')
     catalog = ocat.build_catalog(centers[:,0], centers[:,1],
                                  'COSMOS', 'N708', 'object', 10.*60)

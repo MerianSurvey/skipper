@@ -8,6 +8,7 @@ from astropy import table
 from astropy import units as u
 from astropy.io import fits
 from skipper import observe, qa
+import make_pointings
 
 fmt = '%Y/%m/%d %I:%M %p'
 et = pytz.timezone("America/New_York")
@@ -18,6 +19,10 @@ def load_mastercat ( fname = '../pointings/S2021A.csv' ):
     mastercat['wait'] = "False"
     mastercat['proposer'] = 'Leauthaud'
     return mastercat
+
+def load_extracosmos ( ):
+    extra_cosmos, _ = make_pointings.build_cosmos ( 39872, start_at_center=False )
+    return extra_cosmos
 
 def load_telemetry ( fname ):
     return pd.read_csv(fname)
@@ -66,8 +71,22 @@ def plan_tomorrow ( day, tele_fname, **kwargs ):
     is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
                                      is_queued=is_queued.copy(),
                                      maxairmass=1.5, object_priority=priorities,**kwargs )
+
+    # \\ add extra COSMOS great seeing queue
+    print('')
+    print('-'*31)
+    print('-- COSMOS great seeing queue --')
+    print('-'*31)
+    print('\n(only trigger if seeing is <.75" for more than 30min prior to the hour)\n')
+    extra_cosmos = load_extracosmos ()
+    is_queued_ec2 = ocat.plan_night ( obs_start, ctio, catalog=extra_cosmos,
+                                      obs_end=obs_end,
+                                      checksky_at_start=False,
+                                      maxairmass=1.2, prefix='extracosmos_', **kwargs )
+    
     return is_queued_tmrw
 
+kw_types = {'save':lambda x: x.lower == 'true'}
 
 if __name__ == '__main__':
     print('='*27)
@@ -82,4 +101,10 @@ if __name__ == '__main__':
         print('  [path/to/telemetry/output] path to the CSV containing the telemetry output from SISPI')
         print('(contact kadofong at princeton dot edu for help)\n')
     else:
-        plan_tomorrow ( int(sys.argv[1]), sys.argv[2] )
+        kwarg_keys = [ x[2:] for x in sys.argv[3::2] ]
+        kwarg_cont = sys.argv[4::2]
+        kwargs = dict(zip(kwarg_keys,kwarg_cont))
+        for key in kwargs:
+            kwargs[key] = kw_types[key](kwargs[key])
+
+        plan_tomorrow ( int(sys.argv[1]), sys.argv[2],**kwargs )
