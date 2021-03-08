@@ -73,10 +73,11 @@ def plan_tomorrow ( day, tele_fname, **kwargs ):
                                      maxairmass=1.5, object_priority=priorities,**kwargs )
 
     # \\ add extra COSMOS great seeing queue
+    print('')
     print('-'*31)
     print('-- COSMOS great seeing queue --')
     print('-'*31)
-    print('\n(only trigger if seeing is <.75" for more than 30min prior to the hour\n')
+    print('\n(only trigger if seeing is <.75" for more than 30min prior to the hour)\n')
     extra_cosmos = load_extracosmos ()
     is_queued_ec2 = ocat.plan_night ( obs_start, ctio, catalog=extra_cosmos,
                                       obs_end=obs_end,
