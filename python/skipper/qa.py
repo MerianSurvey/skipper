@@ -23,7 +23,7 @@ import pytz
 def tmp():
     print('Hello, world')
 
-def validate_json(file, obs_start, obssite, csv, maxairmass=1.5, logname='../json/json.log'):
+def validate_json(file, obs_start, obssite, csv=None, maxairmass=1.5, logname='../json/json.log'):
     '''
     Validation for JSON observing scripts
     Verifies:
@@ -161,7 +161,8 @@ def __checkVis__(file, obs_start, obssite, maxairmass, csv):
     utc_start = Time(obs_start) - obs_start.astimezone(pytz.utc).minute*u.minute - obs_start.astimezone(pytz.utc).second*u.second
 
     #already observed objects
-    done = pd.read_csv(csv)['object'].to_list()
+    if csv is not None:
+        done = pd.read_csv(csv)['object'].to_list()
 
     ok=True
 
@@ -183,7 +184,8 @@ def __checkVis__(file, obs_start, obssite, maxairmass, csv):
             ok=False
 
         # check object repeat
-        __checkObsdPrior__(exposure['object'], done, file)
+        if csv is not None:
+            __checkObsdPrior__(exposure['object'], done, file)
 
     return ok
 
