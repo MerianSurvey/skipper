@@ -84,7 +84,8 @@ def plan_tomorrow ( day, tele_fname, add_extracosmos=False, **kwargs ):
         is_queued_ec2 = ocat.plan_night ( obs_start, ctio, catalog=extra_cosmos,
                                           obs_end=obs_end,
                                           checksky_at_start=False,
-                                          maxairmass=1.2, prefix='extracosmos_', **kwargs )
+                                          maxairmass=1.2, prefix='extracosmos_',
+                                          pointingdb_fname=tele_fname, **kwargs )
     
     return is_queued_tmrw
 

@@ -215,7 +215,8 @@ class ObsCatalog (object):
                      save=True,
                      checksky_at_start=True,
                      pad_first_hour=False,
-                     prefix=''):
+                     prefix='',
+                     pointingdb_fname=None):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -366,7 +367,7 @@ class ObsCatalog (object):
                                  insert_checksky_exposures=not has_checkedsky,
                                  previous_position=previous_position)
                     has_checkedsky=True
-                    qa.validate_json(fname, htime, None)
+                    qa.validate_json(fname, htime, pointingdb_fname)
                 previous_position = hfile.iloc[-1]
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
