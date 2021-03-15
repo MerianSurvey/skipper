@@ -76,6 +76,7 @@ def plan_tomorrow ( day, tele_fname, add_extracosmos=False, **kwargs ):
     # \\ add extra COSMOS great seeing queue
     if add_extracosmos:
         print('')
+
         print('-'*31)
         print('-- COSMOS great seeing queue --')
         print('-'*31)
