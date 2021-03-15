@@ -114,6 +114,7 @@ class ObsCatalog (object):
                  slew_scale=8.*u.deg,
                  insert_checksky_exposures=False,
                  previous_position=None,
+                 end_with_onemin=False,
                  verbose=True):
         '''
         Format to JSON with small tweaks to enhance readability
@@ -167,6 +168,22 @@ class ObsCatalog (object):
                     throw.name = throw.name - 0.5
                     catalog.loc[throw.name] = throw
                     nonsci_count += 1
+
+                if end_with_onemin and name >= catalog.index.max():
+                    # \\ if last and we are supposed to end with a
+                    # \\ one min exposure, pad there
+                    # \\ can do gteq because IF we are doing this THEN
+                    # \\ OME insertion must be active, so the index MUST be
+                    # \\ float type
+                    print(f'[to_json] Ending with OME')
+                    throw['expTime'] = 60.
+                    throw['object'] =  f'1minexp_{nonsci_count:03d}'
+                    throw['comment'] = 'OneMinuteFocusExposure'
+                    throw.name = throw.name + 0.5
+                    catalog.loc[throw.name] = throw
+                    nonsci_count += 1
+                   
+
             catalog = catalog.sort_index().reset_index(drop=True)
         if insert_checksky_exposures:
             if verbose:
