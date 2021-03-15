@@ -24,6 +24,13 @@ def load_extracosmos ( ):
     extra_cosmos, _ = make_pointings.build_cosmos ( 39872, start_at_center=False )
     return extra_cosmos
 
+def write_backupjson ():
+    catalog, ocat = make_pointings.build_backup ()
+    for ij in np.arange(4, 41, 4):
+        ocat.to_json ( catalog.iloc[(ij-4):ij], fp=f'../json/backup_scripts/COSMOS_AGN_{ij//4:02d}.json',  
+                       end_with_onemin=True )
+        print(ij//4)    
+
 def load_telemetry ( fname ):
     return pd.read_csv(fname)
 

@@ -6,7 +6,7 @@ from skipper import observe,tiling,visualize
 
 fmt = '%Y/%m/%d %I:%M %p'
 
-def build_cosmos (seed=267667, start_at_center=True):
+def build_cosmos (seed=267667, start_at_center=True, filter='N708'):
     '''
     Build COSMOS dithering pattern from FocusedRandomDither
 
@@ -28,9 +28,15 @@ def build_cosmos (seed=267667, start_at_center=True):
     ocat = observe.ObsCatalog(comment='--', proposer='Leauthaud', 
                           propid='2020B-0288', seqid='S2021A')
     catalog = ocat.build_catalog(centers[:,0], centers[:,1],
-                                 'COSMOS', 'N708', 'object', 10.*60)
+                                 'COSMOS', filter, 'object', 10.*60)
     assert not catalog.object.duplicated().any()
     return catalog, ocat
+
+def build_backup ( seed=246, filter='g' ):
+    # seed = 246 = AGN
+    catalog, ocat = build_cosmos ( seed=seed, filter=filter )
+    return catalog, ocat
+    
 
 def build_gama ():
     '''
