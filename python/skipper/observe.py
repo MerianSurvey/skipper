@@ -207,7 +207,8 @@ class ObsCatalog (object):
         for key, repkey in fx.items():
             json_str = json_str.replace(key, repkey)
 
-        open(fp, 'w').write(json_str)
+        with open(fp,'w') as infp:
+            infp.write(json_str)
         
         self.write_jsonlog ( fp )
 

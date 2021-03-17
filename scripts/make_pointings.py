@@ -8,7 +8,8 @@ fmt = '%Y/%m/%d %I:%M %p'
 
 def build_cosmos (seed=267667, start_at_center=True, filter='N708',
                   exptime=10.,
-                  ndither=40):
+                  ndither=40,
+                  return_frd=False):
     '''
     Build COSMOS dithering pattern from FocusedRandomDither
 
@@ -17,7 +18,8 @@ def build_cosmos (seed=267667, start_at_center=True, filter='N708',
     '''
     center = coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s")
     size =  (1.4, 1.4)
-    np.random.seed(seed)
+    if seed is not None:
+        np.random.seed(seed)
     edges = [ (center.ra.deg-size[0]/2., center.dec.deg-size[0]/2.),
               (center.ra.deg+size[0]/2., center.dec.deg-size[0]/2.),
               (center.ra.deg+size[0]/2., center.dec.deg+size[0]/2.),
@@ -32,14 +34,26 @@ def build_cosmos (seed=267667, start_at_center=True, filter='N708',
     catalog = ocat.build_catalog(centers[:,0], centers[:,1],
                                  'COSMOS', filter, 'object', exptime*60)
     assert not catalog.object.duplicated().any()
-    return catalog, ocat
+
+    if return_frd:
+        return catalog,ocat,frd
+    else:
+        return catalog, ocat
 
 def build_backup ( seed=2465646, filter='g' ):
     # seed = 246 = AGN <= AGN 10 min exp
     # seed = 2465646 = AGN5MIN <= AGN 5 min exp
-    catalog, ocat = build_cosmos ( seed=seed, filter=filter, exptime=5.,
-                                   ndither = 40//5*10)
-    return catalog, ocat
+    np.random.seed(seed)
+    catalog_l = []
+    frd_l = []
+    for i in range(10):
+        catalog, ocat, frd = build_cosmos ( seed=None,filter=filter,exptime=5.,
+                                       ndither = 40//5, start_at_center=False,
+                                       return_frd=True
+                                       )
+        frd_l.append(frd)
+        catalog_l.append(catalog)
+    return catalog_l, ocat, frd_l
     
 
 def build_gama ():
