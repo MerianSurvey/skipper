@@ -6,7 +6,9 @@ from skipper import observe,tiling,visualize
 
 fmt = '%Y/%m/%d %I:%M %p'
 
-def build_cosmos (seed=267667, start_at_center=True, filter='N708'):
+def build_cosmos (seed=267667, start_at_center=True, filter='N708',
+                  exptime=10.,
+                  ndither=40):
     '''
     Build COSMOS dithering pattern from FocusedRandomDither
 
@@ -22,19 +24,21 @@ def build_cosmos (seed=267667, start_at_center=True, filter='N708'):
               (center.ra.deg-size[0]/2., center.dec.deg+size[0]/2.) ]    
 
     frd = tiling.FocusedRandomDither (center, random_max=0.1,
-                                      offset_radius=0.01, ndither=40,
+                                      offset_radius=0.01, ndither=ndither,
                                       start_at_center=start_at_center)
     centers = frd.get_centers ()
     ocat = observe.ObsCatalog(comment='--', proposer='Leauthaud', 
                           propid='2020B-0288', seqid='S2021A')
     catalog = ocat.build_catalog(centers[:,0], centers[:,1],
-                                 'COSMOS', filter, 'object', 10.*60)
+                                 'COSMOS', filter, 'object', exptime*60)
     assert not catalog.object.duplicated().any()
     return catalog, ocat
 
-def build_backup ( seed=246, filter='g' ):
-    # seed = 246 = AGN
-    catalog, ocat = build_cosmos ( seed=seed, filter=filter )
+def build_backup ( seed=2465646, filter='g' ):
+    # seed = 246 = AGN <= AGN 10 min exp
+    # seed = 2465646 = AGN5MIN <= AGN 5 min exp
+    catalog, ocat = build_cosmos ( seed=seed, filter=filter, exptime=5.,
+                                   ndither = 40//5*10)
     return catalog, ocat
     
 
