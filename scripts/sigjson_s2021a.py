@@ -24,12 +24,16 @@ def load_extracosmos ( ):
     extra_cosmos, _ = make_pointings.build_cosmos ( 39872, start_at_center=False )
     return extra_cosmos
 
+
 def write_backupjson ():
-    catalog, ocat = make_pointings.build_backup ()
-    for ij in np.arange(4, 41, 4):
-        ocat.to_json ( catalog.iloc[(ij-4):ij], fp=f'../json/backup_scripts/COSMOS_AGN_{ij//4:02d}.json',  
-                       end_with_onemin=True )
-        print(ij//4)    
+    for filt in ['g','r']:
+        catalog_l, ocat, frd = make_pointings.build_backup (filter=filt)
+
+        for ij in np.arange(10):
+            fp = f'../json/backup_scripts/COSMOS_5minAGN_{filt}_{ij+1:02d}.json'
+            print(fp)
+            ocat.to_json ( catalog_l[ij], fp=fp, 
+                           end_with_onemin=False )
 
 def load_telemetry ( fname ):
     return pd.read_csv(fname)
@@ -41,6 +45,7 @@ def lazy_ephem ( day ):
     print(f'START: {sunset.strftime(fmt)} UTC; {sunset.astimezone(et).strftime(fmt)} ET')
     print(f'MID:   {middle.strftime(fmt)} UTC; {middle.astimezone(et).strftime(fmt)} ET')
     print(f'END:   {sunrise.strftime(fmt)} UTC; {sunrise.astimezone(et).strftime(fmt)} ET')
+
 
 def plan_tomorrow ( day, tele_fname, add_extracosmos=False, **kwargs ):
     '''
