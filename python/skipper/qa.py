@@ -15,15 +15,14 @@ import astropy.units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
 
-import pandas as pd
-
 from datetime import datetime, timedelta
 import pytz
 
 def tmp():
     print('Hello, world')
 
-def validate_json(file, obs_start, obssite, csv=None, maxairmass=1.5, logname='../json/json.log'):
+
+def validate_json(file, obs_start, obssite, maxairmass=1.5, logname='../json/json.log'):
     '''
     Validation for JSON observing scripts
     Verifies:
@@ -37,14 +36,13 @@ def validate_json(file, obs_start, obssite, csv=None, maxairmass=1.5, logname='.
             local time or UTC, as long as time zone is specified.
         - obssite (observe.ObsCatalog): Observatory object where we'll be observing, if None defaults to Cerro Tololo
         - maxairmass (float): maximum airmass at which we will observe
-        - csv (string): path to the csv file with all already observed objects
         ===========
     '''
 
     valid_json = True
     valid_vis = True
 
-    if __checkJSON__(file, csv):
+    if __checkJSON__(file):
         valid_json = True
         valid_vis = 1
     else:
@@ -52,14 +50,12 @@ def validate_json(file, obs_start, obssite, csv=None, maxairmass=1.5, logname='.
         valid_vis = -1
 
     if valid_json:
-        if __checkVis__(file, obs_start, obssite, maxairmass, csv) == False:
+        if __checkVis__(file, obs_start, obssite, maxairmass) == False:
             valid_vis=False
-
-
 
     if valid_json and valid_vis:
         print('QA COMPLETE: All tests passed')
-
+        
         try:
             user=os.environ['USER']
         except KeyError:
@@ -69,11 +65,11 @@ def validate_json(file, obs_start, obssite, csv=None, maxairmass=1.5, logname='.
 
         with open(logname,'a') as ff:
             print(f'{file} VALIDATED at {dtime} by {user}', file=ff)
+            
+            
 
 
-
-
-def __checkJSON__(f, csv):
+def __checkJSON__(f):
     '''
     Checks if a file is in valid json format, makes sure important keys are present, checks value format
     '''
@@ -96,13 +92,13 @@ def __checkJSON__(f, csv):
             keys.append(key)
         for i,key in enumerate(reqdKeys):
             if key not in keys:
-                print('JSON Warning: missing key "' + key + '" in file ' + f + ' block ' + str(i))
+                print('JSON Warning: missing key ' + key + ' in file ' + f + ' block ' + str(i))
                 return False
         # check that values are valid
         for key in keys:
             val = group[key]
             if not __validJSONVal__(val, key):
-                print('JSON Warning: "' + val + '" is invalid value format for key "' + key + '" in file ' + f)
+                print('JSON Warning: ' + val + ' is invalid value format for key ' + key + ' in file ' + f)
                 return False
     return True
 
@@ -140,7 +136,7 @@ def __validJSONVal__(val, forKey):
 
 # Checks is airmass is within acceptable range
 # using input start time and site
-def __checkVis__(file, obs_start, obssite, maxairmass, csv):
+def __checkVis__(file, obs_start, obssite, maxairmass):
     '''
     Checks airmass against upper limit
     '''
@@ -159,10 +155,6 @@ def __checkVis__(file, obs_start, obssite, maxairmass, csv):
         site = obssite
     timezone= pytz.timezone ( 'America/Santiago' )
     utc_start = Time(obs_start) - obs_start.astimezone(pytz.utc).minute*u.minute - obs_start.astimezone(pytz.utc).second*u.second
-
-    #already observed objects
-    if csv is not None:
-        done = pd.read_csv(csv)['object'].to_list()
 
     ok=True
 
@@ -183,25 +175,8 @@ def __checkVis__(file, obs_start, obssite, maxairmass, csv):
             print(f'Warning: Airmass of {wt:.2f} in exposure ' + str(i+1) + ' of file ' + file)
             ok=False
 
-        # check object repeat
-        if csv is not None:
-            __checkObsdPrior__(exposure['object'], done, file)
-
     return ok
 
-# CheckObsdPrior
-# checks if a given object has already been observed
-# ie is present in the csv
-def __checkObsdPrior__(object, done, file):
-    ignore = ['G09', '1minexp', 'checksky']
-
-    for i in ignore:
-        if i in object:
-            return True
-
-    if object in done and object not in ignore:
-        m = 'Repeat Object: ' + object + ' in file ' + file
-        raise PointingError(m)
 
 # listify
 # takes a string in form [a, b, c] and returns a list [a, b, c]
@@ -211,12 +186,6 @@ def __listify__(s):
         return s[1:len(s)-1].split(', ')
     else:
         return [s]
-
-class PointingError(Exception):
-    '''Exception raised for a pointing object that has already been observec'''
-    def __init__(self, message='pointing error'):
-        self.message=message
-        super().__init__(self.message)
 
 class JSONError(Exception):
     '''Exception raised for incorrect JSON format'''

@@ -24,17 +24,6 @@ def load_extracosmos ( ):
     extra_cosmos, _ = make_pointings.build_cosmos ( 39872, start_at_center=False )
     return extra_cosmos
 
-
-def write_backupjson ():
-    for filt in ['g','r']:
-        catalog_l, ocat, frd = make_pointings.build_backup (filter=filt)
-
-        for ij in np.arange(10):
-            fp = f'../json/backup_scripts/COSMOS_5minAGN_{filt}_{ij+1:02d}.json'
-            print(fp)
-            ocat.to_json ( catalog_l[ij], fp=fp, 
-                           end_with_onemin=False )
-
 def load_telemetry ( fname ):
     return pd.read_csv(fname)
 
@@ -46,8 +35,7 @@ def lazy_ephem ( day ):
     print(f'MID:   {middle.strftime(fmt)} UTC; {middle.astimezone(et).strftime(fmt)} ET')
     print(f'END:   {sunrise.strftime(fmt)} UTC; {sunrise.astimezone(et).strftime(fmt)} ET')
 
-
-def plan_tomorrow ( day, tele_fname, add_extracosmos=False, **kwargs ):
+def plan_tomorrow ( day, tele_fname, **kwargs ):
     '''
     Plan tomorrow in S2021A
     '''
@@ -56,8 +44,7 @@ def plan_tomorrow ( day, tele_fname, add_extracosmos=False, **kwargs ):
 
     exp_exposures = tele.query('(exptime>599.)&(object!="G09")').shape[0]
     has_observed = np.in1d(mastercat['object'], tele['object'])
-
-    #assert has_observed.sum() == exp_exposures, "We have observed exposures that aren't in the master catalog?!"
+    assert has_observed.sum() == exp_exposures, "We have observed exposures that aren't in the master catalog?!"
 
     ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='S2021A')
 
@@ -86,19 +73,16 @@ def plan_tomorrow ( day, tele_fname, add_extracosmos=False, **kwargs ):
                                      maxairmass=1.5, object_priority=priorities,**kwargs )
 
     # \\ add extra COSMOS great seeing queue
-    if add_extracosmos:
-        print('')
-
-        print('-'*31)
-        print('-- COSMOS great seeing queue --')
-        print('-'*31)
-        print('\n(only trigger if seeing is <.75" for more than 30min prior to the hour)\n')
-        extra_cosmos = load_extracosmos ()
-        is_queued_ec2 = ocat.plan_night ( obs_start, ctio, catalog=extra_cosmos,
-                                          obs_end=obs_end,
-                                          checksky_at_start=False,
-                                          maxairmass=1.2, prefix='extracosmos_',
-                                          pointingdb_fname=tele_fname, **kwargs )
+    print('')
+    print('-'*31)
+    print('-- COSMOS great seeing queue --')
+    print('-'*31)
+    print('\n(only trigger if seeing is <.75" for more than 30min prior to the hour)\n')
+    extra_cosmos = load_extracosmos ()
+    is_queued_ec2 = ocat.plan_night ( obs_start, ctio, catalog=extra_cosmos,
+                                      obs_end=obs_end,
+                                      checksky_at_start=False,
+                                      maxairmass=1.2, prefix='extracosmos_', **kwargs )
     
     return is_queued_tmrw
 

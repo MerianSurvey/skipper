@@ -114,7 +114,6 @@ class ObsCatalog (object):
                  slew_scale=8.*u.deg,
                  insert_checksky_exposures=False,
                  previous_position=None,
-                 end_with_onemin=False,
                  verbose=True):
         '''
         Format to JSON with small tweaks to enhance readability
@@ -168,22 +167,6 @@ class ObsCatalog (object):
                     throw.name = throw.name - 0.5
                     catalog.loc[throw.name] = throw
                     nonsci_count += 1
-
-                if end_with_onemin and name >= catalog.index.max():
-                    # \\ if last and we are supposed to end with a
-                    # \\ one min exposure, pad there
-                    # \\ can do gteq because IF we are doing this THEN
-                    # \\ OME insertion must be active, so the index MUST be
-                    # \\ float type
-                    print(f'[to_json] Ending with OME')
-                    throw['expTime'] = 60.
-                    throw['object'] =  f'1minexp_{nonsci_count:03d}'
-                    throw['comment'] = 'OneMinuteFocusExposure'
-                    throw.name = throw.name + 0.5
-                    catalog.loc[throw.name] = throw
-                    nonsci_count += 1
-                   
-
             catalog = catalog.sort_index().reset_index(drop=True)
         if insert_checksky_exposures:
             if verbose:
@@ -207,8 +190,7 @@ class ObsCatalog (object):
         for key, repkey in fx.items():
             json_str = json_str.replace(key, repkey)
 
-        with open(fp,'w') as infp:
-            infp.write(json_str)
+        open(fp, 'w').write(json_str)
         
         self.write_jsonlog ( fp )
 
@@ -233,8 +215,7 @@ class ObsCatalog (object):
                      save=True,
                      checksky_at_start=True,
                      pad_first_hour=False,
-                     prefix='',
-                     pointingdb_fname=None):
+                     prefix=''):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -385,7 +366,7 @@ class ObsCatalog (object):
                                  insert_checksky_exposures=not has_checkedsky,
                                  previous_position=previous_position)
                     has_checkedsky=True
-                    qa.validate_json(fname, htime, pointingdb_fname)
+                    qa.validate_json(fname, htime, None)
                 previous_position = hfile.iloc[-1]
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
