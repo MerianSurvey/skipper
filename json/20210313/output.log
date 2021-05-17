@@ -1,0 +1,44 @@
+===========================
+== Merian Planner S2021A ==
+===========================
+obsStart: 2021/03/13 09:04 PM Santiago
+          2021/03/13 07:04 PM ET
+          2021/03/14 12:04 AM UTC
+obsEnd:   2021/03/14 01:52 AM Santiago
+          2021/03/13 11:52 PM ET
+          2021/03/14 04:52 AM UTC
+2021-03-14 04:00:00
+
+==> 20210314_00, 3360.000000000006s available
+0.0s filled by priority=0.0 objects
+3000.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+
+==> 20210314_01, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+
+==> 20210314_02, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+
+==> 20210314_03, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+2021-03-14 05:30:00
+2021-03-14 04:52:30
+
+==> 20210314_04, 4349.99999999998s available
+0.0s filled by priority=0.0 objects
+4200.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J102235.52+002736.03_N708 to GAMA_J114122.15-005948.11_N708
+QA COMPLETE: All tests passed
