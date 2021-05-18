@@ -95,7 +95,7 @@ def plan_tomorrow ( mastercat, day, month=3,
     mastercat.loc[mask, 'object'] = mastercat.loc[mask,'object'].apply(lambda x: 'early' + x )
 
 
-    
+
 
 def predict_s2021a ():
     cosmos,ocat = build_cosmos ()
@@ -122,6 +122,45 @@ def predict_s2021a ():
     mask =(airmass>0)&(airmass<1.41)&(mastercat['object']!='COSMOS')
     print (f'Deprioritizing N={mask.sum()} targets')
     mastercat.loc[mask, 'object'] = mastercat.loc[mask,'object'].apply(lambda x: 'early' + x )
+
+    # \\ Nights for S2021A
+    nights = np.arange(5,18,1)
+    nights = np.concatenate([nights[:7], nights[8:]])
+
+    obs_start, twibeg = ctio.get_sunriseset ( 2021, 3, nights[0] )
+    obs_end = obs_start + 0.5*(twibeg-obs_start)
+
+    print(obs_start.astimezone(ctio.timezone).strftime(fmt))
+    print(obs_end.astimezone(ctio.timezone).strftime(fmt))
+
+    is_queued = ocat.plan_night ( obs_start, ctio, catalog=mastercat,
+                                  obs_end=obs_end,
+                                  maxairmass=1.5,
+                                  object_priority=priorities )
+
+    for night in nights[1:]:
+        obs_start, twibeg = ctio.get_sunriseset ( 2021, 3, night)
+        obs_end = obs_start + 0.5*(twibeg-obs_start)
+
+        print(obs_start.astimezone(ctio.timezone).strftime(fmt))
+        print(obs_end.astimezone(ctio.timezone).strftime(fmt))
+
+        is_queued = ocat.plan_night ( obs_start, ctio,
+                                      catalog=mastercat, obs_end=obs_end,
+                                      maxairmass=1.5, is_queued=is_queued,
+                                      save=False)
+    return mastercat, is_queued
+
+def predict_f2021b ():
+    # \\ TODO: generate mastercat for F2021b
+    
+    mastercat = get_f2021mastercat ()
+    mastercat.index = mastercat['object']
+    assert not mastercat.object.duplicated().any()
+
+    # \\ Define the observatory site -- default is CTIO
+    ctio = observe.ObservingSite ()
+    priorities = { } 
 
     # \\ Nights for S2021A
     nights = np.arange(5,18,1)
