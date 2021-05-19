@@ -1,0 +1,38 @@
+> plan_night
+[plan_night] padding the first hour script with an exposure even though we only have 480s left
+
+==> 20210308_00, 3000.0s available
+0.0s filled by priority=0.0 objects
+3000.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+
+==> 20210308_01, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+
+==> 20210308_02, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+
+==> 20210308_03, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J090652.65-005141.42_N708 to GAMA_J094539.32-005908.86_N708
+QA COMPLETE: All tests passed
+2021-03-08 05:30:00
+2021-03-08 04:54:30
+
+==> 20210308_04, 4469.99999999998s available
+0.0s filled by priority=0.0 objects
+4200.0s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J095853.32-010118.92_N708 to GAMA_J111156.69-005841.16_N708
+[to_json] Big slew from GAMA_J111527.88-010939.72_N708 to GAMA_J102559.52-010506.59_N708
+QA COMPLETE: All tests passed
