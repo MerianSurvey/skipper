@@ -151,6 +151,13 @@ def predict_s2021a ():
                                       save=False)
     return mastercat, is_queued
 
+def get_f2021mastercat ():
+    vvds_oiii = pd.read_csv ( '../pointings/vvds_n536.ncsv', index_col='object.1')
+    vvds_halha = pd.read_csv ( '../pointings/vvds_n702.ncsv', index_col='object.1')
+    xmm_oiii = pd.read_csv ( '../pointings/xmm_n536.ncsv', index_col='object.1')
+    xmm_halha = pd.read_csv ( '../pointings/xmm_n702.ncsv', index_col='object.1')    
+    
+
 def predict_f2021b ():
     # \\ TODO: generate mastercat for F2021b
     

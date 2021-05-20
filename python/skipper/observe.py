@@ -17,6 +17,8 @@ from astropy.io import fits
 import healpy as hp
 from . import utils, qa
 
+dim_d = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
+
 class ObsCatalog (object):
     def __init__ (self,
                   comment='',
@@ -151,7 +153,7 @@ class ObsCatalog (object):
                             print(f'[to_json] Big slew from {prev_row["object"]} to {throw["object"]}')
                     elif insert_random_ome:
                         pull = np.random.uniform(0.,5)
-                        print(pull)
+                        
                         if pull > 3.:
                             insert_throw=True
                             if verbose:
@@ -233,6 +235,7 @@ class ObsCatalog (object):
                      save=True,
                      checksky_at_start=True,
                      pad_first_hour=False,
+                     pad_last_hour=True,
                      prefix='',
                      pointingdb_fname=None):
         '''
@@ -332,9 +335,15 @@ class ObsCatalog (object):
                     total_available_time += 600. - total_available_time% 600.
                     
             elif ix==(len(alt_l[0])-1):
-                print(obsframe.obstime[ix]+1.*u.hr)
-                print(Time(obs_end))
-                total_available_time = (Time(obs_end) - obsframe.obstime[ix]+1.*u.hr - 0.5*u.hour).to(u.second).value + 1200.
+                #print(obsframe.obstime[ix]+1.*u.hr)
+                #print(Time(obs_end))
+                if pad_last_hour:
+                    print('[plan_night] padding the last hour script')
+                    pad_time = 1200. #catalog['expTime']
+                else:
+                    pad_time = 0.
+                total_available_time = (Time(obs_end) - obsframe.obstime[ix]+1.*u.hr - 0.5*u.hour).to(u.second).value + pad_time
+                #print(total_available_time)
                 # \\ Add two extra exposures at the end just in case.
                 # \\ We definitely don't want
                 # \\ to run out of queued objects!
@@ -425,7 +434,15 @@ class ObservingSite ( object ):
         utc_offset = int(self.get_utcoffset (utc_midnight))
 
         utc_start = pytz.utc.localize ( datetime.datetime ( year, month, day, 12-utc_offset, 0))
-        utc_end = pytz.utc.localize ( datetime.datetime ( year, month, day+1, 12-utc_offset,0) )
+        
+        if (day == dim_d[month]) & month==12:
+            utc_end = pytz.utc.localize ( datetime.datetime ( year+1, 1, 1, 12-utc_offset,0) )
+        elif day == dim_d[month]:
+            utc_end = pytz.utc.localize ( datetime.datetime ( year, month+1, 1, 12-utc_offset,0) )
+        else:
+            utc_end = pytz.utc.localize ( datetime.datetime ( year, month, day+1, 12-utc_offset,0) )
+        
+
 
         grid = np.arange(Time(utc_start), Time(utc_end),10.*u.min)
         fgrid = np.arange(Time(utc_start), Time(utc_end), 1.*u.min)
@@ -476,7 +493,7 @@ class ObservingSite ( object ):
         else:
             utc_end = utc_start + lim*u.hour
 
-        print(utc_end)
+        
         #frame = np.arange ( -lim, lim+nstep/2., nstep) * u.hour
         frame = np.arange(0, (utc_end-utc_start).to_value(u.hour)+1,1)*u.hour
         timeframe = np.arange(utc_start+0.5*u.hour, utc_end+1*u.hour, 1.*u.hour) #utc_start + frame
