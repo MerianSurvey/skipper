@@ -436,7 +436,8 @@ class ObservingSite ( object ):
 
         utc_start = pytz.utc.localize ( datetime.datetime ( year, month, day, 12-utc_offset, 0))
         
-        if (day == dim_d[month]) & month==12:
+        if (day == dim_d[month]) & (month==12):
+            print('happy new years')
             utc_end = pytz.utc.localize ( datetime.datetime ( year+1, 1, 1, 12-utc_offset,0) )
         elif day == dim_d[month]:
             utc_end = pytz.utc.localize ( datetime.datetime ( year, month+1, 1, 12-utc_offset,0) )
