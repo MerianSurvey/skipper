@@ -21,6 +21,13 @@ def load_mastercat ( filter_name ):
     mastercat['proposer'] = 'Leauthaud'
     return mastercat
 
+def load_mastercat_cosmos ( fname = '../pointings/cosmosgama_n536.csv' ):
+    mastercat = pd.read_csv ( fname )
+    mastercat = mastercat.set_index('object.1')
+    mastercat['wait'] = "False"
+    mastercat['proposer'] = 'Leauthaud'
+    return mastercat
+
 
 def write_backupjson ():
     raise NotImplementedError
@@ -45,13 +52,16 @@ def lazy_ephem ( day ):
     print(f'MID:   {middle.strftime(fmt)} UTC; {middle.astimezone(et).strftime(fmt)} ET')
     print(f'END:   {sunrise.strftime(fmt)} UTC; {sunrise.astimezone(et).strftime(fmt)} ET')
  
-def predict_f2021b ( filter_name, datelist, nightslot_l, priorities=None, **kwargs ):
+def predict_f2021b ( filter_name, datelist, nightslot_l, priorities=None, field='VVDSXMM', **kwargs ):
     if priorities is None:
         priorities = {}
         
-    mastercat = load_mastercat (filter_name)
+    if field == 'VVDSXMM':
+        mastercat = load_mastercat (filter_name)
+    elif field == 'COSMOSGAMA':
+        mastercat = load_mastercat_cosmos ()
 
-    ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='S2021A')
+    ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='S2021B')
     
 
     # \\ build is_queued 

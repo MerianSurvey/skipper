@@ -319,10 +319,11 @@ class ObsCatalog (object):
             cmass = pd.DataFrame(index=catalog.index)
 
             cmass['airmass'] = [ ai.secz[ix] for ai in alt_l]
-            cmass['is_possible'] = True
-            cmass.loc[cmass.airmass>maxairmass, 'is_possible'] = False
+            cmass['is_possible'] = True            
             cmass.loc[cmass.airmass<0,'is_possible'] = False
             cmass.loc[is_queued.is_queued, 'is_possible'] = False
+            print(f'Minimum airmass available: {cmass.loc[cmass.is_possible, "airmass"].min()}')
+            cmass.loc[cmass.airmass>maxairmass, 'is_possible'] = False
             cmass['going_to_queue'] = False
 
             total_queued_time = 0.
