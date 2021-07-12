@@ -13,8 +13,12 @@ import make_pointings
 fmt = '%Y/%m/%d %I:%M %p'
 et = pytz.timezone("America/New_York")
 
-def load_mastercat ( filter_name ):
+def load_mastercat ( filter_name, early_vvds=False ):
     vvds = pd.read_csv ( f'../pointings/vvds_{filter_name}.csv', index_col='object.1')
+    if early_vvds:
+        mask = vvds.RA < 340
+        vvds.loc[mask, 'object'] = vvds.loc[mask, 'object'].apply ( lambda x: x.split('_')[0] +'early' + '_' + '_'.join(x.split('_')[1:]) )
+        vvds.loc[~mask, 'object'] = vvds.loc[~mask, 'object'].apply ( lambda x: x.split('_')[0] +'late' + '_' +  '_'.join(x.split('_')[1:]))
     xmm = pd.read_csv ( f'../pointings/xmm_{filter_name}.csv', index_col='object.1')
 
     mastercat = pd.concat([vvds, xmm])
