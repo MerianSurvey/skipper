@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 *~
 .DS_Store
+*#
+
 
 # C extensions
 *.so
@@ -140,3 +142,4 @@ cython_debug/
 
 # Figures
 figures/
+python/skipper/#tiling.py#
