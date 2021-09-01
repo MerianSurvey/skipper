@@ -13,10 +13,35 @@ import make_pointings
 fmt = '%Y/%m/%d %I:%M %p'
 et = pytz.timezone("America/New_York")
 
-def load_mastercat ( filter_name, early_vvds=False ):
+# \\ Filter and field assignments for F2021B
+datelist_vvdsxmm_n536 = [(2021,11,ix) for ix in np.arange(24,31)]
+datelist_vvdsxmm_n536 += [(2021,12,ix) for ix in np.arange(1,5)]
+nightslot_vvdsxmm_n536 = [1 for ix in np.arange(24,31)]
+nightslot_vvdsxmm_n536 += [1 for ix in np.arange(1,5)]
+priorities_n536 = {'VVDSearly':0, 'VVDSlate':1, 'VVDS':1, 'XMM':2}    
+
+datelist_vvdsxmm_n702 =  [(2021,9,ix) for ix in np.arange(10, 14)] 
+#datelist_vvdsxmm_n702 += [(2021,11,ix) for ix in np.arange(24,31)]
+nightslot_vvdsxmm_n702 = [2 for ix in np.arange(10,14)]
+#nightslot_vvdsxmm_n702 += [1 for ix in np.arange(24,31)]
+priorities_n702 = {'VVDSearly':0, 'VVDSlate':1,'VVDS':1, 'XMM':2}    
+
+datelist_cosmosgama_n536 = [(2021,12,31), (2021,1,1)]
+datelist_cosmosgama_n536 += [(2021,1,ix) for ix in np.arange(3,5)]
+datelist_cosmosgama_n536 += [(2021,1,ix) for ix in np.arange(6,8)]
+datelist_cosmosgama_n536 += [(2021,1,ix) for ix in np.arange(9,12)]
+datelist_cosmosgama_n536 += [(2022,1,ix) for ix in np.arange(25, 32)]
+nightslot_cosmosgama_n536 = [2,2]
+nightslot_cosmosgama_n536 += [2 for ix in np.arange(3,5)]
+nightslot_cosmosgama_n536 += [2 for ix in np.arange(6,8)]
+nightslot_cosmosgama_n536 += [2 for ix in np.arange(9,12)]
+nightslot_cosmosgama_n536 += [2 for ix in np.arange(25,32)]
+priorities_cosmosgama_n536 = {'COSMOS':0, 'GAMA':1}     
+
+def load_mastercat ( filter_name, early_vvds=True ):
     vvds = pd.read_csv ( f'../pointings/vvds_{filter_name}.csv', index_col='object.1')
     if early_vvds:
-        mask = vvds.RA < 340
+        mask = vvds.RA < 345.
         vvds.loc[mask, 'object'] = vvds.loc[mask, 'object'].apply ( lambda x: x.split('_')[0] +'early' + '_' + '_'.join(x.split('_')[1:]) )
         vvds.loc[~mask, 'object'] = vvds.loc[~mask, 'object'].apply ( lambda x: x.split('_')[0] +'late' + '_' +  '_'.join(x.split('_')[1:]))
     xmm = pd.read_csv ( f'../pointings/xmm_{filter_name}.csv', index_col='object.1')
