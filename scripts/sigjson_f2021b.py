@@ -13,6 +13,7 @@ import make_pointings
 fmt = '%Y/%m/%d %I:%M %p'
 et = pytz.timezone("America/New_York")
 
+######################### ==>
 # \\ Filter and field assignments for F2021B
 datelist_vvdsxmm_n536 = [(2021,11,ix) for ix in np.arange(24,31)]
 datelist_vvdsxmm_n536 += [(2021,12,ix) for ix in np.arange(1,5)]
@@ -37,6 +38,7 @@ nightslot_cosmosgama_n536 += [2 for ix in np.arange(6,8)]
 nightslot_cosmosgama_n536 += [2 for ix in np.arange(9,12)]
 nightslot_cosmosgama_n536 += [2 for ix in np.arange(25,32)]
 priorities_cosmosgama_n536 = {'COSMOS':0, 'GAMA':1}     
+######################### <==
 
 def load_mastercat ( filter_name, early_vvds=True ):
     vvds = pd.read_csv ( f'../pointings/vvds_{filter_name}.csv', index_col='object.1')
@@ -141,12 +143,12 @@ def plan_tomorrow ( day, month, year, tele_fname, add_extracosmos=False,  **kwar
     mastercat = load_mastercat ()
     tele = load_telemetry ( tele_fname )
 
-    exp_exposures = tele.query('(exptime>599.)&(object!="G09")').shape[0]
+    #exp_exposures = tele.query('(exptime>599.)&(object!="G09")').shape[0]
     has_observed = np.in1d(mastercat['object'], tele['object'])
 
     #assert has_observed.sum() == exp_exposures, "We have observed exposures that aren't in the master catalog?!"
 
-    ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='S2021A')
+    ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='F2021B')
 
     # \\ build is_queued <- previously observed objects
     is_queued = pd.DataFrame ( index=mastercat.index,
@@ -172,34 +174,19 @@ def plan_tomorrow ( day, month, year, tele_fname, add_extracosmos=False,  **kwar
                                      is_queued=is_queued.copy(),
                                      maxairmass=1.5, object_priority=priorities,**kwargs )
 
-    # \\ add extra COSMOS great seeing queue
-    if add_extracosmos:
-        print('')
-
-        print('-'*31)
-        print('-- COSMOS great seeing queue --')
-        print('-'*31)
-        print('\n(only trigger if seeing is <.75" for more than 30min prior to the hour)\n')
-        extra_cosmos = load_extracosmos ()
-        is_queued_ec2 = ocat.plan_night ( obs_start, ctio, catalog=extra_cosmos,
-                                          obs_end=obs_end,
-                                          checksky_at_start=False,
-                                          maxairmass=1.2, prefix='extracosmos_',
-                                          pointingdb_fname=tele_fname, **kwargs )
-    
     return is_queued_tmrw
 
 kw_types = {'save':lambda x: x.lower == 'true'}
 
 if __name__ == '__main__':
     print('='*27)
-    print('== Merian Planner S2021A ==')
+    print('== Merian Planner F2021B ==')
     print('='*27)
 
 
     if len(sys.argv)==1 or sys.argv[1] == '-h' or sys.argv[1] == '--help':
-        print('S2021A JSON file generation.')
-        print('\n(usage) python sigjson_2021a.py [run day] [path/to/telemetry/output]')
+        print('F2021B JSON file generation.')
+        print('\n(usage) python sigjson_2021b.py [run day] [run month] [run year] [path/to/telemetry/output]')
         print('  [run day] integer, the date of the beginning of the night')
         print('  [path/to/telemetry/output] path to the CSV containing the telemetry output from SISPI')
         print('(contact kadofong at princeton dot edu for help)\n')
@@ -210,4 +197,4 @@ if __name__ == '__main__':
         for key in kwargs:
             kwargs[key] = kw_types[key](kwargs[key])
 
-        plan_tomorrow ( int(sys.argv[1]), sys.argv[2],**kwargs )
+        plan_tomorrow ( int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), sys.argv[4],**kwargs )
