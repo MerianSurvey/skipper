@@ -466,6 +466,39 @@ class ObservingSite ( object ):
         
         lcl = lambda x: pytz.utc.localize(x.to_datetime())
         return lcl(obs_can_start), lcl(obs_must_end)
+    
+    def track_moon ( self, start_time, end_time, alt_returntype='max' ):
+        '''
+        Over a starting and ending time, return the illumination (fractional) and 
+        maximum altitude of the moon.
+        '''
+        from .astroplan_moon import moon_illumination
+        
+        time_start_time = Time(start_time)
+        time_end_time = Time(end_time)
+        
+        grid = np.arange(time_start_time, time_end_time,10.*u.min)
+        fgrid = np.arange(time_start_time, time_end_time, 1.*u.min)
+        
+        moon_alt = []
+        for ts in grid:
+            moon_coord = coordinates.get_moon ( ts )
+            obsframe = coordinates.AltAz ( obstime=ts, location=self.site )
+            moon_alt.append( moon_coord.transform_to(obsframe).alt )
+        moon_alt = np.asarray ( [ ma.value for ma in moon_alt ])
+        
+        fgrid_unix = np.asarray([ gg.unix for gg in fgrid ])
+        grid_unix = np.asarray([ gg.unix for gg in grid ])
+        moon_falt = np.interp(fgrid_unix, grid_unix, moon_alt)        
+        
+        moon_altreport = getattr(np, alt_returntype)(moon_falt)
+        moon_altreport = max(0., moon_altreport)
+        
+        moon_cillum = np.mean([moon_illumination (time_start_time), 
+                               moon_illumination(time_end_time)])
+        
+        return moon_cillum, moon_altreport
+        
 
     def get_utcoffset ( self, date ):
         '''
