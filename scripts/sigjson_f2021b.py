@@ -1,13 +1,13 @@
 import sys
 import pytz
-import datetime
+#import datetime
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import pandas as pd
-from astropy import table
-from astropy import units as u
-from astropy.io import fits
-from skipper import observe, qa
+#from astropy import table
+#from astropy import units as u
+#from astropy.io import fits
+from skipper import observe#, qa
 import make_pointings
 
 fmt = '%Y/%m/%d %I:%M %p'
@@ -41,7 +41,8 @@ priorities_cosmosgama_n536 = {'COSMOS':0, 'GAMA':1}
 # \\ total list    
 datelist = datelist_vvdsxmm_n536 + datelist_vvdsxmm_n702 + datelist_cosmosgama_n536
 nightslot = nightslot_vvdsxmm_n536 + nightslot_vvdsxmm_n702 + nightslot_cosmosgama_n536
-#priorities = priorities_n536 + priorities_n702 + priorities_cosmosgama_n536
+nightslot_d = dict ( [(key,val) for key,val in zip(datelist,nightslot)])
+priorities = {('VVDSXMM','n536'):priorities_n536, ('VVDSXMM','n702'):priorities_n702, ('COSMOSGAMA','n536'):priorities_cosmosgama_n536}
 filter_l = len(datelist_vvdsxmm_n536) * ['n536'] + len(datelist_vvdsxmm_n702) *['n702'] + len(datelist_cosmosgama_n536)*['n536']
 filter_d = dict ( [ (key,val) for key, val in zip(datelist, filter_l )])
 field_l = len(datelist_vvdsxmm_n536) * ['VVDSXMM'] + len(datelist_vvdsxmm_n702) *['VVDSXMM'] + len(datelist_cosmosgama_n536)*['COSMOSGAMA']
@@ -52,7 +53,8 @@ def whichfield ( year, month, day ):
     tpl = (year,month,day)
     field = field_d[tpl]
     mfilt = filter_d[tpl]
-    return mfilt, field
+    nightslot = filter_d[tpl]
+    return mfilt, field, nightslot
 
 def load_mastercat ( filter_name, early_vvds=True ):
     vvds = pd.read_csv ( f'../pointings/vvds_{filter_name}.csv', index_col='object.1')
@@ -153,17 +155,17 @@ def plan_tomorrow ( day, month, year, tele_fname,  **kwargs ):
 
     TODO: port this function to observe.py
     '''
-    mastercat = load_mastercat ()
     tele = load_telemetry ( tele_fname )
 
     # \\ figure out which field and filter we're going to be observing in,
     # \\ TODO : manual override
-    mfilt, field = whichfield (year,month,day)
+    mfilt, field, slot = whichfield (year,month,day)
     if field == 'VVDSXMM':
         mastercat = load_mastercat (mfilt)
     elif field == 'COSMOSGAMA':
         mastercat = load_mastercat_cosmos () # \\ only N536
     print(f"On {year}/{month}/{day}, we are observing {field} in {mfilt}")
+    print(f'We are observing the {slot == 1 and "first" or "second"} half of the night')
     #exp_exposures = tele.query('(exptime>599.)&(object!="G09")').shape[0]
     has_observed = np.in1d(mastercat['object'], tele['object'])
 
@@ -178,10 +180,20 @@ def plan_tomorrow ( day, month, year, tele_fname,  **kwargs ):
 
     # \\ Define the observatory site -- default is CTIO
     ctio = observe.ObservingSite ()
-    priorities = {'COSMOS':0, 'GAMA':1}
-
-    obs_start, twibeg = ctio.get_sunriseset ( year, month, day )
-    obs_end = obs_start + 0.5*(twibeg-obs_start)
+    
+    night_start, night_end = ctio.get_sunriseset ( year, month, day )
+    if slot == 0:
+        print('[predict] night slot: Full night')
+        obs_start = night_start
+        obs_end = night_end
+    elif slot == 1:
+        print('[predict] night slot: First half')
+        obs_start = night_start
+        obs_end = obs_start + 0.5*(night_end-obs_start)
+    else:
+        print('[predict] night slot: Second half')
+        obs_start = night_start + 0.5*(night_end-night_start)
+        obs_end = night_end 
 
     print(f"obsStart: {obs_start.astimezone(ctio.timezone).strftime(fmt)} Santiago")
     print(f"          {obs_start.astimezone(et).strftime(fmt)} ET")
@@ -192,7 +204,7 @@ def plan_tomorrow ( day, month, year, tele_fname,  **kwargs ):
 
     is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
                                      is_queued=is_queued.copy(),
-                                     maxairmass=1.5, object_priority=priorities,**kwargs )
+                                     maxairmass=1.5, object_priority=priorities[(field,mfilt)],**kwargs )
 
     return is_queued_tmrw
 
@@ -211,10 +223,11 @@ if __name__ == '__main__':
         print('  [path/to/telemetry/output] path to the CSV containing the telemetry output from SISPI')
         print('(contact kadofong at princeton dot edu for help)\n')
     else:
-        kwarg_keys = [ x[2:] for x in sys.argv[3::2] ]
-        kwarg_cont = sys.argv[4::2]
+        kwarg_keys = [ x[2:] for x in sys.argv[5::2] ]
+        kwarg_cont = sys.argv[6::2]
         kwargs = dict(zip(kwarg_keys,kwarg_cont))
         for key in kwargs:
             kwargs[key] = kw_types[key](kwargs[key])
+        
 
         plan_tomorrow ( int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), sys.argv[4],**kwargs )

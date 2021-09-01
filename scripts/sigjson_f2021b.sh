@@ -1,15 +1,19 @@
 #!/bin/bash
 
 day=$1
+month=$2
+year=$3
 fmt_day=$(printf "%02d" $day)
+fmt_month=$(printf "%02d" $month)
 
-file=$2
+file=$4
+logfilename="../json/"$year$fmt_month$fmt_day"/output.log"
 
 if [ $# -eq 0 ]; then
-    python sigjson_s2021b.py
+    python sigjson_f2021b.py
     exit 0
 fi
 
-python sigjson_s2021b.py $day $2 > ../json/output.log && mv ../json/output.log ../json/202103"$fmt_day"/output.log
+python sigjson_f2021b.py $day $month $year $file > ../json/output.log && mv ../json/output.log $logfilename
 
-cat ../json/202103"$fmt_day"/output.log
+cat $logfilename
