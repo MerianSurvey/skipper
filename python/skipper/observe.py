@@ -10,7 +10,7 @@ import warnings
 import numpy as np
 import pandas as pd
 import pytz
-from astropy import coordinates
+from astropy import coordinates, table
 from astropy import units as u
 from astropy.time import Time
 from astropy.io import fits
@@ -543,3 +543,20 @@ class ObservingSite ( object ):
         '''
         alt = target_coord.transform_to ( obsframe )
         return alt
+
+class CopilotOutput ( object ):
+    def __init__ ( self, filename ):
+        self.sidecar = self.load ( filename )
+    
+    def load ( self, filename ):
+        _sidecar = fits.getdata ( filename, 1 )
+        sidecar = table.Table ( _sidecar ).to_pandas ()
+        return sidecar
+    
+    
+    def t_effective ( self, transparency_0=1., seeing_0=1., skySB_0=21. ):
+        t0 = ( self.sidecar['transparency'] / transparency_0 )**2
+        t1 = ( self.sidecar['seeing']/seeing_0 )**-2
+        t2 = 10.**( (self.sidecar['sky']-skySB_0)/2.5 )
+        return t0*t1*t2*self.sidecar['exptime']
+        
