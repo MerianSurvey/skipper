@@ -149,7 +149,7 @@ def predict_f2021b ( filter_name, datelist, nightslot_l, priorities=None, field=
         
     return is_queued
 
-def plan_tomorrow ( day, month, year, tele_fname,  **kwargs ):
+def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, **kwargs ):
     '''
     Plan tomorrow in F2021B
 
@@ -168,7 +168,14 @@ def plan_tomorrow ( day, month, year, tele_fname,  **kwargs ):
     print(f'We are observing the {slot == 1 and "first" or "second"} half of the night')
     #exp_exposures = tele.query('(exptime>599.)&(object!="G09")').shape[0]
     has_observed = np.in1d(mastercat['object'], tele['object'])
-
+    
+    # \\ also check for exposures that need to be reobserved
+    coo = observe.CopilotOutput ( copilot_fname )
+    reobs = coo.flag_for_reobservation ( mastercat )
+    needs_reobservation = np.in1d(mastercat['object'], reobs)
+    has_observed = has_observed & ~needs_reobservation
+    
+    
     #assert has_observed.sum() == exp_exposures, "We have observed exposures that aren't in the master catalog?!"
     ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='F2021B')
 
