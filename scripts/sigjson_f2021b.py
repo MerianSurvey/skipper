@@ -37,8 +37,22 @@ nightslot_cosmosgama_n536 += [2 for ix in np.arange(3,5)]
 nightslot_cosmosgama_n536 += [2 for ix in np.arange(6,8)]
 nightslot_cosmosgama_n536 += [2 for ix in np.arange(9,12)]
 nightslot_cosmosgama_n536 += [2 for ix in np.arange(25,32)]
-priorities_cosmosgama_n536 = {'COSMOS':0, 'GAMA':1}     
+priorities_cosmosgama_n536 = {'COSMOS':0, 'GAMA':1} 
+# \\ total list    
+datelist = datelist_vvdsxmm_n536 + datelist_vvdsxmm_n702 + datelist_cosmosgama_n536
+nightslot = nightslot_vvdsxmm_n536 + nightslot_vvdsxmm_n702 + nightslot_cosmosgama_n536
+#priorities = priorities_n536 + priorities_n702 + priorities_cosmosgama_n536
+filter_l = len(datelist_vvdsxmm_n536) * ['n536'] + len(datelist_vvdsxmm_n702) *['n702'] + len(datelist_cosmosgama_n536)*['n536']
+filter_d = dict ( [ (key,val) for key, val in zip(datelist, filter_l )])
+field_l = len(datelist_vvdsxmm_n536) * ['VVDSXMM'] + len(datelist_vvdsxmm_n702) *['VVDSXMM'] + len(datelist_cosmosgama_n536)*['COSMOSGAMA']
+field_d = dict ( [ (key,val) for key, val in zip(datelist, field_l )])
 ######################### <==
+
+def whichfield ( year, month, day ):
+    tpl = (year,month,day)
+    field = field_d[tpl]
+    mfilt = filter_d[tpl]
+    return mfilt, field
 
 def load_mastercat ( filter_name, early_vvds=True ):
     vvds = pd.read_csv ( f'../pointings/vvds_{filter_name}.csv', index_col='object.1')
@@ -91,9 +105,8 @@ def predict_f2021b ( filter_name, datelist, nightslot_l, priorities=None, field=
         mastercat = load_mastercat (filter_name)
     elif field == 'COSMOSGAMA':
         mastercat = load_mastercat_cosmos ()
-
-    ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='S2021B')
     
+    ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='S2021B')
 
     # \\ build is_queued 
     is_queued = pd.DataFrame ( index=mastercat.index,
@@ -134,7 +147,7 @@ def predict_f2021b ( filter_name, datelist, nightslot_l, priorities=None, field=
         
     return is_queued
 
-def plan_tomorrow ( day, month, year, tele_fname, add_extracosmos=False,  **kwargs ):
+def plan_tomorrow ( day, month, year, tele_fname,  **kwargs ):
     '''
     Plan tomorrow in F2021B
 
@@ -143,11 +156,18 @@ def plan_tomorrow ( day, month, year, tele_fname, add_extracosmos=False,  **kwar
     mastercat = load_mastercat ()
     tele = load_telemetry ( tele_fname )
 
+    # \\ figure out which field and filter we're going to be observing in,
+    # \\ TODO : manual override
+    mfilt, field = whichfield (year,month,day)
+    if field == 'VVDSXMM':
+        mastercat = load_mastercat (mfilt)
+    elif field == 'COSMOSGAMA':
+        mastercat = load_mastercat_cosmos () # \\ only N536
+    print(f"On {year}/{month}/{day}, we are observing {field} in {mfilt}")
     #exp_exposures = tele.query('(exptime>599.)&(object!="G09")').shape[0]
     has_observed = np.in1d(mastercat['object'], tele['object'])
 
     #assert has_observed.sum() == exp_exposures, "We have observed exposures that aren't in the master catalog?!"
-
     ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='F2021B')
 
     # \\ build is_queued <- previously observed objects
