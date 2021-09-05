@@ -1,0 +1,69 @@
+===========================
+== Merian Planner F2021B ==
+===========================
+On 2021/9/10, we are observing VVDSXMM in n702
+We are observing the second half of the night
+[predict] night slot: Second half
+obsStart: 2021/09/11 01:40 AM Santiago
+          2021/09/11 12:40 AM ET
+          2021/09/11 04:40 AM UTC
+obsEnd:   2021/09/11 06:45 AM Santiago
+          2021/09/11 05:45 AM ET
+          2021/09/11 09:45 AM UTC
+Minimum airmass available: 1.169890196485967
+
+==> 20210911_04, 1200.0000000000086s available
+1200.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.170375046477945
+
+==> 20210911_05, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSearly_J225356.44+010804.19_N70 to VVDSearly_J000343.95+005959.52_N70
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1351914641225473
+
+==> 20210911_06, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSearly_J000715.33+011057.74_N70 to VVDSearly_J225506.02+023127.06_N70
+Warning: Airmass of 1.52 in exposure 5 of file ../json/20210910/20210911_06.json
+Warning: Airmass of 1.57 in exposure 6 of file ../json/20210910/20210911_06.json
+Warning: Airmass of 1.63 in exposure 7 of file ../json/20210910/20210911_06.json
+Minimum airmass available: 1.1015408234261475
+
+==> 20210911_07, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSearly_J225245.83+010505.60_N70 to VVDSlate_J235616.04+005959.52_N70
+Warning: Airmass of 1.58 in exposure 6 of file ../json/20210910/20210911_07.json
+Warning: Airmass of 1.64 in exposure 7 of file ../json/20210910/20210911_07.json
+Minimum airmass available: 1.1124556110470594
+
+==> 20210911_08, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSlate_J235219.94+011057.49_N70 to XMM_J023120.23-053713.98_N70
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.2050014347138318
+[plan_night] padding the last hour script
+
+==> 20210911_09, 3899.999999999963s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed

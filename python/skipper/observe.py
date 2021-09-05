@@ -427,9 +427,14 @@ class ObservingSite ( object ):
             else:
                 self.timezone = timezone
 
-    def get_sunriseset ( self, year, month, day, alt=-14. ):
+    def get_sunriseset ( self, year, month, day, alt=-14., cut_at_contract=False, contract_time=(6,5) ):
         '''
         DECam observing begins and ends at Sun altitude=-14 deg.
+        
+        cut_at_contract: bool, default=False
+            if True, cut at <contract_time> in accordance to Chilean labor laws
+        contract_time: tuple, default=(6,5)
+            hour,min in Chilean local time at which observations must cease
         '''
         utc_midnight = pytz.utc.localize ( datetime.datetime ( year, month, day, 0, 0 ) )
         utc_offset = int(self.get_utcoffset (utc_midnight))
@@ -465,8 +470,28 @@ class ObservingSite ( object ):
         obs_can_start, obs_must_end = fgrid[observable][[0,-1]]
         
         lcl = lambda x: pytz.utc.localize(x.to_datetime())
-        return lcl(obs_can_start), lcl(obs_must_end)
-    
+        night_start = lcl(obs_can_start)
+        night_end = lcl(obs_must_end)
+        
+        fmt = '%Y/%m/%d %I:%M %p'
+        if cut_at_contract:
+            print ( 'True night start and night end are:')
+            print(f"obsStart: {night_start.astimezone(self.timezone).strftime(fmt)} Santiago")
+            print(f"          {night_start.strftime(fmt)} UTC")
+            print(f"obsEnd:   {night_end.astimezone(self.timezone).strftime(fmt)} Santiago")        
+            print(f"          {night_end.strftime(fmt)} UTC")
+            
+            utcoff = self.get_utcoffset ( night_end )
+            contract_end = pytz.utc.localize(datetime.datetime ( 2021, night_end.month, night_end.day, contract_time[0]-int(utcoff), contract_time[1],))
+            mat_end = min ( night_end, contract_end )
+            
+            if contract_end < night_end:
+                print ( 'Updated night end is:')
+                print(f"obsEnd:   {contract_end.astimezone(self.timezone).strftime(fmt)} Santiago")        
+                print(f"          {contract_end.strftime(fmt)} UTC")    
+            return night_start, mat_end
+        else:
+            return night_start, night_end
     def track_moon ( self, start_time, end_time, alt_returntype='max' ):
         '''
         Over a starting and ending time, return the illumination (fractional) and 
