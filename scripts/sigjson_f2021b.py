@@ -149,11 +149,14 @@ def predict_f2021b ( filter_name, datelist, nightslot_l, priorities=None, field=
         
     return is_queued
 
-def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, **kwargs ):
+def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract=True, **kwargs ):
     '''
     Plan tomorrow in F2021B
 
     TODO: port this function to observe.py
+    
+    cut_at_contract: bool, default=True
+        If True, the night end will occur, at latest, at 6:05 AM (Chilean work contract rule)
     '''
     tele = load_telemetry ( tele_fname )
 
@@ -188,7 +191,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, **kwargs ):
     # \\ Define the observatory site -- default is CTIO
     ctio = observe.ObservingSite ()
     
-    night_start, night_end = ctio.get_sunriseset ( year, month, day )
+    night_start, night_end = ctio.get_sunriseset ( year, month, day, cut_at_contract=cut_at_contract )
     if slot == 0:
         print('[predict] night slot: Full night')
         obs_start = night_start
@@ -225,7 +228,7 @@ if __name__ == '__main__':
 
     if len(sys.argv)==1 or sys.argv[1] == '-h' or sys.argv[1] == '--help':
         print('F2021B JSON file generation.')
-        print('\n(usage) python sigjson_2021b.py [run day] [run month] [run year] [path/to/telemetry/output]')
+        print('\n(usage) python sigjson_2021b.py [run day] [run month] [run year] [path/to/telemetry/output] [path/to/copilot/output]')
         print('  [run day] integer, the date of the beginning of the night')
         print('  [path/to/telemetry/output] path to the CSV containing the telemetry output from SISPI')
         print('(contact kadofong at princeton dot edu for help)\n')
@@ -236,5 +239,9 @@ if __name__ == '__main__':
         for key in kwargs:
             kwargs[key] = kw_types[key](kwargs[key])
         
-
-        plan_tomorrow ( int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), sys.argv[4],**kwargs )
+        print(f'DAY:       {sys.argv[1]}')
+        print(f'MONTH:     {sys.argv[2]}')
+        print(f'YEAR:      {sys.argv[3]}')
+        print(f'TELEFILE:  {sys.argv[4]}')
+        print(f'COPILOT:   {sys.argv[5]}')
+        plan_tomorrow ( int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), sys.argv[4], sys.argv[5],**kwargs )

@@ -18,6 +18,7 @@ import healpy as hp
 from . import utils, qa
 
 dim_d = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
+fmt = '%Y/%m/%d %I:%M %p'
 
 class ObsCatalog (object):
     def __init__ (self,
@@ -473,19 +474,17 @@ class ObservingSite ( object ):
         night_start = lcl(obs_can_start)
         night_end = lcl(obs_must_end)
         
-        fmt = '%Y/%m/%d %I:%M %p'
-        if cut_at_contract:
-            print ( 'True night start and night end are:')
-            print(f"obsStart: {night_start.astimezone(self.timezone).strftime(fmt)} Santiago")
-            print(f"          {night_start.strftime(fmt)} UTC")
-            print(f"obsEnd:   {night_end.astimezone(self.timezone).strftime(fmt)} Santiago")        
-            print(f"          {night_end.strftime(fmt)} UTC")
-            
+        
+        if cut_at_contract:            
             utcoff = self.get_utcoffset ( night_end )
             contract_end = pytz.utc.localize(datetime.datetime ( 2021, night_end.month, night_end.day, contract_time[0]-int(utcoff), contract_time[1],))
             mat_end = min ( night_end, contract_end )
             
             if contract_end < night_end:
+                print ( 'True night end is:')                
+                print(f"obsEnd:   {night_end.astimezone(self.timezone).strftime(fmt)} Santiago")        
+                print(f"          {night_end.strftime(fmt)} UTC")
+                                
                 print ( 'Updated night end is:')
                 print(f"obsEnd:   {contract_end.astimezone(self.timezone).strftime(fmt)} Santiago")        
                 print(f"          {contract_end.strftime(fmt)} UTC")    

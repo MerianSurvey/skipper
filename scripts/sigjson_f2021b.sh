@@ -14,6 +14,4 @@ if [ $# -eq 0 ]; then
     exit 0
 fi
 
-python sigjson_f2021b.py $day $month $year $file > ../json/output.log && mv ../json/output.log $logfilename
-
-cat $logfilename
+python sigjson_f2021b.py $@ > ../json/output.log && mv ../json/output.log $logfilename && cat $logfilename
