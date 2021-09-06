@@ -149,6 +149,19 @@ def predict_f2021b ( filter_name, datelist, nightslot_l, priorities=None, field=
         
     return is_queued
 
+def write_backupjson ():
+    from astropy import coordinates
+    for filt in ['g','r']:
+        center = coordinates.SkyCoord ("35.739030633438745 -4.7489828727193775", unit='deg')
+        catalog_l, ocat, frd = make_pointings.build_backup (filter=filt, center=center, name='SXDS')
+
+        for ij in np.arange(10):
+            fp = f'../json/backup_scripts/SXDS_5minAGN_{filt}_{ij+1:02d}.json'
+            print(fp)
+            ocat.to_json ( catalog_l[ij], fp=fp, 
+                           end_with_onemin=False )
+
+
 def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract=True, **kwargs ):
     '''
     Plan tomorrow in F2021B
@@ -244,4 +257,6 @@ if __name__ == '__main__':
         print(f'YEAR:      {sys.argv[3]}')
         print(f'TELEFILE:  {sys.argv[4]}')
         print(f'COPILOT:   {sys.argv[5]}')
+        w = open('../resources/aart.txt','r').read()
+        print(w)
         plan_tomorrow ( int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), sys.argv[4], sys.argv[5],**kwargs )

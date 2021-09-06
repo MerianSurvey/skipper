@@ -9,6 +9,8 @@ fmt = '%Y/%m/%d %I:%M %p'
 def build_cosmos (seed=267667, start_at_center=True, filter='N708',
                   exptime=10.,
                   ndither=40,
+                  center=None,
+                  name='COSMOS',
                   return_frd=False):
     '''
     Build COSMOS dithering pattern from FocusedRandomDither
@@ -16,7 +18,8 @@ def build_cosmos (seed=267667, start_at_center=True, filter='N708',
     seed (int, default=267667): numpy random seed. Default is COSMOS=267667
       see also EXTRA=39872
     '''
-    center = coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s")
+    if center is None:
+        center = coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s")    
     size =  (1.4, 1.4)
     if seed is not None:
         np.random.seed(seed)
@@ -32,7 +35,7 @@ def build_cosmos (seed=267667, start_at_center=True, filter='N708',
     ocat = observe.ObsCatalog(comment='--', proposer='Leauthaud', 
                           propid='2020B-0288', seqid='S2021A')
     catalog = ocat.build_catalog(centers[:,0], centers[:,1],
-                                 'COSMOS', filter, 'object', exptime*60)
+                                 name, filter, 'object', exptime*60)
     assert not catalog.object.duplicated().any()
 
     if return_frd:
@@ -40,7 +43,7 @@ def build_cosmos (seed=267667, start_at_center=True, filter='N708',
     else:
         return catalog, ocat
 
-def build_backup ( seed=2465646, filter='g' ):
+def build_backup ( seed=2465646, filter='g', **kwargs ):
     # seed = 246 = AGN <= AGN 10 min exp
     # seed = 2465646 = AGN5MIN <= AGN 5 min exp
     np.random.seed(seed)
@@ -49,7 +52,8 @@ def build_backup ( seed=2465646, filter='g' ):
     for i in range(10):
         catalog, ocat, frd = build_cosmos ( seed=None,filter=filter,exptime=5.,
                                        ndither = 40//5, start_at_center=False,
-                                       return_frd=True
+                                       return_frd=True,
+                                       **kwargs
                                        )
         frd_l.append(frd)
         catalog_l.append(catalog)
