@@ -38,6 +38,7 @@ nightslot_cosmosgama_n536 += [2 for ix in np.arange(6,8)]
 nightslot_cosmosgama_n536 += [2 for ix in np.arange(9,12)]
 nightslot_cosmosgama_n536 += [2 for ix in np.arange(25,32)]
 priorities_cosmosgama_n536 = {'COSMOS':0, 'GAMA':1} 
+
 # \\ total list    
 datelist = datelist_vvdsxmm_n536 + datelist_vvdsxmm_n702 + datelist_cosmosgama_n536
 nightslot = nightslot_vvdsxmm_n536 + nightslot_vvdsxmm_n702 + nightslot_cosmosgama_n536
