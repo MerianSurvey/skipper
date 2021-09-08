@@ -91,3 +91,23 @@ Minimum airmass available: 1.2050014347138318
 1200.0s filled by priority=2.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)		SXDS	COSMOS	
+2021/09/11 04:30 AM	1.65	-1.18	
+2021/09/11 05:30 AM	1.32	-1.33	
+2021/09/11 06:30 AM	1.17	-1.64	
+2021/09/11 07:30 AM	1.11	-2.35	
+2021/09/11 08:30 AM	1.13	-4.66	
+2021/09/11 09:30 AM	1.23	94.53	
+------
+Next script for SXDS [g] is ../json/backup_scripts/SXDS_5minAGN_g_01.json
+------
+Next script for SXDS [r] is ../json/backup_scripts/SXDS_5minAGN_r_01.json
+------
+Next script for COSMOS [g] is ../json/backup_scripts/COSMOS_5minAGN_g_01.json
+------
+Next script for COSMOS [r] is ../json/backup_scripts/COSMOS_5minAGN_r_02.json
