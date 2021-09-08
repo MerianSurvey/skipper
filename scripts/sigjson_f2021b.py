@@ -1,5 +1,6 @@
 import sys
 import pytz
+import os
 #import datetime
 import numpy as np
 #import matplotlib.pyplot as plt
@@ -12,6 +13,7 @@ import make_pointings
 
 fmt = '%Y/%m/%d %I:%M %p'
 et = pytz.timezone("America/New_York")
+_BACKUP_FIELDS = ['SXDS','COSMOS']
 
 ######################### ==>
 # \\ Filter and field assignments for F2021B
@@ -169,14 +171,14 @@ def print_backupaltitudes (obs_start, obs_end, backup_fields=None):
     _backup_centers = {'SXDS':coordinates.SkyCoord ("35.739030633438745 -4.7489828727193775", unit='deg'),
                       'COSMOS':coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s") }
     if backup_fields is None:
-        backup_fields = ['SXDS','COSMOS']
+        backup_fields = _BACKUP_FIELDS
     backup_centers = [ _backup_centers[name] for name in backup_fields ]
     
     ctio = observe.ObservingSite ()
     obsframe = ctio.define_obsframe ( obs_start=obs_start, obs_end=obs_end )
     alt_l = [ ctio.get_altitude(cc, obsframe) for cc in backup_centers]
     
-    dtime = [ alt_l[iw][ix].obstime.datetime for ix in range(len(alt_l[iw]))]
+    dtime = [ alt_l[0][ix].obstime.datetime for ix in range(len(alt_l[0]))]
     hd = 'time (UTC)\t\t'
     for iw in range(len(backup_centers)):
         hd = f'{hd}{backup_fields[iw]}\t'
@@ -189,7 +191,31 @@ def print_backupaltitudes (obs_start, obs_end, backup_fields=None):
         for iw in range(len(backup_centers)):            
             airmass = alt_l[iw].secz[iv]
             st = f'{st}{airmass:.2f}\t'
-        print(st)    
+        print(st) 
+        
+def nextbackupscript ( tele, backup_fields=None ):
+    if backup_fields is None:
+        backup_fields = _BACKUP_FIELDS
+    for name in backup_fields:
+        for filt in ['g','r']:
+            iu=0
+            while True:
+                fname = f'../json/backup_scripts/{name}_5minAGN_{filt}_{iu:02d}.json' 
+                if not os.path.exists ( fname ):
+                    iu += 1
+                    continue
+                elif iu > 10:
+                    raise ValueError ("No back-up scripts available! Need to regenerate")
+                else:
+                    json = pd.read_json ( fname )
+                    has_observed = np.in1d(json['object'].iloc[1:], tele['object']).any ()
+                    if has_observed:
+                        iu+=1
+                    else:
+                        print('------')
+                        print(f'Next script for {name} [{filt}] is {fname}')
+                        break
+                        
         
 def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract=True, **kwargs ):
     '''
@@ -259,6 +285,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
                                      maxairmass=1.5, object_priority=priorities[(field,mfilt)],**kwargs )
 
     print_backupaltitudes (obs_start, obs_end )
+    nextbackupscript ( tele )
     return is_queued_tmrw
 
 kw_types = {'save':lambda x: x.lower == 'true'}
