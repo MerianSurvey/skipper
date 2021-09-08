@@ -585,7 +585,7 @@ class CopilotOutput ( object ):
         t2 = 10.**( (self.sidecar['sky']-skySB_0)/2.5 )
         return t0*t1*t2*self.sidecar['exptime']
         
-    def flag_for_reobservation ( self, mastercat, min_teff=100., ):
+    def flag_for_reobservation ( self, mastercat, min_teff=200., ):
         merian_sidecar = self.sidecar.loc[np.in1d(self.sidecar['object'], mastercat.index)]
         #return merian_sidecar.loc[merian_sidecar['t_eff']<min_teff, 'object'].values
         merian_sidecar = merian_sidecar.loc[~merian_sidecar.sort_values('t_eff')['object'].duplicated(keep='last')] # \\ remove frames that
