@@ -4,7 +4,7 @@ import pytz
 import numpy as np
 #import matplotlib.pyplot as plt
 import pandas as pd
-#from astropy import table
+from astropy import coordinates
 #from astropy import units as u
 #from astropy.io import fits
 from skipper import observe#, qa
@@ -162,7 +162,35 @@ def write_backupjson ():
             ocat.to_json ( catalog_l[ij], fp=fp, 
                            end_with_onemin=False )
 
-
+def print_backupaltitudes (obs_start, obs_end, backup_fields=None):
+    '''
+    Plot backup field altitudes over the course of the (half) night
+    '''
+    _backup_centers = {'SXDS':coordinates.SkyCoord ("35.739030633438745 -4.7489828727193775", unit='deg'),
+                      'COSMOS':coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s") }
+    if backup_fields is None:
+        backup_fields = ['SXDS','COSMOS']
+    backup_centers = [ _backup_centers[name] for name in backup_fields ]
+    
+    ctio = observe.ObservingSite ()
+    obsframe = ctio.define_obsframe ( obs_start=obs_start, obs_end=obs_end )
+    alt_l = [ ctio.get_altitude(cc, obsframe) for cc in backup_centers]
+    
+    dtime = [ alt_l[iw][ix].obstime.datetime for ix in range(len(alt_l[iw]))]
+    hd = 'time (UTC)\t\t'
+    for iw in range(len(backup_centers)):
+        hd = f'{hd}{backup_fields[iw]}\t'
+    bfly = open('../resources/bfly.txt','r').read()
+    print(bfly)
+    print(hd)    
+    for iv in range(len(dtime)):
+        dt = dtime[iv]
+        st = f'{dt.strftime(fmt)}\t'
+        for iw in range(len(backup_centers)):            
+            airmass = alt_l[iw].secz[iv]
+            st = f'{st}{airmass:.2f}\t'
+        print(st)    
+        
 def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract=True, **kwargs ):
     '''
     Plan tomorrow in F2021B
@@ -230,6 +258,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
                                      is_queued=is_queued.copy(),
                                      maxairmass=1.5, object_priority=priorities[(field,mfilt)],**kwargs )
 
+    print_backupaltitudes (obs_start, obs_end )
     return is_queued_tmrw
 
 kw_types = {'save':lambda x: x.lower == 'true'}
