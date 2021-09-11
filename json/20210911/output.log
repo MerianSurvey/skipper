@@ -1,0 +1,115 @@
+===========================
+== Merian Planner F2021B ==
+===========================
+DAY:       11
+MONTH:     9
+YEAR:      2021
+TELEFILE:  /Users/shanydanieli/projects/merian/observing/telemetry/tele20210910.csv
+COPILOT:   /Users/shanydanieli/projects/merian/observing/copilot/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+On 2021/9/11, we are observing VVDSXMM in n708
+We are observing the second half of the night
+True night end is:
+obsEnd:   2021/09/12 06:43 AM Santiago
+          2021/09/12 09:43 AM UTC
+Updated night end is:
+obsEnd:   2021/09/12 06:05 AM Santiago
+          2021/09/12 09:05 AM UTC
+[predict] night slot: Second half
+obsStart: 2021/09/12 01:20 AM Santiago
+          2021/09/12 12:20 AM ET
+          2021/09/12 04:20 AM UTC
+obsEnd:   2021/09/12 06:05 AM Santiago
+          2021/09/12 05:05 AM ET
+          2021/09/12 09:05 AM UTC
+Minimum airmass available: 1.1699165453810925
+
+==> 20210912_04, 2399.999999999995s available
+1800.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.170884873915028
+
+==> 20210912_05, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSearly_J225356.44+010804.19_N708 to VVDSearly_J000343.95+005959.52_N708
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1306582367393803
+
+==> 20210912_06, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSearly_J000715.33+011057.74_N708 to VVDSearly_J225025.32+005715.39_N708
+Warning: Airmass of 1.52 in exposure 4 of file ../json/20210911/20210912_06.json
+Warning: Airmass of 1.58 in exposure 5 of file ../json/20210911/20210912_06.json
+Warning: Airmass of 1.64 in exposure 6 of file ../json/20210911/20210912_06.json
+Warning: Airmass of 1.71 in exposure 7 of file ../json/20210911/20210912_06.json
+Minimum airmass available: 1.1013933404345009
+
+==> 20210912_07, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSearly_J224542.89+010427.48_N708 to VVDSlate_J235616.04+005959.52_N708
+Warning: Airmass of 1.55 in exposure 5 of file ../json/20210911/20210912_07.json
+Warning: Airmass of 1.61 in exposure 6 of file ../json/20210911/20210912_07.json
+Warning: Airmass of 1.72 in exposure 7 of file ../json/20210911/20210912_07.json
+Minimum airmass available: 1.1152643885896458
+
+==> 20210912_08, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSlate_J234453.44+011050.62_N708 to XMM_J023120.23-053713.98_N708
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.213507850817792
+[plan_night] padding the last hour script
+
+==> 20210912_09, 1499.9999999999668s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+1200.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)		SXDS	COSMOS	
+2021/09/12 04:30 AM	1.62	-1.19	
+2021/09/12 05:30 AM	1.31	-1.34	
+2021/09/12 06:30 AM	1.16	-1.67	
+2021/09/12 07:30 AM	1.11	-2.42	
+2021/09/12 08:30 AM	1.13	-5.00	
+2021/09/12 09:30 AM	1.24	39.33	
+------
+Next script for SXDS [g] is ../json/backup_scripts/SXDS_5minAGN_g_02.json
+------
+Next script for SXDS [r] is ../json/backup_scripts/SXDS_5minAGN_r_02.json
+------
+Next script for COSMOS [g] is ../json/backup_scripts/COSMOS_5minAGN_g_01.json
+------
+Next script for COSMOS [r] is ../json/backup_scripts/COSMOS_5minAGN_r_02.json
