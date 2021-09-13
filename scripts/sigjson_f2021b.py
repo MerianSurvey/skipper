@@ -258,8 +258,12 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
 
     # \\ Define the observatory site -- default is CTIO
     ctio = observe.ObservingSite ()
-    
     night_start, night_end = ctio.get_sunriseset ( year, month, day, cut_at_contract=cut_at_contract )
+    if cut_at_contract:        
+        _,true_end = ctio.get_sunriseset ( year, month, day, cut_at_contract=False)
+        midpoint = night_start + 0.5*(true_end-night_start)
+    else:
+        midpoint = night_start + 0.5*(night_end-night_start)
     if slot == 0:
         print('[predict] night slot: Full night')
         obs_start = night_start
@@ -267,10 +271,10 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     elif slot == 1:
         print('[predict] night slot: First half')
         obs_start = night_start
-        obs_end = obs_start + 0.5*(night_end-obs_start)
+        obs_end = midpoint
     else:
         print('[predict] night slot: Second half')
-        obs_start = night_start + 0.5*(night_end-night_start)
+        obs_start = midpoint
         obs_end = night_end 
 
     print(f"obsStart: {obs_start.astimezone(ctio.timezone).strftime(fmt)} Santiago")
