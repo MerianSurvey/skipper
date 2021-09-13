@@ -340,7 +340,7 @@ class ObsCatalog (object):
                 #print(obsframe.obstime[ix]+1.*u.hr)
                 #print(Time(obs_end))
                 if pad_last_hour:
-                    print('[plan_night] padding the last hour script')
+                    
                     pad_time = 1200. #catalog['expTime']
                 else:
                     pad_time = 0.
@@ -358,6 +358,10 @@ class ObsCatalog (object):
                 print(f'({total_available_time:.0f}s) Not enough time for an exposure. Skipping...')
                 continue
             print(f'\n==> {hstr}, {total_available_time}s available')
+            if pad_last_hour and ix==(len(alt_l[0])-1):
+                print(f'[plan_night] padding the last hour script') # \\ say this here to make 
+                # \\ log more readable
+                
             for cprior in np.sort(is_queued.has_priority.unique()):                
                 # \\ go through each object priority level
                 avail_queue_time = total_available_time - total_queued_time                
