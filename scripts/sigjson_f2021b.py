@@ -260,8 +260,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     ctio = observe.ObservingSite ()
     night_start, night_end = ctio.get_sunriseset ( year, month, day, cut_at_contract=cut_at_contract )
     if cut_at_contract:        
-        _,true_end = ctio.get_sunriseset ( year, month, day, cut_at_contract=False)
-        midpoint = night_start + 0.5*(true_end-night_start)
+        ten_start, ten_end = ctio.get_sunriseset ( year, month, day, alt=-10, cut_at_contract=False)
+        midpoint = ten_start + 0.5*(night_end-ten_start)
     else:
         midpoint = night_start + 0.5*(night_end-night_start)
     if slot == 0:
