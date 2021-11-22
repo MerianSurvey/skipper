@@ -300,7 +300,7 @@ class ObsCatalog (object):
         # \\ If we've got object priorities, set those
         if object_priority is not None: # \\ allow overwrite if priorities change
             is_queued['has_priority'] = np.inf
-            for key,val in object_priority.items():
+            for key,val in object_priority.items():                
                 is_that_object = catalog_objects==key
                 is_queued.loc[is_that_object, 'has_priority'] = val
         elif 'has_priority' not in is_queued.columns: # \\ don't overwrite if already there

@@ -17,11 +17,11 @@ _BACKUP_FIELDS = ['SXDS','COSMOS']
 
 ######################### ==>
 # \\ Filter and field assignments for F2021B
-datelist_vvdsxmm_n536 = [(2021,11,ix) for ix in np.arange(24,31)]
-datelist_vvdsxmm_n536 += [(2021,12,ix) for ix in np.arange(1,5)]
-nightslot_vvdsxmm_n536 = [1 for ix in np.arange(24,31)]
-nightslot_vvdsxmm_n536 += [1 for ix in np.arange(1,5)]
-priorities_n536 = {'VVDSearly':0, 'VVDSlate':1, 'VVDS':1, 'XMM':2}    
+datelist_vvdsxmm_N540 = [(2021,11,ix) for ix in np.arange(24,31)]
+datelist_vvdsxmm_N540 += [(2021,12,ix) for ix in np.arange(1,5)]
+nightslot_vvdsxmm_N540 = [1 for ix in np.arange(24,31)]
+nightslot_vvdsxmm_N540 += [1 for ix in np.arange(1,5)]
+priorities_N540 = {'VVDSearly':0, 'VVDSlate':1, 'VVDS':1, 'XMM':2}    
 
 datelist_vvdsxmm_n708 =  [(2021,9,ix) for ix in np.arange(10, 14)] 
 #datelist_vvdsxmm_n708 += [(2021,11,ix) for ix in np.arange(24,31)]
@@ -29,26 +29,26 @@ nightslot_vvdsxmm_n708 = [2 for ix in np.arange(10,14)]
 #nightslot_vvdsxmm_n708 += [1 for ix in np.arange(24,31)]
 priorities_n708 = {'VVDSearly':0, 'VVDSlate':1,'VVDS':1, 'XMM':2}    
 
-datelist_cosmosgama_n536 = [(2021,12,31), (2021,1,1)]
-datelist_cosmosgama_n536 += [(2021,1,ix) for ix in np.arange(3,5)]
-datelist_cosmosgama_n536 += [(2021,1,ix) for ix in np.arange(6,8)]
-datelist_cosmosgama_n536 += [(2021,1,ix) for ix in np.arange(9,12)]
-datelist_cosmosgama_n536 += [(2022,1,ix) for ix in np.arange(25, 32)]
-nightslot_cosmosgama_n536 = [2,2]
-nightslot_cosmosgama_n536 += [2 for ix in np.arange(3,5)]
-nightslot_cosmosgama_n536 += [2 for ix in np.arange(6,8)]
-nightslot_cosmosgama_n536 += [2 for ix in np.arange(9,12)]
-nightslot_cosmosgama_n536 += [2 for ix in np.arange(25,32)]
-priorities_cosmosgama_n536 = {'COSMOS':0, 'GAMA':1} 
+datelist_cosmosgama_N540 = [(2021,12,31), (2021,1,1)]
+datelist_cosmosgama_N540 += [(2021,1,ix) for ix in np.arange(3,5)]
+datelist_cosmosgama_N540 += [(2021,1,ix) for ix in np.arange(6,8)]
+datelist_cosmosgama_N540 += [(2021,1,ix) for ix in np.arange(9,12)]
+datelist_cosmosgama_N540 += [(2022,1,ix) for ix in np.arange(25, 32)]
+nightslot_cosmosgama_N540 = [2,2]
+nightslot_cosmosgama_N540 += [2 for ix in np.arange(3,5)]
+nightslot_cosmosgama_N540 += [2 for ix in np.arange(6,8)]
+nightslot_cosmosgama_N540 += [2 for ix in np.arange(9,12)]
+nightslot_cosmosgama_N540 += [2 for ix in np.arange(25,32)]
+priorities_cosmosgama_N540 = {'COSMOS':0, 'GAMA':1} 
 
 # \\ total list    
-datelist = datelist_vvdsxmm_n536 + datelist_vvdsxmm_n708 + datelist_cosmosgama_n536
-nightslot = nightslot_vvdsxmm_n536 + nightslot_vvdsxmm_n708 + nightslot_cosmosgama_n536
+datelist = datelist_vvdsxmm_N540 + datelist_vvdsxmm_n708 + datelist_cosmosgama_N540
+nightslot = nightslot_vvdsxmm_N540 + nightslot_vvdsxmm_n708 + nightslot_cosmosgama_N540
 nightslot_d = dict ( [(key,val) for key,val in zip(datelist,nightslot)])
-priorities = {('VVDSXMM','n536'):priorities_n536, ('VVDSXMM','n708'):priorities_n708, ('COSMOSGAMA','n536'):priorities_cosmosgama_n536}
-filter_l = len(datelist_vvdsxmm_n536) * ['n536'] + len(datelist_vvdsxmm_n708) *['n708'] + len(datelist_cosmosgama_n536)*['n536']
+priorities = {('VVDSXMM','N540'):priorities_N540, ('VVDSXMM','n708'):priorities_n708, ('COSMOSGAMA','N540'):priorities_cosmosgama_N540}
+filter_l = len(datelist_vvdsxmm_N540) * ['N540'] + len(datelist_vvdsxmm_n708) *['n708'] + len(datelist_cosmosgama_N540)*['N540']
 filter_d = dict ( [ (key,val) for key, val in zip(datelist, filter_l )])
-field_l = len(datelist_vvdsxmm_n536) * ['VVDSXMM'] + len(datelist_vvdsxmm_n708) *['VVDSXMM'] + len(datelist_cosmosgama_n536)*['COSMOSGAMA']
+field_l = len(datelist_vvdsxmm_N540) * ['VVDSXMM'] + len(datelist_vvdsxmm_n708) *['VVDSXMM'] + len(datelist_cosmosgama_N540)*['COSMOSGAMA']
 field_d = dict ( [ (key,val) for key, val in zip(datelist, field_l )])
 ######################### <==
 
@@ -71,11 +71,13 @@ def load_mastercat ( filter_name, early_vvds=True ):
     mastercat['proposer'] = 'Leauthaud'
     return mastercat
 
-def load_mastercat_cosmos ( fname = '../pointings/cosmosgama_n536.csv' ):
+def load_mastercat_cosmos ( fname = '../pointings/cosmosgama_N540.csv' ):
     mastercat = pd.read_csv ( fname )
     mastercat = mastercat.set_index('object')
     mastercat['wait'] = "False"
     mastercat['proposer'] = 'Leauthaud'
+    mastercat = mastercat.drop('object.1', axis=1)
+    mastercat['object'] = mastercat.index
     return mastercat
 
 
@@ -235,7 +237,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     if field == 'VVDSXMM':
         mastercat = load_mastercat (mfilt)
     elif field == 'COSMOSGAMA':
-        mastercat = load_mastercat_cosmos () # \\ only N536
+        mastercat = load_mastercat_cosmos () # \\ only N540
     print(f"On {year}/{month}/{day}, we are observing {field} in {mfilt}")
 
     if slot==0:
