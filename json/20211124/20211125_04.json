@@ -1,8 +1,8 @@
 [
 {
-"object":"XMM_J023639.17+390947.55_N53",
+"object":"XMM_J023639.17+390947.55_N540",
 "comment":"--",
-"filter":"N53",
+"filter":"N540",
 "seqtot":2,
 "seqnum":1,
 "seqid":"S2021B",
@@ -17,9 +17,9 @@
 "wait":false
 },
 {
-"object":"XMM_J023749.21+392718.21_N53",
+"object":"XMM_J023749.21+392718.21_N540",
 "comment":"--",
-"filter":"N53",
+"filter":"N540",
 "seqtot":2,
 "seqnum":2,
 "seqid":"S2021B",

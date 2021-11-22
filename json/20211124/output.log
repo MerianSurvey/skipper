@@ -19,7 +19,7 @@ COPILOT:   /Users/kadofong/Downloads/db_merian.fits
        \\            \_ .  _  .
 _______________ _  _ __ _  __      _  .   .
 
-On 2021/11/24, we are observing VVDSXMM in n536
+On 2021/11/24, we are observing VVDSXMM in N540
 We are observing the first half of the night
 [predict] night slot: First half
 obsStart: 2021/11/24 09:36 PM Santiago
@@ -44,8 +44,8 @@ Minimum airmass available: 1.1416320081517655
 0.0s filled by priority=1.0 objects
 0.0s filled by priority=2.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from VVDSearly_J000343.95+005959.52_N53 to VVDSearly_J225952.63+010540.32_N53
-[to_json] Big slew from VVDSearly_J225952.63+010540.32_N53 to VVDSearly_J000453.98+010458.98_N53
+[to_json] Big slew from VVDSearly_J000343.95+005959.52_N540 to VVDSearly_J225952.63+010540.32_N540
+[to_json] Big slew from VVDSearly_J225952.63+010540.32_N540 to VVDSearly_J000453.98+010458.98_N540
 QA COMPLETE: All tests passed
 Minimum airmass available: 1.101899685561499
 
@@ -62,7 +62,7 @@ Minimum airmass available: 1.1092688107185755
 0.0s filled by priority=1.0 objects
 3600.0s filled by priority=2.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from VVDSlate_J235947.39+011059.87_N53 to XMM_J023120.23+375003.54_N53
+[to_json] Big slew from VVDSlate_J235947.39+011059.87_N540 to XMM_J023120.23+375003.54_N540
 QA COMPLETE: All tests passed
 Minimum airmass available: 1.1945747045779578
 

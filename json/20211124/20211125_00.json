@@ -2,7 +2,7 @@
 {
 "object":"checksky_001",
 "comment":"CheckSkyExposure",
-"filter":"N53",
+"filter":"N540",
 "seqtot":5,
 "seqnum":1,
 "seqid":"S2021B",
@@ -19,7 +19,7 @@
 {
 "object":"checksky_002",
 "comment":"CheckSkyExposure",
-"filter":"N53",
+"filter":"N540",
 "seqtot":5,
 "seqnum":2,
 "seqid":"S2021B",
@@ -36,7 +36,7 @@
 {
 "object":"checksky_003",
 "comment":"CheckSkyExposure",
-"filter":"N53",
+"filter":"N540",
 "seqtot":5,
 "seqnum":3,
 "seqid":"S2021B",
@@ -53,7 +53,7 @@
 {
 "object":"1minexp_000",
 "comment":"OneMinuteFocusExposure",
-"filter":"N53",
+"filter":"N540",
 "seqtot":5,
 "seqnum":4,
 "seqid":"S2021B",
@@ -68,9 +68,9 @@
 "wait":false
 },
 {
-"object":"VVDSearly_J000343.95+005959.52_N53",
+"object":"VVDSearly_J000343.95+005959.52_N540",
 "comment":"--",
-"filter":"N53",
+"filter":"N540",
 "seqtot":5,
 "seqnum":5,
 "seqid":"S2021B",

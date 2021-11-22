@@ -2,7 +2,7 @@
 {
 "object":"1minexp_000",
 "comment":"OneMinuteFocusExposure",
-"filter":"N53",
+"filter":"N540",
 "seqtot":6,
 "seqnum":1,
 "seqid":"S2021B",
@@ -17,9 +17,9 @@
 "wait":false
 },
 {
-"object":"VVDSearly_J225952.63+010540.32_N53",
+"object":"VVDSearly_J225952.63+010540.32_N540",
 "comment":"--",
-"filter":"N53",
+"filter":"N540",
 "seqtot":6,
 "seqnum":2,
 "seqid":"S2021B",
@@ -36,7 +36,7 @@
 {
 "object":"1minexp_001",
 "comment":"OneMinuteFocusExposure",
-"filter":"N53",
+"filter":"N540",
 "seqtot":6,
 "seqnum":3,
 "seqid":"S2021B",
@@ -51,9 +51,9 @@
 "wait":false
 },
 {
-"object":"VVDSearly_J000453.98+010458.98_N53",
+"object":"VVDSearly_J000453.98+010458.98_N540",
 "comment":"--",
-"filter":"N53",
+"filter":"N540",
 "seqtot":6,
 "seqnum":4,
 "seqid":"S2021B",
@@ -68,9 +68,9 @@
 "wait":false
 },
 {
-"object":"VVDSearly_J000604.65+010758.44_N53",
+"object":"VVDSearly_J000604.65+010758.44_N540",
 "comment":"--",
-"filter":"N53",
+"filter":"N540",
 "seqtot":6,
 "seqnum":5,
 "seqid":"S2021B",
@@ -85,9 +85,9 @@
 "wait":false
 },
 {
-"object":"VVDSearly_J000715.33+011057.74_N53",
+"object":"VVDSearly_J000715.33+011057.74_N540",
 "comment":"--",
-"filter":"N53",
+"filter":"N540",
 "seqtot":6,
 "seqnum":6,
 "seqid":"S2021B",
