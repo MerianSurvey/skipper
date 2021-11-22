@@ -56,7 +56,7 @@ def whichfield ( year, month, day ):
     tpl = (year,month,day)
     field = field_d[tpl]
     mfilt = filter_d[tpl]
-    nightslot = filter_d[tpl]
+    nightslot = nightslot_d[tpl]
     return mfilt, field, nightslot
 
 def load_mastercat ( filter_name, early_vvds=True ):
@@ -73,7 +73,7 @@ def load_mastercat ( filter_name, early_vvds=True ):
 
 def load_mastercat_cosmos ( fname = '../pointings/cosmosgama_n536.csv' ):
     mastercat = pd.read_csv ( fname )
-    mastercat = mastercat.set_index('object.1')
+    mastercat = mastercat.set_index('object')
     mastercat['wait'] = "False"
     mastercat['proposer'] = 'Leauthaud'
     return mastercat
@@ -231,18 +231,26 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     # \\ figure out which field and filter we're going to be observing in,
     # \\ TODO : manual override
     mfilt, field, slot = whichfield (year,month,day)
+    
     if field == 'VVDSXMM':
         mastercat = load_mastercat (mfilt)
     elif field == 'COSMOSGAMA':
         mastercat = load_mastercat_cosmos () # \\ only N536
     print(f"On {year}/{month}/{day}, we are observing {field} in {mfilt}")
-    print(f'We are observing the {slot == 1 and "first" or "second"} half of the night')
+
+    if slot==0:
+        tag = 'full'
+    elif slot==1:
+        tag='first half'
+    elif slot==2:
+        tag = 'second half'
+    print(f'We are observing the {tag} of the night')
     #exp_exposures = tele.query('(exptime>599.)&(object!="G09")').shape[0]
     has_observed = np.in1d(mastercat['object'], tele['object'])
     
     # \\ also check for exposures that need to be reobserved
-    coo = observe.CopilotOutput ( copilot_fname )
-    reobs = coo.flag_for_reobservation ( mastercat )
+    coo = observe.CopilotOutput ( copilot_fname, pointings=mastercat )
+    reobs = coo.flag_for_reobservation ( )
     needs_reobservation = np.in1d(mastercat['object'], reobs)
     has_observed = has_observed & ~needs_reobservation
     

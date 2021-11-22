@@ -573,9 +573,10 @@ class ObservingSite ( object ):
         return alt
 
 class CopilotOutput ( object ):
-    def __init__ ( self, filename ):
+    def __init__ ( self, filename, pointings ):
         self.sidecar = self.load ( filename )
         self.sidecar['t_eff'] = self.t_effective ()
+        self.merian_sidecar = self.sidecar.loc[np.in1d(self.sidecar['object'], pointings)]
         
     def load ( self, filename ):
         _sidecar = fits.getdata ( filename, 1 )
@@ -589,9 +590,10 @@ class CopilotOutput ( object ):
         t2 = 10.**( (self.sidecar['sky']-skySB_0)/2.5 )
         return t0*t1*t2*self.sidecar['exptime']
         
-    def flag_for_reobservation ( self, mastercat, min_teff=200., ):
-        merian_sidecar = self.sidecar.loc[np.in1d(self.sidecar['object'], mastercat.index)]
+    def flag_for_reobservation ( self, min_teff=200., ):
+        merian_sidecar = self.merian_sidecar
         #return merian_sidecar.loc[merian_sidecar['t_eff']<min_teff, 'object'].values
-        merian_sidecar = merian_sidecar.loc[~merian_sidecar.sort_values('t_eff')['object'].duplicated(keep='last')] # \\ remove frames that
+        sorter = merian_sidecar.sort_values('t_eff')['object'].duplicated(keep='last')
+        merian_sidecar = merian_sidecar.loc[~sorter] # \\ remove frames that
         # \\ have already been reobserved; only consider the highest t_eff exposure
         return merian_sidecar.loc[merian_sidecar['t_eff']<min_teff, 'object'].values
