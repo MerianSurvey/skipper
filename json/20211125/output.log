@@ -1,0 +1,94 @@
+===========================
+== Merian Planner F2021B ==
+===========================
+DAY:       25
+MONTH:     11
+YEAR:      2021
+TELEFILE:  /Users/kadofong/Downloads/tele20210912.csv
+COPILOT:   /Users/kadofong/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+On 2021/11/25, we are observing VVDSXMM in N540
+We are observing the first half of the night
+[predict] night slot: First half
+obsStart: 2021/11/25 09:37 PM Santiago
+          2021/11/25 07:37 PM ET
+          2021/11/26 12:37 AM UTC
+obsEnd:   2021/11/26 01:19 AM Santiago
+          2021/11/25 11:19 PM ET
+          2021/11/26 04:19 AM UTC
+Minimum airmass available: 1.170290753023866
+
+==> 20211126_00, 1380.0000000000032s available
+900.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1366308462761703
+
+==> 20211126_01, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSearly_J000343.95+005959.52_N540 to VVDSearly_J225952.63+010540.32_N540
+[to_json] Big slew from VVDSearly_J225952.63+010540.32_N540 to VVDSearly_J000453.98+010458.98_N540
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1016342919254982
+
+==> 20211126_02, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1116548722799946
+
+==> 20211126_03, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSlate_J235947.39+011059.87_N540 to XMM_J023120.23+375003.54_N540
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.20248930498141
+
+==> 20211126_04, 2369.999999999978s available
+[plan_night] padding the last hour script
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+1800.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)		SXDS	COSMOS	
+2021/11/26 12:30 AM	1.33	-1.32	
+2021/11/26 01:30 AM	1.17	-1.63	
+2021/11/26 02:30 AM	1.11	-2.32	
+2021/11/26 03:30 AM	1.13	-4.57	
+2021/11/26 04:30 AM	1.23	166.31	
+------
+Next script for SXDS [g] is ../json/backup_scripts/SXDS_5minAGN_g_02.json
+------
+Next script for SXDS [r] is ../json/backup_scripts/SXDS_5minAGN_r_02.json
+------
+Next script for COSMOS [g] is ../json/backup_scripts/COSMOS_5minAGN_g_01.json
+------
+Next script for COSMOS [r] is ../json/backup_scripts/COSMOS_5minAGN_r_02.json
