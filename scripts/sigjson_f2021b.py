@@ -13,6 +13,7 @@ import make_pointings
 
 fmt = '%Y/%m/%d %I:%M %p'
 et = pytz.timezone("America/New_York")
+pt = pytz.timezone("America/Los_Angeles")
 _BACKUP_FIELDS = ['SXDS','COSMOS']
 
 ######################### ==>
@@ -29,7 +30,7 @@ nightslot_vvdsxmm_n708 = [2 for ix in np.arange(10,14)]
 #nightslot_vvdsxmm_n708 += [1 for ix in np.arange(24,31)]
 priorities_n708 = {'VVDSearly':0, 'VVDSlate':1,'VVDS':1, 'XMM':2}    
 
-datelist_cosmosgama_N540 = [(2021,12,31), (2021,1,1)]
+datelist_cosmosgama_N540 = [(2021,12,31), (2022,1,1)]
 datelist_cosmosgama_N540 += [(2022,1,ix) for ix in np.arange(3,5)]
 datelist_cosmosgama_N540 += [(2022,1,ix) for ix in np.arange(6,8)]
 datelist_cosmosgama_N540 += [(2022,1,ix) for ix in np.arange(9,12)]
@@ -269,7 +270,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     # \\ Define the observatory site -- default is CTIO
     ctio = observe.ObservingSite ()
     night_start, night_end = ctio.get_sunriseset ( year, month, day, cut_at_contract=cut_at_contract )
-    if cut_at_contract:        
+    if cut_at_contract:    
         ten_start, ten_end = ctio.get_sunriseset ( year, month, day, alt=-10, cut_at_contract=False)
         midpoint = ten_start + 0.5*(night_end-ten_start)
     else:
@@ -289,9 +290,11 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
 
     print(f"obsStart: {obs_start.astimezone(ctio.timezone).strftime(fmt)} Santiago")
     print(f"          {obs_start.astimezone(et).strftime(fmt)} ET")
+    print(f"          {obs_start.astimezone(pt).strftime(fmt)} PT")
     print(f"          {obs_start.strftime(fmt)} UTC")
     print(f"obsEnd:   {obs_end.astimezone(ctio.timezone).strftime(fmt)} Santiago")
     print(f"          {obs_end.astimezone(et).strftime(fmt)} ET")
+    print(f"          {obs_end.astimezone(pt).strftime(fmt)} PT")
     print(f"          {obs_end.strftime(fmt)} UTC")
 
     is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,

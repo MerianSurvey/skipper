@@ -481,7 +481,7 @@ class ObservingSite ( object ):
         
         if cut_at_contract:            
             utcoff = self.get_utcoffset ( night_end )
-            contract_end = pytz.utc.localize(datetime.datetime ( 2021, night_end.month, night_end.day, contract_time[0]-int(utcoff), contract_time[1],))
+            contract_end = pytz.utc.localize(datetime.datetime ( night_end.year, night_end.month, night_end.day, contract_time[0]-int(utcoff), contract_time[1],))
             mat_end = min ( night_end, contract_end )
             
             if contract_end < night_end:
