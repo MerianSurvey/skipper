@@ -30,9 +30,9 @@ nightslot_vvdsxmm_n708 = [2 for ix in np.arange(10,14)]
 priorities_n708 = {'VVDSearly':0, 'VVDSlate':1,'VVDS':1, 'XMM':2}    
 
 datelist_cosmosgama_N540 = [(2021,12,31), (2021,1,1)]
-datelist_cosmosgama_N540 += [(2021,1,ix) for ix in np.arange(3,5)]
-datelist_cosmosgama_N540 += [(2021,1,ix) for ix in np.arange(6,8)]
-datelist_cosmosgama_N540 += [(2021,1,ix) for ix in np.arange(9,12)]
+datelist_cosmosgama_N540 += [(2022,1,ix) for ix in np.arange(3,5)]
+datelist_cosmosgama_N540 += [(2022,1,ix) for ix in np.arange(6,8)]
+datelist_cosmosgama_N540 += [(2022,1,ix) for ix in np.arange(9,12)]
 datelist_cosmosgama_N540 += [(2022,1,ix) for ix in np.arange(25, 32)]
 nightslot_cosmosgama_N540 = [2,2]
 nightslot_cosmosgama_N540 += [2 for ix in np.arange(3,5)]
