@@ -258,9 +258,10 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     has_observed = np.in1d(mastercat['object'], tele['object'])
     
     # \\ also check for exposures that need to be reobserved
-    coo = observe.CopilotOutput ( copilot_fname, pointings=mastercat )
-    reobs = coo.flag_for_reobservation ( skySB_0 = skySB_0 )
+    coo = observe.CopilotOutput ( copilot_fname, pointings=mastercat,  skySB_0 = skySB_0 )
+    reobs = coo.flag_for_reobservation ( )
     needs_reobservation = np.in1d(mastercat['object'], reobs)
+    print(f'{needs_reobservation.sum()} pointings in this catalog need reobservation!')
     has_observed = has_observed & ~needs_reobservation
     
     
