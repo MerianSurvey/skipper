@@ -235,6 +235,12 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     # \\ TODO : manual override
     mfilt, field, slot = whichfield (year,month,day)
     
+    # \\ QUICKFIX for 2021B TODO: fix in observe.py
+    if mfilt == 'N708':
+        skySB_0 = 21.
+    elif mfilt == 'N540':
+        skySB_0 = 22.1
+    
     if field == 'VVDSXMM':
         mastercat = load_mastercat (mfilt)
     elif field == 'COSMOSGAMA':
@@ -253,7 +259,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     
     # \\ also check for exposures that need to be reobserved
     coo = observe.CopilotOutput ( copilot_fname, pointings=mastercat )
-    reobs = coo.flag_for_reobservation ( )
+    reobs = coo.flag_for_reobservation ( skySB_0 = skySB_0 )
     needs_reobservation = np.in1d(mastercat['object'], reobs)
     has_observed = has_observed & ~needs_reobservation
     
