@@ -573,9 +573,9 @@ class ObservingSite ( object ):
         return alt
 
 class CopilotOutput ( object ):
-    def __init__ ( self, filename, pointings ):
+    def __init__ ( self, filename, pointings,  transparency_0=1., seeing_0=1., skySB_0=21.):
         self.sidecar = self.load ( filename )
-        self.sidecar['t_eff'] = self.t_effective ()
+        self.sidecar['t_eff'] = self.t_effective ( transparency_0, seeing_0, skySB_0)
         self.merian_sidecar = self.sidecar.loc[np.in1d(self.sidecar['object'], pointings)]
         
     def load ( self, filename ):
@@ -584,7 +584,7 @@ class CopilotOutput ( object ):
         return sidecar
     
     
-    def t_effective ( self, transparency_0=1., seeing_0=1., skySB_0=21. ):
+    def t_effective ( self, transparency_0, seeing_0, skySB_0 ):
         t0 = ( self.sidecar['transparency'] / transparency_0 )**2
         t1 = ( self.sidecar['seeing']/seeing_0 )**-2
         t2 = 10.**( (self.sidecar['sky']-skySB_0)/2.5 )
