@@ -340,8 +340,7 @@ class ObsCatalog (object):
                 #print(obsframe.obstime[ix]+1.*u.hr)
                 #print(Time(obs_end))
                 if pad_last_hour:
-                    
-                    pad_time = 1200. #catalog['expTime']
+                    pad_time = catalog['expTime'].mean() * 6                    
                 else:
                     pad_time = 0.
                 total_available_time = (Time(obs_end) - obsframe.obstime[ix]+1.*u.hr - 0.5*u.hour).to(u.second).value + pad_time
@@ -359,7 +358,7 @@ class ObsCatalog (object):
                 continue
             print(f'\n==> {hstr}, {total_available_time}s available')
             if pad_last_hour and ix==(len(alt_l[0])-1):
-                print(f'[plan_night] padding the last hour script') # \\ say this here to make 
+                print(f'[plan_night] padding the last hour script by {pad_time}s') # \\ say this here to make 
                 # \\ log more readable
                 
             for cprior in np.sort(is_queued.has_priority.unique()):                

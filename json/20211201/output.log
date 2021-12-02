@@ -4,8 +4,8 @@
 DAY:       1
 MONTH:     12
 YEAR:      2021
-TELEFILE:  /Users/shanydanieli/Downloads/tele20211130.csv
-COPILOT:   /Users/shanydanieli/Downloads/db_merian.fits
+TELEFILE:  /Users/kadofong/Downloads/tele20211130.csv
+COPILOT:   /Users/kadofong/Downloads/db_merian.fits
 .         *          
     *    .        *        .   .     .
       ____            .    {\*/}           .  *     .
@@ -31,16 +31,16 @@ obsEnd:   2021/12/02 01:21 AM Santiago
           2021/12/01 11:21 PM ET
           2021/12/01 08:21 PM PT
           2021/12/02 04:21 AM UTC
-Minimum airmass available: 1.2079573675895576
+Minimum airmass available: 1.2079573584443242
 
-==> 20211202_00, 1020.0000000000141s available
+==> 20211202_00, 1020.0000000000044s available
 900.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
 0.0s filled by priority=2.0 objects
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.126727685305249
+Minimum airmass available: 1.1267276905760537
 
 ==> 20211202_01, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -48,7 +48,7 @@ Minimum airmass available: 1.126727685305249
 0.0s filled by priority=2.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.121272588604998
+Minimum airmass available: 1.1212726043976422
 
 ==> 20211202_02, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -57,7 +57,7 @@ Minimum airmass available: 1.121272588604998
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from VVDSlate_J232245.25+011003.76_N540 to XMM_J020801.67+320025.10_N540
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.1778106210340173
+Minimum airmass available: 1.1778106490084743
 
 ==> 20211202_03, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -65,13 +65,13 @@ Minimum airmass available: 1.1778106210340173
 3600.0s filled by priority=2.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.3250197525691187
+Minimum airmass available: 1.3250198017579
 
-==> 20211202_04, 2459.9999999999727s available
-[plan_night] padding the last hour script
+==> 20211202_04, 6659.999999999983s available
+[plan_night] padding the last hour script by 5400.0s
 0.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
-1800.0s filled by priority=2.0 objects
+6300.0s filled by priority=2.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
  .   . 
