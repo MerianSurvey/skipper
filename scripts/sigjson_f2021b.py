@@ -303,6 +303,10 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     print(f"          {obs_end.astimezone(et).strftime(fmt)} ET")
     print(f"          {obs_end.astimezone(pt).strftime(fmt)} PT")
     print(f"          {obs_end.strftime(fmt)} UTC")
+    
+    moon_cillum, moon_altreport = ctio.track_moon ( obs_start, obs_end)
+    print(f'Moon illumination is: {moon_cillum:.2f}')
+    print(f'Moon max altitude during observation is: {moon_altreport:.2f}')
 
     is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
                                      is_queued=is_queued.copy(),

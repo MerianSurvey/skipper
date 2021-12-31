@@ -238,7 +238,8 @@ class ObsCatalog (object):
                      pad_first_hour=False,
                      pad_last_hour=True,
                      prefix='',
-                     pointingdb_fname=None):
+                     pointingdb_fname=None,
+                     verbose=True):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -271,7 +272,14 @@ class ObsCatalog (object):
         '''
         if catalog is None:
             catalog = self.catalog
-        catalog_objects = catalog.apply(lambda x: x['object'].split('_')[0], axis=1)
+        #catalog_objects = catalog.apply(lambda x: x['object'].split('_')[0], axis=1)
+        if 'priority_name' not in catalog.columns:
+            if verbose:
+                print('[plan_night] Inferring priorities from object names')
+                catalog_objects = catalog['object'].str.extract(r'(.*?(?=_))')[0]
+        else:
+            catalog_objects = catalog['priority_name']
+        
 
         # \\ if time < 12, we've started past midnight.
         start_hour = obs_start.astimezone(obssite.timezone).hour
