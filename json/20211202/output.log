@@ -1,0 +1,96 @@
+===========================
+== Merian Planner F2021B ==
+===========================
+DAY:       2
+MONTH:     12
+YEAR:      2021
+TELEFILE:  /Users/shanydanieli/Downloads/tele20211201.csv
+COPILOT:   /Users/shanydanieli/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+On 2021/12/2, we are observing VVDSXMM in N540
+We are observing the first half of the night
+1 pointings in this catalog need reobservation!
+[predict] night slot: First half
+obsStart: 2021/12/02 09:44 PM Santiago
+          2021/12/02 07:44 PM ET
+          2021/12/02 04:44 PM PT
+          2021/12/03 12:44 AM UTC
+obsEnd:   2021/12/03 01:21 AM Santiago
+          2021/12/02 11:21 PM ET
+          2021/12/02 08:21 PM PT
+          2021/12/03 04:21 AM UTC
+Minimum airmass available: 1.1997771984449583
+
+==> 20211203_00, 959.9999999999951s available
+900.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1243347600699565
+
+==> 20211203_01, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.122962232549534
+
+==> 20211203_02, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSlate_J231527.88+010939.72_N540 to XMM_J021021.01+323515.27_N540
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1950091356297838
+
+==> 20211203_03, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.348688076868634
+
+==> 20211203_04, 6689.999999999987s available
+[plan_night] padding the last hour script by 5400.0s
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+6300.0s filled by priority=2.0 objects
+[to_json] Inserting 60s focus exposures
+Warning: Airmass of 1.51 in exposure 6 of file ../json/20211202/20211203_04.json
+Warning: Airmass of 1.56 in exposure 7 of file ../json/20211202/20211203_04.json
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)		SXDS	COSMOS	
+2021/12/03 12:30 AM	1.24	-1.44	
+2021/12/03 01:30 AM	1.13	-1.87	
+2021/12/03 02:30 AM	1.11	-2.98	
+2021/12/03 03:30 AM	1.16	-8.58	
+2021/12/03 04:30 AM	1.31	9.13	
+------
+Next script for SXDS [g] is ../json/backup_scripts/SXDS_5minAGN_g_03.json
+------
+Next script for SXDS [r] is ../json/backup_scripts/SXDS_5minAGN_r_02.json
+------
+Next script for COSMOS [g] is ../json/backup_scripts/COSMOS_5minAGN_g_01.json
+------
+Next script for COSMOS [r] is ../json/backup_scripts/COSMOS_5minAGN_r_02.json
