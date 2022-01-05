@@ -1,0 +1,95 @@
+===========================
+== Merian Planner F2021B ==
+===========================
+DAY:       6
+MONTH:     1
+YEAR:      2022
+TELEFILE:  /Users/kadofong/Downloads/tele20220104.csv
+COPILOT:   /Users/kadofong/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+On 2022/1/6, we are observing COSMOSGAMA in N540
+We are observing the second half of the night
+3 pointings in this catalog need reobservation!
+[predict] night slot: Second half
+obsStart: 2022/01/07 01:38 AM Santiago
+          2022/01/06 11:38 PM ET
+          2022/01/06 08:38 PM PT
+          2022/01/07 04:38 AM UTC
+obsEnd:   2022/01/07 05:38 AM Santiago
+          2022/01/07 03:38 AM ET
+          2022/01/07 12:38 AM PT
+          2022/01/07 08:38 AM UTC
+Moon illumination is: 0.26
+Moon max altitude during observation is: 0.00
+[plan_night] Inferring priorities from object names
+Minimum airmass available: 1.283074785421047
+
+==> 20220107_04, 1290.0000000000132s available
+0s filled by priority=0.0 objects
+900s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.172402510401967
+
+==> 20220107_05, 3600.0s available
+0s filled by priority=0.0 objects
+3600s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1463908005410126
+
+==> 20220107_06, 3600.0s available
+0s filled by priority=0.0 objects
+3600s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1441984227407564
+
+==> 20220107_07, 3600.0s available
+0s filled by priority=0.0 objects
+3600s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J090030.57-005019.09_N540 to GAMA_J095104.33-005731.28_N540
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1473278054452267
+
+==> 20220107_08, 7679.99999999996s available
+[plan_night] padding the last hour script by 5400.0s
+0s filled by priority=0.0 objects
+7200s filled by priority=1.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J095853.32-010118.92_N540 to GAMA_J111156.69-005841.16_N540
+[to_json] Big slew from GAMA_J111527.88-010939.72_N540 to GAMA_J102923.97-005522.39_N540
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)		SXDS	COSMOS	
+2022/01/07 04:30 AM	2.69	1.75	
+2022/01/07 05:30 AM	6.49	1.40	
+2022/01/07 06:30 AM	-13.98	1.24	
+2022/01/07 07:30 AM	-3.46	1.18	
+2022/01/07 08:30 AM	-2.06	1.22	
+------
+Next script for SXDS [g] is ../json/backup_scripts/SXDS_5minAGN_g_04.json
+------
+Next script for SXDS [r] is ../json/backup_scripts/SXDS_5minAGN_r_02.json
+------
+Next script for COSMOS [g] is ../json/backup_scripts/COSMOS_5minAGN_g_02.json
+------
+Next script for COSMOS [r] is ../json/backup_scripts/COSMOS_5minAGN_r_02.json
