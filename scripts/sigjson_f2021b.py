@@ -238,8 +238,10 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     # \\ QUICKFIX for 2021B TODO: fix in observe.py
     if mfilt == 'N708':
         skySB_0 = 21.
+        teff_min = 200.
     elif mfilt == 'N540':
         skySB_0 = 22.1
+        teff_min = 300.
     
     if field == 'VVDSXMM':
         mastercat = load_mastercat (mfilt)
@@ -259,7 +261,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, cut_at_contract
     
     # \\ also check for exposures that need to be reobserved
     coo = observe.CopilotOutput ( copilot_fname, pointings=mastercat,  skySB_0 = skySB_0 )
-    reobs = coo.flag_for_reobservation ( )
+    reobs = coo.flag_for_reobservation ( min_teff = teff_min )
     needs_reobservation = np.in1d(mastercat['object'], reobs)
     print(f'{needs_reobservation.sum()} pointings in this catalog need reobservation!')
     has_observed = has_observed & ~needs_reobservation
