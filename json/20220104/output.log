@@ -21,7 +21,7 @@ _______________ _  _ __ _  __      _  .   .
 
 On 2022/1/4, we are observing COSMOSGAMA in N540
 We are observing the second half of the night
-0 pointings in this catalog need reobservation!
+4 pointings in this catalog need reobservation!
 [predict] night slot: Second half
 obsStart: 2022/01/05 01:37 AM Santiago
           2022/01/04 11:37 PM ET
@@ -34,7 +34,7 @@ obsEnd:   2022/01/05 05:36 AM Santiago
 Moon illumination is: 0.09
 Moon max altitude during observation is: 0.00
 [plan_night] Inferring priorities from object names
-Minimum airmass available: 1.329484429654892
+Minimum airmass available: 1.3034773979860907
 
 ==> 20220105_04, 1380.000000000008s available
 0s filled by priority=0.0 objects
@@ -42,13 +42,13 @@ Minimum airmass available: 1.329484429654892
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.1909931208744466
+Minimum airmass available: 1.180567036989284
 
 ==> 20220105_05, 3600.0s available
 3600s filled by priority=0.0 objects
 0s filled by priority=1.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J084638.76-004512.21_N540 to COSMOS_J100021.44+021535.51_N540
+[to_json] Big slew from GAMA_J083758.97-003809.81_N540 to COSMOS_J100021.44+021535.51_N540
 Warning: Airmass of 1.53 in exposure 1 of file ../json/20220104/20220105_05.json
 Minimum airmass available: 1.146758010001754
 
