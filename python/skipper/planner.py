@@ -84,7 +84,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                    is_queued=None,                  
                    cut_at_contract=True,
                    priorities=None,
-                   extra = None, # manual extra hours 
+                   extra = None, # manual extra hours                    
                    **kwargs ):
     '''
     Plan "tomorrow" in the observing time frame (i.e. the next night that we will be observing)
