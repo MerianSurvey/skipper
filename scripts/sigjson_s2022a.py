@@ -162,7 +162,7 @@ kw_types = {'save':lambda x: x.lower == 'true'}
 
 if __name__ == '__main__':
     print('='*27)
-    print('== Merian Planner F2021B ==')
+    print('== Merian Planner S2022A ==')
     print('='*27)
 
 
