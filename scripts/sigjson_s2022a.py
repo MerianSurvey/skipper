@@ -168,7 +168,7 @@ if __name__ == '__main__':
 
     if len(sys.argv)==1 or sys.argv[1] == '-h' or sys.argv[1] == '--help':
         print('S2022A JSON file generation.')
-        print('\n(usage) python sigjson_s2022a.py [run day] [run month] [run year] [path/to/telemetry/output] [path/to/copilot/output]')
+        print('\n(usage) sh sigjson_s2022a.sh [run day] [run month] [run year] [path/to/telemetry/output] [path/to/copilot/output]')
         print('  [run day] integer, the date of the beginning of the night')
         print('  [path/to/telemetry/output] path to the CSV containing the telemetry output from SISPI')
         print('(contact kadofong at princeton dot edu for help)\n')
