@@ -1,0 +1,118 @@
+===========================
+== Merian Planner S2022A ==
+===========================
+DAY:       8
+MONTH:     2
+YEAR:      2022
+TELEFILE:  ../../DataLogs/tele20220207.csv
+COPILOT:   ../../DataLogs/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+On 2022/2/8, we are observing COSMOSGAMA in N540
+We are observing the second half of the night
+2 pointings in this catalog need reobservation!
+True night end is:
+obsEnd:   2022/02/09 06:12 AM Santiago
+          2022/02/09 09:12 AM UTC
+Updated night end is:
+obsEnd:   2022/02/09 06:05 AM Santiago
+          2022/02/09 09:05 AM UTC
+[predict] night slot: Second half
+obsStart: 2022/02/09 01:43 AM Santiago
+          2022/02/08 11:43 PM ET
+          2022/02/08 08:43 PM PT
+          2022/02/09 04:43 AM UTC
+obsEnd:   2022/02/09 06:05 AM Santiago
+          2022/02/09 04:05 AM ET
+          2022/02/09 01:05 AM PT
+          2022/02/09 09:05 AM UTC
+Moon illumination is: 0.57
+Moon max altitude during observation is: 0.00
+Minimum airmass available: 1.1665366392029446
+
+==> 20220209_04, 990.0000000000142s available
+0.0s filled by priority=0.0 objects
+900.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.162530733116769
+
+==> 20220209_05, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1423577948891412
+
+==> 20220209_06, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1419637269551053
+
+==> 20220209_07, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.142508763214231
+
+==> 20220209_08, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J102553.22+033951.23_N540 to GAMA_J122058.09+014024.39_N540
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1438558591396242
+
+==> 20220209_09, 5699.999999999953s available
+[plan_night] padding the last hour script by 5400.0s
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+5400.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)		SXDS	COSMOS	
+2022/02/09 04:30 AM	-9.27	1.22	
+2022/02/09 05:30 AM	-3.10	1.18	
+2022/02/09 06:30 AM	-1.95	1.23	
+2022/02/09 07:30 AM	-1.50	1.38	
+2022/02/09 08:30 AM	-1.30	1.71	
+2022/02/09 09:30 AM	-1.22	2.48	
+------
+Next script for SXDS [g] is ../json/backup_scripts/SXDS_5minAGN_g_04.json
+------
+Next script for SXDS [r] is ../json/backup_scripts/SXDS_5minAGN_r_02.json
+------
+Next script for COSMOS [g] is ../json/backup_scripts/COSMOS_5minAGN_g_07.json
+------
+Next script for COSMOS [r] is ../json/backup_scripts/COSMOS_5minAGN_r_05.json
