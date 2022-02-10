@@ -43,15 +43,16 @@ def build_cosmos (seed=267667, start_at_center=True, filter='N708',
     else:
         return catalog, ocat
 
-def build_backup ( seed=2465646, filter='g', **kwargs ):
+def build_backup ( seed=2465646, filter='g', exptime=5., total_time=40., start_at_center=False, nscripts=10, **kwargs ):
     # seed = 246 = AGN <= AGN 10 min exp
     # seed = 2465646 = AGN5MIN <= AGN 5 min exp
+    # seed = 24690732 = AGN90SEC
     np.random.seed(seed)
     catalog_l = []
     frd_l = []
-    for i in range(10):
-        catalog, ocat, frd = build_cosmos ( seed=None,filter=filter,exptime=5.,
-                                       ndither = 40//5, start_at_center=False,
+    for i in range(nscripts):
+        catalog, ocat, frd = build_cosmos ( seed=None,filter=filter,exptime=exptime,
+                                       ndither = int(total_time//exptime), start_at_center=start_at_center,
                                        return_frd=True,
                                        **kwargs
                                        )
