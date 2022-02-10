@@ -60,7 +60,7 @@ def nextbackupscript ( tele, backup_fields=None ):
         for filt in ['g','r']:
             iu=0
             while True:
-                fname = f'../json/backup_scripts/{name}_5minAGN_{filt}_{iu:02d}.json' 
+                fname = f'../json/backup_scripts/{name}/5min/{name}_5minAGN_{filt}_{iu:02d}.json' 
                 if not os.path.exists ( fname ):
                     iu += 1
                     continue
