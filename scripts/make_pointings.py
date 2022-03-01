@@ -59,6 +59,30 @@ def build_backup ( seed=2465646, filter='g', exptime=5., total_time=40., start_a
         frd_l.append(frd)
         catalog_l.append(catalog)
     return catalog_l, ocat, frd_l
+
+def build_SOAGN ( objid, seed=123, filter='g', exptime=1.5, total_time=60., start_at_center=False, nscripts=20, **kwargs ):
+    '''
+    Build a catalog for the single AGN variability back-up program
+    
+    seed = 123
+    '''
+    # \\ load source 
+    src_df = pd.read_csv ('../data/SOAGN.txt', delim_whitespace=True, comment='#', index_col=0)
+    center = coordinates.SkyCoord ( src_df.loc[objid, 'RA'], src_df.loc[objid,'Dec'], unit='deg')
+    catalog_l = []
+    frd_l = []
+    for i in range(nscripts):
+        catalog, ocat, frd = build_cosmos ( seed=seed,
+                                            filter=filter,exptime=exptime,
+                                            ndither = int(total_time//exptime), 
+                                            start_at_center=start_at_center,
+                                            center=center,
+                                            return_frd=True,
+                                            **kwargs
+                                       )
+        frd_l.append(frd)
+        catalog_l.append(catalog)
+    return catalog_l, ocat, frd_l    
     
 
 def build_gama ():

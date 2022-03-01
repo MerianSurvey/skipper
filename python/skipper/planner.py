@@ -14,9 +14,12 @@ pt = pytz.timezone("America/Los_Angeles")
 ct = pytz.timezone("Asia/Chongqing")
 
 
-_BACKUP_FIELDS = ['SXDS','COSMOS']
+
 _backup_centers = {'SXDS':coordinates.SkyCoord ("35.739030633438745 -4.7489828727193775", unit='deg'),
-                    'COSMOS':coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s") }
+                    'COSMOS':coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s"),
+                    'GH14':coordinates.SkyCoord (218.710949, 3.645162, unit='deg' ),
+                    'NSA15235':coordinates.SkyCoord (220.052925, 2.795422, unit='deg')}
+_BACKUP_FIELDS = list(_backup_centers.keys ())
 
 def load_telemetry ( fname ):
     return pd.read_csv(fname)
@@ -56,25 +59,34 @@ def nextbackupscript ( tele, backup_fields=None ):
     '''
     if backup_fields is None:
         backup_fields = _BACKUP_FIELDS
+        
+    print('''
+          
+~ ( B A C K U P  F I E L D S ) ~          
+          ''')
     for name in backup_fields:
+        print(f'=== {name} ===')
         for filt in ['g','r']:
-            iu=0
-            while True:
-                fname = f'../json/backup_scripts/{name}/5min/{name}_5minAGN_{filt}_{iu:02d}.json' 
-                if not os.path.exists ( fname ):
-                    iu += 1
-                    continue
-                elif iu > 10:
-                    raise ValueError ("No back-up scripts available! Need to regenerate")
-                else:
-                    json = pd.read_json ( fname )
-                    has_observed = np.in1d(json['object'].iloc[1:], tele['object']).any ()
-                    if has_observed:
-                        iu+=1
-                    else:
-                        print('------')
-                        print(f'Next script for {name} [{filt}] is {fname}')
+            for time in ['5min','90sec']:
+                iu=0
+                while True:
+                    fname = f'../json/backup_scripts/{name}/{time}/{name}_{time}AGN_{filt}_{iu:02d}.json' 
+                    
+                    
+                    if iu > 10:
+                        print ( f'No back-up scripts available for [{filt}, {time}]')
+                        #raise ValueError ("No back-up scripts available! Need to regenerate")
                         break
+                    elif not os.path.exists ( fname ):
+                        iu += 1    
+                    else:
+                        json = pd.read_json ( fname )
+                        has_observed = np.in1d(json['object'].iloc[1:], tele['object']).any ()
+                        if has_observed:
+                            iu+=1
+                        else:                            
+                            print(f'Next script for [{filt}, {time}] is {fname}')
+                            break
                     
 def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat, 
                    whichfield=None,
@@ -82,7 +94,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                    current_field = None,
                    current_slot = None, 
                    is_queued=None,                  
-                   cut_at_contract=True,
+                   cut_at_contract=False,
                    priorities=None,
                    extra = None, # manual extra hours                    
                    **kwargs ):
