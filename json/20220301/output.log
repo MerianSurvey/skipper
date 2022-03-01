@@ -1,0 +1,122 @@
+===========================
+== Merian Planner S2022A ==
+===========================
+DAY:       1
+MONTH:     3
+YEAR:      2022
+TELEFILE:  ../../DataLogs/tele20220228.csv
+COPILOT:   ../../DataLogs/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+On 2022/3/1, we are observing COSMOSGAMA in N540
+We are observing the second half of the night
+6 pointings in this catalog need reobservation!
+[predict] night slot: Second half
+obsStart: 2022/03/02 01:55 AM Santiago
+          2022/03/01 11:55 PM ET
+          2022/03/01 08:55 PM PT
+          2022/03/02 04:55 AM UTC
+obsEnd:   2022/03/02 06:32 AM Santiago
+          2022/03/02 04:32 AM ET
+          2022/03/02 01:32 AM PT
+          2022/03/02 09:32 AM UTC
+Moon illumination is: 0.00
+Moon max altitude during observation is: 0.00
+Minimum airmass available: 1.147527217065508
+(270s) Not enough time for an exposure. Skipping...
+Minimum airmass available: 1.1454466080726533
+
+==> 20220302_05, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1433666403446452
+
+==> 20220302_06, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J100211.33+034054.61_N540 to GAMA_J115947.41+013558.92_N540
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1428729917323273
+
+==> 20220302_07, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+Minimum airmass available: 1.1447240912767298
+
+==> 20220302_08, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+3600.0s filled by priority=2.0 objects
+0.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+Warning: Airmass of 1.51 in exposure 4 of file ../json/20220301/20220302_08.json
+Minimum airmass available: 1.1534698534740209
+
+==> 20220302_09, 7319.999999999952s available
+[plan_night] padding the last hour script by 5400.0s
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+7200.0s filled by priority=3.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J120727.81+031042.71_N540 to GAMA_J145638.24-004302.78_N540
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)		SXDS	COSMOS	GH14	NSA15235	
+2022/03/02 04:30 AM	-2.51	1.19	2.71	2.78	
+2022/03/02 05:30 AM	-1.74	1.27	1.80	1.83	
+2022/03/02 06:30 AM	-1.41	1.48	1.43	1.44	
+2022/03/02 07:30 AM	-1.26	1.92	1.26	1.26	
+2022/03/02 08:30 AM	-1.22	3.05	1.20	1.19	
+2022/03/02 09:30 AM	-1.27	9.08	1.23	1.22	
+
+          
+~ ( B A C K U P  F I E L D S ) ~          
+          
+=== SXDS ===
+Next script for [g, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_g_04.json
+No back-up scripts available for [g, 90sec]
+Next script for [r, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_r_02.json
+No back-up scripts available for [r, 90sec]
+=== COSMOS ===
+Next script for [g, 5min] is ../json/backup_scripts/COSMOS/5min/COSMOS_5minAGN_g_08.json
+Next script for [g, 90sec] is ../json/backup_scripts/COSMOS/90sec/COSMOS_90secAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/COSMOS/5min/COSMOS_5minAGN_r_05.json
+Next script for [r, 90sec] is ../json/backup_scripts/COSMOS/90sec/COSMOS_90secAGN_r_01.json
+=== GH14 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GH14/90sec/GH14_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+No back-up scripts available for [r, 90sec]
+=== NSA15235 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/NSA15235/90sec/NSA15235_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+No back-up scripts available for [r, 90sec]
