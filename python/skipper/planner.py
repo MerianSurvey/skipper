@@ -5,6 +5,7 @@ import datetime
 import numpy as np
 import pandas as pd
 from astropy import coordinates
+from astropy.io import fits
 from . import observe
 
 # \\ Define relevant timezones
@@ -88,6 +89,22 @@ def nextbackupscript ( tele, backup_fields=None ):
                             print(f'Next script for [{filt}, {time}] is {fname}')
                             break
                     
+def verify_synchronicity ( tele_fname, copilot_fname, verbose=True ):
+    '''
+    Make sure that the telemetry output and copilot output are in sync
+    '''
+    tele = pd.read_csv ( tele_fname )
+    copilot_output = fits.getdata ( copilot_fname, 1 )
+    
+    lexpnum_tele = tele.iloc[-1]['id']
+    lexpnum_copilot = copilot_output[-1][2]
+    
+    assert lexpnum_copilot == lexpnum_tele
+    if verbose:
+        print (f'[verify_synchronicity] last exposure in logs is {lexpnum_copilot}, taken at {tele.iloc[-1]["date"]}')        
+    
+    
+
 def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat, 
                    whichfield=None,
                    current_filter = None,
@@ -107,6 +124,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
         If True, the night end will occur, at latest, at 6:05 AM (Chilean work contract rule)
     '''
     tele = load_telemetry ( tele_fname )
+    verify_synchronicity ( tele_fname, copilot_fname )
 
     # \\ figure out which field and filter we're going to be observing in,
     if whichfield is not None:

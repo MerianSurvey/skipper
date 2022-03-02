@@ -1,3 +1,4 @@
+import datetime
 import sys
 import numpy as np
 import pandas as pd
@@ -12,15 +13,18 @@ priorities = {'COSMOS':0,'GAMA':3, 'GAMAhigh':2, 'GAMAearly':1, 'GAMAlate':3}
 dates = [ (2022,2,idx) for idx in range(2,11)]
 dates += [ (2022,2,28) ]
 dates += [ (2022,3,idx) for idx in range(1,10)]
+dates += [(2022,3,10)]
 #dates = np.asarray(dates)
 
 slots = [ 4 for idx in range(2,6) ] # first Feb nights, 2/28, and 3/1
 slots += [ 2 for idx in range(6,13)]
 slots += [ 3 for idx in range(2,10) ] # second 3/4 for rest of run
+slots += [3]
 slots = np.asarray(slots)
 
 filters = [ 'N540' for idx in range(2,16) ]
 filters += [ 'N708' for idx in range(5,10) ]
+filters += ['N540']
 filters = np.asarray(filters)
 
 
@@ -126,7 +130,7 @@ def predict_all ( tele_fname=None, copilot_fname=None ):
     # \\ Load pointings, observation logs 
     _, oiii_s2022a = load_mastercat ()   
     if tele_fname is None:
-        tele_fname = f'{obsdir}/tele20220112.csv'
+        tele_fname = f'{obsdir}/tele20220131.csv'
     if copilot_fname is None:
         copilot_fname = f'{obsdir}/db_merian.fits'
     
@@ -155,6 +159,37 @@ def predict_all ( tele_fname=None, copilot_fname=None ):
         print('\n<(-.-)>\n')
     
     return is_queued_oiii, is_queued_halpha
+
+def predict_remainder ( tele_fname, copilot_fname=None ):
+    '''
+    Predict coverage for the rest of the run, assuming no losses from weather
+    '''
+    _, oiii_s2022a = load_mastercat ()   
+    if tele_fname is None:
+        tele_fname = f'{obsdir}/tele20220131.csv'
+    if copilot_fname is None:
+        copilot_fname = f'{obsdir}/db_merian.fits'
+        
+    is_queued_oiii = None
+    is_queued_halpha = None    
+
+    # \\ find dates yet to be observed in 2022
+    today = datetime.date.today ()
+    for date in dates:
+        dt_date = datetime.date(*date)
+        if dt_date < today:
+            continue
+        
+        mfilt, _, _ = whichfield ( date[0],date[1],date[2] )
+        if mfilt == 'N708':
+            is_queued_halpha = plan_tomorrow ( date[2], date[1], date[0], tele_fname, copilot_fname, 
+                                              is_queued=is_queued_halpha, pad_last_hour=False, save=False )
+        elif mfilt == 'N540':
+            is_queued_oiii = plan_tomorrow ( date[2], date[1], date[0], tele_fname, copilot_fname, 
+                                              is_queued=is_queued_oiii, pad_last_hour=False, save=False )
+        print('\n<(-.-)>\n')
+    return is_queued_halpha, is_queued_oiii    
+    
                 
     
 

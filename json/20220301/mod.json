@@ -1,0 +1,20 @@
+[
+{
+    "object":"GAMA_J145638.24-004302.78_N540",
+    "comment":"--",
+    "filter":"N540",
+    "seqtot":1,
+    "seqnum":1,
+    "seqid":"S2021A",
+    "expType":"object",
+    "proposer":"LeathaudGreene",
+    "program":"Merian",
+    "RA":224.1593616564,
+    "propid":"2020B-0288",
+    "dec":-0.7174402623,
+    "expTime":1080.0,
+    "count":1,
+    "wait":false,
+    "priority_name":"GAMAlate"
+    }
+]
