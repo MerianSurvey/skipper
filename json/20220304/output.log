@@ -4,8 +4,13 @@
 DAY:       4
 MONTH:     3
 YEAR:      2022
+<<<<<<< HEAD
 TELEFILE:  ../../DataLogs/tele20220303.csv
 COPILOT:   ../../DataLogs/db_merian.fits
+=======
+TELEFILE:  /Users/yifei/Downloads/tele20220303.csv
+COPILOT:   /Users/yifei/Downloads/db_merian.fits
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 .         *          
     *    .        *        .   .     .
       ____            .    {\*/}           .  *     .
@@ -34,9 +39,15 @@ obsEnd:   2022/03/05 06:34 AM Santiago
           2022/03/05 09:34 AM UTC
 Moon illumination is: 0.07
 Moon max altitude during observation is: 0.00
+<<<<<<< HEAD
 Minimum airmass available: 1.1868890422770528
 
 ==> 20220305_02, 1470.0000000000125s available
+=======
+Minimum airmass available: 1.186889032922131
+
+==> 20220305_02, 1470.000000000003s available
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 0.0s filled by priority=0.0 objects
 900.0s filled by priority=1.0 objects
 0.0s filled by priority=2.0 objects
@@ -44,7 +55,11 @@ Minimum airmass available: 1.1868890422770528
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
 QA COMPLETE: All tests passed
+<<<<<<< HEAD
 Minimum airmass available: 1.1842425699430168
+=======
+Minimum airmass available: 1.1842425617646966
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 
 ==> 20220305_03, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -54,7 +69,11 @@ Minimum airmass available: 1.1842425699430168
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J084115.29+022905.20_N540 to GAMA_J093015.05+022107.24_N540
 QA COMPLETE: All tests passed
+<<<<<<< HEAD
 Minimum airmass available: 1.1435599857035235
+=======
+Minimum airmass available: 1.1435599764100017
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 
 ==> 20220305_04, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -63,7 +82,11 @@ Minimum airmass available: 1.1435599857035235
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
+<<<<<<< HEAD
 Minimum airmass available: 1.1452703129195667
+=======
+Minimum airmass available: 1.1452703030716171
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 
 ==> 20220305_05, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -72,7 +95,11 @@ Minimum airmass available: 1.1452703129195667
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
+<<<<<<< HEAD
 Minimum airmass available: 1.142581596640516
+=======
+Minimum airmass available: 1.142581587917295
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 
 ==> 20220305_06, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -82,7 +109,11 @@ Minimum airmass available: 1.142581596640516
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J094106.45+035117.24_N540 to GAMA_J113357.74+014935.22_N540
 QA COMPLETE: All tests passed
+<<<<<<< HEAD
 Minimum airmass available: 1.1431655665104523
+=======
+Minimum airmass available: 1.1431655602093485
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 
 ==> 20220305_07, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -91,7 +122,11 @@ Minimum airmass available: 1.1431655665104523
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
+<<<<<<< HEAD
 Minimum airmass available: 1.1456067664776126
+=======
+Minimum airmass available: 1.1456067603064033
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 
 ==> 20220305_08, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -101,9 +136,15 @@ Minimum airmass available: 1.1456067664776126
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J114110.23+030212.10_N540 to GAMA_J144611.19-005053.62_N540
 QA COMPLETE: All tests passed
+<<<<<<< HEAD
 Minimum airmass available: 1.1617887523710793
 
 ==> 20220305_09, 7439.999999999946s available
+=======
+Minimum airmass available: 1.161788754586152
+
+==> 20220305_09, 7439.999999999951s available
+>>>>>>> 9c19822de2caa4c30268daca8ee38c228f1ad69f
 [plan_night] padding the last hour script by 5400.0s
 0.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
