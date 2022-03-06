@@ -4,7 +4,7 @@
 DAY:       5
 MONTH:     3
 YEAR:      2022
-TELEFILE:  ../../DataLogs/tele20220304.csv
+TELEFILE:  ../../DataLogs/tele20220305.csv
 COPILOT:   ../../DataLogs/db_merian.fits
 .         *          
     *    .        *        .   .     .
@@ -19,10 +19,10 @@ COPILOT:   ../../DataLogs/db_merian.fits
        \\            \_ .  _  .
 _______________ _  _ __ _  __      _  .   .
 
-[verify_synchronicity] last exposure in logs is 1085677, taken at 2022-03-05 08:55:33.817463+00:00
+[verify_synchronicity] last exposure in logs is 1085891, taken at 2022-03-06 09:22:15.548094+00:00
 On 2022/3/5, we are observing COSMOSGAMA in N708
 We are observing the second 3/4 of the night
-15 pointings in this catalog need reobservation!
+11 pointings in this catalog need reobservation!
 [predict] night slot: Second 3/4
 obsStart: 2022/03/05 11:35 PM Santiago
           2022/03/05 09:35 PM ET
@@ -34,7 +34,7 @@ obsEnd:   2022/03/06 06:35 AM Santiago
           2022/03/06 09:35 AM UTC
 Moon illumination is: 0.14
 Moon max altitude during observation is: 0.00
-Minimum airmass available: 1.200942615729489
+Minimum airmass available: 1.2014984307278158
 
 ==> 20220306_02, 1500.0000000000075s available
 0.0s filled by priority=0.0 objects
@@ -44,7 +44,7 @@ Minimum airmass available: 1.200942615729489
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.1535355426609446
+Minimum airmass available: 1.1668657624326322
 
 ==> 20220306_03, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -52,9 +52,8 @@ Minimum airmass available: 1.1535355426609446
 0.0s filled by priority=2.0 objects
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J091718.60+022438.08_N708 to GAMA_J100848.81-005304.66_N708
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.1427259564344592
+Minimum airmass available: 1.1429104115127449
 
 ==> 20220306_04, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -80,7 +79,9 @@ Minimum airmass available: 1.1421806890387673
 0.0s filled by priority=2.0 objects
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
-Warning: Airmass of 1.54 in exposure 6 of file ../json/20220305/20220306_06.json
+Warning: Airmass of 1.51 in exposure 4 of file ../json/20220305/20220306_06.json
+Warning: Airmass of 1.55 in exposure 5 of file ../json/20220305/20220306_06.json
+Warning: Airmass of 1.66 in exposure 6 of file ../json/20220305/20220306_06.json
 Minimum airmass available: 1.143208299800475
 
 ==> 20220306_07, 3600.0s available
@@ -89,19 +90,18 @@ Minimum airmass available: 1.143208299800475
 3600.0s filled by priority=2.0 objects
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J103256.78+015635.19_N708 to GAMA_J122058.09+014024.39_N708
+[to_json] Big slew from GAMA_J101538.22+021127.50_N708 to GAMA_J120343.76+014659.27_N708
 QA COMPLETE: All tests passed
 Minimum airmass available: 1.1452525896788441
 
 ==> 20220306_08, 3600.0s available
 0.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
-3600.0s filled by priority=2.0 objects
-0.0s filled by priority=3.0 objects
+0.0s filled by priority=2.0 objects
+3600.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
-Warning: Airmass of 1.52 in exposure 4 of file ../json/20220305/20220306_08.json
-Warning: Airmass of 1.56 in exposure 5 of file ../json/20220305/20220306_08.json
-Warning: Airmass of 1.62 in exposure 6 of file ../json/20220305/20220306_08.json
+[to_json] Big slew from GAMA_J121947.52+014321.86_N708 to GAMA_J144611.19-005053.62_N708
+QA COMPLETE: All tests passed
 Minimum airmass available: 1.1652744146969638
 
 ==> 20220306_09, 5699.999999999956s available
@@ -111,7 +111,6 @@ Minimum airmass available: 1.1652744146969638
 0.0s filled by priority=2.0 objects
 5400.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J121947.52+014321.86_N708 to GAMA_J145638.24-004302.78_N708
 QA COMPLETE: All tests passed
  .   . 
  {\*/} 
