@@ -4,8 +4,8 @@
 DAY:       10
 MONTH:     3
 YEAR:      2022
-TELEFILE:  ../../DataLogs/tele20220309.csv
-COPILOT:   /Users/kadofong/Downloads/db_merian.fits
+TELEFILE:  /Users/shanydanieli/Downloads/tele20220309.csv
+COPILOT:   /Users/shanydanieli/Downloads/db_merian.fits
 .         *          
     *    .        *        .   .     .
       ____            .    {\*/}           .  *     .
@@ -34,9 +34,9 @@ obsEnd:   2022/03/11 06:39 AM Santiago
           2022/03/11 09:39 AM UTC
 Moon illumination is: 0.58
 Moon max altitude during observation is: 16.26
-Minimum airmass available: 1.1856211220943216
+Minimum airmass available: 1.1856211117408304
 
-==> 20220311_02, 1755.0000000000186s available
+==> 20220311_02, 1754.9999999999995s available
 0.0s filled by priority=0.0 objects
 900.0s filled by priority=1.0 objects
 0.0s filled by priority=2.0 objects
@@ -44,7 +44,7 @@ Minimum airmass available: 1.1856211220943216
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.164414936174133
+Minimum airmass available: 1.1644148989965337
 
 ==> 20220311_03, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -53,7 +53,7 @@ Minimum airmass available: 1.164414936174133
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.1423084029409034
+Minimum airmass available: 1.1423083941291816
 
 ==> 20220311_04, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -62,7 +62,7 @@ Minimum airmass available: 1.1423084029409034
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.1418507067346577
+Minimum airmass available: 1.1418506988633654
 
 ==> 20220311_05, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -72,7 +72,7 @@ Minimum airmass available: 1.1418507067346577
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J093544.21+035055.67_N540 to GAMA_J113357.74+014935.22_N540
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.14236279274583
+Minimum airmass available: 1.142362785600009
 
 ==> 20220311_06, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -81,7 +81,7 @@ Minimum airmass available: 1.14236279274583
 0.0s filled by priority=3.0 objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.1438018710827917
+Minimum airmass available: 1.1438018622652735
 
 ==> 20220311_07, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -91,7 +91,7 @@ Minimum airmass available: 1.1438018710827917
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J113006.37+014007.53_N540 to GAMA_J140127.79-010115.62_N540
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.146092162361219
+Minimum airmass available: 1.146092154417885
 
 ==> 20220311_08, 3600.0s available
 0.0s filled by priority=0.0 objects
@@ -101,9 +101,9 @@ Minimum airmass available: 1.146092162361219
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J140127.79-010115.62_N540 to GAMA_J145748.43-004624.05_N540
 QA COMPLETE: All tests passed
-Minimum airmass available: 1.199825847302189
+Minimum airmass available: 1.1998258874176473
 
-==> 20220311_09, 7739.999999999945s available
+==> 20220311_09, 7739.99999999995s available
 [plan_night] padding the last hour script by 5400.0s
 0.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
@@ -124,7 +124,7 @@ time (UTC)		SXDS	COSMOS	GH14	NSA15235
 2022/03/11 06:30 AM	-1.30	1.69	1.31	1.31	
 2022/03/11 07:30 AM	-1.22	2.44	1.22	1.21	
 2022/03/11 08:30 AM	-1.24	4.97	1.21	1.20	
-2022/03/11 09:30 AM	-1.35	-43.28	1.30	1.27	
+2022/03/11 09:30 AM	-1.35	-43.27	1.30	1.27	
 
           
 ~ ( B A C K U P  F I E L D S ) ~          
