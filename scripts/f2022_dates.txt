@@ -1,0 +1,24 @@
+# observing dates for semester 2022B
+# slots :
+# 0 : full night
+# 1 : first half
+# 2 : second half
+# 3 : second 3/4
+# 4 : second half and {extra} hours of the first half     
+# year month day slot    
+2022 09 20 2 N540
+2022 09 21 2 N708
+2022 09 22 2 N540
+2022 09 23 2 N708
+2022 09 27 0 N540
+2022 09 28 0 N540
+2022 09 29 0 N708
+2022 09 30 0 N708
+# \\ the first half of the night is too bright! 
+# \\ moon is UP
+# 2022 10 2  0
+# 2022 10 3  0
+# 2022 10 4  0
+2022 10 2 2 N540
+2022 10 3 2 N708
+2022 10 4 2 N708

@@ -14,7 +14,7 @@ from astropy import coordinates, table
 from astropy import units as u
 from astropy.time import Time
 from astropy.io import fits
-import healpy as hp
+
 from . import utils, qa
 
 dim_d = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
@@ -55,6 +55,7 @@ class ObsCatalog (object):
         return f'{field_name}_J{ra_truncated}{dec_truncated}_{filter_name}'
 
     def objnamer_healpix ( self, cat_row ):
+        import healpy as hp
         pixel_index = hp.ang2pix(80000, cat_row['RA'],
                                    cat_row['dec'], lonlat=True)
         filter_name = cat_row['filter']
