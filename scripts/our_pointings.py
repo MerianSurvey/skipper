@@ -107,7 +107,8 @@ def construct_fall_superset ( newp, oldp ):
     # \\ cut off early VVDS fields -< not for now
     superset = superset.loc[(superset['RA']<175.)|(superset['RA']>339.)]
     # \\ deprioritize middle where we have no DEC coverage
-    is_mid = (superset['RA']>0.)&(superset['RA']<28.)
+    is_mid = (superset['RA']>(360.-8.))|(superset['RA']<28.)
+    is_mid |= (superset['RA']>(360-13.))&(superset['RA']<(360.-5.))&(superset['dec']>3.)
     superset.loc[is_mid, 'object'] = superset.loc[is_mid, 'object'].apply(lambda x: x.replace('btwnXV', 'newRAbtwnXV'))
     above_xmm = (superset['RA']>38.)&(superset['RA']<=40.)
     superset.loc[above_xmm, 'object'] = superset.loc[above_xmm, 'object'].apply(lambda x: x.replace('btwnXV', 'XMMhigh'))
