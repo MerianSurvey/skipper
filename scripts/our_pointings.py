@@ -1,5 +1,8 @@
 # \\ load catalog of master pointings
+import re
 import pandas as pd
+from astropy import coordinates
+from astropy import units as u
 
 def _load_mastercat_cosmos ( fname = '../pointings/cosmosgama_N540.csv' ):
     mastercat = pd.read_csv ( fname )
@@ -66,10 +69,67 @@ def _load_fallfields_perfilter ( filter_name, early_vvds=True ):
     mastercat['proposer'] = 'Leauthaud'
     return mastercat    
 
-def load_fallfields ( *args, **kwargs ):
+def load_fallfields_f2021 ( *args, **kwargs ):
     '''
-    Loads Halpha and OIII catalogs for the fall fields
+    Loads Halpha and OIII catalogs for the fall fields -- the OLD pointings
+    from F2021B. These do not include the expanded coverage from S21A
     '''
     hcat = _load_fallfields_perfilter ( 'N708', *args, **kwargs )
     ocat = _load_fallfields_perfilter ( 'N540', *args, **kwargs )
     return hcat, ocat
+
+def construct_fall_superset ( newp, oldp ):
+    '''
+    Construct the superset of the new fall pointings & old fall pointings without
+    duplicating objects.
+    
+    Also preserves old object names
+    '''
+    new_coords = coordinates.SkyCoord ( newp['RA'], newp['dec'], unit=('deg','deg'))
+    old_coords = coordinates.SkyCoord ( oldp['RA'], oldp['dec'], unit=('deg','deg'))
+
+    matchid, sep, _ = old_coords.match_to_catalog_sky ( new_coords )
+    match_limit = 0.05 * u.arcsec
+
+    oldnames_wmatch = oldp.loc[sep<=match_limit].index
+    newnames_wmatch = newp.index[matchid[sep<=match_limit]]
+
+    new_unique_pointings = newp.index.difference(newnames_wmatch)
+    pointings_to_add = newp.reindex(new_unique_pointings)
+    pointings_to_add.index = [ x.replace('XMM_VVDS','btwnXV') for x in pointings_to_add.index ]
+    
+    # \\ object.1 -> object
+    pointings_to_add = pointings_to_add.rename ( {'object.1':'object'}, axis=1)
+    pointings_to_add['object'] = pointings_to_add['object'].apply(lambda x:x.replace('XMM_VVDS','btwnXV') )
+    
+    superset = pd.concat([oldp, pointings_to_add])
+    
+    # \\ cut off early VVDS fields -< not for now
+    superset = superset.loc[(superset['RA']<175.)|(superset['RA']>339.)]
+    # \\ deprioritize middle where we have no DEC coverage
+    is_mid = (superset['RA']>0.)&(superset['RA']<28.)
+    superset.loc[is_mid, 'object'] = superset.loc[is_mid, 'object'].apply(lambda x: x.replace('btwnXV', 'newRAbtwnXV'))
+    above_xmm = (superset['RA']>38.)&(superset['RA']<=40.)
+    superset.loc[above_xmm, 'object'] = superset.loc[above_xmm, 'object'].apply(lambda x: x.replace('btwnXV', 'XMMhigh'))
+    #assert superset.shape[0] == (newp.shape[0] + oldp.shape[0] - oldnames_wmatch.shape[0])
+    return superset
+
+def load_newfallpointings(csv):
+    x = pd.read_csv(csv, index_col=0)
+    x.loc[x['RA']<0.,'RA'] = x.loc[x['RA']<0.,'RA'] + 360.
+    return x
+
+def load_fallfields ( *args, **kwargs):
+    '''
+    Loads Halpha & OIII pointings for the fall fields -- these DO include
+    new pointings from S21A, and we should use these catalogs
+    as the fall field catalogs.    
+    '''
+    # a mapping hiccup: copilot output saves 'object' which has
+    # the VVDS early/late designations.
+    hcat, ocat = load_fallfields_f2021 ()
+    oiii_pointings = construct_fall_superset ( load_newfallpointings('../pointings/xmm_vvds_N540.csv'),
+                                               ocat )
+    halpha_pointings = construct_fall_superset ( load_newfallpointings('../pointings/xmm_vvds_N708.csv'),
+                                                 hcat )
+    return halpha_pointings, oiii_pointings
