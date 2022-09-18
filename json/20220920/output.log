@@ -1,0 +1,120 @@
+[verify_synchronicity] last exposure in logs is 1087049, taken at 2022-03-11 09:22:22.530928+00:00
+On 2022/9/20, we are observing None in N540
+We are observing the second half of the night
+14 pointings in this catalog need reobservation!
+[predict] night slot: Second half
+obsStart: 2022/09/21 01:36 AM Santiago
+          2022/09/21 12:36 AM ET
+          2022/09/20 09:36 PM PT
+          2022/09/21 04:36 AM UTC
+obsEnd:   2022/09/21 06:32 AM Santiago
+          2022/09/21 05:32 AM ET
+          2022/09/21 02:32 AM PT
+          2022/09/21 09:32 AM UTC
+Moon illumination is: 0.20
+Moon max altitude during observation is: 10.90
+[plan_night] Inferring priorities from object names
+
+(Minimum airmass available: 1.170462486365145)
+==> 20220921_04, 1440.0000000000077s available
+900.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=4.0 objects
+0.0s filled by priority=5.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.170043775378815)
+==> 20220921_05, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=4.0 objects
+0.0s filled by priority=5.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.152292543690726)
+==> 20220921_06, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=4.0 objects
+0.0s filled by priority=5.0 objects
+[to_json] Inserting 60s focus exposures
+Warning: Airmass of 1.53 in exposure 3 of file ../json/20220920/20220921_06.json
+Warning: Airmass of 1.63 in exposure 4 of file ../json/20220920/20220921_06.json
+
+(Minimum airmass available: 1.149907475567513)
+==> 20220921_07, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=4.0 objects
+0.0s filled by priority=5.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from VVDSlate_J230103.23+010839.79_N540 to XMM_J021432.07+333801.17_N540
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.2032459508169369)
+==> 20220921_08, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=4.0 objects
+0.0s filled by priority=5.0 objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.357824895165752)
+==> 20220921_09, 7319.999999999961s available
+[plan_night] padding the last hour script by 5400.0s
+0.0s filled by priority=0.0 objects
+7200.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=4.0 objects
+0.0s filled by priority=5.0 objects
+[to_json] Inserting 60s focus exposures
+Warning: Airmass of 1.55 in exposure 4 of file ../json/20220920/20220921_09.json
+Warning: Airmass of 1.61 in exposure 5 of file ../json/20220920/20220921_09.json
+Warning: Airmass of 1.69 in exposure 6 of file ../json/20220920/20220921_09.json
+Warning: Airmass of 1.76 in exposure 7 of file ../json/20220920/20220921_09.json
+Warning: Airmass of 1.91 in exposure 8 of file ../json/20220920/20220921_09.json
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)		SXDS	COSMOS	GH14	NSA15235	
+2022/09/21 04:30 AM	1.41	-1.26	-1.49	-1.54	
+2022/09/21 05:30 AM	1.21	-1.50	-1.25	-1.28	
+2022/09/21 06:30 AM	1.12	-2.01	-1.14	-1.16	
+2022/09/21 07:30 AM	1.11	-3.41	-1.12	-1.13	
+2022/09/21 08:30 AM	1.18	-14.02	-1.17	-1.17	
+2022/09/21 09:30 AM	1.35	6.48	-1.32	-1.32	
+
+          
+~ ( B A C K U P  F I E L D S ) ~          
+          
+=== SXDS ===
+Next script for [g, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_g_04.json
+No back-up scripts available for [g, 90sec]
+Next script for [r, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_r_02.json
+No back-up scripts available for [r, 90sec]
+=== COSMOS ===
+Next script for [g, 5min] is ../json/backup_scripts/COSMOS/5min/COSMOS_5minAGN_g_08.json
+Next script for [g, 90sec] is ../json/backup_scripts/COSMOS/90sec/COSMOS_90secAGN_g_02.json
+Next script for [r, 5min] is ../json/backup_scripts/COSMOS/5min/COSMOS_5minAGN_r_05.json
+Next script for [r, 90sec] is ../json/backup_scripts/COSMOS/90sec/COSMOS_90secAGN_r_01.json
+=== GH14 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GH14/90sec/GH14_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+No back-up scripts available for [r, 90sec]
+=== NSA15235 ===
+No back-up scripts available for [g, 5min]
+No back-up scripts available for [g, 90sec]
+No back-up scripts available for [r, 5min]
+No back-up scripts available for [r, 90sec]
