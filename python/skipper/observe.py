@@ -332,7 +332,7 @@ class ObsCatalog (object):
             cmass['is_possible'] = True            
             cmass.loc[cmass.airmass<0,'is_possible'] = False
             cmass.loc[is_queued.is_queued, 'is_possible'] = False
-            print(f'Minimum airmass available: {cmass.loc[cmass.is_possible, "airmass"].min()}')
+            print(f'\n(Minimum airmass available: {cmass.loc[cmass.is_possible, "airmass"].min()})')
             cmass.loc[cmass.airmass>maxairmass, 'is_possible'] = False
             cmass['going_to_queue'] = False
 
@@ -365,7 +365,7 @@ class ObsCatalog (object):
             if total_available_time < catalog.expTime.mean():
                 print(f'({total_available_time:.0f}s) Not enough time for an exposure. Skipping...')
                 continue
-            print(f'\n==> {hstr}, {total_available_time}s available')
+            print(f'==> {hstr}, {total_available_time}s available')
             if pad_last_hour and ix==(len(alt_l[0])-1):
                 print(f'[plan_night] padding the last hour script by {pad_time}s') # \\ say this here to make 
                 # \\ log more readable

@@ -113,6 +113,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                    is_queued=None,                  
                    cut_at_contract=False,
                    priorities=None,
+                   maxairmass = 1.5,
+                   verbose = True,
                    extra = None, # manual extra hours                    
                    **kwargs ):
     '''
@@ -213,15 +215,15 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
         obs_start = midpoint - datetime.timedelta(hours=extra)
         obs_end = night_end
         
-
-    print(f"obsStart: {obs_start.astimezone(ctio.timezone).strftime(fmt)} Santiago")
-    print(f"          {obs_start.astimezone(et).strftime(fmt)} ET")
-    print(f"          {obs_start.astimezone(pt).strftime(fmt)} PT")
-    print(f"          {obs_start.strftime(fmt)} UTC")
-    print(f"obsEnd:   {obs_end.astimezone(ctio.timezone).strftime(fmt)} Santiago")
-    print(f"          {obs_end.astimezone(et).strftime(fmt)} ET")
-    print(f"          {obs_end.astimezone(pt).strftime(fmt)} PT")
-    print(f"          {obs_end.strftime(fmt)} UTC")
+    if verbose:
+        print(f"obsStart: {obs_start.astimezone(ctio.timezone).strftime(fmt)} Santiago")
+        print(f"          {obs_start.astimezone(et).strftime(fmt)} ET")
+        print(f"          {obs_start.astimezone(pt).strftime(fmt)} PT")
+        print(f"          {obs_start.strftime(fmt)} UTC")
+        print(f"obsEnd:   {obs_end.astimezone(ctio.timezone).strftime(fmt)} Santiago")
+        print(f"          {obs_end.astimezone(et).strftime(fmt)} ET")
+        print(f"          {obs_end.astimezone(pt).strftime(fmt)} PT")
+        print(f"          {obs_end.strftime(fmt)} UTC")
     
     moon_cillum, moon_altreport = ctio.track_moon ( obs_start, obs_end)
     print(f'Moon illumination is: {moon_cillum:.2f}')
@@ -229,10 +231,11 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
 
     is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
                                      is_queued=is_queued.copy(),
-                                     maxairmass=1.5, 
+                                     maxairmass=maxairmass, 
                                      object_priority=priorities,
                                      **kwargs )
 
-    print_backupaltitudes (obs_start, obs_end )
-    nextbackupscript ( tele )
+    if verbose:
+        print_backupaltitudes (obs_start, obs_end )
+        nextbackupscript ( tele )
     return is_queued_tmrw
