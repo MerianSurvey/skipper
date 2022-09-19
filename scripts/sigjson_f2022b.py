@@ -36,7 +36,15 @@ def whichfield ( year, month, day ):
     return mfilt, None, nightslot
 
 def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, 
-                    pointings=None, priorities=None, **kwargs ):  
+                    pointings=None, priorities=None, **kwargs ):
+    print(f'DAY:       {day}')
+    print(f'MONTH:     {month}')
+    print(f'YEAR:      {year}')
+    print(f'TELEFILE:  {tele_fname}')
+    print(f'COPILOT:   {copilot_fname}')      
+    w = open('../resources/aart.txt','r').read()
+    print(w)
+            
     if pointings is None:
         halpha_pointings, oiii_pointings =  our_pointings.load_fallfields()
     if priorities is None:
@@ -54,3 +62,28 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None,
     is_queued = planner.plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                                        whichfield=whichfield, priorities=priorities, **kwargs )
     return is_queued
+
+def duplicate_obsscript (halpha_pointings, json_input, output_filename ):
+    from astropy import coordinates
+    from astropy import units as u
+    from skipper import observe 
+    jscript = pd.read_json(json_input)
+    
+    planned_oiii_obscoords = coordinates.SkyCoord( jscript['RA'], 
+                                                   jscript['dec'], 
+                                                   unit=('deg','deg'))
+    # \\ match via coordinates
+    # \\ load N708 pointings
+    halpha_locations = coordinates.SkyCoord( halpha_pointings['RA'], halpha_pointings['dec'], 
+                                            unit=('deg','deg'))
+    matchids, sep, _ = planned_oiii_obscoords.match_to_catalog_sky ( halpha_locations )
+    matches = sep < 0.05*u.arcsec
+
+    assert matches.sum() == len(planned_oiii_obscoords)
+
+    match_indices = halpha_pointings.index[matchids[matches]]
+
+    dummy_obscat = observe.ObsCatalog ( propid='2020B-0288', seqid='2022B')
+
+    dummy_obscat.to_json ( halpha_pointings.reindex(match_indices), fp=output_filename, 
+                          insert_checksky_exposures=False)    
