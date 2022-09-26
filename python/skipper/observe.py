@@ -63,7 +63,7 @@ class ObsCatalog (object):
         return f'{field_name}_HP{pixel_index}_{filter_name}'
         
     def build_object_names (self, catalog, naming_scheme='coord'):
-        obj_df = pd.Series(index=catalog.index)
+        obj_df = pd.Series(index=catalog.index, dtype=str)
 
         namer_d = {'healpix':self.objnamer_healpix,
                    'coord':self.objnamer_coordinates}

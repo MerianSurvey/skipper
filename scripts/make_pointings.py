@@ -6,11 +6,13 @@ from skipper import observe,tiling,visualize
 
 fmt = '%Y/%m/%d %I:%M %p'
 
-def build_cosmos (seed=267667, start_at_center=True, filter='N708',
+def build_cosmos (seed=267667, 
+                  start_at_center=True, filter='N708',
                   exptime=10.,
                   ndither=40,
                   center=None,
                   name='COSMOS',
+                  seqid='S2021A',
                   return_frd=False):
     '''
     Build COSMOS dithering pattern from FocusedRandomDither
@@ -33,7 +35,7 @@ def build_cosmos (seed=267667, start_at_center=True, filter='N708',
                                       start_at_center=start_at_center)
     centers = frd.get_centers ()
     ocat = observe.ObsCatalog(comment='--', proposer='Leauthaud', 
-                          propid='2020B-0288', seqid='S2021A')
+                          propid='2020B-0288', seqid=seqid)
     catalog = ocat.build_catalog(centers[:,0], centers[:,1],
                                  name, filter, 'object', exptime*60)
     assert not catalog.object.duplicated().any()
@@ -53,21 +55,27 @@ def build_backup ( seed=2465646, filter='g', exptime=5., total_time=40., start_a
     for i in range(nscripts):
         catalog, ocat, frd = build_cosmos ( seed=None,filter=filter,exptime=exptime,
                                        ndither = int(total_time//exptime), start_at_center=start_at_center,
-                                       return_frd=True,
+                                       return_frd=True, name=None,
                                        **kwargs
                                        )
         frd_l.append(frd)
         catalog_l.append(catalog)
     return catalog_l, ocat, frd_l
 
-def build_SOAGN ( objid, seed=123, filter='g', exptime=1.5, total_time=60., start_at_center=False, nscripts=20, **kwargs ):
+def build_SOAGN ( objid, 
+                 filename='../data/SOAGN.txt',
+                 name=None,                 
+                 seed=123, filter='g', exptime=1.5, total_time=60., 
+                 start_at_center=True, nscripts=20, **kwargs ):
     '''
     Build a catalog for the single AGN variability back-up program
     
     seed = 123
     '''
+    if name is None:
+        name = objid
     # \\ load source 
-    src_df = pd.read_csv ('../data/SOAGN.txt', delim_whitespace=True, comment='#', index_col=0)
+    src_df = pd.read_csv (filename, delim_whitespace=True, comment='#', index_col=0)
     center = coordinates.SkyCoord ( src_df.loc[objid, 'RA'], src_df.loc[objid,'Dec'], unit='deg')
     catalog_l = []
     frd_l = []
@@ -78,6 +86,7 @@ def build_SOAGN ( objid, seed=123, filter='g', exptime=1.5, total_time=60., star
                                             start_at_center=start_at_center,
                                             center=center,
                                             return_frd=True,
+                                            name = name,
                                             **kwargs
                                        )
         frd_l.append(frd)

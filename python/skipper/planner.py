@@ -1,5 +1,6 @@
 #from asyncio.format_helpers import extract_stack
 import os
+#from parser import st2list
 import pytz
 import datetime
 import numpy as np
@@ -19,7 +20,16 @@ ct = pytz.timezone("Asia/Chongqing")
 _backup_centers = {'SXDS':coordinates.SkyCoord ("35.739030633438745 -4.7489828727193775", unit='deg'),
                     'COSMOS':coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s"),
                     'GH14':coordinates.SkyCoord (218.710949, 3.645162, unit='deg' ),
-                    'NSA15235':coordinates.SkyCoord (220.052925, 2.795422, unit='deg')}
+                    'NSA15235':coordinates.SkyCoord (220.052925, 2.795422, unit='deg'),
+                    'GAMA5220386':coordinates.SkyCoord(341.4840027,-34.6012237,unit='deg'),
+                    'GAMA5275222':coordinates.SkyCoord(345.3551208,-34.2113545,unit='deg'),
+                    'GAMA5265117':coordinates.SkyCoord(344.6030656,-31.2366291,unit='deg'),
+                    'GAMA5240292':coordinates.SkyCoord(343.2688411,-33.9772443,unit='deg'),
+                    'GAMA5247018':coordinates.SkyCoord(344.079748,-30.8219773,unit='deg'),
+                    'GAMA5266552':coordinates.SkyCoord(344.3078567,-30.9387669,unit='deg'),
+                    'GAMA5337331':coordinates.SkyCoord(349.0095776,-34.2318865,unit='deg'),
+                    'GAMA5197149':coordinates.SkyCoord(339.824962,-34.0506528,unit='deg'),                    
+                    }
 _BACKUP_FIELDS = list(_backup_centers.keys ())
 
 def load_telemetry ( fname ):
@@ -41,18 +51,31 @@ def print_backupaltitudes (obs_start, obs_end, backup_fields=None):
     
     dtime = [ alt_l[0][ix].obstime.datetime for ix in range(len(alt_l[0]))]
     hd = 'time (UTC)\t\t'
-    for iw in range(len(backup_centers)):
-        hd = f'{hd}{backup_fields[iw]}\t'
+    #for iw in range(len(backup_centers)):
+    #    hd = f'{hd}{backup_fields[iw]}\t'
+    for iv in range(len(dtime)):
+        dt = dtime[iv]
+        hd = f'{hd}{dt.strftime(fmt)}\t'
+        
     bfly = open('../resources/bfly.txt','r').read()
     print(bfly)
-    print(hd)    
+    print(hd) 
+    
+    for iw in range(len(backup_centers)):
+        st = f'{backup_fields[iw]}\t\t'
+        for iv in range(len(dtime)):
+            airmass = alt_l[iw].secz[iv]
+            st = f'{st}{airmass:.2f}\t'
+        print(st)
+    
+    '''
     for iv in range(len(dtime)):
         dt = dtime[iv]
         st = f'{dt.strftime(fmt)}\t'
         for iw in range(len(backup_centers)):            
             airmass = alt_l[iw].secz[iv]
             st = f'{st}{airmass:.2f}\t'
-        print(st) 
+        print(st) '''
  
 def nextbackupscript ( tele, backup_fields=None ):
     '''

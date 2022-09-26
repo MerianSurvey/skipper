@@ -106,13 +106,19 @@ Warning: Airmass of 1.84 in exposure 7 of file ../json/20220922/20220923_09.json
   >!<  BACKUP FIELD INFO
  (/^\) 
  '   ' 
-time (UTC)		SXDS	COSMOS	GH14	NSA15235	
-2022/09/23 04:30 AM	1.38	-1.28	-1.45	-1.49	
-2022/09/23 05:30 AM	1.19	-1.55	-1.23	-1.26	
-2022/09/23 06:30 AM	1.12	-2.12	-1.14	-1.15	
-2022/09/23 07:30 AM	1.12	-3.77	-1.12	-1.13	
-2022/09/23 08:30 AM	1.20	-24.02	-1.19	-1.19	
-2022/09/23 09:30 AM	1.39	5.46	-1.35	-1.35	
+time (UTC)		2022/09/23 04:30 AM	2022/09/23 05:30 AM	2022/09/23 06:30 AM	2022/09/23 07:30 AM	2022/09/23 08:30 AM	2022/09/23 09:30 AM	
+SXDS		1.38	1.19	1.12	1.12	1.20	1.39	
+COSMOS		-1.28	-1.55	-2.12	-3.77	-24.02	5.46	
+GH14		-1.45	-1.23	-1.14	-1.12	-1.19	-1.35	
+NSA15235		-1.49	-1.26	-1.15	-1.13	-1.19	-1.35	
+GAMA5220386		1.03	1.12	1.30	1.62	2.25	3.87	
+GAMA5275222		1.02	1.09	1.24	1.52	2.05	3.29	
+GAMA5265117		1.02	1.10	1.26	1.56	2.15	3.67	
+GAMA5240292		1.03	1.11	1.27	1.57	2.16	3.62	
+GAMA5247018		1.02	1.11	1.27	1.58	2.19	3.80	
+GAMA5266552		1.02	1.10	1.27	1.57	2.18	3.75	
+GAMA5337331		1.01	1.07	1.20	1.43	1.88	2.86	
+GAMA5197149		1.04	1.14	1.33	1.67	2.38	4.28	
 
           
 ~ ( B A C K U P  F I E L D S ) ~          
@@ -137,3 +143,43 @@ No back-up scripts available for [g, 5min]
 No back-up scripts available for [g, 90sec]
 No back-up scripts available for [r, 5min]
 No back-up scripts available for [r, 90sec]
+=== GAMA5220386 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5220386/90sec/GAMA5220386_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5220386/90sec/GAMA5220386_90secAGN_r_01.json
+=== GAMA5275222 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5275222/90sec/GAMA5275222_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5275222/90sec/GAMA5275222_90secAGN_r_01.json
+=== GAMA5265117 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5265117/90sec/GAMA5265117_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5265117/90sec/GAMA5265117_90secAGN_r_01.json
+=== GAMA5240292 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5240292/90sec/GAMA5240292_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5240292/90sec/GAMA5240292_90secAGN_r_01.json
+=== GAMA5247018 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5247018/90sec/GAMA5247018_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5247018/90sec/GAMA5247018_90secAGN_r_01.json
+=== GAMA5266552 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5266552/90sec/GAMA5266552_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5266552/90sec/GAMA5266552_90secAGN_r_01.json
+=== GAMA5337331 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5337331/90sec/GAMA5337331_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5337331/90sec/GAMA5337331_90secAGN_r_01.json
+=== GAMA5197149 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5197149/90sec/GAMA5197149_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5197149/90sec/GAMA5197149_90secAGN_r_01.json
