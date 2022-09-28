@@ -50,22 +50,25 @@ def print_backupaltitudes (obs_start, obs_end, backup_fields=None):
     alt_l = [ ctio.get_altitude(cc, obsframe) for cc in backup_centers]
     
     dtime = [ alt_l[0][ix].obstime.datetime for ix in range(len(alt_l[0]))]
-    hd = 'time (UTC)\t\t'
+    field_length = max([len(x) for x in backup_fields ]) + 3
+    hd = 'time (UTC)'.ljust(field_length, ' ')
     #for iw in range(len(backup_centers)):
     #    hd = f'{hd}{backup_fields[iw]}\t'
     for iv in range(len(dtime)):
         dt = dtime[iv]
-        hd = f'{hd}{dt.strftime(fmt)}\t'
+        dt = f'{dt.strftime("%I:%M")}'.ljust(10, ' ')
+        hd = f'{hd}{dt}'
         
     bfly = open('../resources/bfly.txt','r').read()
     print(bfly)
     print(hd) 
     
     for iw in range(len(backup_centers)):
-        st = f'{backup_fields[iw]}\t\t'
+        st = f'{backup_fields[iw]}'.ljust(field_length, ' ')
         for iv in range(len(dtime)):
             airmass = alt_l[iw].secz[iv]
-            st = f'{st}{airmass:.2f}\t'
+            airmass = f'{airmass:.2f}'.ljust (10, ' ' )
+            st = f'{st}{airmass}'
         print(st)
     
     '''
@@ -168,8 +171,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
         skySB_0 = 22.1
         teff_min = 300.
     else:
-        raise ValueError (f"the filter {mfilt} is not recognized!")
-
+        raise ValueError (f"the filter {mfilt} is not recognized!")    
+    
     print(f"On {year}/{month}/{day}, we are observing {field} in {mfilt}")
 
     if slot==0:
