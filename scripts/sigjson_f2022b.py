@@ -35,7 +35,7 @@ def whichfield ( year, month, day ):
     nightslot = obsdates[index, 3]
     return mfilt, None, nightslot
 
-def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, 
+def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slot=None,
                     pointings=None, priorities=None, **kwargs ):
     print(f'DAY:       {day}')
     print(f'MONTH:     {month}')
@@ -60,6 +60,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None,
         raise ValueError (f"Filter {mfilt} not recognized.")
     
     is_queued = planner.plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
+                                       current_slot=slot,
                                        whichfield=whichfield, priorities=priorities, **kwargs )
     return is_queued
 

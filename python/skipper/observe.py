@@ -234,6 +234,7 @@ class ObsCatalog (object):
                      obs_end=None, 
                      is_queued=None,
                      object_priority=None,
+                     exclude_hour_indices=None,
                      save=True,
                      checksky_at_start=True,
                      pad_first_hour=False,
@@ -267,6 +268,7 @@ class ObsCatalog (object):
           needed for observation.
           object priority should be given as {OBJECT_NAME:OBJECT_PRIORITY},
           where 0 is highest priority.
+        exclude_hour_indices (list-like): if given, will exclude hours by index 
         save (bool, default=True): if True, save output files as JSON observing scripts
         checksky_at_start (bool, default=True): if True, add 3 60s exposures to the start
           of the first script in order to check sky brightness
@@ -281,6 +283,8 @@ class ObsCatalog (object):
         else:
             catalog_objects = catalog['priority_name']
         
+        if exclude_hour_indices is None:
+            exclude_hour_indices = []        
 
         # \\ if time < 12, we've started past midnight.
         start_hour = obs_start.astimezone(obssite.timezone).hour
@@ -323,6 +327,8 @@ class ObsCatalog (object):
 
         previous_position = None # \\ initialize as null; no starting focus exp
         for ix in range(len(alt_l[0])): # \\ for each hour,
+            if ix in exclude_hour_indices:
+                continue
             htime = alt_l[0][ix].obstime.datetime            
             hstr = htime.strftime('%Y%m%d_%H')
 
