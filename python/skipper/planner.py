@@ -17,7 +17,7 @@ ct = pytz.timezone("Asia/Chongqing")
 
 
 
-_backup_centers = {'SXDS':coordinates.SkyCoord ("35.739030633438745 -4.7489828727193775", unit='deg'),
+_backup_centers = { 'SXDS':coordinates.SkyCoord ("35.739030633438745 -4.7489828727193775", unit='deg'),
                     'COSMOS':coordinates.SkyCoord ("10h00m28.6s+02d12m21.0s"),
                     'GH14':coordinates.SkyCoord (218.710949, 3.645162, unit='deg' ),
                     'NSA15235':coordinates.SkyCoord (220.052925, 2.795422, unit='deg'),
@@ -161,7 +161,6 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
         mfilt = current_filter
         field = current_field
         slot = current_slot
-        
     
     # \\ QUICKFIX for 2021B TODO: fix in observe.py
     if mfilt == 'N708':
@@ -185,6 +184,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
         tag ='second 3/4'
     elif slot==4:
         tag = f'second half and the last {extra} hours of the first half'
+    else:
+        raise ValueError (f"slot number {slot} not recognized")
         
     print(f'We are observing the {tag} of the night')
     #exp_exposures = tele.query('(exptime>599.)&(object!="G09")').shape[0]
