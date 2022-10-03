@@ -326,6 +326,14 @@ class ObsCatalog (object):
             has_checkedsky = True
 
         previous_position = None # \\ initialize as null; no starting focus exp
+        nexcluded = 0
+        while True:
+            hr = len(alt_l[0]) - 1 - nexcluded
+            if hr in exclude_hour_indices:
+                nexcluded+=1
+            else:
+                break
+        
         for ix in range(len(alt_l[0])): # \\ for each hour,
             if ix in exclude_hour_indices:
                 continue
@@ -351,7 +359,7 @@ class ObsCatalog (object):
                     print(f'\n[plan_night] padding the first hour script with an exposure even though we only have {total_available_time % 600.:.1f}s left')
                     total_available_time += 600. - total_available_time% 600.
                     
-            elif ix==(len(alt_l[0])-1):
+            elif ix==(len(alt_l[0])-1-nexcluded):
                 #print(obsframe.obstime[ix]+1.*u.hr)
                 #print(Time(obs_end))
                 if pad_last_hour:
@@ -366,7 +374,7 @@ class ObsCatalog (object):
 
             else:
                 total_available_time = 3600.
-            if ix != (len(alt_l[0])-1): # \\ don't do this when we intentionally add time
+            if ix != (len(alt_l[0])-1-nexcluded): # \\ don't do this when we intentionally add time
                 assert total_available_time <= 3600.1, f'{obs_end}, {total_available_time:.0f}s'
             if total_available_time < catalog.expTime.mean():
                 print(f'({total_available_time:.0f}s) Not enough time for an exposure. Skipping...')

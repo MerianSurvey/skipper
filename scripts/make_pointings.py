@@ -65,7 +65,8 @@ def build_backup ( seed=2465646, filter='g', exptime=5., total_time=40., start_a
 def build_SOAGN ( objid, 
                  filename='../data/SOAGN.txt',
                  name=None,                 
-                 seed=123, filter='g', exptime=1.5, total_time=60., 
+                 seed_l=None, 
+                 filter='g', exptime=1.5, total_time=60., 
                  start_at_center=True, nscripts=20, **kwargs ):
     '''
     Build a catalog for the single AGN variability back-up program
@@ -79,8 +80,9 @@ def build_SOAGN ( objid,
     center = coordinates.SkyCoord ( src_df.loc[objid, 'RA'], src_df.loc[objid,'Dec'], unit='deg')
     catalog_l = []
     frd_l = []
+    seed_l = [None,]*nscripts
     for i in range(nscripts):
-        catalog, ocat, frd = build_cosmos ( seed=seed,
+        catalog, ocat, frd = build_cosmos ( seed=seed_l[i],
                                             filter=filter,exptime=exptime,
                                             ndither = int(total_time//exptime), 
                                             start_at_center=start_at_center,

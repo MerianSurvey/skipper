@@ -99,8 +99,7 @@ def nextbackupscript ( tele, backup_fields=None ):
                 while True:
                     fname = f'../json/backup_scripts/{name}/{time}/{name}_{time}AGN_{filt}_{iu:02d}.json' 
                     
-                    
-                    if iu > 10:
+                    if iu > 20:
                         print ( f'No back-up scripts available for [{filt}, {time}]')
                         #raise ValueError ("No back-up scripts available! Need to regenerate")
                         break
@@ -108,7 +107,7 @@ def nextbackupscript ( tele, backup_fields=None ):
                         iu += 1    
                     else:
                         json = pd.read_json ( fname )
-                        has_observed = np.in1d(json['object'].iloc[1:], tele['object']).any ()
+                        has_observed = np.in1d(json['object'].iloc[2:], tele['object']).any ()                        
                         if has_observed:
                             iu+=1
                         else:                            
