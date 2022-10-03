@@ -63,19 +63,19 @@ QA COMPLETE: All tests passed
 QA COMPLETE: All tests passed
 
 (Minimum airmass available: 1.392100531443658)
-==> 20221004_08, 3600.0s available
+==> 20221004_08, 8159.999999999961s available
 0.0s filled by priority=2.0 objects
-3600.0s filled by priority=100.0 objects
+7800.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
 Warning: Airmass of 1.52 in exposure 5 of file ../json/20221003/20221004_08.json
-Warning: Airmass of 1.57 in exposure 6 of file ../json/20221003/20221004_08.json
-
-(Minimum airmass available: 1.8261599770421326)
-==> 20221004_09, 4559.9999999999545s available
-[plan_night] padding the last hour script by 3600.0s
-0.0s filled by priority=2.0 objects
-0.0s filled by priority=100.0 objects
-!!! Nothing to queue !!!
+Warning: Airmass of 1.58 in exposure 6 of file ../json/20221003/20221004_08.json
+Warning: Airmass of 1.64 in exposure 7 of file ../json/20221003/20221004_08.json
+Warning: Airmass of 1.78 in exposure 8 of file ../json/20221003/20221004_08.json
+Warning: Airmass of 1.86 in exposure 9 of file ../json/20221003/20221004_08.json
+Warning: Airmass of 1.99 in exposure 10 of file ../json/20221003/20221004_08.json
+Warning: Airmass of 2.11 in exposure 11 of file ../json/20221003/20221004_08.json
+Warning: Airmass of 2.25 in exposure 12 of file ../json/20221003/20221004_08.json
+Warning: Airmass of 2.41 in exposure 13 of file ../json/20221003/20221004_08.json
  .   . 
  {\*/} 
   >!<  BACKUP FIELD INFO
@@ -99,7 +99,7 @@ GAMA5197149   1.10      1.26      1.55      2.12      3.50      10.03
 ~ ( B A C K U P  F I E L D S ) ~          
           
 === SXDS ===
-Next script for [g, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_g_05.json
+Next script for [g, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_g_04.json
 No back-up scripts available for [g, 90sec]
 Next script for [r, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_r_02.json
 No back-up scripts available for [r, 90sec]
@@ -119,9 +119,9 @@ No back-up scripts available for [g, 90sec]
 No back-up scripts available for [r, 5min]
 No back-up scripts available for [r, 90sec]
 === GAMA5220386 ===
-No back-up scripts available for [g, 5min]
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5220386/5min/GAMA5220386_5minAGN_g_01.json
 No back-up scripts available for [g, 90sec]
-No back-up scripts available for [r, 5min]
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5220386/5min/GAMA5220386_5minAGN_r_01.json
 No back-up scripts available for [r, 90sec]
 === GAMA5275222 ===
 Next script for [g, 5min] is ../json/backup_scripts/GAMA5275222/5min/GAMA5275222_5minAGN_g_01.json
@@ -129,8 +129,8 @@ Next script for [g, 90sec] is ../json/backup_scripts/GAMA5275222/90sec/GAMA52752
 Next script for [r, 5min] is ../json/backup_scripts/GAMA5275222/5min/GAMA5275222_5minAGN_r_01.json
 Next script for [r, 90sec] is ../json/backup_scripts/GAMA5275222/90sec/GAMA5275222_90secAGN_r_01.json
 === GAMA5265117 ===
-No back-up scripts available for [g, 5min]
-No back-up scripts available for [g, 90sec]
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5265117/5min/GAMA5265117_5minAGN_g_11.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5265117/90sec/GAMA5265117_90secAGN_g_01.json
 Next script for [r, 5min] is ../json/backup_scripts/GAMA5265117/5min/GAMA5265117_5minAGN_r_01.json
 Next script for [r, 90sec] is ../json/backup_scripts/GAMA5265117/90sec/GAMA5265117_90secAGN_r_01.json
 === GAMA5240292 ===
@@ -144,8 +144,8 @@ Next script for [g, 90sec] is ../json/backup_scripts/GAMA5247018/90sec/GAMA52470
 Next script for [r, 5min] is ../json/backup_scripts/GAMA5247018/5min/GAMA5247018_5minAGN_r_01.json
 Next script for [r, 90sec] is ../json/backup_scripts/GAMA5247018/90sec/GAMA5247018_90secAGN_r_01.json
 === GAMA5266552 ===
-No back-up scripts available for [g, 5min]
-No back-up scripts available for [g, 90sec]
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5266552/5min/GAMA5266552_5minAGN_g_11.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5266552/90sec/GAMA5266552_90secAGN_g_01.json
 Next script for [r, 5min] is ../json/backup_scripts/GAMA5266552/5min/GAMA5266552_5minAGN_r_01.json
 Next script for [r, 90sec] is ../json/backup_scripts/GAMA5266552/90sec/GAMA5266552_90secAGN_r_01.json
 === GAMA5337331 ===
