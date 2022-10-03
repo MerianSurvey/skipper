@@ -15,7 +15,7 @@
 2022 09 29 0 N708
 2022 09 30 0 N708
 2022 10 2 0 N540
-2022 10 3 0 N540
+2022 10 3 0 N708
 2022 10 4 0 N708
 
 # \\ the first half of the night is too bright! 

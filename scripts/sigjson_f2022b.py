@@ -61,7 +61,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slo
     
     is_queued = planner.plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                                        current_slot=slot,
-                                       whichfield=whichfield, priorities=priorities, **kwargs )
+                                       current_filter = mfilt,
+                                       whichfield=None, priorities=priorities, **kwargs )
     return is_queued
 
 def duplicate_obsscript (halpha_pointings, json_input, output_filename ):

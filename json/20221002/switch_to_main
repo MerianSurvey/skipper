@@ -1,0 +1,19 @@
+[
+    {
+    "comment":"OneMinuteFocusExposure",
+    "filter":"N540",
+    "seqtot":1,
+    "seqnum":1,
+    "seqid":"F2022B",
+    "expType":"object",
+    "object":"1minexp_utility",
+    "proposer":"Leauthaud",
+    "program":"Merian",
+    "RA":31.1568638038,
+    "propid":"2020B-0288",
+    "dec":0.8557772836,
+    "expTime":60.0,
+    "count":1,
+    "wait":"False"
+    }
+    ]
