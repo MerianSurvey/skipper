@@ -140,6 +140,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                    priorities=None,
                    maxairmass = 1.5,
                    verbose = True,
+                   ignore_synchronicity = False,
                    extra = None, # manual extra hours                    
                    **kwargs ):
     '''
@@ -151,7 +152,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
         If True, the night end will occur, at latest, at 6:05 AM (Chilean work contract rule)
     '''
     tele = load_telemetry ( tele_fname )
-    verify_synchronicity ( tele_fname, copilot_fname )
+    if not ignore_synchronicity:
+        verify_synchronicity ( tele_fname, copilot_fname )
 
     # \\ figure out which field and filter we're going to be observing in,
     if whichfield is not None:
