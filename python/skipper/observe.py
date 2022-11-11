@@ -613,9 +613,26 @@ class CopilotOutput ( object ):
         return t0*t1*t2*self.sidecar['exptime']
         
     def flag_for_reobservation ( self, min_teff=200., ):
+        '''
+        Flag exposures that need reobservation
+        '''
         merian_sidecar = self.merian_sidecar
         #return merian_sidecar.loc[merian_sidecar['t_eff']<min_teff, 'object'].values
         sorter = merian_sidecar.sort_values('t_eff')['object'].duplicated(keep='last')
         merian_sidecar = merian_sidecar.loc[~sorter] # \\ remove frames that
         # \\ have already been reobserved; only consider the highest t_eff exposure
         return merian_sidecar.loc[merian_sidecar['t_eff']<min_teff, 'object'].values
+        
+    def get_observed_catalog ( self, min_teff ):
+        '''
+        Return a copilot database that only has finished pointings (i.e. existing and do not need
+        reobservation).
+        
+        Default min t_eff:
+            Halpha : 200 s
+            OIII : 300 s
+        i.e. 1/3 t_exp
+        '''
+        #coo_o_spring.merian_sidecar[~np.in1d(coo_o_spring.merian_sidecar['object'], needs_reobservation)]
+        needs_reobservation = self.flag_for_reobservation (min_teff)
+        return self.merian_sidecar[~np.in1d(self.merian_sidecar['object'], needs_reobservation)]
