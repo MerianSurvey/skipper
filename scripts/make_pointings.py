@@ -7,13 +7,16 @@ from skipper import observe,tiling,visualize
 fmt = '%Y/%m/%d %I:%M %p'
 
 def build_cosmos (seed=267667, 
-                  start_at_center=True, filter='N708',
+                  start_at_center=True, 
+                  filter='N708',
                   exptime=10.,
                   ndither=40,
                   center=None,
                   name='COSMOS',
+                  offset_radius=0.01,
                   seqid='S2021A',
-                  return_frd=False):
+                  return_frd=False,
+                  random_max=0.1):
     '''
     Build COSMOS dithering pattern from FocusedRandomDither
 
@@ -30,9 +33,9 @@ def build_cosmos (seed=267667,
               (center.ra.deg+size[0]/2., center.dec.deg+size[0]/2.),
               (center.ra.deg-size[0]/2., center.dec.deg+size[0]/2.) ]    
 
-    frd = tiling.FocusedRandomDither (center, random_max=0.1,
-                                      offset_radius=0.01, ndither=ndither,
-                                      start_at_center=start_at_center)
+    frd = tiling.FocusedRandomDither (center, #random_max=0.1,
+                                      offset_radius=offset_radius, ndither=ndither,
+                                      start_at_center=start_at_center, random_max=random_max)
     centers = frd.get_centers ()
     ocat = observe.ObsCatalog(comment='--', proposer='Leauthaud', 
                           propid='2020B-0288', seqid=seqid)
@@ -83,7 +86,8 @@ def build_SOAGN ( objid,
     seed_l = [None,]*nscripts
     for i in range(nscripts):
         catalog, ocat, frd = build_cosmos ( seed=seed_l[i],
-                                            filter=filter,exptime=exptime,
+                                            filter=filter,
+                                            exptime=exptime,
                                             ndither = int(total_time//exptime), 
                                             start_at_center=start_at_center,
                                             center=center,
