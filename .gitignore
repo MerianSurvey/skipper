@@ -144,3 +144,4 @@ cython_debug/
 figures/
 python/skipper/#tiling.py#
 
+scripts/queued.png

@@ -19,13 +19,6 @@ _field_priorities = {'VVDSearly':0, 'VVDSlate':0, 'VVDS':0, 'XMM':1, 'btwnXV':2,
 ####
 ####
 
-#\\ years = obsdates[:,0]
-#\\ months = obsdates[:,1]
-#\\ days = obsdates[:,2]
-#\\ slots = obsdates[:,3]
-
-
-#'VVDSearly':0, 'VVDSlate':1, 'VVDS':1, 'btwnXV':2, 'XMM':3}   
 
 def whichfield ( year, month, day ):
     key = f'{year:02d}-{month:02d}-{day:02d}'
