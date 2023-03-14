@@ -1,0 +1,184 @@
+DAY:       17
+MONTH:     3
+YEAR:      2023
+TELEFILE:  /Users/kadofong/Downloads/2023-02-06/tele20221004.csv
+COPILOT:   /Users/kadofong/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+[verify_synchronicity] last exposure in logs is 1137840, taken at 2022-10-04 03:27:10.492486+00:00
+On 2023/3/17, we are observing None in N540
+We are observing the full of the night
+2 pointings in this catalog need reobservation!
+[predict] night slot: Full night
+obsStart: 2023/03/17 09:00 PM Santiago
+          2023/03/17 08:00 PM ET
+          2023/03/17 05:00 PM PT
+          2023/03/18 12:00 AM UTC
+obsEnd:   2023/03/18 06:43 AM Santiago
+          2023/03/18 05:43 AM ET
+          2023/03/18 02:43 AM PT
+          2023/03/18 09:43 AM UTC
+Moon illumination is: 0.17
+Moon max altitude during observation is: 30.26
+
+(Minimum airmass available: 1.250478011572031)
+==> 20230318_00, 3600.000000000005s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.1912239111945204)
+==> 20230318_01, 3600.0s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.1849878284528785)
+==> 20230318_02, 3600.0s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.1466150313936259)
+==> 20230318_03, 3600.0s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J091940.44+021936.67_N540 to GAMA_J104322.39-005640.68_N540
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.1461351045388362)
+==> 20230318_04, 3600.0s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J104653.48-010725.02_N540 to GAMA_J114848.61-005955.71_N540
+[to_json] Big slew from GAMA_J114848.61-005955.71_N540 to GAMA_J110552.64-010311.66_N540
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.1435802882077337)
+==> 20230318_05, 3600.0s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J110813.87-010911.69_N540 to GAMA_J121837.84-005948.11_N540
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.1427940546452366)
+==> 20230318_06, 3600.0s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J124417.47-010940.59_N540 to GAMA_J132558.78-010316.19_N540
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.14549088415429)
+==> 20230318_07, 3600.0s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J132009.22-010642.06_N540 to GAMA_J142534.94-005219.29_N540
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.1586224083585683)
+==> 20230318_08, 3600.0s available
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J141447.79-005904.21_N540 to GAMA_J145014.96-004411.67_N540
+QA COMPLETE: All tests passed
+
+(Minimum airmass available: 1.2647890412236238)
+==> 20230318_09, 7979.9999999999445s available
+[plan_night] padding the last hour script by 5400.0s
+7200.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)    12:30     01:30     02:30     03:30     04:30     05:30     06:30     07:30     08:30     09:30     
+SXDS          4.01      39.63     -5.06     -2.47     -1.72     -1.40     -1.26     -1.22     -1.27     -1.44     
+COSMOS        1.52      1.29      1.20      1.19      1.28      1.48      1.94      3.12      9.70      -8.13     
+GH14          -3.53     -16.55    6.08      2.66      1.79      1.42      1.26      1.20      1.24      1.37      
+NSA15235      -3.39     -13.65    6.57      2.74      1.81      1.43      1.25      1.19      1.22      1.34      
+GAMA5220386   -5.70     -3.32     -2.59     -2.35     -2.40     -2.78     -3.88     -8.39     21.24     4.36      
+GAMA5275222   -7.01     -3.60     -2.67     -2.35     -2.33     -2.60     -3.41     -6.14     -546.00   5.60      
+GAMA5265117   -5.35     -3.08     -2.37     -2.11     -2.11     -2.35     -3.04     -5.21     -40.95    6.15      
+GAMA5240292   -6.02     -3.37     -2.58     -2.31     -2.33     -2.65     -3.56     -6.90     50.37     4.94      
+GAMA5247018   -5.07     -2.99     -2.32     -2.08     -2.08     -2.33     -3.03     -5.22     -44.46    6.03      
+GAMA5266552   -5.17     -3.02     -2.33     -2.09     -2.09     -2.34     -3.03     -5.19     -41.65    6.10      
+GAMA5337331   -9.54     -4.03     -2.82     -2.39     -2.31     -2.50     -3.14     -5.07     -23.31    7.47      
+GAMA5197149   -5.05     -3.12     -2.49     -2.29     -2.38     -2.79     -3.97     -9.22     16.34     4.07      
+
+          
+~ ( B A C K U P  F I E L D S ) ~          
+          
+=== SXDS ===
+Next script for [g, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_g_04.json
+No back-up scripts available for [g, 90sec]
+Next script for [r, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_r_02.json
+No back-up scripts available for [r, 90sec]
+=== COSMOS ===
+Next script for [g, 5min] is ../json/backup_scripts/COSMOS/5min/COSMOS_5minAGN_g_08.json
+Next script for [g, 90sec] is ../json/backup_scripts/COSMOS/90sec/COSMOS_90secAGN_g_02.json
+Next script for [r, 5min] is ../json/backup_scripts/COSMOS/5min/COSMOS_5minAGN_r_05.json
+Next script for [r, 90sec] is ../json/backup_scripts/COSMOS/90sec/COSMOS_90secAGN_r_01.json
+=== GH14 ===
+No back-up scripts available for [g, 5min]
+Next script for [g, 90sec] is ../json/backup_scripts/GH14/90sec/GH14_90secAGN_g_01.json
+No back-up scripts available for [r, 5min]
+No back-up scripts available for [r, 90sec]
+=== NSA15235 ===
+No back-up scripts available for [g, 5min]
+No back-up scripts available for [g, 90sec]
+No back-up scripts available for [r, 5min]
+No back-up scripts available for [r, 90sec]
+=== GAMA5220386 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5220386/5min/GAMA5220386_5minAGN_g_01.json
+No back-up scripts available for [g, 90sec]
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5220386/5min/GAMA5220386_5minAGN_r_01.json
+No back-up scripts available for [r, 90sec]
+=== GAMA5275222 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5275222/5min/GAMA5275222_5minAGN_g_01.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5275222/90sec/GAMA5275222_90secAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5275222/5min/GAMA5275222_5minAGN_r_01.json
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5275222/90sec/GAMA5275222_90secAGN_r_01.json
+=== GAMA5265117 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5265117/5min/GAMA5265117_5minAGN_g_12.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5265117/90sec/GAMA5265117_90secAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5265117/5min/GAMA5265117_5minAGN_r_01.json
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5265117/90sec/GAMA5265117_90secAGN_r_01.json
+=== GAMA5240292 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5240292/5min/GAMA5240292_5minAGN_g_01.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5240292/90sec/GAMA5240292_90secAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5240292/5min/GAMA5240292_5minAGN_r_01.json
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5240292/90sec/GAMA5240292_90secAGN_r_01.json
+=== GAMA5247018 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5247018/5min/GAMA5247018_5minAGN_g_01.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5247018/90sec/GAMA5247018_90secAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5247018/5min/GAMA5247018_5minAGN_r_01.json
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5247018/90sec/GAMA5247018_90secAGN_r_01.json
+=== GAMA5266552 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5266552/5min/GAMA5266552_5minAGN_g_13.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5266552/90sec/GAMA5266552_90secAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5266552/5min/GAMA5266552_5minAGN_r_01.json
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5266552/90sec/GAMA5266552_90secAGN_r_01.json
+=== GAMA5337331 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5337331/5min/GAMA5337331_5minAGN_g_01.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5337331/90sec/GAMA5337331_90secAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5337331/5min/GAMA5337331_5minAGN_r_01.json
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5337331/90sec/GAMA5337331_90secAGN_r_01.json
+=== GAMA5197149 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5197149/5min/GAMA5197149_5minAGN_g_01.json
+Next script for [g, 90sec] is ../json/backup_scripts/GAMA5197149/90sec/GAMA5197149_90secAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5197149/5min/GAMA5197149_5minAGN_r_01.json
+Next script for [r, 90sec] is ../json/backup_scripts/GAMA5197149/90sec/GAMA5197149_90secAGN_r_01.json
