@@ -443,7 +443,7 @@ class ObservingSite ( object ):
         if site=='CTIO':
             self.site = coordinates.EarthLocation ( lat='-30d10m10.78s',
                                                     lon='-70d48m23.49s',
-                                                    height=2241.*u.m )
+                                                    height=2200.*u.m )
             self.timezone= pytz.timezone ( 'America/Santiago' )
         else:
             # // if not CTIO, trust the user to put in an EarthLocation
@@ -487,6 +487,7 @@ class ObservingSite ( object ):
             sun_alt.append( sun_coord.transform_to(obsframe).alt )
 
         sun_alt = np.asarray( [ sa.value for sa in sun_alt ] )
+        #return grid, sun_alt
         
         fgrid_unix = np.asarray([ gg.unix for gg in fgrid ])
         grid_unix = np.asarray([ gg.unix for gg in grid ])
