@@ -128,6 +128,9 @@ if __name__ == '__main__':
                                     save=True, 
                                     verbose=True
                                     )
+    sys.stdout = sys.__stdout__ # \\ gotta reset stdout 
+    
+    print(open(f'{jsondir}output.log','r').read())
     
     if args.make_figure:
         halpha_pointings, oiii_pointings =      our_pointings.load_springfields()
@@ -151,3 +154,5 @@ if __name__ == '__main__':
         plt.tight_layout ()  
         plt.legend () 
         plt.savefig('./queued.png')
+        print('Made queued plot at queued.png')
+    print('Finished planning!')
