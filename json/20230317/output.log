@@ -33,7 +33,7 @@ Moon illumination is: 0.17
 Moon max altitude during observation is: 30.26
 
 (Minimum airmass available: 1.250478011572031)
-==> 20230318_00, 3600.000000000005s available
+==> 20230318_00, 3600.0s available
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures

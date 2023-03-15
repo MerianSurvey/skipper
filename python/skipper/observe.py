@@ -351,10 +351,13 @@ class ObsCatalog (object):
             cmass['going_to_queue'] = False
 
             total_queued_time = 0.
-            if ix == 0:
-                total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start)-0.5*u.hour).to(u.second).value
+            if ix == 0:                
+                total_available_time = (obsframe.obstime[ix] + 1.*u.hr - Time(obs_start) - 0.5*u.hour).to(u.second).value
+                if (3600. - total_available_time) < (catalog['expTime'].mean()*.1): # if we're within ten pct of an exposure just round up
+                    total_available_time = 3600.
 
-                if pad_first_hour and  total_available_time % 600. > 300:
+                if pad_first_hour and total_available_time % 600. > 300:
+                    
                     # \\ if we've got time for at least half an exposure, put one int
                     print(f'\n[plan_night] padding the first hour script with an exposure even though we only have {total_available_time % 600.:.1f}s left')
                     total_available_time += 600. - total_available_time% 600.
