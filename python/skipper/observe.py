@@ -360,8 +360,7 @@ class ObsCatalog (object):
                     
                     # \\ if we've got time for at least half an exposure, put one int
                     print(f'\n[plan_night] padding the first hour script with an exposure even though we only have {total_available_time % 600.:.1f}s left')
-                    total_available_time += 600. - total_available_time% 600.
-                    
+                    total_available_time += 600. - total_available_time% 600.                    
             elif ix==(len(alt_l[0])-1-nexcluded):
                 #print(obsframe.obstime[ix]+1.*u.hr)
                 #print(Time(obs_end))
@@ -374,9 +373,9 @@ class ObsCatalog (object):
                 # \\ Add two extra exposures at the end just in case.
                 # \\ We definitely don't want
                 # \\ to run out of queued objects!
-
             else:
                 total_available_time = 3600.
+                
             if ix != (len(alt_l[0])-1-nexcluded): # \\ don't do this when we intentionally add time
                 assert total_available_time <= 3600.1, f'{obs_end}, {total_available_time:.0f}s'
             if total_available_time < catalog.expTime.mean():

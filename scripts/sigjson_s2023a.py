@@ -103,6 +103,7 @@ if __name__ == '__main__':
     parser.add_argument ( '--make_figure', action='store_true', help='makes a figure that shows queued observations for tonight as queued.png')
     parser.add_argument ( '--telemetry_file', '-t', action='store' )
     parser.add_argument ( '--copilot_file', '-c', default=f'{os.environ["HOME"]}/Downloads/db_merian.fits', action='store' )    
+    parser.add_argument ( '--dryrun', action='store_true' )
     args = parser.parse_args ()
     
     #plan_tomorrow ( args.day, args.month, args.year, args.telemetry_file, args.copilot_file)
@@ -116,21 +117,24 @@ if __name__ == '__main__':
     jsondir=f'../json/{args.year}{args.month:02d}{args.day:02d}/'
     if not os.path.exists(jsondir):
         os.makedirs(jsondir)
-    with open(f'{jsondir}output.log', 'w') as sys.stdout:
-        is_queued = plan_tomorrow(  night[2], night[1], night[0], 
-                                    args.telemetry_file, 
-                                    args.copilot_file, 
-                                    slot = night[3],
-                                    mfilt=obsfilters[night_index], 
-                                    is_queued=None, 
-                                    pad_last_hour=True, 
-                                    maxairmass=1.8, 
-                                    save=True, 
-                                    verbose=True
-                                    )
-    sys.stdout = sys.__stdout__ # \\ gotta reset stdout 
-    
-    print(open(f'{jsondir}output.log','r').read())
+        
+    plan_args = [night[2], night[1], night[0], args.telemetry_file, args.copilot_file,]
+    plan_kwargs = dict( slot = night[3],
+                        mfilt=obsfilters[night_index], 
+                        is_queued=None, 
+                        pad_last_hour=True, 
+                        maxairmass=1.8, 
+                        save=True, 
+                        verbose=True
+    )
+    if args.dryrun:
+        is_queued = plan_tomorrow(  *plan_args, **plan_kwargs)
+    else:        
+        with open(f'{jsondir}output.log', 'w') as sys.stdout:
+            is_queued = plan_tomorrow( *plan_args, **plan_kwargs )
+        sys.stdout = sys.__stdout__ # \\ gotta reset stdout 
+        
+        print(open(f'{jsondir}output.log','r').read())
     
     if args.make_figure:
         halpha_pointings, oiii_pointings =      our_pointings.load_springfields()
@@ -148,6 +152,7 @@ if __name__ == '__main__':
         pointings = pointings_d[obsfilters[night_index]]
         plt.scatter ( pointings.reindex(to_obs.index)['RA'], pointings.reindex(to_obs.index)['dec'], 
                     facecolor='None', edgecolor='r', s=30**2, lw=1, label='queued [w. padding]' )
+        plt.title ( obsfilters[night_index] )
         plt.ylim(-2.2,5)
         plt.xlabel('RA (deg)')
         plt.ylabel('Dec (deg)')     

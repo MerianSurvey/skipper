@@ -141,7 +141,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                    maxairmass = 1.5,
                    verbose = True,
                    ignore_synchronicity = False,
-                   extra = None, # manual extra hours                    
+                   extra = None, # manual extra hours     
+                   dryrun = False,               
                    **kwargs ):
     '''
     Plan "tomorrow" in the observing time frame (i.e. the next night that we will be observing)
@@ -201,7 +202,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
     
     
     #assert has_observed.sum() == exp_exposures, "We have observed exposures that aren't in the master catalog?!"
-    ocat = observe.ObsCatalog(comment='--', proposer='Leathaud', propid='2020B-0288', seqid='F2021B')
+    ocat = observe.ObsCatalog(comment='--', proposer='Leauthaud', propid='2020B-0288', seqid='F2021B')
 
     if is_queued is None:
         # \\ build is_queued <- previously observed objects
@@ -256,6 +257,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
     moon_cillum, moon_altreport = ctio.track_moon ( obs_start, obs_end)
     print(f'Moon illumination is: {moon_cillum:.2f}')
     print(f'Moon max altitude during observation is: {moon_altreport:.2f}')
+    if dryrun:
+        return None
 
     is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
                                      is_queued=is_queued.copy(),
