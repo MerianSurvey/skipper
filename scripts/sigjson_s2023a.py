@@ -115,7 +115,7 @@ if __name__ == '__main__':
     
     #"../json/"$year$fmt_month$fmt_day"/output.log"
     jsondir=f'../json/{args.year}{args.month:02d}{args.day:02d}/'
-    if not os.path.exists(jsondir):
+    if not os.path.exists(jsondir) and not args.dryrun:
         os.makedirs(jsondir)
         
     plan_args = [night[2], night[1], night[0], args.telemetry_file, args.copilot_file,]
@@ -124,10 +124,11 @@ if __name__ == '__main__':
                         is_queued=None, 
                         pad_last_hour=True, 
                         maxairmass=1.8, 
-                        save=~args.dryrun, 
+                        save=not args.dryrun, 
                         verbose=True
     )
     if args.dryrun:
+        print(f'[sigjson] We are doing a dry run of {args.year}/{args.month}/{args.day}')
         is_queued = plan_tomorrow(  *plan_args, **plan_kwargs)
     else:        
         with open(f'{jsondir}output.log', 'w') as sys.stdout:
