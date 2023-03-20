@@ -124,9 +124,12 @@ def verify_synchronicity ( tele_fname, copilot_fname, verbose=True ):
     lexpnum_tele = tele.iloc[-1]['id']
     lexpnum_copilot = copilot_output[-1][2]
     
-    assert lexpnum_copilot == lexpnum_tele
+    assert lexpnum_copilot == lexpnum_tele, f'''[verify_synchronicity] Telemetry file and copilot file are not synced!
+The last expsoure in the telemetry file is {lexpnum_tele}
+The last expsoure in the copilot file is   {lexpnum_copilot}'''
+
     if verbose:
-        print (f'[verify_synchronicity] last exposure in logs is {lexpnum_copilot}, taken at {tele.iloc[-1]["date"]}')        
+        print (f'[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is {lexpnum_copilot}, taken at {tele.iloc[-1]["date"]}')        
     
     
 
@@ -259,7 +262,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
     print(f'Moon max altitude during observation is: {moon_altreport:.2f}')
     if dryrun:
         return None
-
+    
     is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
                                      is_queued=is_queued.copy(),
                                      maxairmass=maxairmass, 

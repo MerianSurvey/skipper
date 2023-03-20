@@ -293,8 +293,9 @@ class ObsCatalog (object):
         else:
             tstart = obs_start.astimezone(obssite.timezone) - datetime.timedelta(days=1.)
             dstr = tstart.strftime('%Y%m%d')
+            
         dpath = f'../json/{dstr}'
-        if not os.path.exists(dpath) and save:
+        if (not os.path.exists(dpath)) and save:         
             os.mkdir(dpath)
 
         # \\ Define Observing Frame from obstime
