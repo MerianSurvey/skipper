@@ -124,7 +124,7 @@ if __name__ == '__main__':
                         is_queued=None, 
                         pad_last_hour=True, 
                         maxairmass=1.8, 
-                        save=True, 
+                        save=~args.dryrun, 
                         verbose=True
     )
     if args.dryrun:
