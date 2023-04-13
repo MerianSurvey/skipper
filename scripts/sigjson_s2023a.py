@@ -134,7 +134,6 @@ if __name__ == '__main__':
         with open(f'{jsondir}output.log', 'w') as sys.stdout:
             is_queued = plan_tomorrow( *plan_args, **plan_kwargs )
         sys.stdout = sys.__stdout__ # \\ gotta reset stdout 
-        
         print(open(f'{jsondir}output.log','r').read())
     
     if args.make_figure:
@@ -159,6 +158,7 @@ if __name__ == '__main__':
         plt.ylabel('Dec (deg)')     
         plt.tight_layout ()  
         plt.legend () 
-        plt.savefig(jsondir + f'queued_{args.year}{args.month:02d}{args.day:02d}.png')
-        print('Made queued plot at queued.png')
+        figname = f'queued_{args.year}{args.month:02d}{args.day:02d}.png'
+        plt.savefig(jsondir + figname)
+        print(f'Made queued plot at {jsondir}/{figname}')
     print('Finished planning!')
