@@ -2723,7 +2723,6 @@
 ../json/20211125/20211126_03.json VALIDATED at 2021/11/25 01:01 PM by kadofong
 ../json/20211125/20211126_04.json written on 2021/11/25 01:01 PM by kadofong
 ../json/20211125/20211126_04.json VALIDATED at 2021/11/25 01:01 PM by kadofong
-<<<<<<< HEAD
 ../json/20211129/20211130_00.json written on 2021/11/29 02:31 PM by kadofong
 ../json/20211129/20211130_00.json VALIDATED at 2021/11/29 02:31 PM by kadofong
 ../json/20211129/20211130_01.json written on 2021/11/29 02:31 PM by kadofong
@@ -2754,7 +2753,6 @@
 ../json/20211231/20220101_07.json VALIDATED at 2021/11/29 03:13 PM by kadofong
 ../json/20211231/20220101_08.json written on 2021/11/29 03:13 PM by kadofong
 ../json/20211231/20220101_08.json VALIDATED at 2021/11/29 03:13 PM by kadofong
-=======
 ../json/20211126/20211127_00.json written on 2021/11/26 12:01 PM by shanydanieli
 ../json/20211126/20211127_00.json VALIDATED at 2021/11/26 12:01 PM by shanydanieli
 ../json/20211126/20211127_01.json written on 2021/11/26 12:01 PM by shanydanieli
@@ -2853,8 +2851,6 @@
 ../json/20211201/20211202_03.json VALIDATED at 2021/12/01 01:11 PM by shanydanieli
 ../json/20211201/20211202_04.json written on 2021/12/01 01:11 PM by shanydanieli
 ../json/20211201/20211202_04.json VALIDATED at 2021/12/01 01:11 PM by shanydanieli
->>>>>>> 7dc198b714c5a4d07ed7c930e440821bcc911601
-<<<<<<< HEAD
 ../json/20220103/20220104_04.json written on 2021/12/15 01:06 PM by kadofong
 ../json/20220103/20220104_04.json VALIDATED at 2021/12/15 01:06 PM by kadofong
 ../json/20220103/20220104_05.json written on 2021/12/15 01:06 PM by kadofong
@@ -2926,7 +2922,8 @@
 ../json/20211231/20220101_07.json written on 2021/12/31 08:27 AM by shanydanieli
 ../json/20211231/20220101_07.json VALIDATED at 2021/12/31 08:27 AM by shanydanieli
 ../json/20211231/20220101_08.json written on 2021/12/31 08:27 AM by shanydanieli
-../json/20211231/20220101_08.json VALIDATED at 2021/12/31 08:27 AM by shanydanieli../json/20220101/20220102_04.json written on 2022/01/01 06:27 PM by shanydanieli
+../json/20211231/20220101_08.json VALIDATED at 2021/12/31 08:27 AM by shanydanieli
+../json/20220101/20220102_04.json written on 2022/01/01 06:27 PM by shanydanieli
 ../json/20220101/20220102_04.json VALIDATED at 2022/01/01 06:27 PM by shanydanieli
 ../json/20220101/20220102_05.json written on 2022/01/01 06:27 PM by shanydanieli
 ../json/20220101/20220102_06.json written on 2022/01/01 06:27 PM by shanydanieli
@@ -7706,7 +7703,6 @@ AGN_r_30.json written on 2022/10/03 10:45 AM by kadofong
 ../json/20230317/20230318_08.json VALIDATED at 2023/03/15 12:28 PM by kadofong
 ../json/20230317/20230318_09.json written on 2023/03/15 12:28 PM by kadofong
 ../json/20230317/20230318_09.json VALIDATED at 2023/03/15 12:28 PM by kadofong
-<<<<<<< HEAD
 ../json/20230320/20230321_00.json written on 2023/03/19 12:43 PM by kadofong
 ../json/20230320/20230321_00.json VALIDATED at 2023/03/19 12:43 PM by kadofong
 ../json/20230320/20230321_01.json written on 2023/03/19 12:43 PM by kadofong
@@ -9065,3 +9061,27 @@ AGN_r_30.json written on 2022/10/03 10:45 AM by kadofong
 ../json/20230413/20230414_03.json VALIDATED at 2023/04/13 01:34 PM by kadofong
 ../json/20230413/20230414_04.json written on 2023/04/13 01:34 PM by kadofong
 ../json/20230413/20230414_04.json VALIDATED at 2023/04/13 01:34 PM by kadofong
+../json/20230412/20230412_23.json written on 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230412_23.json VALIDATED at 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_00.json written on 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_00.json VALIDATED at 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_01.json written on 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_01.json VALIDATED at 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_02.json written on 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_02.json VALIDATED at 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_03.json written on 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_03.json VALIDATED at 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_04.json written on 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230413_04.json VALIDATED at 2023/04/10 01:22 PM by shanydanieli
+../json/20230412/20230412_23.json written on 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230412_23.json VALIDATED at 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_00.json written on 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_00.json VALIDATED at 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_01.json written on 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_01.json VALIDATED at 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_02.json written on 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_02.json VALIDATED at 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_03.json written on 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_03.json VALIDATED at 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_04.json written on 2023/04/10 01:36 PM by shanydanieli
+../json/20230412/20230413_04.json VALIDATED at 2023/04/10 01:36 PM by shanydanieli

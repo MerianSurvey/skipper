@@ -159,6 +159,6 @@ if __name__ == '__main__':
         plt.ylabel('Dec (deg)')     
         plt.tight_layout ()  
         plt.legend () 
-        plt.savefig('./queued.png')
+        plt.savefig(jsondir + f'queued_{args.year}{args.month:02d}{args.day:02d}.png')
         print('Made queued plot at queued.png')
     print('Finished planning!')
