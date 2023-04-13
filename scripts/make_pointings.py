@@ -39,6 +39,7 @@ def build_cosmos (seed=267667,
     centers = frd.get_centers ()
     ocat = observe.ObsCatalog(comment='--', proposer='Leauthaud', 
                           propid='2020B-0288', seqid=seqid)
+    
     catalog = ocat.build_catalog(centers[:,0], centers[:,1],
                                  name, filter, 'object', exptime*60)
     assert not catalog.object.duplicated().any()
@@ -84,7 +85,7 @@ def build_SOAGN ( objid,
     catalog_l = []
     frd_l = []
     seed_l = [None,]*nscripts
-    for i in range(nscripts):
+    for i in range(nscripts):  
         catalog, ocat, frd = build_cosmos ( seed=seed_l[i],
                                             filter=filter,
                                             exptime=exptime,
