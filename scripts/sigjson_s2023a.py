@@ -138,7 +138,7 @@ if __name__ == '__main__':
         print(open(f'{jsondir}output.log','r').read())
     
     if args.make_figure:
-        halpha_pointings, oiii_pointings =      our_pointings.load_springfields()
+        halpha_pointings, oiii_pointings = our_pointings.load_springfields()
         pointings_d = {'N540':oiii_pointings,'N708':halpha_pointings} 
         pointings = pointings_d[obsfilters[night_index]]
         coo = observe.CopilotOutput ( args.copilot_file, pointings )
