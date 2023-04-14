@@ -131,9 +131,10 @@ if __name__ == '__main__':
         print(f'[sigjson] We are doing a dry run of {args.year}/{args.month}/{args.day}')
         is_queued = plan_tomorrow(  *plan_args, **plan_kwargs)
     else:        
+        save_stdout = sys.stdout
         with open(f'{jsondir}output.log', 'w') as sys.stdout:
             is_queued = plan_tomorrow( *plan_args, **plan_kwargs )
-        sys.stdout = sys.__stdout__ # \\ gotta reset stdout 
+        sys.stdout = save_stdout # \\ gotta reset stdout 
         print(open(f'{jsondir}output.log','r').read())
     
     if args.make_figure:
