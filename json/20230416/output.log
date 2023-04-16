@@ -1,8 +1,8 @@
 DAY:       16
 MONTH:     4
 YEAR:      2023
-TELEFILE:  /Users/shanydanieli/Downloads/tele20230415.csv
-COPILOT:   /Users/shanydanieli/Downloads/db_merian.fits
+TELEFILE:  /Users/kadofong/Downloads/tele20230415.csv
+COPILOT:   /Users/kadofong/Downloads/db_merian.fits
 .         *          
     *    .        *        .   .     .
       ____            .    {\*/}           .  *     .
@@ -65,7 +65,7 @@ QA COMPLETE: All tests passed
 [to_json] Big slew from GAMA_J112625.92+001522.94_N708 to GAMA_J121947.89-010445.34_N708
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1428078397217436)
+(Minimum airmass available: 1.1428078397217434)
 ==> 20230417_04, 6210.000000000021s available
 [plan_night] padding the last hour script by 3600.0s
 6000.0s filled by priority=inf objects

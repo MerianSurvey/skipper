@@ -616,6 +616,13 @@ class CopilotOutput ( object ):
         t2 = 10.**( (self.sidecar['sky']-skySB_0)/2.5 )
         return t0*t1*t2*self.sidecar['exptime']
         
+    def identify_completed_pointings ( self, min_teff ):
+        merian_sidecar = self.merian_sidecar        
+        sorter = merian_sidecar.sort_values('t_eff')['object'].duplicated(keep='last')
+        merian_sidecar = merian_sidecar.loc[~sorter] # \\ remove frames that        
+        # \\ have already been reobserved; only consider the highest t_eff exposure
+        return merian_sidecar.loc[merian_sidecar['t_eff']>=min_teff]
+    
     def flag_for_reobservation ( self, min_teff=200., ):
         '''
         Flag exposures that need reobservation

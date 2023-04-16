@@ -139,16 +139,17 @@ if __name__ == '__main__':
     if args.make_figure:
         halpha_pointings, oiii_pointings =      our_pointings.load_springfields()
         pointings_d = {'N540':oiii_pointings,'N708':halpha_pointings} 
+        teff_min = {'N540':300, 'N708':200}[obsfilters[night_index]]
         pointings = pointings_d[obsfilters[night_index]]
         coo = observe.CopilotOutput ( args.copilot_file, pointings )
-
+        completed = coo.identify_completed_pointings ( teff_min )
         to_obs = is_queued.loc[~is_queued['qstamp'].isna()]
         
         fig, ax = plt.subplots(1,1, figsize=(20,3))
 
         plt.scatter ( pointings['RA'], pointings['dec'], 
                     facecolor='None', edgecolor='lightgrey', s=30**2, lw=1, label='planned' )
-        plt.scatter ( coo.merian_sidecar['racenter'], coo.merian_sidecar['deccenter'], s=30**2, color='lightgrey', label='executed')
+        plt.scatter ( completed['racenter'], completed['deccenter'], s=30**2, color='lightgrey', label='executed')
         pointings = pointings_d[obsfilters[night_index]]
         plt.scatter ( pointings.reindex(to_obs.index)['RA'], pointings.reindex(to_obs.index)['dec'], 
                     facecolor='None', edgecolor='r', s=30**2, lw=1, label='queued [w. padding]' )
