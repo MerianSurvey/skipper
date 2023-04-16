@@ -1,8 +1,8 @@
 DAY:       16
 MONTH:     4
 YEAR:      2023
-TELEFILE:  ../../TELEMETRY/tele20230415.csv
-COPILOT:   /Users/jgreene/Downloads/db_merian.fits
+TELEFILE:  /Users/shanydanieli/Downloads/tele20230415.csv
+COPILOT:   /Users/shanydanieli/Downloads/db_merian.fits
 .         *          
     *    .        *        .   .     .
       ____            .    {\*/}           .  *     .
@@ -16,7 +16,7 @@ COPILOT:   /Users/jgreene/Downloads/db_merian.fits
        \\            \_ .  _  .
 _______________ _  _ __ _  __      _  .   .
 
-[verify_synchronicity] last exposure in logs is 1194976, taken at 2023-04-16 04:24:57.954021+00:00
+[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1194976, taken at 2023-04-16 04:24:57.954021+00:00
 On 2023/4/16, we are observing None in N708
 We are observing the first half of the night
 4 pointings in this catalog need reobservation!
@@ -32,40 +32,40 @@ obsEnd:   2023/04/17 12:43 AM Santiago
 Moon illumination is: 0.12
 Moon max altitude during observation is: 0.00
 
-(Minimum airmass available: 1.4281797652404542)
+(Minimum airmass available: 1.4281797333451438)
 ==> 20230416_23, 2099.999999999996s available
 1800.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
 Warning: Airmass of 1.54 in exposure 1 of file ../json/20230416/20230416_23.json
 
-(Minimum airmass available: 1.254988088873568)
+(Minimum airmass available: 1.2549880730319496)
 ==> 20230417_00, 3600.0s available
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1708512317860702)
+(Minimum airmass available: 1.1708512269195974)
 ==> 20230417_01, 3600.0s available
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1458604910472616)
+(Minimum airmass available: 1.1458604883552799)
 ==> 20230417_02, 3600.0s available
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J105731.10+002039.89_N708 to GAMA_J115616.04-005959.52_N708
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1419567649162647)
+(Minimum airmass available: 1.141956765765515)
 ==> 20230417_03, 3600.0s available
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J112625.92+001522.94_N708 to GAMA_J121947.89-010445.34_N708
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1428078396217314)
+(Minimum airmass available: 1.1428078397217436)
 ==> 20230417_04, 6210.000000000021s available
 [plan_night] padding the last hour script by 3600.0s
 6000.0s filled by priority=inf objects
