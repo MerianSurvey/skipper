@@ -6,6 +6,7 @@ import os
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
+from astropy import coordinates
 import pandas as pd
 from skipper import planner, observe
 
@@ -18,7 +19,7 @@ import our_pointings
 obsdates = np.genfromtxt ( '../scripts/s2023_dates.txt', comments='#', dtype=int)
 obskeys = [ f'{x[0]:02d}-{x[1]:02d}-{x[2]:02d}' for x in obsdates[:,:3]]
 obsfilters = np.genfromtxt ( '../scripts/s2023_dates.txt', comments='#', dtype=str)[:,4]
-_field_priorities = {'VVDSearly':0, 'VVDSlate':0, 'VVDS':0, 'XMM':1, 'btwnXV':2, 'XMMhigh':4, 'newRAbtwnXV':5}
+_field_priorities = {'VVDSearly':0, 'VVDSlate':0, 'VVDS':0, 'XMM':1, 'btwnXV':2, 'XMMhigh':4, 'newRAbtwnXV':5, 'coobserved':0}
 ####
 ####
 
@@ -62,6 +63,32 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slo
         mastercat = halpha_pointings
     else:
         raise ValueError (f"Filter {mfilt} not recognized.")
+    
+    # -----------------------------------------------------------------
+    # -- Prioritize pointings that already have single band coverage --
+    # -----------------------------------------------------------------
+    # -- Set up co filter
+    if mfilt == 'N540':
+        cofilt = 'N708'
+        co_skySB = 21.
+        co_teffmin = 200.
+        co_pointings = halpha_pointings
+    else:
+        cofilt = 'N540'
+        co_skySB = 22.1
+        co_teffmin = 300.
+        co_pointings = oiii_pointings
+    #mastercat['priority_name'] = 'blank' 
+    co_coo = observe.CopilotOutput ( copilot_fname, pointings=co_pointings,  skySB_0 = co_skySB )   
+    co_finished = co_coo.identify_completed_pointings ( co_teffmin )
+    observed_cofilter = coordinates.SkyCoord ( co_finished['rabore'], co_finished['decbore'], unit=('deg','deg') )
+    pointings_mfilter = coordinates.SkyCoord ( mastercat['RA'], mastercat['dec'], unit=('deg','deg') )
+    idx, d2d, _ = pointings_mfilter.match_to_catalog_sky ( observed_cofilter )
+    has_observed_match = d2d.to('arcsec').value < 2.
+    # \\ all observed pointings should have a match in the second filter pointing    
+    assert has_observed_match.sum() == observed_cofilter.shape[0]
+    mastercat['priority_name'] = 'blank'
+    mastercat.loc[has_observed_match, 'priority_name'] = 'coobserved'
     
     is_queued = planner.plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                                        current_slot=slot,
@@ -160,6 +187,9 @@ if __name__ == '__main__':
         plt.tight_layout ()  
         plt.legend () 
         figname = f'queued_{args.year}{args.month:02d}{args.day:02d}.png'
-        plt.savefig(jsondir + figname)
-        print(f'Made queued plot at {jsondir}/{figname}')
+        if not args.dryrun:
+            plt.savefig(jsondir + figname)
+            print(f'Made queued plot at {jsondir}/{figname}')
+        else:
+            plt.show ()
     print('Finished planning!')

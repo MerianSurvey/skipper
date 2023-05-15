@@ -214,7 +214,7 @@ class ObsCatalog (object):
         with open(fp,'w') as infp:
             infp.write(json_str)
         
-        self.write_jsonlog ( fp )
+        #self.write_jsonlog ( fp ) # \\ this is annoying on merge and not useful in practice
 
 
     def observing_time ( self ):
@@ -275,12 +275,13 @@ class ObsCatalog (object):
         '''
         if catalog is None:
             catalog = self.catalog
-        #catalog_objects = catalog.apply(lambda x: x['object'].split('_')[0], axis=1)
+        
         if 'priority_name' not in catalog.columns:
             if verbose:
                 print('[plan_night] Inferring priorities from object names')
                 catalog_objects = catalog['object'].str.extract(r'(.*?(?=_))')[0]
         else:
+            print('[plan_night] Using "priority_name" column as object priorities')
             catalog_objects = catalog['priority_name']
         
         if exclude_hour_indices is None:
@@ -608,7 +609,6 @@ class CopilotOutput ( object ):
         _sidecar = fits.getdata ( filename, 1 )
         sidecar = table.Table ( _sidecar ).to_pandas ()        
         return sidecar
-    
     
     def t_effective ( self, transparency_0, seeing_0, skySB_0 ):
         t0 = ( self.sidecar['transparency'] / transparency_0 )**2
