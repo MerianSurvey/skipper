@@ -123,6 +123,11 @@ def verify_synchronicity ( tele_fname, copilot_fname, verbose=True ):
     
     lexpnum_tele = tele.iloc[-1]['id']
     lexpnum_copilot = copilot_output[-1][2]
+
+    idx = 0
+    while lexpnum_copilot == 0:
+        idx = idx +1 
+        lexpnum_copilot = copilot_output[-1-idx][2]
     
     assert lexpnum_copilot == lexpnum_tele, f'''[verify_synchronicity] Telemetry file and copilot file are not synced!
 The last expsoure in the telemetry file is {lexpnum_tele}
