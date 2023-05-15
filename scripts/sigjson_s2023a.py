@@ -166,26 +166,37 @@ if __name__ == '__main__':
     if args.make_figure:
         halpha_pointings, oiii_pointings =      our_pointings.load_springfields()
         pointings_d = {'N540':oiii_pointings,'N708':halpha_pointings} 
-        teff_min = {'N540':300, 'N708':200}[obsfilters[night_index]]
-        pointings = pointings_d[obsfilters[night_index]]
-        coo = observe.CopilotOutput ( args.copilot_file, pointings )
-        completed = coo.identify_completed_pointings ( teff_min )
-        to_obs = is_queued.loc[~is_queued['qstamp'].isna()]
+        teff_min_d = {'N540':300, 'N708':200}
+        fig, axarr = plt.subplots(2,1, figsize=(20,6))
         
-        fig, ax = plt.subplots(1,1, figsize=(20,3))
-
-        plt.scatter ( pointings['RA'], pointings['dec'], 
-                    facecolor='None', edgecolor='lightgrey', s=30**2, lw=1, label='planned' )
-        plt.scatter ( completed['racenter'], completed['deccenter'], s=30**2, color='lightgrey', label='executed')
-        pointings = pointings_d[obsfilters[night_index]]
-        plt.scatter ( pointings.reindex(to_obs.index)['RA'], pointings.reindex(to_obs.index)['dec'], 
-                    facecolor='None', edgecolor='r', s=30**2, lw=1, label='queued [w. padding]' )
-        plt.title ( obsfilters[night_index] )
-        plt.ylim(-2.2,5)
-        plt.xlabel('RA (deg)')
-        plt.ylabel('Dec (deg)')     
+        for idx, cfilter in enumerate(['N540','N708']):
+            ax = axarr[idx]
+            teff_min = teff_min_d[cfilter]
+            pointings = pointings_d[cfilter]
+            coo = observe.CopilotOutput ( args.copilot_file, pointings )
+            completed = coo.identify_completed_pointings ( teff_min )
+            to_obs = is_queued.loc[~is_queued['qstamp'].isna()]                        
+            
+            ax.scatter ( pointings['RA'], pointings['dec'], 
+                        facecolor='None', edgecolor='lightgrey', s=30**2, lw=1, label='planned' )
+            ax.scatter ( completed['racenter'], completed['deccenter'], s=30**2, color='#26b7f0', label='executed', alpha=0.2)
+            pointings = pointings_d[cfilter]
+            if cfilter == obsfilters[night_index]:
+                ax.scatter ( pointings.reindex(to_obs.index)['RA'], pointings.reindex(to_obs.index)['dec'], 
+                            facecolor='None', edgecolor='r', s=30**2, lw=1, label='queued [w. padding]' )
+            ax.set_title ( cfilter )     
+            ax.legend () 
+        
+           
+        for ax in axarr:
+            ax.set_ylim(-2.2,5)
+            ax.set_xlabel('RA (deg)')
+            ax.set_ylabel('Dec (deg)')     
+            
+        
+        
         plt.tight_layout ()  
-        plt.legend () 
+        
         figname = f'queued_{args.year}{args.month:02d}{args.day:02d}.png'
         if not args.dryrun:
             plt.savefig(jsondir + figname)
