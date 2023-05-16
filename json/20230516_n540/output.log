@@ -17,9 +17,9 @@ COPILOT:   /Users/kadofong/Downloads/db_merian.fits
 _______________ _  _ __ _  __      _  .   .
 
 [verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1203329, taken at 2023-05-16 04:25:57.239983+00:00
-On 2023/5/16, we are observing None in N708
+On 2023/5/16, we are observing None in N540
 We are observing the first half of the night
-0 pointings in this catalog need reobservation!
+1 pointings in this catalog need reobservation!
 [predict] night slot: First half
 obsStart: 2023/05/16 07:02 PM Santiago
           2023/05/16 07:02 PM ET
@@ -33,38 +33,36 @@ Moon illumination is: 0.08
 Moon max altitude during observation is: 0.00
 [plan_night] Using "priority_name" column as object priorities
 
-(Minimum airmass available: 1.2063203534722793)
+(Minimum airmass available: 1.2149816628200587)
 ==> 20230516_23, 3479.9999999999914s available
-3000.0s filled by priority=0.0 objects
-0.0s filled by priority=inf objects
+0.0s filled by priority=0.0 objects
+2700.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1646828435564063)
+(Minimum airmass available: 1.1692566621470177)
 ==> 20230517_00, 3600.0s available
-3600.0s filled by priority=0.0 objects
-0.0s filled by priority=inf objects
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J105729.31+031845.00_N708 to GAMA_J115342.51+001836.38_N708
+[to_json] Big slew from GAMA_J110327.30+031836.22_N540 to GAMA_J115232.52+002336.70_N540
+[to_json] Big slew from GAMA_J112246.35+014201.03_N540 to GAMA_J120000.00+002327.60_N540
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.158445405253482)
+(Minimum airmass available: 1.1590126771553289)
 ==> 20230517_01, 3600.0s available
-3600.0s filled by priority=0.0 objects
-0.0s filled by priority=inf objects
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J112135.69+014502.11_N708 to GAMA_J135906.26-005625.08_N708
-[to_json] Big slew from GAMA_J135332.10-005949.51_N708 to GAMA_J110106.34+032630.74_N708
-[to_json] Big slew from GAMA_J110216.57+032135.71_N708 to GAMA_J122440.63+001641.75_N708
 QA COMPLETE: All tests passed
 
 (Minimum airmass available: 1.1469572047901742)
 ==> 20230517_02, 3600.0s available
-600.0s filled by priority=0.0 objects
-3000.0s filled by priority=inf objects
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J122440.63+001641.75_N708 to GAMA_J142534.94-005219.29_N708
+[to_json] Big slew from GAMA_J123315.12+001438.88_N540 to GAMA_J135756.09-005213.86_N540
 QA COMPLETE: All tests passed
 
 (Minimum airmass available: 1.1461960371132645)
@@ -72,14 +70,14 @@ QA COMPLETE: All tests passed
 0.0s filled by priority=0.0 objects
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J132337.78+002409.47_N708 to GAMA_J142216.07+004257.11_N708
+[to_json] Big slew from GAMA_J133731.50-005439.00_N540 to GAMA_J142326.61+004042.93_N540
 QA COMPLETE: All tests passed
 
 (Minimum airmass available: 1.1821414446520566)
-==> 20230517_04, 6000.000000000016s available
-[plan_night] padding the last hour script by 3600.0s
+==> 20230517_04, 7800.000000000016s available
+[plan_night] padding the last hour script by 5400.0s
 0.0s filled by priority=0.0 objects
-6000.0s filled by priority=inf objects
+7200.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 QA COMPLETE: All tests passed
  .   . 

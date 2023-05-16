@@ -182,6 +182,7 @@ if __name__ == '__main__':
             ax.scatter ( completed['racenter'], completed['deccenter'], s=30**2, color='#26b7f0', label='executed', alpha=0.2)
             pointings = pointings_d[cfilter]
             if cfilter == obsfilters[night_index]:
+                print( f'We are observing {cfilter} ({idx})')
                 ax.scatter ( pointings.reindex(to_obs.index)['RA'], pointings.reindex(to_obs.index)['dec'], 
                             facecolor='None', edgecolor='r', s=30**2, lw=1, label='queued [w. padding]' )
             ax.set_title ( cfilter )     
