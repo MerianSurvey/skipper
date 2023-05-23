@@ -17,9 +17,9 @@ COPILOT:   /Users/shanydanieli/Downloads/db_merian.fits
 _______________ _  _ __ _  __      _  .   .
 
 [verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1205739, taken at 2023-05-23 04:26:29.370775+00:00
-On 2023/5/23, we are observing None in N540
+On 2023/5/23, we are observing None in N708
 We are observing the first half of the night
-1 pointings in this catalog need reobservation!
+14 pointings in this catalog need reobservation!
 [predict] night slot: First half
 obsStart: 2023/05/23 06:59 PM Santiago
           2023/05/23 06:59 PM ET
@@ -33,45 +33,43 @@ Moon illumination is: 0.19
 Moon max altitude during observation is: 20.47
 [plan_night] Using "priority_name" column as object priorities
 
-(Minimum airmass available: 1.2624295192874075)
+(Minimum airmass available: 1.2518306556683003)
 (60s) Not enough time for an exposure. Skipping...
 
-(Minimum airmass available: 1.1872058073292768)
+(Minimum airmass available: 1.1832629571206152)
 ==> 20230523_23, 3600.0s available
-900.0s filled by priority=0.0 objects
-2700.0s filled by priority=inf objects
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J135111.18-005304.66_N540 to GAMA_J111914.96+015301.59_N540
 [to_json] Inserting CheckSky 60s exposures
-Warning: Airmass of 1.78 in exposure 1 of file ../json/20230523/20230523_23.json
-Warning: Airmass of 1.69 in exposure 2 of file ../json/20230523/20230523_23.json
-Warning: Airmass of 1.62 in exposure 3 of file ../json/20230523/20230523_23.json
-Warning: Airmass of 1.55 in exposure 4 of file ../json/20230523/20230523_23.json
+QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1598204702624402)
+(Minimum airmass available: 1.1577467999566657)
 ==> 20230524_00, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J112246.35+014201.03_N540 to GAMA_J143407.37+004940.04_N540
-Warning: Airmass of 1.68 in exposure 1 of file ../json/20230523/20230524_00.json
-Warning: Airmass of 1.61 in exposure 2 of file ../json/20230523/20230524_00.json
-Warning: Airmass of 1.51 in exposure 3 of file ../json/20230523/20230524_00.json
+[to_json] Big slew from GAMA_J111418.54+014702.99_N708 to GAMA_J115342.51+001836.38_N708
+[to_json] Big slew from GAMA_J114836.79+001254.57_N708 to GAMA_J110106.34+032630.74_N708
+[to_json] Big slew from GAMA_J110216.57+032135.71_N708 to GAMA_J122440.63+001641.75_N708
+QA COMPLETE: All tests passed
 
 (Minimum airmass available: 1.1586208004229148)
 ==> 20230524_01, 3600.0s available
-0.0s filled by priority=0.0 objects
-3600.0s filled by priority=inf objects
+3000.0s filled by priority=0.0 objects
+600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J142106.24+004650.42_N540 to GAMA_J124644.77+001948.71_N540
-QA COMPLETE: All tests passed
+[to_json] Big slew from GAMA_J122440.63+001641.75_N708 to GAMA_J142534.94-005219.29_N708
+[to_json] Big slew from GAMA_J135332.10-005949.51_N708 to GAMA_J105729.31+031845.00_N708
+[to_json] Big slew from GAMA_J105729.31+031845.00_N708 to GAMA_J124755.39+001656.93_N708
+Warning: Airmass of 1.54 in exposure 7 of file ../json/20230523/20230524_01.json
 
 (Minimum airmass available: 1.1455789156582652)
 ==> 20230524_02, 3600.0s available
 0.0s filled by priority=0.0 objects
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J125510.83+001821.02_N540 to GAMA_J142424.75-004828.74_N540
+[to_json] Big slew from GAMA_J124755.39+001656.93_N708 to GAMA_J142424.75-004828.74_N708
 QA COMPLETE: All tests passed
 
 (Minimum airmass available: 1.1647157057209354)
@@ -79,16 +77,16 @@ QA COMPLETE: All tests passed
 0.0s filled by priority=0.0 objects
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J133731.50-005439.00_N540 to GAMA_J144405.67+004320.51_N540
+[to_json] Big slew from GAMA_J133731.50-005439.00_N708 to GAMA_J144405.67+004320.51_N708
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.23952842715357)
-==> 20230524_04, 7799.999999999969s available
-[plan_night] padding the last hour script by 5400.0s
+(Minimum airmass available: 1.2527900782316297)
+==> 20230524_04, 5999.999999999969s available
+[plan_night] padding the last hour script by 3600.0s
 0.0s filled by priority=0.0 objects
-7200.0s filled by priority=inf objects
+5400.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-QA COMPLETE: All tests passed
+Warning: Airmass of 1.52 in exposure 9 of file ../json/20230523/20230524_04.json
  .   . 
  {\*/} 
   >!<  BACKUP FIELD INFO
