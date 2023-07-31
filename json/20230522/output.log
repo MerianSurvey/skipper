@@ -1,4 +1,4 @@
-DAY:       21
+DAY:       22
 MONTH:     5
 YEAR:      2023
 TELEFILE:  /Users/shanydanieli/Downloads/tele20230519.csv
@@ -17,35 +17,35 @@ COPILOT:   /Users/shanydanieli/Downloads/db_merian.fits
 _______________ _  _ __ _  __      _  .   .
 
 [verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1204763, taken at 2023-05-20 04:37:21.831303+00:00
-On 2023/5/21, we are observing None in N708
+On 2023/5/22, we are observing None in N708
 We are observing the first half of the night
 14 pointings in this catalog need reobservation!
 [predict] night slot: First half
-obsStart: 2023/05/21 06:59 PM Santiago
-          2023/05/21 06:59 PM ET
-          2023/05/21 03:59 PM PT
-          2023/05/21 10:59 PM UTC
-obsEnd:   2023/05/22 12:39 AM Santiago
-          2023/05/22 12:39 AM ET
-          2023/05/21 09:39 PM PT
-          2023/05/22 04:39 AM UTC
-Moon illumination is: 0.06
-Moon max altitude during observation is: 3.66
+obsStart: 2023/05/22 06:59 PM Santiago
+          2023/05/22 06:59 PM ET
+          2023/05/22 03:59 PM PT
+          2023/05/22 10:59 PM UTC
+obsEnd:   2023/05/23 12:40 AM Santiago
+          2023/05/23 12:40 AM ET
+          2023/05/22 09:40 PM PT
+          2023/05/23 04:40 AM UTC
+Moon illumination is: 0.12
+Moon max altitude during observation is: 12.19
 [plan_night] Using "priority_name" column as object priorities
 
-(Minimum airmass available: 1.266134414603161)
+(Minimum airmass available: 1.2587490313827834)
 (60s) Not enough time for an exposure. Skipping...
 
-(Minimum airmass available: 1.1880654774514985)
-==> 20230521_23, 3600.0s available
+(Minimum airmass available: 1.1854949875778427)
+==> 20230522_23, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.158016960064109)
-==> 20230522_00, 3600.0s available
+(Minimum airmass available: 1.1577103607769046)
+==> 20230523_00, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
@@ -54,34 +54,34 @@ QA COMPLETE: All tests passed
 [to_json] Big slew from GAMA_J110216.57+032135.71_N708 to GAMA_J122440.63+001641.75_N708
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1583352474391377)
-==> 20230522_01, 3600.0s available
+(Minimum airmass available: 1.1585102716444011)
+==> 20230523_01, 3600.0s available
 3000.0s filled by priority=0.0 objects
 600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J122440.63+001641.75_N708 to GAMA_J142534.94-005219.29_N708
 [to_json] Big slew from GAMA_J135332.10-005949.51_N708 to GAMA_J110106.34+032630.74_N708
-[to_json] Big slew from GAMA_J110106.34+032630.74_N708 to GAMA_J124036.58+001544.03_N708
-QA COMPLETE: All tests passed
+[to_json] Big slew from GAMA_J110106.34+032630.74_N708 to GAMA_J124755.39+001656.93_N708
+Warning: Airmass of 1.51 in exposure 7 of file ../json/20230522/20230523_01.json
 
-(Minimum airmass available: 1.145069736422014)
-==> 20230522_02, 3600.0s available
+(Minimum airmass available: 1.1451565271242417)
+==> 20230523_02, 3600.0s available
 0.0s filled by priority=0.0 objects
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from GAMA_J124036.58+001544.03_N708 to GAMA_J135756.09-005213.86_N708
+[to_json] Big slew from GAMA_J124755.39+001656.93_N708 to GAMA_J142424.75-004828.74_N708
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.1501837721915786)
-==> 20230522_03, 3600.0s available
+(Minimum airmass available: 1.164238516605247)
+==> 20230523_03, 3600.0s available
 0.0s filled by priority=0.0 objects
 3600.0s filled by priority=inf objects
 [to_json] Inserting 60s focus exposures
 [to_json] Big slew from GAMA_J133731.50-005439.00_N708 to GAMA_J144405.67+004320.51_N708
 QA COMPLETE: All tests passed
 
-(Minimum airmass available: 1.2217349787613325)
-==> 20230522_04, 5969.9999999999745s available
+(Minimum airmass available: 1.2285974289648482)
+==> 20230523_04, 5999.999999999969s available
 [plan_night] padding the last hour script by 3600.0s
 0.0s filled by priority=0.0 objects
 5400.0s filled by priority=inf objects
@@ -93,18 +93,18 @@ QA COMPLETE: All tests passed
  (/^\) 
  '   ' 
 time (UTC)    10:30     11:30     12:30     01:30     02:30     03:30     04:30     
-SXDS          -3.94     -2.20     -1.61     -1.35     -1.24     -1.22     -1.30     
-COSMOS        1.19      1.20      1.32      1.57      2.14      3.76      22.45     
-GH14          4.52      2.34      1.66      1.37      1.23      1.20      1.26      
-NSA15235      4.78      2.40      1.68      1.37      1.23      1.19      1.24      
-GAMA5220386   -2.49     -2.34     -2.46     -2.97     -4.44     -12.76    10.73     
-GAMA5275222   -2.55     -2.31     -2.37     -2.74     -3.80     -8.09     23.02     
-GAMA5265117   -2.27     -2.09     -2.14     -2.47     -3.37     -6.61     44.19     
-GAMA5240292   -2.47     -2.29     -2.38     -2.80     -4.02     -9.56     15.18     
-GAMA5247018   -2.23     -2.06     -2.12     -2.45     -3.36     -6.65     40.12     
-GAMA5266552   -2.24     -2.07     -2.13     -2.46     -3.35     -6.60     42.96     
-GAMA5337331   -2.66     -2.34     -2.33     -2.61     -3.43     -6.24     864.41    
-GAMA5197149   -2.41     -2.29     -2.44     -2.99     -4.59     -14.99    9.25      
+SXDS          -3.74     -2.15     -1.59     -1.34     -1.23     -1.23     -1.31     
+COSMOS        1.18      1.21      1.33      1.60      2.19      3.97      33.66     
+GH14          4.25      2.28      1.64      1.35      1.23      1.20      1.27      
+NSA15235      4.47      2.33      1.65      1.36      1.22      1.19      1.25      
+GAMA5220386   -2.47     -2.34     -2.48     -3.02     -4.62     -14.76    9.52      
+GAMA5275222   -2.52     -2.31     -2.38     -2.78     -3.92     -8.82     18.15     
+GAMA5265117   -2.25     -2.09     -2.16     -2.51     -3.47     -7.11     28.80     
+GAMA5240292   -2.45     -2.28     -2.39     -2.85     -4.16     -10.62    12.87     
+GAMA5247018   -2.21     -2.06     -2.13     -2.49     -3.46     -7.16     26.95     
+GAMA5266552   -2.22     -2.06     -2.14     -2.49     -3.45     -7.10     28.22     
+GAMA5337331   -2.63     -2.33     -2.34     -2.64     -3.53     -6.65     79.84     
+GAMA5197149   -2.39     -2.29     -2.46     -3.05     -4.79     -17.90    8.33      
 
           
 ~ ( B A C K U P  F I E L D S ) ~          
