@@ -241,7 +241,9 @@ class ObsCatalog (object):
                      pad_last_hour=True,
                      prefix='',
                      pointingdb_fname=None,
-                     verbose=True):
+                     verbose=True,
+                     flag_emptyhours=False,
+                     ):
         '''
         Using obstime and obssite (CTIO), generate a plan from the night
         via airmass optimization.
@@ -285,7 +287,10 @@ class ObsCatalog (object):
             catalog_objects = catalog['priority_name']
         
         if exclude_hour_indices is None:
-            exclude_hour_indices = []        
+            exclude_hour_indices = []     
+            
+        if flag_emptyhours:
+            emptyhours = []   
 
         # \\ if time < 12, we've started past midnight.
         start_hour = obs_start.astimezone(obssite.timezone).hour
@@ -416,9 +421,13 @@ class ObsCatalog (object):
             if hfile.shape[0]==0:
                 print('!!! Nothing to queue !!!')
                 warnings.warn (f'Queue empty at {hstr}')
+                if flag_emptyhours:
+                    emptyhours.append( hstr )
             elif avail_queue_time > catalog['expTime'].mean():
                 print(f'!!! Cannot fill queue !!! {avail_queue_time}, {catalog["expTime"].mean()}')
                 warnings.warn(f'Queue unfilled at {hstr}')
+                if flag_emptyhours:
+                    emptyhours.append( hstr )
             if hfile.shape[0]>0:
                 if save:
                     fname = f'../json/{dstr}/{prefix}{hstr}.json'
@@ -433,6 +442,8 @@ class ObsCatalog (object):
             is_queued.loc[cmass.index[cmass.going_to_queue], 'qstamp'] = hstr
             is_queued.loc[cmass.index[cmass.going_to_queue], 'airmass'] = cmass.loc[cmass.going_to_queue, 'airmass']
 
+        if flag_emptyhours:
+            return is_queued, emptyhours
         return is_queued
     
 
@@ -585,7 +596,7 @@ class ObservingSite ( object ):
 
         
         #frame = np.arange ( -lim, lim+nstep/2., nstep) * u.hour
-        frame = np.arange(0, (utc_end-utc_start).to_value(u.hour)+1,1)*u.hour
+        #frame = np.arange(0, (utc_end-utc_start).to_value(u.hour)+1,1)*u.hour
         timeframe = np.arange(utc_start+0.5*u.hour, utc_end+1*u.hour, 1.*u.hour) #utc_start + frame
         #timeframe += 0.5*u.hour # calculate airmass in middle of hour
         obsframe = coordinates.AltAz ( obstime = timeframe, location=self.site)

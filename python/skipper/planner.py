@@ -148,6 +148,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                    priorities=None,
                    maxairmass = 1.5,
                    verbose = True,
+                   flag_emptyhours = False,
                    ignore_synchronicity = False,
                    extra = None, # manual extra hours     
                    dryrun = False,               
@@ -268,13 +269,21 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
     if dryrun:
         return None
     
-    is_queued_tmrw = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
+    output = ocat.plan_night ( obs_start, ctio, catalog=mastercat, obs_end=obs_end,
                                      is_queued=is_queued.copy(),
                                      maxairmass=maxairmass, 
-                                     object_priority=priorities,
+                                     object_priority=priorities,   
+                                     flag_emptyhours=flag_emptyhours,                                  
                                      **kwargs )
+    if flag_emptyhours:
+        is_queued_tmrw, emptyhours = output
+    else:
+        is_queued_tmrw = output
 
     if verbose:
         print_backupaltitudes (obs_start, obs_end )
         nextbackupscript ( tele )
+        
+    if flag_emptyhours:
+        return is_queued_tmrw, emptyhours
     return is_queued_tmrw

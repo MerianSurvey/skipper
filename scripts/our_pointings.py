@@ -105,13 +105,14 @@ def construct_fall_superset ( newp, oldp ):
     superset = pd.concat([oldp, pointings_to_add])
     
     # \\ cut off early VVDS fields -< not for now
-    superset = superset.loc[(superset['RA']<175.)|(superset['RA']>339.)]
+    #superset = superset.loc[(superset['RA']<175.)|(superset['RA']>339.)]
     # \\ deprioritize middle where we have no DEC coverage
     is_mid = (superset['RA']>(360.-8.))|(superset['RA']<28.)
     is_mid |= (superset['RA']>(360-13.))&(superset['RA']<(360.-5.))&(superset['dec']>3.)
-    superset.loc[is_mid, 'object'] = superset.loc[is_mid, 'object'].apply(lambda x: x.replace('btwnXV', 'newRAbtwnXV'))
+    #superset.loc[is_mid, 'object'] = superset.loc[is_mid, 'object'].apply(lambda x: x.replace('btwnXV', 'newRAbtwnXV'))
     above_xmm = (superset['RA']>38.)&(superset['RA']<=40.)
-    superset.loc[above_xmm, 'object'] = superset.loc[above_xmm, 'object'].apply(lambda x: x.replace('btwnXV', 'XMMhigh'))
+    #superset.loc[above_xmm, 'object'] = superset.loc[above_xmm, 'object'].apply(lambda x: x.replace('btwnXV', 'XMMhigh'))    
+    #superset.loc[superset['RA']>320., 'object'] =  superset.loc[superset['RA']>320., 'object'].apply(lambda x: x.replace('btwnXV', 'EarlyRA')) 
     #assert superset.shape[0] == (newp.shape[0] + oldp.shape[0] - oldnames_wmatch.shape[0])
     return superset
 
