@@ -20,6 +20,8 @@ import pandas as pd
 from datetime import datetime, timedelta
 import pytz
 
+exptime_d = {'N540':10.*u.minute, 'N708':15.*u.minute}
+
 def tmp():
     print('Hello, world')
 
@@ -150,6 +152,7 @@ def __checkVis__(file, obs_start, obssite, maxairmass, csv):
     with open(file, 'r') as content_file:
         content = content_file.read()
     j = json.loads(content)
+    print(f'[qa l155] Reference time: {obs_start}')
 
     #site = obssite #EarthLocation.of_site('Cerro Tololo')
     site=None
@@ -158,7 +161,8 @@ def __checkVis__(file, obs_start, obssite, maxairmass, csv):
     else:
         site = obssite
     timezone= pytz.timezone ( 'America/Santiago' )
-    utc_start = Time(obs_start) - obs_start.astimezone(pytz.utc).minute*u.minute - obs_start.astimezone(pytz.utc).second*u.second
+    utc_start = Time(obs_start) #- obs_start.astimezone(pytz.utc).minute*u.minute - obs_start.astimezone(pytz.utc).second*u.second
+    print(f'[qa] UTC start time: {utc_start}')
 
     #already observed objects
     if csv is not None:
@@ -170,10 +174,12 @@ def __checkVis__(file, obs_start, obssite, maxairmass, csv):
         # ra/dec coordinates
         ra = exposure['RA']
         dec = exposure['dec']
+        #mediumband = exposure['filter']
+        exptime = exposure['expTime']
         ra_dec = SkyCoord(ra=ra*u.deg, dec=dec*u.deg)
 
         # get airmass
-        utc_start += 10*u.minute
+        utc_start += exptime * u.second #exptime_d[mediumband]
         obsframe = astropy.coordinates.AltAz( obstime = utc_start, location=site)
         wt = (ra_dec.transform_to(obsframe)).secz
         #print(wt)
