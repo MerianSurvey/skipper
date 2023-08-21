@@ -484,7 +484,7 @@ class ObservingSite ( object ):
             else:
                 self.timezone = timezone
 
-    def get_sunriseset ( self, year, month, day, alt=-16., cut_at_contract=False, contract_time=(6,5) ):
+    def get_sunriseset ( self, year, month, day, alt=-14., cut_at_contract=False, contract_time=(6,5) ):
         '''
         DECam observing begins and ends at Sun altitude=-14 deg.
         

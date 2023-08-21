@@ -20,37 +20,38 @@ _______________ _  _ __ _  __      _  .   .
 On 2023/9/6, we are observing None in N708
 We are observing the full of the night
 8 pointings in this catalog need reobservation!
-[observe] Computing sunrise and sunset on 2023/9/6 at altitude = -16.0
+[observe] Computing sunrise and sunset on 2023/9/6 at altitude = -14.0
 [predict] night slot: Full night
-obsStart: 2023/09/06 08:42 PM Santiago
-          2023/09/06 07:42 PM ET
-          2023/09/06 04:42 PM PT
-          2023/09/06 11:42 PM UTC
-obsEnd:   2023/09/07 06:41 AM Santiago
-          2023/09/07 05:41 AM ET
-          2023/09/07 02:41 AM PT
-          2023/09/07 09:41 AM UTC
+obsStart: 2023/09/06 08:32 PM Santiago
+          2023/09/06 07:32 PM ET
+          2023/09/06 04:32 PM PT
+          2023/09/06 11:32 PM UTC
+obsEnd:   2023/09/07 06:50 AM Santiago
+          2023/09/07 05:50 AM ET
+          2023/09/07 02:50 AM PT
+          2023/09/07 09:50 AM UTC
 Moon illumination is: 0.47
-Moon max altitude during observation is: 28.59
+Moon max altitude during observation is: 29.28
 [plan_night] Using "priority_name" column as object priorities
 [observe] (Minimum airmass available: 2.807024117981006)
 [observe] No targets found at 1.9. Raising max airmass allowable to 3.000000000000001...
 8
-==> 20230906_23, 1079.9999999999898s available
+==> 20230906_23, 1679.9999999999973s available
 0.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
-600.0s filled by priority=100.0 objects
+1200.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
-[qa l155] Reference time: 2023-09-06 23:42:00+00:00
-[qa] UTC start time: 2023-09-06 23:42:00
-Warning: Airmass of 2.50 in exposure 1 of file ../json/20230906/20230906_23.json
-Warning: Airmass of 2.48 in exposure 2 of file ../json/20230906/20230906_23.json
-Warning: Airmass of 2.46 in exposure 3 of file ../json/20230906/20230906_23.json
-Warning: Airmass of 2.44 in exposure 4 of file ../json/20230906/20230906_23.json
-Warning: Airmass of 2.26 in exposure 5 of file ../json/20230906/20230906_23.json
+[qa l155] Reference time: 2023-09-06 23:32:00+00:00
+[qa] UTC start time: 2023-09-06 23:32:00
+Warning: Airmass of 2.73 in exposure 1 [60.0 sec exposure] of file ../json/20230906/20230906_23.json
+Warning: Airmass of 2.70 in exposure 2 [60.0 sec exposure] of file ../json/20230906/20230906_23.json
+Warning: Airmass of 2.68 in exposure 3 [60.0 sec exposure] of file ../json/20230906/20230906_23.json
+Warning: Airmass of 2.65 in exposure 4 [60.0 sec exposure] of file ../json/20230906/20230906_23.json
+Warning: Airmass of 2.44 in exposure 5 [600.0 sec exposure] of file ../json/20230906/20230906_23.json
+Warning: Airmass of 2.27 in exposure 6 [600.0 sec exposure] of file ../json/20230906/20230906_23.json
 [observe] (Minimum airmass available: 1.8415226899163215)
-8
+7
 ==> 20230907_00, 3600.0s available
 0.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
@@ -58,27 +59,20 @@ Warning: Airmass of 2.26 in exposure 5 of file ../json/20230906/20230906_23.json
 [to_json] Inserting 60s focus exposures
 [qa l155] Reference time: 2023-09-07 00:30:00
 [qa] UTC start time: 2023-09-07 00:30:00
-Warning: Airmass of 1.75 in exposure 1 of file ../json/20230906/20230907_00.json
-Warning: Airmass of 1.68 in exposure 2 of file ../json/20230906/20230907_00.json
-Warning: Airmass of 1.62 in exposure 3 of file ../json/20230906/20230907_00.json
-Warning: Airmass of 1.54 in exposure 4 of file ../json/20230906/20230907_00.json
+QA COMPLETE: All tests passed
 [observe] (Minimum airmass available: 1.460509227158299)
-63
+62
 ==> 20230907_01, 3600.0s available
 1800.0s filled by priority=0.0 objects
 1800.0s filled by priority=1.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from VVDSearly_J220741.73+023339.72_N708 to VVDSearly_J225506.02+023127.06_N708
+[to_json] Big slew from VVDSearly_J220852.18+023628.78_N708 to VVDSearly_J225506.02+023127.06_N708
 [qa l155] Reference time: 2023-09-07 01:30:00
 [qa] UTC start time: 2023-09-07 01:30:00
-Warning: Airmass of 1.74 in exposure 1 of file ../json/20230906/20230907_01.json
-Warning: Airmass of 1.67 in exposure 2 of file ../json/20230906/20230907_01.json
-Warning: Airmass of 1.61 in exposure 3 of file ../json/20230906/20230907_01.json
-Warning: Airmass of 1.55 in exposure 4 of file ../json/20230906/20230907_01.json
-Warning: Airmass of 1.53 in exposure 5 of file ../json/20230906/20230907_01.json
+QA COMPLETE: All tests passed
 [observe] (Minimum airmass available: 1.2581817652305203)
-128
+127
 ==> 20230907_02, 3600.0s available
 1200.0s filled by priority=0.0 objects
 2400.0s filled by priority=1.0 objects
@@ -88,11 +82,9 @@ Warning: Airmass of 1.53 in exposure 5 of file ../json/20230906/20230907_01.json
 [to_json] Big slew from VVDSlate_J235219.94+011057.49_N708 to btwnXV_J225836.55+035951.76_N708
 [qa l155] Reference time: 2023-09-07 02:30:00
 [qa] UTC start time: 2023-09-07 02:30:00
-Warning: Airmass of 1.67 in exposure 1 of file ../json/20230906/20230907_02.json
-Warning: Airmass of 1.60 in exposure 2 of file ../json/20230906/20230907_02.json
-Warning: Airmass of 1.55 in exposure 3 of file ../json/20230906/20230907_02.json
+QA COMPLETE: All tests passed
 [observe] (Minimum airmass available: 1.176702939176901)
-220
+219
 ==> 20230907_03, 3600.0s available
 1200.0s filled by priority=0.0 objects
 2400.0s filled by priority=1.0 objects
@@ -102,9 +94,9 @@ Warning: Airmass of 1.55 in exposure 3 of file ../json/20230906/20230907_02.json
 [to_json] Big slew from btwnXV_J004045.96+005903.20_N708 to btwnXV_J230817.61+022546.82_N708
 [qa l155] Reference time: 2023-09-07 03:30:00
 [qa] UTC start time: 2023-09-07 03:30:00
-Warning: Airmass of 1.55 in exposure 1 of file ../json/20230906/20230907_03.json
+QA COMPLETE: All tests passed
 [observe] (Minimum airmass available: 1.1738589146921226)
-331
+330
 ==> 20230907_04, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
@@ -113,9 +105,9 @@ Warning: Airmass of 1.55 in exposure 1 of file ../json/20230906/20230907_03.json
 [to_json] Big slew from btwnXV_J231148.65+023644.13_N708 to btwnXV_J013036.02+005522.39_N708
 [qa l155] Reference time: 2023-09-07 04:30:00
 [qa] UTC start time: 2023-09-07 04:30:00
-Warning: Airmass of 1.53 in exposure 1 of file ../json/20230906/20230907_04.json
+QA COMPLETE: All tests passed
 [observe] (Minimum airmass available: 1.175567184222529)
-375
+374
 ==> 20230907_05, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
@@ -125,7 +117,7 @@ Warning: Airmass of 1.53 in exposure 1 of file ../json/20230906/20230907_04.json
 [qa] UTC start time: 2023-09-07 05:30:00
 QA COMPLETE: All tests passed
 [observe] (Minimum airmass available: 1.1701001906076571)
-369
+368
 ==> 20230907_06, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
@@ -156,17 +148,15 @@ QA COMPLETE: All tests passed
 QA COMPLETE: All tests passed
 [observe] (Minimum airmass available: 1.2099266724036106)
 207
-==> 20230907_09, 6060.000000000031s available
+==> 20230907_09, 6600.000000000029s available
 [plan_night] padding the last hour script by 3600.0s
 1800.0s filled by priority=0.0 objects
-4200.0s filled by priority=1.0 objects
+4800.0s filled by priority=1.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
 [qa l155] Reference time: 2023-09-07 09:30:00
 [qa] UTC start time: 2023-09-07 09:30:00
-Warning: Airmass of 1.53 in exposure 8 of file ../json/20230906/20230907_09.json
-Warning: Airmass of 1.51 in exposure 9 of file ../json/20230906/20230907_09.json
-Warning: Airmass of 1.65 in exposure 10 of file ../json/20230906/20230907_09.json
+QA COMPLETE: All tests passed
  .   . 
  {\*/} 
   >!<  BACKUP FIELD INFO

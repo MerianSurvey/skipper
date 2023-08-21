@@ -25,7 +25,7 @@ exptime_d = {'N540':10.*u.minute, 'N708':15.*u.minute}
 def tmp():
     print('Hello, world')
 
-def validate_json(file, obs_start, obssite, csv=None, maxairmass=1.5, logname='../json/json.log'):
+def validate_json(file, obs_start, obssite, csv=None, maxairmass=1.9, logname='../json/json.log'):
     '''
     Validation for JSON observing scripts
     Verifies:
@@ -186,7 +186,7 @@ def __checkVis__(file, obs_start, obssite, maxairmass, csv):
 
         # check airmass against our threshold
         if wt > maxairmass or wt<0:
-            print(f'Warning: Airmass of {wt:.2f} in exposure ' + str(i+1) + ' of file ' + file)
+            print(f'Warning: Airmass of {wt:.2f} in exposure ' + str(i+1) + f' [{exptime} sec exposure] of file ' + file)
             ok=False
 
         # check object repeat
