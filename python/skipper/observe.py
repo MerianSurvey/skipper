@@ -484,7 +484,7 @@ class ObservingSite ( object ):
             else:
                 self.timezone = timezone
 
-    def get_sunriseset ( self, year, month, day, alt=-14., cut_at_contract=False, contract_time=(6,5) ):
+    def get_sunriseset ( self, year, month, day, alt=-16., cut_at_contract=False, contract_time=(6,5) ):
         '''
         DECam observing begins and ends at Sun altitude=-14 deg.
         
@@ -493,6 +493,7 @@ class ObservingSite ( object ):
         contract_time: tuple, default=(6,5)
             hour,min in Chilean local time at which observations must cease
         '''
+        print (f'[observe] Computing sunrise and sunset on {year}/{month}/{day} at altitude = {alt}' )
         utc_midnight = pytz.utc.localize ( datetime.datetime ( year, month, day, 0, 0 ) )
         utc_offset = int(self.get_utcoffset (utc_midnight))
 

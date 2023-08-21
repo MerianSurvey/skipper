@@ -69,8 +69,8 @@ def validate_json(file, obs_start, obssite, csv=None, maxairmass=1.5, logname='.
 
         dtime = datetime.now().strftime('%Y/%m/%d %I:%M %p')
 
-        with open(logname,'a') as ff:
-            print(f'{file} VALIDATED at {dtime} by {user}', file=ff)
+        #with open(logname,'a') as ff:
+        #    print(f'{file} VALIDATED at {dtime} by {user}', file=ff)
 
 
 
