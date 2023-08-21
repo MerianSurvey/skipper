@@ -128,6 +128,10 @@ def duplicate_obsscript (halpha_pointings, json_input, output_filename ):
     dummy_obscat.to_json ( halpha_pointings.reindex(match_indices), fp=output_filename, 
                           insert_checksky_exposures=False)    
     
+def wrapra ( ra, pivot = 320. ):
+    wrapped_ra = np.where(ra>pivot, ra-360, ra )
+    return wrapped_ra
+    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser ( prog='sigjson_f2023b.py', description='Merian obs planner for 2023B')
     parser.add_argument ( '--year', '-Y', action='store', default=2023, help='year of observations', type=int )
@@ -137,8 +141,10 @@ if __name__ == '__main__':
     parser.add_argument ( '--telemetry_file', '-t', action='store' )
     parser.add_argument ( '--copilot_file', '-c', default=f'{os.environ["HOME"]}/Downloads/db_merian.fits', action='store' )    
     parser.add_argument ( '--dryrun', action='store_true' )
+    parser.add_argument ( '--maxairmass', action='store', default=1.9)
     args = parser.parse_args ()
     
+    print(f'Running with airmass cut of {float(args.maxairmass)}')
     #plan_tomorrow ( args.day, args.month, args.year, args.telemetry_file, args.copilot_file)
 
     #fields = oiii_pointings['object'].str.extract(r'(.*?(?=_))')[0]
@@ -156,7 +162,7 @@ if __name__ == '__main__':
                         mfilt=obsfilters[night_index], 
                         is_queued=None, 
                         pad_last_hour=True, 
-                        maxairmass=1.8, 
+                        maxairmass=float(args.maxairmass),
                         save=not args.dryrun, 
                         verbose=True
     )
@@ -183,13 +189,13 @@ if __name__ == '__main__':
             completed = coo.identify_completed_pointings ( teff_min )
             to_obs = is_queued.loc[~is_queued['qstamp'].isna()]                        
             
-            ax.scatter ( pointings['RA'], pointings['dec'], 
+            ax.scatter ( wrapra(pointings['RA']), pointings['dec'], 
                         facecolor='None', edgecolor='lightgrey', s=30**2, lw=1, label='planned' )
-            ax.scatter ( completed['racenter'], completed['deccenter'], s=30**2, color='#26b7f0', label='executed', alpha=0.2)
+            ax.scatter ( wrapra(completed['racenter']), completed['deccenter'], s=30**2, color='#26b7f0', label='executed', alpha=0.2)
             pointings = pointings_d[cfilter]
             if cfilter == obsfilters[night_index]:
                 print( f'We are observing {cfilter} ({idx})')
-                ax.scatter ( pointings.reindex(to_obs.index)['RA'], pointings.reindex(to_obs.index)['dec'], 
+                ax.scatter ( wrapra(pointings.reindex(to_obs.index)['RA']), pointings.reindex(to_obs.index)['dec'], 
                             facecolor='None', edgecolor='r', s=30**2, lw=1, label='queued [w. padding]' )
             ax.set_title ( cfilter )     
             ax.legend () 

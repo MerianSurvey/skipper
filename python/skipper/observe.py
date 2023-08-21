@@ -344,7 +344,11 @@ class ObsCatalog (object):
         for ix in range(len(alt_l[0])): # \\ for each hour,
             if ix in exclude_hour_indices:
                 continue
-            htime = alt_l[0][ix].obstime.datetime            
+            htime = alt_l[0][ix].obstime.datetime     
+            #print(f'[observe l348] Reference time is {htime}. Obs start is {obs_start}')
+            
+            cmaxairmass = maxairmass
+            #print(f'[observe l351] {cmaxairmass}')       
             hstr = htime.strftime('%Y%m%d_%H')
 
             cmass = pd.DataFrame(index=catalog.index)
@@ -353,8 +357,17 @@ class ObsCatalog (object):
             cmass['is_possible'] = True            
             cmass.loc[cmass.airmass<0,'is_possible'] = False
             cmass.loc[is_queued.is_queued, 'is_possible'] = False
-            print(f'\n(Minimum airmass available: {cmass.loc[cmass.is_possible, "airmass"].min()})')
-            cmass.loc[cmass.airmass>maxairmass, 'is_possible'] = False
+            print(f'[observe] (Minimum airmass available: {cmass.loc[cmass.is_possible, "airmass"].min()})')
+            ntargets = (cmass.loc[cmass.is_possible].airmass<cmaxairmass).sum()
+            #print(ntargets)
+            while ntargets == 0:                
+                ntargets = (cmass.loc[cmass.is_possible].airmass<cmaxairmass).sum()
+                #print(ntargets)
+                cmaxairmass += 0.1
+            if cmaxairmass > maxairmass:
+                print (f'[observe] No targets found at {maxairmass}. Raising max airmass allowable to {cmaxairmass}...')
+            cmass.loc[cmass.airmass>cmaxairmass, 'is_possible'] = False
+            print(cmass['is_possible'].sum())
             cmass['going_to_queue'] = False
 
             total_queued_time = 0.
@@ -435,7 +448,9 @@ class ObsCatalog (object):
                                  insert_checksky_exposures=not has_checkedsky,
                                  previous_position=previous_position)
                     has_checkedsky=True
-                    qa.validate_json(fname, htime, pointingdb_fname)
+                    qa.validate_json(fname, 
+                                     ix >0 and htime or obs_start, 
+                                     pointingdb_fname)
                 previous_position = hfile.iloc[-1]
 
             is_queued.loc[cmass.index[cmass.going_to_queue], 'is_queued'] = True
