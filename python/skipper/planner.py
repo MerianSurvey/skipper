@@ -80,7 +80,7 @@ def print_backupaltitudes (obs_start, obs_end, backup_fields=None):
             st = f'{st}{airmass:.2f}\t'
         print(st) '''
  
-def nextbackupscript ( tele, backup_fields=None ):
+def nextbackupscript ( tele, backup_fields=None, advance_scripts=False ):
     '''
     Check which backup scripts have already been observed, and print out the next one
     '''
@@ -94,7 +94,7 @@ def nextbackupscript ( tele, backup_fields=None ):
     for name in backup_fields:
         print(f'=== {name} ===')
         for filt in ['g','r']:
-            for time in ['5min','90sec']:
+            for time in ['5min']:
                 iu=0
                 while True:
                     fname = f'../json/backup_scripts/{name}/{time}/{name}_{time}AGN_{filt}_{iu:02d}.json' 
@@ -106,13 +106,17 @@ def nextbackupscript ( tele, backup_fields=None ):
                     elif not os.path.exists ( fname ):
                         iu += 1    
                     else:
-                        json = pd.read_json ( fname )
-                        has_observed = np.in1d(json['object'].iloc[2:], tele['object']).any ()                        
-                        if has_observed:
-                            iu+=1
+                        if advance_scripts:
+                            json = pd.read_json ( fname )
+                            has_observed = np.in1d(json['object'].iloc[2:], tele['object']).any ()                        
+                            if has_observed:
+                                iu+=1
+                            else:                            
+                                print(f'Next script for [{filt}, {time}] is {fname}')
+                                break
                         else:                            
-                            print(f'Next script for [{filt}, {time}] is {fname}')
-                            break
+                                print(f'Next script for [{filt}, {time}] is {fname}')
+                                break
                     
 def verify_synchronicity ( tele_fname, copilot_fname, verbose=True ):
     '''
