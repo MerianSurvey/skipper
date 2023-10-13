@@ -202,7 +202,7 @@ if __name__ == '__main__':
         
            
         for ax in axarr:
-            ax.set_ylim(-2.2,5)
+            ax.set_ylim(-2.7,5)            
             ax.set_xlabel('RA (deg)')
             ax.set_ylabel('Dec (deg)')     
             
