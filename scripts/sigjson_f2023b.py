@@ -20,7 +20,7 @@ date_file = '../scripts/f2023_dates.txt'
 obsdates = np.genfromtxt ( date_file, comments='#', dtype=int)
 obskeys = [ f'{x[0]:02d}-{x[1]:02d}-{x[2]:02d}' for x in obsdates[:,:3]]
 obsfilters = np.genfromtxt ( date_file, comments='#', dtype=str)[:,4]
-_field_priorities = {'VVDSearly':100, 'VVDSlate':100, 'VVDS':100, 'XMM':100, 'btwnXV':1, 'XMMhigh':1, 'newRAbtwnXV':1, 'coobserved':0, 'newEarlyRA':2}
+_field_priorities = {'VVDSearly':100, 'VVDSlate':100, 'VVDS':100, 'XMM':100, 'btwnXV':1, 'XMMhigh':0, 'newRAbtwnXV':1, 'coobserved':0, 'newEarlyRA':2}
 ####
 ####
 
