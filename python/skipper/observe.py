@@ -484,7 +484,7 @@ class ObservingSite ( object ):
             else:
                 self.timezone = timezone
 
-    def get_sunriseset ( self, year, month, day, alt=-14., cut_at_contract=False, contract_time=(6,5) ):
+    def get_sunriseset ( self, year, month, day, alt=-14., cut_at_contract=False, contract_time=(6,5), return_track=False ):
         '''
         DECam observing begins and ends at Sun altitude=-14 deg.
         
@@ -518,7 +518,8 @@ class ObservingSite ( object ):
             sun_alt.append( sun_coord.transform_to(obsframe).alt )
 
         sun_alt = np.asarray( [ sa.value for sa in sun_alt ] )
-        #return grid, sun_alt
+        if return_track:
+            return grid, sun_alt
         
         fgrid_unix = np.asarray([ gg.unix for gg in fgrid ])
         grid_unix = np.asarray([ gg.unix for gg in grid ])
