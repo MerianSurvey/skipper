@@ -1,0 +1,196 @@
+DAY:       19
+MONTH:     10
+YEAR:      2023
+TELEFILE:  /Users/kadofong/Downloads/tele20231018.csv
+COPILOT:   /Users/kadofong/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1248619, taken at 2023-10-19 08:18:46.924741+00:00
+On 2023/10/19, we are observing None in N708
+We are observing the full of the night
+15 pointings in this catalog need reobservation!
+[observe] Computing sunrise and sunset on 2023/10/19 at altitude = -14.0
+[predict] night slot: Full night
+obsStart: 2023/10/19 09:00 PM Santiago
+          2023/10/19 08:00 PM ET
+          2023/10/19 05:00 PM PT
+          2023/10/20 12:00 AM UTC
+obsEnd:   2023/10/20 05:56 AM Santiago
+          2023/10/20 04:56 AM ET
+          2023/10/20 01:56 AM PT
+          2023/10/20 08:56 AM UTC
+Moon illumination is: 0.29
+Moon max altitude during observation is: 47.18
+[plan_night] Using "priority_name" column as object priorities
+[observe] (Minimum airmass available: 1.1791970844828616)
+216
+==> 20231020_00, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+[qa l155] Reference time: 2023-10-20 00:00:00+00:00
+[qa] UTC start time: 2023-10-20 00:00:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1702317502194817)
+319
+==> 20231020_01, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-10-20 01:30:00
+[qa] UTC start time: 2023-10-20 01:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.173761475461302)
+381
+==> 20231020_02, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-10-20 02:30:00
+[qa] UTC start time: 2023-10-20 02:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.170192636704331)
+375
+==> 20231020_03, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-10-20 03:30:00
+[qa] UTC start time: 2023-10-20 03:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.155218339500819)
+349
+==> 20231020_04, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from btwnXV_J004045.96+005903.20_N708 to XMM_J021432.07-004523.22_N708
+[qa l155] Reference time: 2023-10-20 04:30:00
+[qa] UTC start time: 2023-10-20 04:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.148650634693862)
+294
+==> 20231020_05, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-10-20 05:30:00
+[qa] UTC start time: 2023-10-20 05:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1926483733044029)
+225
+==> 20231020_06, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-10-20 06:30:00
+[qa] UTC start time: 2023-10-20 06:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.3330027000286013)
+128
+==> 20231020_07, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-10-20 07:30:00
+[qa] UTC start time: 2023-10-20 07:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.6370515169083617)
+14
+==> 20231020_08, 6959.999999999951s available
+[plan_night] padding the last hour script by 3600.0s
+1200.0s filled by priority=0.0 objects
+5400.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-10-20 08:30:00
+[qa] UTC start time: 2023-10-20 08:30:00
+Warning: Airmass of 2.01 in exposure 1 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 2.12 in exposure 2 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 2.24 in exposure 3 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 2.40 in exposure 4 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 2.62 in exposure 5 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 2.84 in exposure 6 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 3.11 in exposure 7 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 3.35 in exposure 8 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 3.46 in exposure 9 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 4.18 in exposure 10 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+Warning: Airmass of 3.90 in exposure 11 [600.0 sec exposure] of file ../json/20231019/20231020_08.json
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)    12:30     01:30     02:30     03:30     04:30     05:30     06:30     07:30     08:30     
+SXDS          3.13      1.92      1.45      1.23      1.13      1.11      1.17      1.33      1.66      
+COSMOS        -1.14     -1.15     -1.24     -1.46     -1.93     -3.14     -10.24    7.79      2.90      
+GH14          -3.74     -2.11     -1.53     -1.27     -1.15     -1.12     -1.16     -1.30     -1.59     
+NSA15235      -4.15     -2.22     -1.59     -1.30     -1.17     -1.13     -1.16     -1.29     -1.57     
+GAMA5220386   1.03      1.00      1.02      1.10      1.24      1.52      2.05      3.28      8.40      
+GAMA5275222   1.05      1.01      1.01      1.07      1.20      1.43      1.88      2.86      6.14      
+GAMA5265117   1.05      1.00      1.01      1.08      1.21      1.47      1.96      3.12      7.86      
+GAMA5240292   1.04      1.00      1.02      1.08      1.22      1.48      1.97      3.10      7.40      
+GAMA5247018   1.04      1.00      1.01      1.08      1.22      1.48      1.99      3.21      8.56      
+GAMA5266552   1.05      1.00      1.01      1.08      1.22      1.47      1.98      3.18      8.28      
+GAMA5337331   1.07      1.01      1.01      1.05      1.16      1.36      1.74      2.53      4.80      
+GAMA5197149   1.03      1.00      1.03      1.11      1.27      1.56      2.14      3.57      10.65     
+
+          
+~ ( B A C K U P  F I E L D S ) ~          
+          
+=== SXDS ===
+Next script for [g, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/SXDS/5min/SXDS_5minAGN_r_01.json
+=== COSMOS ===
+Next script for [g, 5min] is ../json/backup_scripts/COSMOS/5min/COSMOS_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/COSMOS/5min/COSMOS_5minAGN_r_01.json
+=== GH14 ===
+No back-up scripts available for [g, 5min]
+No back-up scripts available for [r, 5min]
+=== NSA15235 ===
+No back-up scripts available for [g, 5min]
+No back-up scripts available for [r, 5min]
+=== GAMA5220386 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5220386/5min/GAMA5220386_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5220386/5min/GAMA5220386_5minAGN_r_01.json
+=== GAMA5275222 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5275222/5min/GAMA5275222_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5275222/5min/GAMA5275222_5minAGN_r_01.json
+=== GAMA5265117 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5265117/5min/GAMA5265117_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5265117/5min/GAMA5265117_5minAGN_r_01.json
+=== GAMA5240292 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5240292/5min/GAMA5240292_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5240292/5min/GAMA5240292_5minAGN_r_01.json
+=== GAMA5247018 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5247018/5min/GAMA5247018_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5247018/5min/GAMA5247018_5minAGN_r_01.json
+=== GAMA5266552 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5266552/5min/GAMA5266552_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5266552/5min/GAMA5266552_5minAGN_r_01.json
+=== GAMA5337331 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5337331/5min/GAMA5337331_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5337331/5min/GAMA5337331_5minAGN_r_01.json
+=== GAMA5197149 ===
+Next script for [g, 5min] is ../json/backup_scripts/GAMA5197149/5min/GAMA5197149_5minAGN_g_01.json
+Next script for [r, 5min] is ../json/backup_scripts/GAMA5197149/5min/GAMA5197149_5minAGN_r_01.json
