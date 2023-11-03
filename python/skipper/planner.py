@@ -82,6 +82,8 @@ def print_backupaltitudes (obs_start, obs_end, backup_fields=None):
  
 def nextbackupscript ( tele, backup_fields=None, advance_scripts=False ):
     '''
+    DEPRECATED.
+    
     Check which backup scripts have already been observed, and print out the next one
     '''
     if backup_fields is None:
@@ -286,7 +288,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
 
     if verbose:
         print_backupaltitudes (obs_start, obs_end )
-        nextbackupscript ( tele )
+        #nextbackupscript ( tele )
+        print ( 'Update! [2023.11.03] Use the 5min_offset back-up scripts, which are offset 1/2 chip height to the north.')
         
     if flag_emptyhours:
         return is_queued_tmrw, emptyhours
