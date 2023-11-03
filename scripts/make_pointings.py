@@ -50,7 +50,7 @@ def build_cosmos (seed=267667,
     else:
         return catalog, ocat
 
-def build_backup ( seed=2465646, filter='g', exptime=5., total_time=40., start_at_center=False, nscripts=10, **kwargs ):
+def build_backup ( seed=2465646, filter='g', exptime=5., total_time=40., start_at_center=False, nscripts=10,  **kwargs ):
     # seed = 246 = AGN <= AGN 10 min exp
     # seed = 2465646 = AGN5MIN <= AGN 5 min exp
     # seed = 24690732 = AGN90SEC
@@ -71,8 +71,8 @@ def build_SOAGN ( objid,
                  filename='../data/SOAGN.txt',
                  name=None,                 
                  seed_l=None, 
-                 raoffset = 30., # RA offset in arcsec
-                 decoffset = 30., # DEC offset in arcsec
+                 raoffset = 60., # RA offset in arcsec
+                 decoffset = 270., # DEC offset in arcsec
                  filter='g', exptime=1.5, total_time=60., 
                  start_at_center=True, nscripts=20, **kwargs ):
     '''
@@ -87,10 +87,11 @@ def build_SOAGN ( objid,
     if isinstance(decoffset, float):
         decoffset = decoffset * u.arcsec    
     # \\ load source 
-    src_df = pd.read_csv (filename, delim_whitespace=True, comment='#', index_col=0)
+    src_df = pd.read_csv (filename, comment='#', index_col=0)
+    
     raoffset_deg = raoffset.to(u.deg).value
     decoffset_deg = decoffset.to(u.deg).value
-    print(f'Offsetting center by: dRA = {raoffset_deg} deg, dDEC = {decoffset_deg} deg')
+    print(f'Offsetting center by: dRA = {raoffset_deg*60.:.1f} arcmin, dDEC = {decoffset_deg*60.:.1f} arcmin')
     center = coordinates.SkyCoord ( src_df.loc[objid, 'RA'] + raoffset_deg, src_df.loc[objid,'Dec'] + decoffset_deg, unit='deg')
     catalog_l = []
     frd_l = []
