@@ -137,12 +137,16 @@ if __name__ == '__main__':
     parser.add_argument ( '--year', '-Y', action='store', default=2023, help='year of observations', type=int )
     parser.add_argument ( '--month', '-M', action='store', help='month of observations', type=int )
     parser.add_argument ( '--day', '-D', action='store', help='day of observations', type=int )    
-    parser.add_argument ( '--make_figure', action='store_true', help='makes a figure that shows queued observations for tonight as queued.png')
-    parser.add_argument ( '--telemetry_file', '-t', action='store' )
-    parser.add_argument ( '--copilot_file', '-c', default=f'{os.environ["HOME"]}/Downloads/db_merian.fits', action='store' )    
-    parser.add_argument ( '--dryrun', action='store_true' )
-    parser.add_argument ( '--maxairmass', action='store', default=1.9)
+    parser.add_argument ( '--make_figure', action='store_true', help='[DEFUNCT] makes a figure that shows queued observations for tonight as queued.png')
+    parser.add_argument ( '--telemetry_file', '-t', action='store', help='path to telemetry file.' )
+    parser.add_argument ( '--copilot_file', '-c', default=f'{os.environ["HOME"]}/Downloads/db_merian.fits', action='store', help='path to copilot FITS db' )    
+    parser.add_argument ( '--dryrun', action='store_true', help='do not save results' )
+    parser.add_argument ( '--maxairmass', action='store', default=1.9, help='the maximum airmass at which exposures will be queued')
+    parser.add_argument ( '--ignoresync', action='store_true', help='do not verify that telemetry and copilot files are synced')
     args = parser.parse_args ()
+    
+    if args.ignoresync:
+        print('WARNING! You are not checking to make sure that the copilot and telemetry files are synced.')
     
     print(f'Running with airmass cut of {float(args.maxairmass)}')
     #plan_tomorrow ( args.day, args.month, args.year, args.telemetry_file, args.copilot_file)
@@ -164,7 +168,8 @@ if __name__ == '__main__':
                         pad_last_hour=True, 
                         maxairmass=float(args.maxairmass),
                         save=not args.dryrun, 
-                        verbose=True
+                        verbose=True,
+                        ignore_synchronicity=args.ignoresync
     )
     if args.dryrun:
         print(f'[sigjson] We are doing a dry run of {args.year}/{args.month}/{args.day}')
