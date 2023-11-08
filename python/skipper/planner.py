@@ -170,6 +170,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
     tele = load_telemetry ( tele_fname )
     if not ignore_synchronicity:
         verify_synchronicity ( tele_fname, copilot_fname )
+    else:
+        print('[planner.plan_tomorrow] NOT verifying synchronicity.')
 
     # \\ figure out which field and filter we're going to be observing in,
     if whichfield is not None:
