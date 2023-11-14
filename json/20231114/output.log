@@ -1,0 +1,109 @@
+DAY:       14
+MONTH:     11
+YEAR:      2023
+TELEFILE:  /Users/shanydanieli/Downloads/tele20231113.csv
+COPILOT:   /Users/shanydanieli/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1254320, taken at 2023-11-14 04:04:40.140707+00:00
+On 2023/11/14, we are observing None in N708
+We are observing the first half of the night
+1 pointings in this catalog need reobservation!
+[observe] Computing sunrise and sunset on 2023/11/14 at altitude = -14.0
+[predict] night slot: First half
+obsStart: 2023/11/14 09:25 PM Santiago
+          2023/11/14 07:25 PM ET
+          2023/11/14 04:25 PM PT
+          2023/11/15 12:25 AM UTC
+obsEnd:   2023/11/15 01:27 AM Santiago
+          2023/11/14 11:27 PM ET
+          2023/11/14 08:27 PM PT
+          2023/11/15 04:27 AM UTC
+Moon illumination is: 0.03
+Moon max altitude during observation is: 4.70
+[plan_night] Using "priority_name" column as object priorities
+[observe] (Minimum airmass available: 1.190841028804572)
+290
+==> 20231115_00, 2100.0000000000055s available
+1800.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from btwnXV_J012558.78+010316.19_N708 to btwnXV_J021700.96+023133.12_N708
+[to_json] Inserting CheckSky 60s exposures
+[qa l155] Reference time: 2023-11-15 00:25:00+00:00
+[qa] UTC start time: 2023-11-15 00:25:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1725149511435256)
+287
+==> 20231115_01, 3600.0s available
+1200.0s filled by priority=0.0 objects
+2400.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from btwnXV_J022224.51+022840.58_N708 to btwnXV_J002209.28+011039.99_N708
+[qa l155] Reference time: 2023-11-15 01:30:00
+[qa] UTC start time: 2023-11-15 01:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.167472912793984)
+281
+==> 20231115_02, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-11-15 02:30:00
+[qa] UTC start time: 2023-11-15 02:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1503501073640146)
+218
+==> 20231115_03, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from btwnXV_J012710.52+022640.45_N708 to btwnXV_J020121.75+022602.83_N708
+[qa l155] Reference time: 2023-11-15 03:30:00
+[qa] UTC start time: 2023-11-15 03:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1989035735148534)
+165
+==> 20231115_04, 5249.999999999976s available
+[plan_night] padding the last hour script by 3600.0s
+0.0s filled by priority=0.0 objects
+4800.0s filled by priority=1.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2023-11-15 04:30:00
+[qa] UTC start time: 2023-11-15 04:30:00
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)    12:30     01:30     02:30     03:30     04:30     
+SXDS          1.55      1.28      1.15      1.11      1.14      
+COSMOS        -1.21     -1.38     -1.75     -2.63     -6.09     
+GH14          -1.66     -1.33     -1.18     -1.12     -1.14     
+NSA15235      -1.72     -1.36     -1.20     -1.13     -1.15     
+GAMA5220386   1.01      1.07      1.19      1.42      1.85      
+GAMA5275222   1.00      1.05      1.15      1.35      1.71      
+GAMA5265117   1.00      1.05      1.16      1.37      1.77      
+GAMA5240292   1.01      1.06      1.17      1.39      1.79      
+GAMA5247018   1.00      1.05      1.17      1.39      1.80      
+GAMA5266552   1.00      1.05      1.17      1.38      1.79      
+GAMA5337331   1.00      1.03      1.12      1.29      1.60      
+GAMA5197149   1.01      1.08      1.21      1.46      1.93      
+Update! [2023.11.03] Use the 5min_offset back-up scripts, which are offset 1/2 chip height to the north.
