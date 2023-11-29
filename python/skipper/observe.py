@@ -364,10 +364,12 @@ class ObsCatalog (object):
                 ntargets = (cmass.loc[cmass.is_possible].airmass<cmaxairmass).sum()
                 #print(ntargets)
                 cmaxairmass += 0.1
+                if cmaxairmass > 2.2:
+                    break
             if cmaxairmass > maxairmass:
                 print (f'[observe] No targets found at {maxairmass}. Raising max airmass allowable to {cmaxairmass}...')
             cmass.loc[cmass.airmass>cmaxairmass, 'is_possible'] = False
-            print(cmass['is_possible'].sum())
+            #print(cmass['is_possible'].sum())
             cmass['going_to_queue'] = False
 
             total_queued_time = 0.
