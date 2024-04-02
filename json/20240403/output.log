@@ -1,0 +1,112 @@
+DAY:       3
+MONTH:     4
+YEAR:      2024
+TELEFILE:  /Users/kadofong/Downloads/tele20231114.csv
+COPILOT:   /Users/kadofong/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1254618, taken at 2023-11-15 04:15:41.400869+00:00
+On 2024/4/3, we are observing None in N708
+We are observing the first half of the night
+14 pointings in this catalog need reobservation!
+[observe] Computing sunrise and sunset on 2024/4/3 at altitude = -14.0
+[predict] night slot: First half
+obsStart: 2024/04/03 08:38 PM Santiago
+          2024/04/03 07:38 PM ET
+          2024/04/03 04:38 PM PT
+          2024/04/03 11:38 PM UTC
+obsEnd:   2024/04/04 01:46 AM Santiago
+          2024/04/04 12:46 AM ET
+          2024/04/03 09:46 PM PT
+          2024/04/04 04:46 AM UTC
+Moon illumination is: 0.29
+Moon max altitude during observation is: 0.00
+[plan_night] Using "priority_name" column as object priorities
+[observe] (Minimum airmass available: 1.9065697965964257)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.1...
+==> 20240403_23, 1319.999999999989s available
+1200.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+[qa l155] Reference time: 2024-04-03 23:38:00+00:00
+[qa] UTC start time: 2024-04-03 23:38:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.4998446309554925)
+==> 20240404_00, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-04 00:30:00
+[qa] UTC start time: 2024-04-04 00:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.290978777393062)
+==> 20240404_01, 3600.0s available
+3000.0s filled by priority=0.0 objects
+600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J110216.57+032135.71_N708 to GAMA_J115342.51+001836.38_N708
+[to_json] Big slew from GAMA_J114836.79+001254.57_N708 to GAMA_J122440.63+001641.75_N708
+[to_json] Big slew from GAMA_J122440.63+001641.75_N708 to GAMA_J110327.30+031836.22_N708
+[qa l155] Reference time: 2024-04-04 01:30:00
+[qa] UTC start time: 2024-04-04 01:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.198690425846774)
+==> 20240404_02, 3600.0s available
+1800.0s filled by priority=0.0 objects
+1800.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J110327.30+031836.22_N708 to GAMA_J135906.26-005625.08_N708
+[to_json] Big slew from GAMA_J135332.10-005949.51_N708 to GAMA_J111914.96+015301.59_N708
+[qa l155] Reference time: 2024-04-04 02:30:00
+[qa] UTC start time: 2024-04-04 02:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1622939361135771)
+==> 20240404_03, 3600.0s available
+600.0s filled by priority=0.0 objects
+3000.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J112246.35+014201.03_N708 to GAMA_J142534.94-005219.29_N708
+[to_json] Big slew from GAMA_J142534.94-005219.29_N708 to GAMA_J115232.52+002336.70_N708
+[qa l155] Reference time: 2024-04-04 03:30:00
+[qa] UTC start time: 2024-04-04 03:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1581547922309094)
+==> 20240404_04, 6390.00000000002s available
+[plan_night] padding the last hour script by 3600.0s
+0.0s filled by priority=0.0 objects
+6000.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-04 04:30:00
+[qa] UTC start time: 2024-04-04 04:30:00
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)    11:30     12:30     01:30     02:30     03:30     04:30     
+SXDS          4.69      -86.02    -4.29     -2.30     -1.65     -1.37     
+COSMOS        1.47      1.27      1.19      1.20      1.30      1.54      
+GH14          -4.04     -42.50    5.00      2.45      1.71      1.39      
+NSA15235      -3.85     -27.52    5.31      2.51      1.73      1.39      
+GAMA5220386   -5.04     -3.15     -2.52     -2.34     -2.44     -2.89     
+GAMA5275222   -5.99     -3.37     -2.59     -2.32     -2.35     -2.68     
+GAMA5265117   -4.73     -2.91     -2.30     -2.09     -2.13     -2.42     
+GAMA5240292   -5.26     -3.18     -2.51     -2.29     -2.35     -2.74     
+GAMA5247018   -4.50     -2.83     -2.26     -2.06     -2.10     -2.41     
+GAMA5266552   -4.58     -2.86     -2.27     -2.07     -2.11     -2.41     
+GAMA5337331   -7.67     -3.73     -2.72     -2.36     -2.32     -2.57     
+GAMA5197149   -4.53     -2.97     -2.44     -2.29     -2.41     -2.91     
+Update! [2023.11.03] Use the 5min_offset back-up scripts, which are offset 1/2 chip height to the north.
