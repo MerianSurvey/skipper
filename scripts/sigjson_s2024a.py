@@ -169,7 +169,7 @@ if __name__ == '__main__':
         print(open(f'{jsondir}output.log','r').read())
     
     if args.make_figure:
-        halpha_pointings, oiii_pointings =      our_pointings.load_fallfields()
+        halpha_pointings, oiii_pointings =  our_pointings.load_springfields()
         pointings_d = {'N540':oiii_pointings,'N708':halpha_pointings} 
         teff_min_d = {'N540':300, 'N708':200}
         fig, axarr = plt.subplots(2,1, figsize=(20,6))
@@ -187,7 +187,8 @@ if __name__ == '__main__':
             ax.scatter ( wrapra(completed['racenter']), completed['deccenter'], s=30**2, color='#26b7f0', label='executed', alpha=0.2)
             pointings = pointings_d[cfilter]
             if cfilter == obsfilters[night_index]:
-                print( f'We are observing {cfilter} ({idx})')
+                print( f'We are observing {cfilter} ({idx})')                
+
                 ax.scatter ( wrapra(pointings.reindex(to_obs.index)['RA']), pointings.reindex(to_obs.index)['dec'], 
                             facecolor='None', edgecolor='r', s=30**2, lw=1, label='queued [w. padding]' )
             ax.set_title ( cfilter )     
