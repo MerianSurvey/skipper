@@ -1,0 +1,123 @@
+DAY:       8
+MONTH:     4
+YEAR:      2024
+TELEFILE:  ../../TELEMETRY/tele20240407.csv
+COPILOT:   /Users/jgreene/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1287579, taken at 2024-04-08 09:38:47.558860+00:00
+On 2024/4/8, we are observing None in N708
+We are observing the first half of the night
+1 pointings in this catalog need reobservation!
+[observe] Computing sunrise and sunset on 2024/4/8 at altitude = -14.0
+[predict] night slot: First half
+obsStart: 2024/04/08 07:32 PM Santiago
+          2024/04/08 07:32 PM ET
+          2024/04/08 04:32 PM PT
+          2024/04/08 11:32 PM UTC
+obsEnd:   2024/04/09 12:44 AM Santiago
+          2024/04/09 12:44 AM ET
+          2024/04/08 09:44 PM PT
+          2024/04/09 04:44 AM UTC
+Moon illumination is: 0.00
+Moon max altitude during observation is: 0.00
+[plan_night] Using "priority_name" column as object priorities
+[observe] (Minimum airmass available: 4.20576510378563)
+[observe] No targets found at 1.9. Raising max airmass allowable to 4.4...
+3
+==> 20240408_23, 1679.9999999999973s available
+0.0s filled by priority=0.0 objects
+1200.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+[qa l155] Reference time: 2024-04-08 23:32:00+00:00
+[qa] UTC start time: 2024-04-08 23:32:00
+Warning: Airmass of 4.02 in exposure 1 [60.0 sec exposure] of file ../json/20240408/20240408_23.json
+Warning: Airmass of 3.96 in exposure 2 [60.0 sec exposure] of file ../json/20240408/20240408_23.json
+Warning: Airmass of 3.91 in exposure 3 [60.0 sec exposure] of file ../json/20240408/20240408_23.json
+Warning: Airmass of 3.85 in exposure 4 [60.0 sec exposure] of file ../json/20240408/20240408_23.json
+Warning: Airmass of 3.39 in exposure 5 [600.0 sec exposure] of file ../json/20240408/20240408_23.json
+Warning: Airmass of 3.06 in exposure 6 [600.0 sec exposure] of file ../json/20240408/20240408_23.json
+[observe] (Minimum airmass available: 2.2803450992437324)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.4000000000000004...
+4
+==> 20240409_00, 3600.0s available
+0.0s filled by priority=0.0 objects
+2400.0s filled by priority=inf objects
+!!! Cannot fill queue !!! 1200.0, 600.0
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-09 00:30:00
+[qa] UTC start time: 2024-04-09 00:30:00
+Warning: Airmass of 2.12 in exposure 1 [600.0 sec exposure] of file ../json/20240408/20240409_00.json
+Warning: Airmass of 2.01 in exposure 2 [600.0 sec exposure] of file ../json/20240408/20240409_00.json
+Warning: Airmass of 1.94 in exposure 3 [600.0 sec exposure] of file ../json/20240408/20240409_00.json
+[observe] (Minimum airmass available: 1.6750392243750696)
+14
+==> 20240409_01, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-09 01:30:00
+[qa] UTC start time: 2024-04-09 01:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.4034096137658316)
+32
+==> 20240409_02, 3600.0s available
+1200.0s filled by priority=0.0 objects
+2400.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J130931.39+002117.07_N708 to GAMA_J140904.88+003950.68_N708
+[to_json] Big slew from GAMA_J141015.44+003729.72_N708 to GAMA_J131305.13+003254.35_N708
+[qa l155] Reference time: 2024-04-09 02:30:00
+[qa] UTC start time: 2024-04-09 02:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.24307855474358)
+26
+==> 20240409_03, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-09 03:30:00
+[qa] UTC start time: 2024-04-09 03:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1723499303031593)
+20
+==> 20240409_04, 6270.000000000021s available
+[plan_night] padding the last hour script by 3600.0s
+0.0s filled by priority=0.0 objects
+6000.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-09 04:30:00
+[qa] UTC start time: 2024-04-09 04:30:00
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)    11:30     12:30     01:30     02:30     03:30     04:30     
+SXDS          7.13      -11.72    -3.31     -2.02     -1.53     -1.31     
+COSMOS        1.39      1.23      1.18      1.22      1.36      1.66      
+GH14          -5.71     19.78     3.69      2.13      1.57      1.32      
+NSA15235      -5.33     26.40     3.86      2.17      1.59      1.33      
+GAMA5220386   -4.14     -2.87     -2.43     -2.34     -2.54     -3.18     
+GAMA5275222   -4.69     -3.02     -2.46     -2.30     -2.42     -2.90     
+GAMA5265117   -3.86     -2.64     -2.20     -2.08     -2.19     -2.61     
+GAMA5240292   -4.26     -2.88     -2.40     -2.28     -2.44     -2.98     
+GAMA5247018   -3.72     -2.58     -2.17     -2.05     -2.17     -2.59     
+GAMA5266552   -3.77     -2.60     -2.18     -2.06     -2.17     -2.59     
+GAMA5337331   -5.58     -3.27     -2.55     -2.32     -2.37     -2.74     
+GAMA5197149   -3.80     -2.73     -2.36     -2.30     -2.52     -3.21     
+Update! [2023.11.03] Use the 5min_offset back-up scripts, which are offset 1/2 chip height to the north.
+Warning! Unqueued hours: ['20240409_00']
