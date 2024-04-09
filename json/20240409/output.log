@@ -1,0 +1,156 @@
+DAY:       9
+MONTH:     4
+YEAR:      2024
+TELEFILE:  /Users/kadofong/Downloads/merian0408/tele20240408.csv
+COPILOT:   /Users/kadofong/Downloads/merian0408/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1287810, taken at 2024-04-09 04:39:32.197986+00:00
+On 2024/4/9, we are observing None in N540
+We are observing the full of the night
+102 pointings in this catalog need reobservation!
+[observe] Computing sunrise and sunset on 2024/4/9 at altitude = -14.0
+[predict] night slot: Full night
+obsStart: 2024/04/09 07:31 PM Santiago
+          2024/04/09 07:31 PM ET
+          2024/04/09 04:31 PM PT
+          2024/04/09 11:31 PM UTC
+obsEnd:   2024/04/10 05:58 AM Santiago
+          2024/04/10 05:58 AM ET
+          2024/04/10 02:58 AM PT
+          2024/04/10 09:58 AM UTC
+Moon illumination is: 0.03
+Moon max altitude during observation is: 0.00
+[plan_night] Using "priority_name" column as object priorities
+[observe] (Minimum airmass available: 1.2004419602690883)
+==> 20240409_23, 1739.999999999997s available
+900.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+[qa l155] Reference time: 2024-04-09 23:31:00+00:00
+[qa] UTC start time: 2024-04-09 23:31:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1475139164231636)
+==> 20240410_00, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-10 00:30:00
+[qa] UTC start time: 2024-04-10 00:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1452727511657492)
+==> 20240410_01, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J091409.81+004829.62_N540 to GAMA_J103622.10-005603.00_N540
+[qa l155] Reference time: 2024-04-10 01:30:00
+[qa] UTC start time: 2024-04-10 01:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1442531187340008)
+==> 20240410_02, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J103404.25+003028.71_N540 to GAMA_J112744.22-010421.31_N540
+[qa l155] Reference time: 2024-04-10 02:30:00
+[qa] UTC start time: 2024-04-10 02:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1442141083326465)
+==> 20240410_03, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J113005.50-011023.66_N540 to GAMA_J121111.38-005955.71_N540
+[qa l155] Reference time: 2024-04-10 03:30:00
+[qa] UTC start time: 2024-04-10 03:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.142809509136495)
+==> 20240410_04, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-10 04:30:00
+[qa] UTC start time: 2024-04-10 04:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.143930276869604)
+==> 20240410_05, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J131306.27-010725.05_N540 to GAMA_J140547.82-005527.10_N540
+[qa l155] Reference time: 2024-04-10 05:30:00
+[qa] UTC start time: 2024-04-10 05:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.146313878679797)
+==> 20240410_06, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from GAMA_J135442.87-010217.42_N540 to GAMA_J145014.96-004411.67_N540
+[qa l155] Reference time: 2024-04-10 06:30:00
+[qa] UTC start time: 2024-04-10 06:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.2256467926611463)
+==> 20240410_07, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-10 07:30:00
+[qa] UTC start time: 2024-04-10 07:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.4922601166857252)
+==> 20240410_08, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-10 08:30:00
+[qa] UTC start time: 2024-04-10 08:30:00
+Warning: Airmass of 1.90 in exposure 3 [900.0 sec exposure] of file ../json/20240409/20240410_08.json
+Warning: Airmass of 2.02 in exposure 4 [900.0 sec exposure] of file ../json/20240409/20240410_08.json
+[observe] (Minimum airmass available: 2.1797632759103336)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240410_09, 8880.000000000033s available
+[plan_night] padding the last hour script by 5400.0s
+1800.0s filled by priority=0.0 objects
+1800.0s filled by priority=inf objects
+!!! Cannot fill queue !!! 5280.000000000033, 900.0
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-10 09:30:00
+[qa] UTC start time: 2024-04-10 09:30:00
+Warning: Airmass of 2.49 in exposure 1 [900.0 sec exposure] of file ../json/20240409/20240410_09.json
+Warning: Airmass of 2.82 in exposure 2 [900.0 sec exposure] of file ../json/20240409/20240410_09.json
+Warning: Airmass of 3.26 in exposure 3 [900.0 sec exposure] of file ../json/20240409/20240410_09.json
+Warning: Airmass of 4.36 in exposure 4 [900.0 sec exposure] of file ../json/20240409/20240410_09.json
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)    11:30     12:30     01:30     02:30     03:30     04:30     05:30     06:30     07:30     08:30     09:30     
+SXDS          7.97      -10.00    -3.17     -1.97     -1.51     -1.30     -1.22     -1.24     -1.35     -1.61     -2.19     
+COSMOS        1.37      1.23      1.18      1.23      1.37      1.69      2.43      4.96      -44.30    -4.05     -2.20     
+GH14          -6.23     15.31     3.51      2.07      1.55      1.31      1.22      1.21      1.30      1.51      1.99      
+NSA15235      -5.78     18.98     3.66      2.11      1.56      1.31      1.21      1.20      1.27      1.47      1.90      
+GAMA5220386   -4.00     -2.83     -2.41     -2.34     -2.56     -3.25     -5.41     -33.82    6.79      3.00      1.94      
+GAMA5275222   -4.50     -2.97     -2.44     -2.30     -2.44     -2.95     -4.44     -13.07    10.34     3.54      2.14      
+GAMA5265117   -3.73     -2.60     -2.19     -2.08     -2.21     -2.65     -3.89     -9.80     12.84     3.70      2.16      
+GAMA5240292   -4.11     -2.83     -2.38     -2.28     -2.46     -3.04     -4.77     -17.76    8.34      3.26      2.03      
+GAMA5247018   -3.60     -2.54     -2.15     -2.05     -2.19     -2.64     -3.88     -9.92     12.41     3.65      2.14      
+GAMA5266552   -3.64     -2.56     -2.16     -2.06     -2.19     -2.64     -3.87     -9.79     12.69     3.68      2.15      
+GAMA5337331   -5.31     -3.20     -2.53     -2.31     -2.38     -2.78     -3.91     -8.70     18.78     4.22      2.36      
+GAMA5197149   -3.69     -2.69     -2.34     -2.31     -2.55     -3.29     -5.68     -59.35    6.14      2.85      1.88      
+Update! [2023.11.03] Use the 5min_offset back-up scripts, which are offset 1/2 chip height to the north.
+Warning! Unqueued hours: ['20240410_09']

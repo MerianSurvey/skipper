@@ -69,7 +69,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slo
     else:
         cofilt = 'N540'
         co_skySB = 22.1
-        co_teffmin = 300.
+        co_teffmin = 300. # XXX
         co_pointings = oiii_pointings
     
     co_coo = observe.CopilotOutput ( copilot_fname, pointings=co_pointings,  skySB_0 = co_skySB )   
@@ -89,7 +89,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slo
                                        current_filter = mfilt,
                                        whichfield=None, priorities=priorities,
                                        verbose=verbose, 
-                                       flag_emptyhours=True,
+                                       flag_emptyhours=True,                                       
                                        **kwargs )
     if len(emptyhours) > 0:
         print(f'Warning! Unqueued hours: {emptyhours}')
@@ -171,7 +171,7 @@ if __name__ == '__main__':
     if args.make_figure:
         halpha_pointings, oiii_pointings =  our_pointings.load_springfields()
         pointings_d = {'N540':oiii_pointings,'N708':halpha_pointings} 
-        teff_min_d = {'N540':300, 'N708':200}
+        teff_min_d = {'N540':400, 'N708':200}
         fig, axarr = plt.subplots(2,1, figsize=(20,6))
         
         for idx, cfilter in enumerate(['N540','N708']):
