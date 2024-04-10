@@ -171,7 +171,7 @@ if __name__ == '__main__':
     if args.make_figure:
         halpha_pointings, oiii_pointings =  our_pointings.load_springfields()
         pointings_d = {'N540':oiii_pointings,'N708':halpha_pointings} 
-        teff_min_d = {'N540':400, 'N708':200}
+        teff_min_d = {'N540':300, 'N708':200}
         fig, axarr = plt.subplots(2,1, figsize=(20,6))
         
         for idx, cfilter in enumerate(['N540','N708']):

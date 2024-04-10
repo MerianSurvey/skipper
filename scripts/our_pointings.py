@@ -41,7 +41,7 @@ def load_springfields ():
     oiii_s2022a['filter'] = 'N540'
     oiii_s2022a['object'] = [ xo.replace('N708','N540') for xo in oiii_s2022a['object'] ]
     oiii_s2022a.index = oiii_s2022a['object']
-    oiii_s2022a['expTime'] = 900.
+    oiii_s2022a['expTime'] = 1050. #900.
 
     # \\ add COSMOS pointings
     halpha_cosmos = halpha_pointings.loc[get_catalog_objects(halpha_pointings)=='COSMOS'].copy()

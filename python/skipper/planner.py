@@ -187,7 +187,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
         teff_min = 200.
     elif mfilt == 'N540':
         skySB_0 = 22.1
-        teff_min = 400.
+        teff_min = 300.
     else:
         raise ValueError (f"the filter {mfilt} is not recognized!")    
     
