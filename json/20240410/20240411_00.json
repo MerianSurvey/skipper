@@ -3,7 +3,11 @@
 "object":"GAMA_J112253.20+031745.95_N540",
 "comment":"--",
 "filter":"N540",
+<<<<<<< HEAD
 "seqtot":3,
+=======
+"seqtot":4,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":1,
 "seqid":"S2021A",
 "expType":"object",
@@ -12,7 +16,11 @@
 "RA":170.7216857324,
 "propid":"2020B-0288",
 "dec":3.2960975721,
+<<<<<<< HEAD
 "expTime":1050.0,
+=======
+"expTime":900.0,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"
@@ -21,7 +29,11 @@
 "object":"GAMA_J112403.31+031246.84_N540",
 "comment":"--",
 "filter":"N540",
+<<<<<<< HEAD
 "seqtot":3,
+=======
+"seqtot":4,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":2,
 "seqid":"S2021A",
 "expType":"object",
@@ -30,7 +42,11 @@
 "RA":171.0137916728,
 "propid":"2020B-0288",
 "dec":3.2130120591,
+<<<<<<< HEAD
 "expTime":1050.0,
+=======
+"expTime":900.0,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"
@@ -39,7 +55,11 @@
 "object":"GAMA_J112513.98+030945.83_N540",
 "comment":"--",
 "filter":"N540",
+<<<<<<< HEAD
 "seqtot":3,
+=======
+"seqtot":4,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":3,
 "seqid":"S2021A",
 "expType":"object",
@@ -48,7 +68,29 @@
 "RA":171.3082511447,
 "propid":"2020B-0288",
 "dec":3.1627310338,
+<<<<<<< HEAD
 "expTime":1050.0,
+=======
+"expTime":900.0,
+"count":1,
+"wait":false,
+"priority_name":"coobserved"
+},
+{
+"object":"GAMA_J112624.64+030644.64_N540",
+"comment":"--",
+"filter":"N540",
+"seqtot":4,
+"seqnum":4,
+"seqid":"S2021A",
+"expType":"object",
+"proposer":"LeathaudGreene",
+"program":"Merian",
+"RA":171.6026756352,
+"propid":"2020B-0288",
+"dec":3.1124019418,
+"expTime":900.0,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"

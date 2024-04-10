@@ -1,54 +1,114 @@
 [
 {
+<<<<<<< HEAD
 "object":"GAMA_J125249.60+002401.28_N540",
 "comment":"--",
 "filter":"N540",
 "seqtot":3,
+=======
+"object":"GAMA_J125851.75+003006.51_N540",
+"comment":"--",
+"filter":"N540",
+"seqtot":4,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":1,
 "seqid":"S2021A",
 "expType":"object",
 "proposer":"LeathaudGreene",
 "program":"Merian",
+<<<<<<< HEAD
 "RA":193.2066917177,
 "propid":"2020B-0288",
 "dec":0.4003578897,
 "expTime":1050.0,
+=======
+"RA":194.7156300151,
+"propid":"2020B-0288",
+"dec":0.5018096097,
+"expTime":900.0,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"
 },
 {
+<<<<<<< HEAD
 "object":"GAMA_J125400.22+002110.89_N540",
 "comment":"--",
 "filter":"N540",
 "seqtot":3,
+=======
+"object":"GAMA_J130001.69+002521.56_N540",
+"comment":"--",
+"filter":"N540",
+"seqtot":4,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":2,
 "seqid":"S2021A",
 "expType":"object",
 "proposer":"LeathaudGreene",
 "program":"Merian",
+<<<<<<< HEAD
 "RA":193.5009243195,
 "propid":"2020B-0288",
 "dec":0.3530251199,
 "expTime":1050.0,
+=======
+"RA":195.0070681726,
+"propid":"2020B-0288",
+"dec":0.4226563963,
+"expTime":900.0,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"
 },
 {
+<<<<<<< HEAD
 "object":"GAMA_J125510.83+001821.02_N540",
 "comment":"--",
 "filter":"N540",
 "seqtot":3,
+=======
+"object":"GAMA_J130112.30+002233.18_N540",
+"comment":"--",
+"filter":"N540",
+"seqtot":4,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":3,
 "seqid":"S2021A",
 "expType":"object",
 "proposer":"LeathaudGreene",
 "program":"Merian",
+<<<<<<< HEAD
 "RA":193.7951631038,
 "propid":"2020B-0288",
 "dec":0.3058413383,
 "expTime":1050.0,
+=======
+"RA":195.3012837359,
+"propid":"2020B-0288",
+"dec":0.3758838655,
+"expTime":900.0,
+"count":1,
+"wait":false,
+"priority_name":"coobserved"
+},
+{
+"object":"GAMA_J130222.92+001945.39_N540",
+"comment":"--",
+"filter":"N540",
+"seqtot":4,
+"seqnum":4,
+"seqid":"S2021A",
+"expType":"object",
+"proposer":"LeathaudGreene",
+"program":"Merian",
+"RA":195.5955063488,
+"propid":"2020B-0288",
+"dec":0.3292757154,
+"expTime":900.0,
+>>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"
