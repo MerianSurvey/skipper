@@ -84,11 +84,7 @@
 "RA":165.8637855129,
 "propid":"2020B-0288",
 "dec":3.3100617629,
-<<<<<<< HEAD
 "expTime":1050.0,
-=======
-"expTime":900.0,
->>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"

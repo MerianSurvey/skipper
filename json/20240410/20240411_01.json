@@ -3,11 +3,7 @@
 "object":"GAMA_J113014.75+031519.52_N540",
 "comment":"--",
 "filter":"N540",
-<<<<<<< HEAD
 "seqtot":3,
-=======
-"seqtot":4,
->>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":1,
 "seqid":"S2021A",
 "expType":"object",
@@ -16,11 +12,7 @@
 "RA":172.5614931758,
 "propid":"2020B-0288",
 "dec":3.2554247943,
-<<<<<<< HEAD
 "expTime":1050.0,
-=======
-"expTime":900.0,
->>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"
@@ -29,11 +21,7 @@
 "object":"GAMA_J113124.82+031019.65_N540",
 "comment":"--",
 "filter":"N540",
-<<<<<<< HEAD
 "seqtot":3,
-=======
-"seqtot":4,
->>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":2,
 "seqid":"S2021A",
 "expType":"object",
@@ -42,61 +30,25 @@
 "RA":172.8534434115,
 "propid":"2020B-0288",
 "dec":3.172125754,
-<<<<<<< HEAD
 "expTime":1050.0,
-=======
-"expTime":900.0,
->>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"
 },
 {
-<<<<<<< HEAD
 "object":"GAMA_J112624.64+030644.64_N540",
 "comment":"--",
 "filter":"N540",
 "seqtot":3,
-=======
-"object":"GAMA_J113235.47+030718.49_N540",
-"comment":"--",
-"filter":"N540",
-"seqtot":4,
->>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "seqnum":3,
 "seqid":"S2021A",
 "expType":"object",
 "proposer":"LeathaudGreene",
 "program":"Merian",
-<<<<<<< HEAD
 "RA":171.6026756352,
 "propid":"2020B-0288",
 "dec":3.1124019418,
 "expTime":1050.0,
-=======
-"RA":173.1478126088,
-"propid":"2020B-0288",
-"dec":3.1218046374,
-"expTime":900.0,
-"count":1,
-"wait":false,
-"priority_name":"coobserved"
-},
-{
-"object":"GAMA_J113346.11+030417.22_N540",
-"comment":"--",
-"filter":"N540",
-"seqtot":4,
-"seqnum":4,
-"seqid":"S2021A",
-"expType":"object",
-"proposer":"LeathaudGreene",
-"program":"Merian",
-"RA":173.4421485492,
-"propid":"2020B-0288",
-"dec":3.0714519287,
-"expTime":900.0,
->>>>>>> 8ec5fa4951da0d7e13168a9c88a914cca760657c
 "count":1,
 "wait":false,
 "priority_name":"coobserved"
