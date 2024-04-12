@@ -365,7 +365,8 @@ class ObsCatalog (object):
                 #print(ntargets)
                 cmaxairmass += 0.1
                 if cmaxairmass > 2.2:
-                    break
+                    print('Preparing to reobserve pointings:')
+                    cmass.loc[(cmass['airmass']<cmaxairmass)&(cmass['airmass']>0.), 'is_possible'] = True
             if cmaxairmass > maxairmass:
                 print (f'[observe] No targets found at {maxairmass}. Raising max airmass allowable to {cmaxairmass}...')
             cmass.loc[cmass.airmass>cmaxairmass, 'is_possible'] = False

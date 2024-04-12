@@ -33,7 +33,8 @@ def load_springfields ():
     halpha_s2022a['priority_name'] = 'GAMA'
     halpha_s2022a.loc[is_high&~is_early, 'priority_name'] = 'GAMAhigh'
     halpha_s2022a.loc[is_early, 'priority_name'] = 'GAMAearly'
-    halpha_s2022a.loc[is_late, 'priority_name'] = 'GAMAlate'    
+    halpha_s2022a.loc[is_late, 'priority_name'] = 'GAMAlate'  
+    halpha_s2022a['expTime'] = 800.
     
     # \\ copy & modify Halpha catalog to be OIII catalog
     get_catalog_objects = lambda x: x['object'].str.extract(r'(.*?(?=_))')[0]

@@ -184,7 +184,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
     # \\ QUICKFIX for 2021B TODO: fix in observe.py
     if mfilt == 'N708':
         skySB_0 = 21.
-        teff_min = 200.
+        teff_min = 300.
     elif mfilt == 'N540':
         skySB_0 = 22.1
         teff_min = 300.

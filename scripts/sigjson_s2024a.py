@@ -64,7 +64,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slo
     if mfilt == 'N540':
         cofilt = 'N708'
         co_skySB = 21.
-        co_teffmin = 200.
+        co_teffmin = 300.
         co_pointings = halpha_pointings
     else:
         cofilt = 'N540'
@@ -171,7 +171,7 @@ if __name__ == '__main__':
     if args.make_figure:
         halpha_pointings, oiii_pointings =  our_pointings.load_springfields()
         pointings_d = {'N540':oiii_pointings,'N708':halpha_pointings} 
-        teff_min_d = {'N540':300, 'N708':200}
+        teff_min_d = {'N540':300, 'N708':300}
         fig, axarr = plt.subplots(2,1, figsize=(20,6))
         
         for idx, cfilter in enumerate(['N540','N708']):

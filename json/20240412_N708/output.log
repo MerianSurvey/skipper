@@ -1,0 +1,137 @@
+DAY:       12
+MONTH:     4
+YEAR:      2024
+TELEFILE:  /Users/kadofong/Downloads/merian20240410/tele20240410.csv
+COPILOT:   /Users/kadofong/Downloads/merian20240410/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1288304, taken at 2024-04-11 04:38:32.104829+00:00
+On 2024/4/12, we are observing None in N708
+We are observing the full of the night
+1 pointings in this catalog need reobservation!
+[observe] Computing sunrise and sunset on 2024/4/12 at altitude = -14.0
+[predict] night slot: Full night
+obsStart: 2024/04/12 07:28 PM Santiago
+          2024/04/12 07:28 PM ET
+          2024/04/12 04:28 PM PT
+          2024/04/12 11:28 PM UTC
+obsEnd:   2024/04/13 06:00 AM Santiago
+          2024/04/13 06:00 AM ET
+          2024/04/13 03:00 AM PT
+          2024/04/13 10:00 AM UTC
+Moon illumination is: 0.24
+Moon max altitude during observation is: 17.32
+[plan_night] Using "priority_name" column as object priorities
+[observe] (Minimum airmass available: 5.34605685130585)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240412_23, 1919.9999999999966s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+!!! Nothing to queue !!!
+[observe] (Minimum airmass available: 2.5038144038818726)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240413_00, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+!!! Nothing to queue !!!
+[observe] (Minimum airmass available: 1.7119090331860969)
+==> 20240413_01, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+[qa l155] Reference time: 2024-04-13 01:30:00
+[qa] UTC start time: 2024-04-13 01:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.4268487106753789)
+==> 20240413_02, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-13 02:30:00
+[qa] UTC start time: 2024-04-13 02:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.2731046807924344)
+==> 20240413_03, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-13 03:30:00
+[qa] UTC start time: 2024-04-13 03:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1845174311772144)
+==> 20240413_04, 3600.0s available
+0.0s filled by priority=0.0 objects
+3600.0s filled by priority=inf objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-04-13 04:30:00
+[qa] UTC start time: 2024-04-13 04:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: nan)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240413_05, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+!!! Nothing to queue !!!
+[observe] (Minimum airmass available: nan)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240413_06, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+!!! Nothing to queue !!!
+[observe] (Minimum airmass available: nan)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240413_07, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+!!! Nothing to queue !!!
+[observe] (Minimum airmass available: nan)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240413_08, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+!!! Nothing to queue !!!
+[observe] (Minimum airmass available: nan)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240413_09, 3600.0s available
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+!!! Nothing to queue !!!
+[observe] (Minimum airmass available: nan)
+[observe] No targets found at 1.9. Raising max airmass allowable to 2.3000000000000003...
+==> 20240413_10, 3600.000000000035s available
+[plan_night] padding the last hour script by 3600.0s
+0.0s filled by priority=0.0 objects
+0.0s filled by priority=inf objects
+!!! Nothing to queue !!!
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)    11:30     12:30     01:30     02:30     03:30     04:30     05:30     06:30     07:30     08:30     09:30     10:30     
+SXDS          12.33     -6.96     -2.81     -1.85     -1.46     -1.28     -1.22     -1.25     -1.38     -1.69     -2.38     -4.66     
+COSMOS        1.33      1.21      1.18      1.25      1.42      1.79      2.69      6.31      -14.89    -3.46     -2.03     -1.51     
+GH14          -8.60     9.14      3.07      1.93      1.49      1.29      1.21      1.22      1.33      1.58      2.14      3.74      
+NSA15235      -7.75     10.31     3.18      1.96      1.50      1.29      1.20      1.20      1.30      1.53      2.03      3.40      
+GAMA5220386   -3.66     -2.71     -2.38     -2.36     -2.65     -3.49     -6.39     259.71    5.45      2.70      1.82      1.40      
+GAMA5275222   -4.04     -2.82     -2.39     -2.31     -2.50     -3.13     -5.04     -22.71    7.54      3.13      1.99      1.49      
+GAMA5265117   -3.40     -2.48     -2.15     -2.09     -2.26     -2.80     -4.36     -14.64    8.68      3.24      2.01      1.49      
+GAMA5240292   -3.73     -2.71     -2.34     -2.30     -2.53     -3.24     -5.50     -43.19    6.40      2.91      1.90      1.44      
+GAMA5247018   -3.29     -2.43     -2.11     -2.06     -2.24     -2.79     -4.36     -14.98    8.47      3.20      1.99      1.48      
+GAMA5266552   -3.33     -2.45     -2.12     -2.07     -2.25     -2.79     -4.34     -14.68    8.60      3.22      2.00      1.48      
+GAMA5337331   -4.64     -3.01     -2.46     -2.30     -2.43     -2.92     -4.33     -11.94    11.30     3.65      2.17      1.58      
+GAMA5197149   -3.40     -2.59     -2.32     -2.33     -2.64     -3.55     -6.81     58.08     5.01      2.58      1.76      1.37      
+Update! [2023.11.03] Use the 5min_offset back-up scripts, which are offset 1/2 chip height to the north.
+Warning! Unqueued hours: ['20240412_23', '20240413_00', '20240413_05', '20240413_06', '20240413_07', '20240413_08', '20240413_09', '20240413_10']
