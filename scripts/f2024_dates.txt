@@ -5,12 +5,10 @@
 # 2 : second half
 # 3 : second 3/4
 # 4 : second half and {extra} hours of the first half     
-# year month day slot    
-2024 4 3 1 N708
-2024 4 4 0 N708
-2024 4 6 0 N540
-2024 4 7 0 N540
-2024 4 8 1 N708
-2024 4 9 0 N540
-2024 4 10 1 N540
-2024 4 12 0 N540
+# year month day slot 
+2024 8 2 2 N708
+2024 8 6 2 N540
+2024 8 7 2 N540
+2024 8 8 2 N708
+2024 8 10 2 N708
+2024 8 11 2 N708
