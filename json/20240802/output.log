@@ -37,6 +37,7 @@ Moon max altitude during observation is: 0.00
 ==> 20240803_04, 660.0000000000106s available
 600.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
 [to_json] Inserting CheckSky 60s exposures
@@ -47,6 +48,7 @@ QA COMPLETE: All tests passed
 ==> 20240803_05, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
 [qa l155] Reference time: 2024-08-03 05:30:00
@@ -56,18 +58,22 @@ QA COMPLETE: All tests passed
 ==> 20240803_06, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
+[to_json] Big slew from btwnXV_J230817.61+022546.82_N708 to VVDSlate_J235109.28+010756.84_N708
+[to_json] Big slew from VVDSlate_J235109.28+010756.84_N708 to btwnXV_J230927.47+023043.49_N708
 [qa l155] Reference time: 2024-08-03 06:30:00
 [qa] UTC start time: 2024-08-03 06:30:00
 QA COMPLETE: All tests passed
-[observe] (Minimum airmass available: 1.175031619093177)
+[observe] (Minimum airmass available: 1.1755414995918196)
 ==> 20240803_07, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from btwnXV_J230436.09+023704.53_N708 to VVDSlate_J235616.04+005959.52_N708
+[to_json] Big slew from btwnXV_J231753.97+023315.28_N708 to VVDSlate_J235616.04+005959.52_N708
 [qa l155] Reference time: 2024-08-03 07:30:00
 [qa] UTC start time: 2024-08-03 07:30:00
 QA COMPLETE: All tests passed
@@ -75,27 +81,29 @@ QA COMPLETE: All tests passed
 ==> 20240803_08, 3600.0s available
 3600.0s filled by priority=0.0 objects
 0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from btwnXV_J234504.76+022341.57_N708 to btwnXV_J002602.87+005936.77_N708
 [qa l155] Reference time: 2024-08-03 08:30:00
 [qa] UTC start time: 2024-08-03 08:30:00
 QA COMPLETE: All tests passed
 [observe] (Minimum airmass available: 1.1274072155078665)
 ==> 20240803_09, 3600.0s available
-3600.0s filled by priority=0.0 objects
-0.0s filled by priority=1.0 objects
+2400.0s filled by priority=0.0 objects
+1200.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
-[to_json] Big slew from btwnXV_J004803.30+005841.16_N708 to XMM_J021900.51-021742.30_N708
+[to_json] Big slew from btwnXV_J004803.30+005841.16_N708 to btwnXV_J012709.53+010555.59_N708
 [qa l155] Reference time: 2024-08-03 09:30:00
 [qa] UTC start time: 2024-08-03 09:30:00
 QA COMPLETE: All tests passed
-[observe] (Minimum airmass available: 1.149101919750622)
+[observe] (Minimum airmass available: 1.1353411052098212)
 ==> 20240803_10, 4979.999999999958s available
 [plan_night] padding the last hour script by 3600.0s
-4800.0s filled by priority=0.0 objects
-0.0s filled by priority=1.0 objects
+0.0s filled by priority=0.0 objects
+4800.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
 0.0s filled by priority=100.0 objects
 [to_json] Inserting 60s focus exposures
 [qa l155] Reference time: 2024-08-03 10:30:00

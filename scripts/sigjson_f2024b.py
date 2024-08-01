@@ -6,7 +6,8 @@ import os
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
-from astropy import coordinates
+from astropy import coordinates, table
+from astropy.io import fits
 import pandas as pd
 from skipper import planner, observe
 
@@ -20,7 +21,7 @@ date_file = '../scripts/f2024_dates.txt'
 obsdates = np.genfromtxt ( date_file, comments='#', dtype=int)
 obskeys = [ f'{x[0]:02d}-{x[1]:02d}-{x[2]:02d}' for x in obsdates[:,:3]]
 obsfilters = np.genfromtxt ( date_file, comments='#', dtype=str)[:,4]
-_field_priorities = {'VVDSearly':100, 'VVDSlate':100, 'VVDS':100, 'XMM':100, 'btwnXV':1, 'XMMhigh':0, 'newRAbtwnXV':1, 'coobserved':0, 'newEarlyRA':2}
+_field_priorities = {'VVDSearly':100, 'VVDSlate':100, 'VVDS':100, 'XMM':100, 'btwnXV':2, 'XMMhigh':2, 'newRAbtwnXV':2, 'coobserved':1, 'newEarlyRA':3, 'mustget':0}
 ####
 ####
 
@@ -47,6 +48,8 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slo
         halpha_pointings, oiii_pointings =  our_pointings.load_fallfields()
     if priorities is None:
         priorities = _field_priorities
+        
+
     
     if pointings is not None:
         mastercat = pointings
@@ -59,6 +62,7 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slo
     
     # -----------------------------------------------------------------
     # -- Prioritize pointings that already have single band coverage --
+    # and super-prioritize ones from Yifei's lists
     # -----------------------------------------------------------------
     # -- Set up co filter
     if mfilt == 'N540':
@@ -83,6 +87,11 @@ def plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mfilt=None, slo
     assert has_observed_match.sum() == observed_cofilter.shape[0]
     mastercat['priority_name'] = mastercat['object'].str.extract(r'(.*?(?=_))')[0]
     mastercat.loc[has_observed_match, 'priority_name'] = 'coobserved'
+    # \\ super prioritize Yifei's list
+    highest_priority_pointings = table.Table(fits.getdata(f'../pointings/high_priority/{mfilt}_pointing_list_fall_2024.fits',1))
+    is_hp = np.in1d(mastercat['object'], highest_priority_pointings['object'])
+    mastercat.loc[is_hp, 'priority_name'] = 'mustget'
+
     
     is_queued, emptyhours = planner.plan_tomorrow ( day, month, year, tele_fname, copilot_fname, mastercat,
                                        current_slot=slot,
@@ -192,7 +201,7 @@ if __name__ == '__main__':
                 ax.scatter ( wrapra(pointings.reindex(to_obs.index)['RA']), pointings.reindex(to_obs.index)['dec'], 
                             facecolor='None', edgecolor='r', s=30**2, lw=1, label='queued [w. padding]' )
             ax.set_title ( cfilter )     
-            ax.legend () 
+            ax.legend ()  
         
            
         for ax in axarr:
