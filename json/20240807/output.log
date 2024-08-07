@@ -1,0 +1,130 @@
+DAY:       7
+MONTH:     8
+YEAR:      2024
+TELEFILE:  /Users/kadofong/Downloads/tele20240410.csv
+COPILOT:   /Users/kadofong/Downloads/db_merian.fits
+.         *          
+    *    .        *        .   .     .
+      ____            .    {\*/}           .  *     .
+  . .___\\`.  .         *   >!<      . 
+    |   .. |     .         (/^\)   
+    |------|          *    '   '      *
+    |    _ |                      *
+  _ '__ |_|'_	        SKIPPER
+/       //   \        [MERIAN OBSPLANNER]
+       //      \_ _    
+       \\            \_ .  _  .
+_______________ _  _ __ _  __      _  .   .
+
+[verify_synchronicity] Telemetry file and copilot file are synced. The last exposure in logs is 1288304, taken at 2024-04-11 04:38:32.104829+00:00
+On 2024/8/7, we are observing None in N708
+We are observing the second half of the night
+81 pointings in this catalog need reobservation!
+[observe] Computing sunrise and sunset on 2024/8/7 at altitude = -14.0
+[predict] night slot: Second half
+obsStart: 2024/08/08 12:49 AM Santiago
+          2024/08/08 12:49 AM ET
+          2024/08/07 09:49 PM PT
+          2024/08/08 04:49 AM UTC
+obsEnd:   2024/08/08 06:20 AM Santiago
+          2024/08/08 06:20 AM ET
+          2024/08/08 03:20 AM PT
+          2024/08/08 10:20 AM UTC
+Moon illumination is: 0.13
+Moon max altitude during observation is: 0.00
+[plan_night] Using "priority_name" column as object priorities
+[observe] (Minimum airmass available: 1.2342681634500765)
+==> 20240808_04, 660.0000000000106s available
+600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Inserting CheckSky 60s exposures
+[qa l155] Reference time: 2024-08-08 04:49:00+00:00
+[qa] UTC start time: 2024-08-08 04:49:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1711385425791863)
+==> 20240808_05, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-08-08 05:30:00
+[qa] UTC start time: 2024-08-08 05:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1726455005788443)
+==> 20240808_06, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from btwnXV_J230817.61+022546.82_N708 to VVDSlate_J235109.28+010756.84_N708
+[to_json] Big slew from VVDSlate_J235109.28+010756.84_N708 to btwnXV_J230927.47+023043.49_N708
+[qa l155] Reference time: 2024-08-08 06:30:00
+[qa] UTC start time: 2024-08-08 06:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.170454201638902)
+==> 20240808_07, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from btwnXV_J231753.97+023315.28_N708 to VVDSlate_J235616.04+005959.52_N708
+[qa l155] Reference time: 2024-08-08 07:30:00
+[qa] UTC start time: 2024-08-08 07:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.17064993433143)
+==> 20240808_08, 3600.0s available
+3600.0s filled by priority=0.0 objects
+0.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-08-08 08:30:00
+[qa] UTC start time: 2024-08-08 08:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1181173498772583)
+==> 20240808_09, 3600.0s available
+2400.0s filled by priority=0.0 objects
+1200.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[to_json] Big slew from btwnXV_J004803.30+005841.16_N708 to btwnXV_J012709.53+010555.59_N708
+[qa l155] Reference time: 2024-08-08 09:30:00
+[qa] UTC start time: 2024-08-08 09:30:00
+QA COMPLETE: All tests passed
+[observe] (Minimum airmass available: 1.1459442663740151)
+==> 20240808_10, 4799.999999999959s available
+[plan_night] padding the last hour script by 3600.0s
+0.0s filled by priority=0.0 objects
+4200.0s filled by priority=1.0 objects
+0.0s filled by priority=2.0 objects
+0.0s filled by priority=100.0 objects
+[to_json] Inserting 60s focus exposures
+[qa l155] Reference time: 2024-08-08 10:30:00
+[qa] UTC start time: 2024-08-08 10:30:00
+QA COMPLETE: All tests passed
+ .   . 
+ {\*/} 
+  >!<  BACKUP FIELD INFO
+ (/^\) 
+ '   ' 
+time (UTC)    04:30     05:30     06:30     07:30     08:30     09:30     10:30     
+SXDS          6.33      2.66      1.75      1.37      1.19      1.12      1.12      
+COSMOS        -1.18     -1.13     -1.17     -1.29     -1.55     -2.14     -3.83     
+GH14          -9.61     -3.08     -1.90     -1.45     -1.23     -1.14     -1.12     
+NSA15235      -13.08    -3.35     -1.99     -1.49     -1.25     -1.15     -1.13     
+GAMA5220386   1.09      1.02      1.00      1.04      1.13      1.30      1.62      
+GAMA5275222   1.12      1.03      1.00      1.02      1.10      1.25      1.52      
+GAMA5265117   1.12      1.03      1.00      1.02      1.10      1.26      1.57      
+GAMA5240292   1.11      1.03      1.00      1.03      1.11      1.28      1.58      
+GAMA5247018   1.12      1.03      1.00      1.02      1.11      1.27      1.58      
+GAMA5266552   1.12      1.03      1.00      1.02      1.11      1.27      1.58      
+GAMA5337331   1.16      1.05      1.01      1.01      1.07      1.20      1.44      
+GAMA5197149   1.08      1.02      1.00      1.04      1.14      1.33      1.68      
+Update! [2023.11.03] Use the 5min_offset back-up scripts, which are offset 1/2 chip height to the north.
