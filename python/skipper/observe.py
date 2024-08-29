@@ -478,6 +478,11 @@ class ObservingSite ( object ):
                                                     lon='-70d48m23.49s',
                                                     height=2200.*u.m )
             self.timezone= pytz.timezone ( 'America/Santiago' )
+        elif site=='palomar':
+            self.site = coordinates.EarthLocation ( lat='+33d21m22.7s',
+                                                    lon='-116d51m53.6s',
+                                                    height=1712.*u.m )
+            self.timezone= pytz.timezone ( 'America/Los_Angeles' )            
         else:
             # // if not CTIO, trust the user to put in an EarthLocation
             # // and pytz.timezone ()
